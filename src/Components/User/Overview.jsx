@@ -1,24 +1,17 @@
 import React from "react";
-import {FiPlus} from "react-icons/fi"
 import {FaMinus} from "react-icons/fa"
 import {BiEditAlt} from "react-icons/bi"
 import {HiArrowNarrowRight} from "react-icons/hi"
 import "./overview.css"
+import Banner from "../Banner/Banner";
 
 const Overview = () => {
   return (
     <div className="bg-[#202124] h-screen w-full flex justify-center">
       <div className="w-[95%] mt-6 flex flex-col gap-8">
-        {/* header  */}
-        <div className="flex justify-between items-center">
-            <div className="flex flex-col gap-1">
-                <h1 className=" text-white font-medium text-2xl tracking-wide">User</h1>
-                <p className=" text-sm text-[#7E7F80] font-medium tracking-wide">User <span className="text-[#8AB4F8]">/</span> Overview</p>
-            </div>
-            <button className="btn flex gap-2 items-center">
-               <span><FiPlus/></span> Create User
-            </button>
-        </div>
+        {/* baanner  */}
+            <Banner title={"User"} path={"Overview"} icon={true}/>
+            
         {/* table  */}
         <table className=" text-white table-responsive">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
