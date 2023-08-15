@@ -1,11 +1,10 @@
 import React from 'react'
-import Sidebar from './Components/Sidebar/Sidebar'
-import Dashboard from './Pages/Dashboard'
+import Path from './Routes/Path'
 
 const App = () => {
   return (
     <div>
-      <Dashboard/>
+      <Path/>
     </div>
   )
 }
