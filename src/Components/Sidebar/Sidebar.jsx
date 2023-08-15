@@ -28,7 +28,7 @@ const Sidebar = () => {
 
             {/* sidebar  */}
 
-            <div className="text-[#e8eaed] bg-[#161618] w-[230px]">
+            <div className="text-[#e8eaed] bg-[#161618] w-[230px] h-screen">
                 <p className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124]">
                     <span className=" text-[23px]"><AiOutlineHome/></span>
                     <span className=" font-semibold tracking-wide">Overview</span>
