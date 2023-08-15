@@ -1,0 +1,15 @@
+.hover-up:hover{
+    transform: translateY(-4px);
+}
+
+.table-responsive {
+    white-space: nowrap;
+  }
+
+@media (max-width: 800px) {
+    .table-responsive {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+    }
+  }
