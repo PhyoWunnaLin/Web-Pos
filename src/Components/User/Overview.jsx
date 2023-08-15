@@ -74,6 +74,7 @@ const Overview = () => {
         </table>
       </div>
     </div>
+    </MainLayout>
   );
 };
 
