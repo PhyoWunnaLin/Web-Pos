@@ -1,12 +1,12 @@
 import React from 'react'
 import MainLayout from '../Layouts/MainLayout'
-import ProfileFormBottom from '../Components/Profile/ProfileFormBottom'
+import SuccessAlert from '../Components/Sweetalert/SuccessAlert'
 
 const Dashboard = () => {
   return (
     <MainLayout>
       <div className=' h-screen bg-black'>
-        <ProfileFormBottom/>
+        <SuccessAlert/>
       </div>
     </MainLayout>
   )
