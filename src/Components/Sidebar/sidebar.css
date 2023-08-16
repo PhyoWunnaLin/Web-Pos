@@ -1,0 +1,58 @@
+.mantine-Accordion-control:hover{
+    background-color: #202124;
+}
+
+.mantine-Accordion-control:hover .mantine-Accordion-chevron {
+    color: #8ab4f8;
+}
+
+.mantine-Accordion-label{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.mantine-Accordion-item{
+    border: none;
+}
+
+.mantine-Accordion-itemTitle{
+    color: #e8eaed;
+    /* background-color: #202124; */
+}
+
+.mantine-Accordion-chevron{
+    color: #e8eaed;
+}
+
+.mantine-Accordion-content{
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+}
+
+.mantine-Accordion-panel:hover{
+    background-color: #202124;
+    cursor: pointer;
+}
+
+.nav .navLink{
+    color: #e8eaed !important;
+}
+
+.nav:hover span{
+    color: #8ab4f8 !important;
+}
+
+.scrollbar{
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #3f4245;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+}
