@@ -7,11 +7,14 @@ const Banner = (props) => {
         <div className="flex justify-between items-center">
             <div className="flex flex-col gap-1">
                 <h1 className=" text-white font-medium text-2xl tracking-wide">{props.title}</h1>
-                <p className=" text-sm text-[hsl(210,1%,50%)] font-medium tracking-wide">{props.title} <span className="text-[#8AB4F8]">/</span> {props.path}</p>
+                <p className="  text-[#c5c1c1] tracking-wide">{props.title} 
+                <span className="text-[#8ab4f8]"> /</span> {props.path1 && props.path1}
+                <span className="text-[#8ab4f8]">{props.path2 && " /"}</span> {props.path2 && props.path2}
+                </p>
             </div>
-            <button className="btn flex gap-2 items-center">
-               {props.icon && <span><FiPlus/></span>}
-                Create User
+            <button className="btn flex gap-2 items-center border border-[#3f4245]">
+               {props.icon && <span className=' text-[#161618]'><FiPlus/></span>}
+                {props.btn && <span className='text-[#202124]'>{props.btn}</span>}
             </button>
         </div>
     </div>

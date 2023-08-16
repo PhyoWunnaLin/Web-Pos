@@ -22,10 +22,6 @@
     @apply  bg-[#7E7F80] w-[2px] h-[50px] ml-7 my-5;
 }
 
-/* .line:last-child{
-    @apply ;
-} */
-
 .step{
     @apply font-medium w-14 h-14 flex items-center justify-center z-10 relative bg-[#161618] rounded-full text-white;
 }
@@ -36,4 +32,13 @@
 
 .complete .step{
     @apply bg-[#8AB4F8] text-white
+
+}
+
+.icon1{
+    @apply bg-[#7E7F80] p-2 rounded-full cursor-pointer duration-300;
+}
+
+.icon2{
+    @apply bg-[#202124] p-[10px] rounded-full cursor-pointer duration-300;
 }
