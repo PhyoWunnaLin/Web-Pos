@@ -5,6 +5,7 @@ import SuccessAlert from '../Components/Sweetalert/SuccessAlert'
 const Dashboard = () => {
   return (
     <MainLayout>
+      <SuccessAlert/>
       dashboard
     </MainLayout>
   )

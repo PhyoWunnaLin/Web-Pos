@@ -7,17 +7,29 @@ import { TiTick } from "react-icons/ti";
 import CreateUserStep2 from "./CreateUserStep2";
 import CreateUserStep3 from "./CreateUserStep3";
 import CreateUserStep4 from "./CreateUserStep4";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const CreateUser = () => {
   const steps = ["Personal", "Login Info", "Photo"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
+  const nav = useNavigate();
+  const route = () => {
+    nav("/user/overview");
+  };
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
         <div className="w-[95%] my-6 flex flex-col gap-8">
           {/* header  */}
-          <Banner title={"User"} path1={"Create User"} btn={"User List"} button={true}/>
+          <Banner
+            title={"User"}
+            path1={"Create User"}
+            btn={"User List"}
+            button={true}
+            route={"/user/overview"}
+          />
           {/* form  */}
           <div className="flex gap-10">
             <div className="w-[65%]">
@@ -51,21 +63,25 @@ const CreateUser = () => {
                 );
               })}
               <div className="mt-8">
-                <button
-                  onClick={() => {
-                    currentStep > 3
-                      ? setComplete(true)
-                      : setCurrentStep((pre) => pre + 1);
-                  }}
-                  className="btn flex items-center gap-2"
-                >
-                  {currentStep > 3 ? "Complete" : "Next"}
-                  {currentStep <= 3 && (
-                    <span>
-                      <ImArrowRight2 />
-                    </span>
-                  )}
-                </button>
+                <Link to={currentStep == 4 && "/user/overview"}>
+                  <button
+                    onClick={() => {
+                      {
+                        currentStep > 3
+                          ? setComplete(true)
+                          : setCurrentStep((pre) => pre + 1);
+                      }
+                    }}
+                    className="btn flex items-center gap-2"
+                  >
+                    {currentStep > 3 ? "Create" : "Next"}
+                    {currentStep <= 3 && (
+                      <span>
+                        <ImArrowRight2 />
+                      </span>
+                    )}
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
