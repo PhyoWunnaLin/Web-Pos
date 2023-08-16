@@ -52,17 +52,17 @@ const ProfileTop = (props) => {
 
         {/* profile navLink  */}
         <div className=' flex items-center gap-16 ml-10 pb-5'>
-            <p onClick={() => dispatch(SetProfileNavLinkActive("personal"))} className={` ${profileNavLinkActive2 == "personal" || profileNavLinkActive2 == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
+            <p onClick={() => dispatch(SetProfileNavLinkActive("Personal"))} className={` ${profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
                 <span className=" text-[19px]"><CiShop/></span>
                 <span className=' font-semibold'>Personal</span>
             </p>
 
-            <p onClick={() => dispatch(SetProfileNavLinkActive("login Information"))} className={` ${profileNavLinkActive2 == "login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
+            <p onClick={() => dispatch(SetProfileNavLinkActive("Login Information"))} className={` ${profileNavLinkActive2 == "Login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
                 <span className=" text-[19px]"><CiShop/></span>
                 <span className=' font-semibold'>Login Information</span>
             </p>
 
-            <p onClick={() => dispatch(SetProfileNavLinkActive("password"))} className={` ${profileNavLinkActive2 == "password" && "active"} navLink cursor-pointer flex items-center gap-2`}>
+            <p onClick={() => dispatch(SetProfileNavLinkActive("Password"))} className={` ${profileNavLinkActive2 == "Password" && "active"} navLink cursor-pointer flex items-center gap-2`}>
                 <span className=" text-[19px]"><CiShop/></span>
                 <span className=' font-semibold'>Password</span>
             </p>
