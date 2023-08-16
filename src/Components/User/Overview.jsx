@@ -13,7 +13,6 @@ const Overview = () => {
       <div className="w-[95%] mt-6 flex flex-col gap-8">
         {/* baanner  */}
             <Banner title={"User"} path={"Overview"} icon={true}/>
-            
         {/* table  */}
         <table className=" text-white table-responsive">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">

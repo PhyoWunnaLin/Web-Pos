@@ -1,46 +1,63 @@
 import React from "react";
+import Banner from "../Banner/Banner";
 
 const CreateUserStep1 = () => {
   return (
-    <div className="bg-[#202124] h-screen w-full flex justify-center">
-      <div className="w-[95%] mt-6 flex flex-col gap-8">
-        {/* header  */}
-        <div className="flex justify-between items-center">
-          <div className="flex flex-col gap-1">
-            <h1 className=" text-white font-medium text-2xl tracking-wide">
-              User
-            </h1>
-            <p className=" text-sm text-[#7E7F80] font-medium tracking-wide">
-              User <span className="text-[#8AB4F8]">/</span> Create User
-            </p>
+      <form className="border border-[#7E7F80] bg-[#161618] p-10 flex flex-col gap-6 w-[65%]">
+        <div className="flex justify-between gap-5">
+          <label className="text-[#FFFFFF] font-medium tracking-wider">
+            Name
+          </label>
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="input w-[70%]"
+          />
+        </div>
+        <div className="flex justify-between gap-5">
+          <label className="text-[#FFFFFF] font-medium tracking-wider">
+            Phone
+          </label>
+          <input type="text" className="input w-[70%]" />
+        </div>
+        <div className="flex justify-between gap-5">
+          <label className="text-[#FFFFFF] font-medium tracking-wider">
+            Date Of Birth
+          </label>
+          <input type="text" className="input w-[70%]" />
+        </div>
+        <div className="flex justify-between gap-5">
+          <label className="text-[#FFFFFF] font-medium tracking-wider">
+            Gender
+          </label>
+          <div className=" flex gap-4 items-center w-[70%] text-[#FFFFFF] font-medium tracking-wider">
+            <input
+              type="radio"
+              name="gender"
+              checked
+              style={{ width: "18px", height: "18px" }}
+            />
+            Male
+            <input
+              type="radio"
+              name="gender"
+              style={{ width: "18px", height: "18px" }}
+            />
+            Female
           </div>
-          <button className="btn">User List</button>
         </div>
-        {/* form  */}
-        <div className="flex">
-          <form className="border border-[#7E7F80] bg-[#161618] p-10 flex flex-col gap-6 w-[55%]">
-            <div className="flex justify-between gap-5">
-              <label className="text-[#FFFFFF] font-medium tracking-wider">
-                Name
-              </label>
-              <input type="text" placeholder="Your Name" className="input w-[70%]" />
-            </div>
-            <div className="flex justify-between gap-5">
-              <label className="text-[#FFFFFF] font-medium tracking-wider">
-                Phone
-              </label>
-              <input type="text" className="input w-[70%]" />
-            </div>
-            <div className="flex justify-between gap-5">
-              <label className="text-[#FFFFFF] font-medium tracking-wider">
-                Date Of Birth
-              </label>
-              <input type="text" className="input w-[70%]" />
-            </div>
-          </form>
+        <div className="flex justify-between gap-5">
+          <label className="text-[#FFFFFF] font-medium tracking-wider">
+            Address
+          </label>
+          <textarea
+            placeholder="Your Address..."
+            cols="30"
+            rows="4"
+            className="input w-[70%]"
+          ></textarea>
         </div>
-      </div>
-    </div>
+      </form>
   );
 };
 
