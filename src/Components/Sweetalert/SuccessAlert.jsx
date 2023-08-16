@@ -6,7 +6,10 @@ const SuccessAlert = () => {
 
   const showAlert = () => {
     Swal.fire({
-      text: "Successfully created an account",
+      customClass : {
+        title: 'swal2-title'
+      },
+      title: "Successfully created an account",
       icon: "success",
       confirmButtonText: "SEE ALL USERS",
       showCloseButton: true,
@@ -17,7 +20,7 @@ const SuccessAlert = () => {
 
   return (
     <div>
-      <button onClick={showAlert}>Show Alert</button>
+      <button onClick={showAlert} className="btn">Show Alert</button>
     </div>
   );
 };
