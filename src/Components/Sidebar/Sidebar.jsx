@@ -12,7 +12,7 @@ const Sidebar = () => {
         <div className=" select-none">
 
             {/* navbar  */}
-            <div className=" flex justify-between items-center border-b border-[#3f4245] text-[#e8eaed] bg-[#202124] px-5 py-3 fixed w-full">
+            <div className=" flex justify-between items-center border-b border-[#3f4245] text-[#e8eaed] bg-[#202124] px-5 py-3 fixed w-full z-40">
                 <h1 className=" font-semibold tracking-wider text-lg">MMS</h1>
                 <div className=" flex gap-5 items-center">
                     <p className=" text-xl">
@@ -29,7 +29,7 @@ const Sidebar = () => {
             {/* navbar end */}
 
             {/* sidebar  */}
-            <div className="text-[#e8eaed] bg-[#161618] h-screen fixed w-[230px] mt-[53px]">
+            <div className="text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] h-screen fixed w-[210px] mt-[53px]">
                 <p className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124]">
                     <span className=" text-[23px]"><AiOutlineHome/></span>
                     <span className=" font-semibold tracking-wide">Overview</span>
