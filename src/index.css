@@ -11,7 +11,28 @@
 }
 
 .btn{
-    @apply  bg-[#8AB4F8] py-2 px-5 rounded-md font-medium hover:bg-[#6c96da]  duration-200;
+    @apply  bg-[#8AB4F8] py-2 px-5 rounded-md font-medium hover:bg-[#5d9afd] hover:text-[#FFFFFF] duration-300;
+}
+
+.step-item{
+    @apply flex gap-3 relative items-center;
+}
+
+.line{
+    @apply  bg-[#7E7F80] w-[2px] h-[50px] ml-7 my-5;
+}
+
+.step{
+    @apply font-medium w-14 h-14 flex items-center justify-center z-10 relative bg-[#161618] rounded-full text-white;
+}
+
+.active .step{
+    @apply border border-[#8AB4F8] text-[#8AB4F8];
+}
+
+.complete .step{
+    @apply bg-[#8AB4F8] text-white
+
 }
 
 .icon1{
