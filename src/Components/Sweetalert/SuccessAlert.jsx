@@ -1,22 +1,28 @@
-import React from 'react'
-import Swal from 'sweetalert2'
-import "./successAlert.css"
+import React, { useEffect } from "react";
+import Swal from "sweetalert2";
+import "./successAlert.css";
 
 const SuccessAlert = () => {
+
+  const showAlert = () => {
     Swal.fire({
-        text: "Successfully created an account",
-        icon: "success",
-        confirmButtonText: "SEE ALL USERS",
-        showCloseButton: true,
-        color: "#fff",
-        width: 400,
-        background: "#202124",
-    })
+      customClass : {
+        title: 'swal2-title'
+      },
+      title: "Successfully created an account",
+      icon: "success",
+      confirmButtonText: "SEE ALL USERS",
+      showCloseButton: true,
+      width: 400,
+      background: "#202124",
+    });
+  };
+
   return (
     <div>
-        hello
+      <button onClick={showAlert} className="btn">Show Alert</button>
     </div>
-  )
-}
+  );
+};
 
-export default SuccessAlert
+export default SuccessAlert;

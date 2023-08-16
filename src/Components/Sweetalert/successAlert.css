@@ -1,0 +1,17 @@
+.swal2-styled.swal2-confirm {
+  background-color: #8bb4f6;
+  color: black;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: 0.3s;
+}
+
+.swal2-styled.swal2-confirm:hover {
+    background-color: #5f7dad;
+  }
+
+.swal2-title{
+    color: white;
+    font-size: larger;
+    letter-spacing: 0.05em;
+}

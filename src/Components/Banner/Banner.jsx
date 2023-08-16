@@ -1,7 +1,12 @@
 import React from "react";
 import { FiPlus } from "react-icons/fi";
+import { useNavigate } from "react-router";
 
 const Banner = (props) => {
+  const nav = useNavigate();
+  const route = () => {
+    nav(props.route);
+  }
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -18,7 +23,7 @@ const Banner = (props) => {
           </p>
         </div>
         {props.button && (
-          <button className="btn flex gap-2 items-center border border-[#3f4245]">
+          <button onClick={props.route && route} className="btn flex gap-2 items-center border border-[#3f4245]">
             {props.icon && (
               <span className=" text-[#161618]">
                 <FiPlus />
