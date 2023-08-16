@@ -24,7 +24,7 @@ const ProfileTop = (props) => {
                 <div className=' relative rounded-full w-[55%]'>
                     <img src={props.img} alt="" className=' rounded-full'/>
 
-                    <div className='h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
+                    <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
                     <BiSolidEditAlt size={18}/>
                     </div>
                 </div>
