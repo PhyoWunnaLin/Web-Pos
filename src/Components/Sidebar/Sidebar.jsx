@@ -1,15 +1,18 @@
 import React from "react";
 import {MdOutlinePermMedia,MdOutlineNotificationsActive} from "react-icons/md";
-import {BsFillMoonStarsFill,BsPersonCircle} from "react-icons/bs";
+import {BsFillMoonStarsFill,BsPersonCircle, BsPersonSquare} from "react-icons/bs";
 import {AiOutlineHome} from "react-icons/ai"
 import {CiShop} from "react-icons/ci";
 import {TbPointFilled} from "react-icons/tb"
 import {RxExit} from "react-icons/rx"
 import { Accordion } from '@mantine/core';
+import {PiNotepadBold, PiUserCirclePlusDuotone, PiUserSquareFill} from "react-icons/pi"
+import {HiOutlinePhotograph} from "react-icons/hi"
+import "./sidebar.css"
 
 const Sidebar = () => {
     return(
-        <div className=" select-none">
+        <div className=" select-none ">
 
             {/* navbar  */}
             <div className=" flex justify-between items-center border-b border-[#3f4245] text-[#e8eaed] bg-[#202124] px-5 py-3 fixed w-full z-40">
@@ -29,45 +32,152 @@ const Sidebar = () => {
             {/* navbar end */}
 
             {/* sidebar  */}
-            <div className="text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] h-screen fixed w-[210px] mt-[53px]">
-                <p className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124]">
+            <div className="text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] scrollbar overflow-y-auto h-screen fixed w-[210px] mt-[53px]">
+
+                {/* Overview  */}
+                <p className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#8ab4f8]">
                     <span className=" text-[23px]"><AiOutlineHome/></span>
                     <span className=" font-semibold tracking-wide">Overview</span>
                 </p>
                 <div className=" border-b border-[#3f4245]" />
 
-                <Accordion className=" hover:bg-transparent">
+                {/* Sale  */}
+                <Accordion>
                     <Accordion.Item value="customization">
                         <Accordion.Control>
-                            <div className=" flex items-center gap-2 text-[#e8eaed]">
+                            <div className=" flex items-center text-[#e8eaed] gap-2">
                                 <span className=" text-[23px]"><CiShop/></span>
                                 <span className=" tracking-wide">Sale</span>
                             </div>
                         </Accordion.Control>
 
                         <Accordion.Panel>
-                            <div className=" flex items-center text-[#e8eaed]">
-                                <span className="pl-3 text-[8px]"><TbPointFilled/></span>
-                                <span className=" tracking-wide px-3 text-[#e8eaed]">Cashier</span>
+                            <div className=" flex items-center nav ">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Cashier</span>
                             </div>
                         </Accordion.Panel>
                         <Accordion.Panel>
-                            <div className=" flex items-center text-[#e8eaed]">
-                                <span className="pl-3 text-[8px]"><TbPointFilled/></span>
-                                <span className=" tracking-wide px-3 text-[#e8eaed]">Recent</span>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Recent</span>
                             </div>
                         </Accordion.Panel>
                     </Accordion.Item>
                 </Accordion>
+                <div className=" border-b border-[#3f4245]" />
 
+                {/* Inventory  */}
+                <Accordion>
+                    <Accordion.Item value="customization">
+                        <Accordion.Control>
+                            <div className=" flex items-center text-[#e8eaed] gap-2">
+                                <span className=" text-[23px]"><PiNotepadBold/></span>
+                                <span className=" tracking-wide">Inventory</span>
+                            </div>
+                        </Accordion.Control>
 
-                <p className="flex items-center gap-3 px-5 py-3 cursor-pointer hover:bg-[#202124]">
-                    <span className=" text-[20px]"><MdOutlinePermMedia/></span>
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Products</span>
+                            </div>
+                        </Accordion.Panel>
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Add Product</span>
+                            </div>
+                        </Accordion.Panel>
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Stock Control</span>
+                            </div>
+                        </Accordion.Panel>
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Manage Brands</span>
+                            </div>
+                        </Accordion.Panel>
+                    </Accordion.Item>
+                </Accordion>
+                <div className=" border-b border-[#3f4245]" />
+
+                {/* User  */}
+                <Accordion>
+                    <Accordion.Item value="customization">
+                        <Accordion.Control>
+                            <div className=" flex items-center text-[hsl(216,12%,92%)] gap-2">
+                                <span className=" text-[23px]"><PiUserCirclePlusDuotone/></span>
+                                <span className=" tracking-wide">User</span>
+                            </div>
+                        </Accordion.Control>
+
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Overview</span>
+                            </div>
+                        </Accordion.Panel>
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Create User</span>
+                            </div>
+                        </Accordion.Panel>
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Stock Control</span>
+                            </div>
+                        </Accordion.Panel>
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Manage Brands</span>
+                            </div>
+                        </Accordion.Panel>
+                    </Accordion.Item>
+                </Accordion>
+                <div className=" border-b border-[#3f4245]" />
+
+                {/* Media  */}
+                <p className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#8ab4f8]">
+                    <span className=" text-[23px]"><HiOutlinePhotograph/></span>
                     <span className=" tracking-wide">Media</span>
                 </p>
                 <div className=" border-b border-[#3f4245]" />
 
-                <p className="flex items-center gap-3 px-5 py-3 cursor-pointer hover:bg-[#202124]">
+                {/* Profile  */}
+                <Accordion>
+                    <Accordion.Item value="customization">
+                        <Accordion.Control>
+                            <div className=" flex items-center text-[hsl(216,12%,92%)] gap-2">
+                                <span className=" text-[23px]"><PiUserSquareFill/></span>
+                                <span className=" tracking-wide">Profile</span>
+                            </div>
+                        </Accordion.Control>
+
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">My Account</span>
+                            </div>
+                        </Accordion.Panel>
+                        <Accordion.Panel>
+                            <div className=" flex items-center nav">
+                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                                <span className=" tracking-wide px-3 navLink">Edit</span>
+                            </div>
+                        </Accordion.Panel>
+                    </Accordion.Item>
+                </Accordion>
+                <div className=" border-b border-[#3f4245]" />
+
+                {/* Logout  */}
+                <p className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#df7272]">
                     <span className=" text-[20px]"><RxExit/></span>
                     <span className=" tracking-wide">Logout</span>
                 </p>
