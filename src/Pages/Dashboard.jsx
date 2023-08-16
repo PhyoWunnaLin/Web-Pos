@@ -5,9 +5,7 @@ import SuccessAlert from '../Components/Sweetalert/SuccessAlert'
 const Dashboard = () => {
   return (
     <MainLayout>
-      <div className=' h-screen bg-black'>
-        <SuccessAlert/>
-      </div>
+      dashboard
     </MainLayout>
   )
 }

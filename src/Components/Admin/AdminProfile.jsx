@@ -10,8 +10,8 @@ const AdminProfile = () => {
   const profileNavLinkActive2 = localStorage.getItem("profileNavLinkActive");
   return (
     <MainLayout>
-      <div className="bg-[#202124] h-screen w-full flex justify-center">
-        <div className="w-[95%] mt-6 flex flex-col gap-8">
+      <div className="bg-[#202124] w-full flex justify-center">
+        <div className="w-[95%] my-6 flex flex-col gap-8">
           {/* banner  */}
             <Banner title={"Profile"} path1={"My Account"} path2={profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "Personal" : profileNavLinkActive2} icon={true} btn={" Profile"}/>
 

@@ -1,0 +1,11 @@
+.table-responsive2 {
+    white-space: nowrap;
+  }
+
+@media (max-width: 1000px) {
+    .table-responsive2 {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+    }
+  }
