@@ -15,7 +15,7 @@ body{
 }
 
 .btn{
-    @apply  bg-[#5287dd] py-2 px-5 rounded-md font-medium hover:bg-[#3e6aaf] duration-300;
+    @apply  bg-[#8bb4f6] py-2 px-5 rounded-md font-medium hover:bg-[#5f7dad] duration-300;
 }
 
 .btn2{

@@ -56,3 +56,19 @@
     background-color: #555;
   }
 }
+
+
+/* default scrollbar  */
+::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 3px;
+  }
+
+  /* Show a custom scrollbar style on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
