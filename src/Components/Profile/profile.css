@@ -1,0 +1,16 @@
+.navLink span:first-child{
+    color: #8ab4f8;
+}
+
+.navLink span:last-child{
+    color: #878787;
+}
+
+.navLink:hover span:last-child{
+    color: #fff;
+}
+
+.active span:last-child{
+    color: #fff;
+}
+

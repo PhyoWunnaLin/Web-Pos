@@ -7,12 +7,18 @@ import Banner from "../Banner/Banner";
 import MainLayout from "../../Layouts/MainLayout";
 
 const Overview = () => {
+    const user = [
+        {id:1 , name: "Messi", position: "Admin", email: "messi@gmail.com"},
+        {id:2 , name: "Messi", position: "Admin", email: "messi@gmail.com"},
+        {id:3 , name: "Messi", position: "Admin", email: "messi@gmail.com"},
+        {id:4 , name: "Messi", position: "Admin", email: "messi@gmail.com"},
+    ]
   return (
     <MainLayout>
     <div className="bg-[#202124] h-screen w-full flex justify-center">
       <div className="w-[95%] mt-6 flex flex-col gap-8">
-        {/* baanner  */}
-            <Banner title={"User"} path={"Overview"} icon={true}/>
+        {/* banner  */}
+            <Banner title={"User"} path={"Overview"} icon={true} btn={"Create User"}/>
             
         {/* table  */}
         <table className=" text-white table-responsive">
@@ -26,50 +32,22 @@ const Overview = () => {
                 </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-                <tr className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]">
-                    <th className="p-4 text-start">1</th>
-                    <th className="p-4 text-start">Messi</th>
-                    <th className="p-4 text-start">Admin</th>
-                    <th className="p-4 text-start">messi@gmail.com</th>
-                    <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><FaMinus/></span>
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><BiEditAlt/></span>
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><HiArrowNarrowRight/></span>
-                    </th>
-                </tr>
-                <tr className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]">
-                    <th className="p-4 text-start">1</th>
-                    <th className="p-4 text-start">Messi</th>
-                    <th className="p-4 text-start">Admin</th>
-                    <th className="p-4 text-start">messi@gmail.com</th>
-                    <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><FaMinus/></span>
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><BiEditAlt/></span>
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><HiArrowNarrowRight/></span>
-                    </th>
-                </tr>
-                <tr className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]">
-                    <th className="p-4 text-start">1</th>
-                    <th className="p-4 text-start">Messi</th>
-                    <th className="p-4 text-start">Admin</th>
-                    <th className="p-4 text-start">messi@gmail.com</th>
-                    <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><FaMinus/></span>
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><BiEditAlt/></span>
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><HiArrowNarrowRight/></span>
-                    </th>
-                </tr>
-                <tr className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]">
-                    <th className="p-4 text-start">1</th>
-                    <th className="p-4 text-start">Messi</th>
-                    <th className="p-4 text-start">Admin</th>
-                    <th className="p-4 text-start">messi@gmail.com</th>
-                    <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><FaMinus/></span>
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><BiEditAlt/></span>
-                        <span className="bg-[#7E7F80] p-2 rounded-full cursor-pointer hover-up duration-300"><HiArrowNarrowRight/></span>
-                    </th>
-                </tr>
+                {user.map(user => {
+                    return(
+                        <tr key={user.id} className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]">
+                            <th className="p-4 text-start">{user.id}</th>
+                            <th className="p-4 text-start">{user.name}</th>
+                            <th className="p-4 text-start">{user.position}</th>
+                            <th className="p-4 text-start">{user.email}</th>
+                            <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
+                                <span className=" icon1 hover-up"><FaMinus/></span>
+                                <span className=" icon1 hover-up"><BiEditAlt/></span>
+                                <span className=" icon1 hover-up"><HiArrowNarrowRight/></span>
+                            </th>
+                        </tr>
+                    )
+                })}
+                
             </tbody>
         </table>
       </div>
