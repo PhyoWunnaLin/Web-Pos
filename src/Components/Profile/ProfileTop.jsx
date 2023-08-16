@@ -16,9 +16,10 @@ const ProfileTop = (props) => {
     // console.log(profileNavLinkActive);
 
   return (
-    <div className=' bg-[#161618] border-b border-[#878787]'>
+    <div className=''>
+        <div className=' bg-[#161618] border-b border-[#878787]'>
         {/* profile img  */}
-        <div className=' pb-10 pt-7 mt-10 flex items-center relative'>
+        <div className='pb-10 pt-7 mt-10 flex items-center relative'>
             <div className=' absolute top-[-40px] left-[40px]'>
                 <div className=' relative rounded-full w-[55%]'>
                     <img src={props.img} alt="" className=' rounded-full'/>
@@ -68,6 +69,7 @@ const ProfileTop = (props) => {
                 <span className=' font-semibold'>Password</span>
             </p>
         </div>
+    </div>
     </div>
   )
 }
