@@ -11,11 +11,15 @@
 }
 
 .btn{
-    @apply  bg-[#8AB4F8] py-2 px-5 rounded-md font-medium hover:bg-[#5d9afd] duration-300;
+    @apply  bg-[#5287dd] py-2 px-5 rounded-md font-medium hover:bg-[#3e6aaf] duration-300;
 }
 
 .btn2{
     @apply  bg-transparent py-1 px-3 font-medium tracking-wider border border-white text-sm text-white rounded-md hover:bg-white hover:text-black duration-300;
+}
+
+.btn3{
+    @apply  bg-transparent py-2 px-7 rounded-md font-medium hover:bg-[#24262b] duration-300;
 }
 
 .step-item{
