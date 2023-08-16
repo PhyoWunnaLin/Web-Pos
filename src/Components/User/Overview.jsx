@@ -18,7 +18,7 @@ const Overview = () => {
     <div className="bg-[#202124] h-screen w-full flex justify-center">
       <div className="w-[95%] mt-6 flex flex-col gap-8">
         {/* banner  */}
-            <Banner title={"User"} path1={"Overview"} icon={true} btn={"Create User"}/>
+            <Banner title={"User"} path1={"Overview"} icon={true} btn={"Create User"} button={true}/>
             
         {/* table  */}
         <table className=" text-white table-responsive">

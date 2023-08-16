@@ -1,5 +1,5 @@
-import React from 'react'
-import {FiPlus} from "react-icons/fi"
+import React from "react";
+import { FiPlus } from "react-icons/fi";
 
 const Banner = (props) => {
   return (
@@ -17,8 +17,19 @@ const Banner = (props) => {
                 {props.btn && <span className='text-[#202124]'>{props.btn}</span>}
             </button>
         </div>
+        {props.button && (
+          <button className="btn flex gap-2 items-center border border-[#3f4245]">
+            {props.icon && (
+              <span className=" text-[#161618]">
+                <FiPlus />
+              </span>
+            )}
+            {props.btn && <span className="text-[#202124]">{props.btn}</span>}
+          </button>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;
