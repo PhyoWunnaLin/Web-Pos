@@ -4,7 +4,7 @@ import ProfileBottom from "../Profile/ProfileBottom";
 
 const CreateUserStep4 = () => {
   return (
-    <div>
+    <div className="">
       <ProfileTop
         img={
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7lpk_T0p1lQEqmdbzT9DtlytfERJJJUKEqg&usqp=CAU"
