@@ -7,11 +7,15 @@
 }
 
 .input{
-    @apply  bg-[#202124] border-2 border-[#7E7F80] py-1 px-5 rounded-md outline-none text-[#E8EAED] focus:border-[#E8EAED] duration-300 font-medium placeholder:tracking-wider placeholder:text-[#7E7F80];
+    @apply  bg-[#202124] border-2 border-[#7E7F80] py-[6px] px-5 rounded-md outline-none text-[#E8EAED] focus:border-[#E8EAED] duration-300 font-medium placeholder:tracking-wider placeholder:text-[#7E7F80];
 }
 
 .btn{
     @apply  bg-[#8AB4F8] py-2 px-5 rounded-md font-medium hover:bg-[#5d9afd] hover:text-[#FFFFFF] duration-300;
+}
+
+.btn2{
+    @apply  bg-transparent py-1 px-3 font-medium tracking-wider border border-white text-sm text-white rounded-md hover:bg-white hover:text-black duration-300;
 }
 
 .step-item{
