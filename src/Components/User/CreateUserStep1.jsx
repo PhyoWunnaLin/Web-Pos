@@ -34,7 +34,7 @@ const CreateUserStep1 = () => {
             <input
               type="radio"
               name="gender"
-              checked
+              // checked
               style={{ width: "18px", height: "18px" }}
             />
             Male

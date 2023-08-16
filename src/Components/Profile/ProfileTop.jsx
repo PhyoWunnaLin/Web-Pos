@@ -2,7 +2,8 @@ import React from 'react'
 import {HiOutlineMailOpen} from "react-icons/hi"
 import {BsTelephoneOutbound} from "react-icons/bs"
 import {AiFillClockCircle} from "react-icons/ai"
-import {CiShop,CiEdit} from "react-icons/ci";
+import {CiShop} from "react-icons/ci";
+import {BiSolidEditAlt} from "react-icons/bi"
 import "../User/overview.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { SetProfileNavLinkActive } from '../../Redux/Services/profileSlice';
@@ -22,8 +23,8 @@ const ProfileTop = (props) => {
                 <div className=' relative rounded-full w-[55%]'>
                     <img src={props.img} alt="" className=' rounded-full'/>
 
-                    <div className='bg-[#fff] w-[23px] h-[23px] flex justify-center items-center p-4 border border-black rounded-full cursor-pointer duration-300 hover-up absolute bottom-0 right-0'>
-                        <p className=' text-black text-xl'><CiEdit/></p>
+                    <div className='h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
+                    <BiSolidEditAlt size={18}/>
                     </div>
                 </div>
             </div>
