@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SetProfileNavLinkActive } from '../../Redux/Services/profileSlice';
 import "./profile.css"
 
-const ProfileTop = () => {
+const ProfileTop = (props) => {
     const dispatch = useDispatch();
     const profileNavLinkActive = useSelector(state => state.profileSlice.profileNavLinkActive);
     const profileNavLinkActive2 = localStorage.getItem("profileNavLinkActive");
@@ -20,7 +20,7 @@ const ProfileTop = () => {
         <div className=' pb-10 pt-7 mt-10 flex items-center relative'>
             <div className=' absolute top-[-40px] left-[40px]'>
                 <div className=' relative rounded-full w-[55%]'>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7lpk_T0p1lQEqmdbzT9DtlytfERJJJUKEqg&usqp=CAU" alt="" className=' rounded-full'/>
+                    <img src={props.img} alt="" className=' rounded-full'/>
 
                     <div className='bg-[#fff] w-[23px] h-[23px] flex justify-center items-center p-4 border border-black rounded-full cursor-pointer duration-300 hover-up absolute bottom-0 right-0'>
                         <p className=' text-black text-xl'><CiEdit/></p>
