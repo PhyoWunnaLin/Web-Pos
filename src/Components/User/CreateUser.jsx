@@ -37,7 +37,7 @@ const CreateUser = () => {
                     >
                       <div className="step">
                         {i + 1 < currentStep || complete ? (
-                          <TiTick size={22} />
+                          <TiTick className=" text-black" size={22} />
                         ) : (
                           i + 1
                         )}
