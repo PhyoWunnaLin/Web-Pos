@@ -5,7 +5,6 @@ import ModalMedia from '../Components/Modal/ModalMedia'
 const Dashboard = () => {
   return (
     <MainLayout>
-      <SuccessAlert/>
       <ModalMedia/>
     </MainLayout>
   )
