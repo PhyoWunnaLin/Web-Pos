@@ -1,6 +1,5 @@
 import React from 'react'
 import MainLayout from '../Layouts/MainLayout'
-import AdminProfileEdit from '../Components/Admin/AdminProfileEdit'
 
 const Dashboard = () => {
   return (
