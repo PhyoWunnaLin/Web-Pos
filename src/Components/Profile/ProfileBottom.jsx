@@ -8,7 +8,7 @@ const ProfileBottom = (props) => {
   return (
     <div className=' bg-[#191919]'>
         {/* Personal  */}
-        <div className={` ${profileNavLinkActive2 == "personal" || profileNavLinkActive2 == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
+        <div className={` ${profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
             {/* {props.phone && (
                 <p className=' flex items-center gap-36 text-[19px] tracking-wide'>
                     <span className=' text-[#878787] font-semibold'>Phone</span>
@@ -46,7 +46,7 @@ const ProfileBottom = (props) => {
         </div>
 
         {/* Login Information  */}
-        <div className={` ${profileNavLinkActive2 == "login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
+        <div className={` ${profileNavLinkActive2 == "Login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
             {props.phone && (
                 <p className=' flex items-center gap-36 text-[19px] tracking-wide'>
                     <span className=' text-[#878787] font-semibold'>Phone</span>
