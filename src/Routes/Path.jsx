@@ -7,10 +7,12 @@ import AdminProfile from "../Components/Admin/AdminProfile";
 import AdminProfileEdit from "../Components/Admin/AdminProfileEdit";
 import CreateUser from "../Components/User/CreateUser";
 import Media from "../Pages/Media";
+import ScrollTop from "../Components/ScrollTop/ScrollTop";
 
 const Path = () => {
   return (
     <>
+      <ScrollTop/>
       <Routes>
         <Route path="/" element={<Dashboard/>} />
         <Route path="/login" element={<Login/>} />

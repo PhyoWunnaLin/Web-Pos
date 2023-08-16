@@ -1,7 +1,12 @@
 import React from "react";
 import login from "../../assets/LoginPhoto/login.png";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const nav = useNavigate();
+  const route = () => {
+    nav('/');
+  }
   return (
     <div className="w-full flex">
       <div className="w-[60%] max-lg:hidden flex justify-center items-center h-screen bg-[#161618]">
@@ -30,7 +35,7 @@ const Login = () => {
               </label>
               <input type="password" className="login-input" />
             </div>
-            <button className="btn mx-10 mt-6">Login</button>
+            <button onClick={route} className="btn mx-10 mt-6">Login</button>
           </form>
         </div>
       </div>

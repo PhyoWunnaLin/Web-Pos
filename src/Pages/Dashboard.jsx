@@ -5,9 +5,7 @@ import ProfileFormBottom from '../Components/Profile/ProfileFormBottom'
 const Dashboard = () => {
   return (
     <MainLayout>
-      <div className=' h-screen bg-black'>
-        <ProfileFormBottom/>
-      </div>
+      dashboard
     </MainLayout>
   )
 }

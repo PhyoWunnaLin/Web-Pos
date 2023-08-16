@@ -15,8 +15,8 @@ const Overview = () => {
     ]
   return (
     <MainLayout>
-    <div className="bg-[#202124] h-screen w-full flex justify-center">
-      <div className="w-[95%] mt-6 flex flex-col gap-8">
+    <div className="bg-[#202124] w-full flex justify-center">
+      <div className="w-[95%] my-6 flex flex-col gap-8">
         {/* banner  */}
             <Banner title={"User"} path1={"Overview"} icon={true} btn={"Create User"} button={true}/>
             
