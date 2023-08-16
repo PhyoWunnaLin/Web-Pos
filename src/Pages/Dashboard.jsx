@@ -1,11 +1,11 @@
 import React from 'react'
 import MainLayout from '../Layouts/MainLayout'
-import SuccessAlert from '../Components/Sweetalert/SuccessAlert'
+import ModalMedia from '../Components/Modal/ModalMedia'
 
 const Dashboard = () => {
   return (
     <MainLayout>
-      dashboard
+      <ModalMedia/>
     </MainLayout>
   )
 }

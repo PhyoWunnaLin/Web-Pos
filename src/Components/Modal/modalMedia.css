@@ -1,0 +1,24 @@
+.active{
+    border: 2px solid #5e90e0;
+    border-radius: 4px;
+}
+
+.mantine-Modal-body{
+    width: 100% !important;
+}
+
+.mantine-Modal-title{
+    color: #fff;
+}
+
+.mantine-Modal-close{
+    color: #fff;
+}
+
+.mantine-Modal-content{
+    background-color: #202124;
+}
+
+.mantine-Modal-header{
+    background-color: #161618;
+}
