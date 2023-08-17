@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export const mediaSlice = createSlice({
-  name: 'media',
+  name: 'mediaSlice',
   initialState,
   reducers: {
     setActive : (state,{payload})=>{

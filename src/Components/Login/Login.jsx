@@ -1,41 +1,76 @@
-import React from "react";
-import login from "../../assets/LoginPhoto/login.png";
-import { Link, useNavigate } from "react-router-dom";
+import React,{useState} from "react";
+import img from "../../assets/LoginPhoto/login.png";
+import { Link, useNavigate} from "react-router-dom";
+import {useDispatch} from 'react-redux';
+import { useLoginMutation } from "../../Redux/API/authApi";
+import { addToken } from "../../Redux/Services/authSlice";
+import { Loader } from '@mantine/core';
 
 const Login = () => {
+  const [ login, {isLoading}] = useLoginMutation();
+  const [email,setEmail] = useState("admin@gmail.com");
+  const [password,setPassword] = useState("asdffdsa");
+  // const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const nav = useNavigate();
-  const route = () => {
-    nav('/');
+
+  const loginHandler = async(e) => {
+    try{
+      e.preventDefault();
+      const user = {email,password};
+      const {data} = await login(user);
+      // console.log(data);
+      dispatch(addToken(data?.token))
+      if(data?.token){
+        nav("/")
+      }
+    }catch(error){
+      console.log(error);
+    }
   }
+
   return (
     <div className="w-full flex">
       <div className="w-[60%] max-lg:hidden flex justify-center items-center h-screen bg-[#161618]">
-        <div className="w-[60%]">
-          <img src={login} className="w-full opacity-70" />
+        <div className="w-[55%]">
+          <img src={img} className="w-full opacity-70" />
         </div>
       </div>
-      <div className="w-[40%] max-lg:w-[100%] flex justify-center items-center h-screen bg-[#202124]">
-        <div className="w-[80%] max-lg:w-[45%] max-md:w-[60%] max-sm:w-[80%] max-[420px]:w-[95%] flex flex-col gap-5">
+      <div className="w-[45%] max-lg:w-[100%] flex justify-center items-center h-screen bg-[#202124]">
+        <div className="w-[70%] max-lg:w-[45%] max-md:w-[60%] max-sm:w-[80%] max-[420px]:w-[95%] flex flex-col gap-5">
           <h1 className="text-2xl font-bold text-[#E8EAED] text-center tracking-widest">
             MMS
           </h1>
           <h1 className="text-4xl font-medium text-[#FFFFFF] text-center tracking-wider">
             Welcome To
           </h1>
-          <form className="flex flex-col gap-5 mx-5 mt-5">
+
+          {/* form  */}
+          <form onClick={loginHandler} className="flex flex-col gap-5 mx-5 mt-5">
             <div className="flex flex-col gap-2">
               <label className="text-[#FFFFFF] font-medium tracking-widest">
-                User Name
+                Email
               </label>
-              <input type="text" className="login-input" />
+              <input value={email} onChange={(e)=> setEmail(e.target.value)} type="email" className="login-input" />
             </div>
+
             <div className="flex flex-col gap-2">
               <label className="text-[#FFFFFF] font-medium tracking-widest">
                 Password
               </label>
-              <input type="password" className="login-input" />
+              <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="login-input" />
             </div>
-            <button onClick={route} className="btn mx-10 mt-6">Login</button>
+
+            {isLoading ? (
+              <button disabled={isLoading && true} className="btn mx-10 mt-6 flex justify-center item-center gap-3">
+                <span>Login</span> 
+                <Loader color="dark" size="sm"/>
+              </button>
+            ) : (
+              <button className="btn mx-10 mt-6 cursor-pointer flex justify-center item-center gap-3">
+              <span>Login</span> 
+            </button>
+            )}
           </form>
         </div>
       </div>

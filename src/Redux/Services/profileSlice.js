@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const profileSlice = createSlice({
-  name: 'counter',
+  name: 'profileSlice',
   initialState,
   reducers: {
     setProfileNavLinkActive : (state,{payload})=>{
