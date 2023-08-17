@@ -3,10 +3,10 @@ import { MdOutlineCloudUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectActive, setOnclickActive } from '../../Redux/Services/mediaSlice';
 import "./modalMedia.css"
-import { Modal, Group, Button} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { Modal} from '@mantine/core';
+// import { useDisclosure } from '@mantine/hooks';
 
-const ModalMedia = () => {
+const ModalMedia = (props) => {
     const dispatch = useDispatch();
     const selectActive = useSelector((state) => state.mediaSlice.selectActive);
     const onclickActive = useSelector((state) => state.mediaSlice.onclickActive);
@@ -30,11 +30,11 @@ const ModalMedia = () => {
         setFile(e.dataTransfer.files[0].name)
     }
 
-    const [opened, { open, close }] = useDisclosure(false);
+    // const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
-        <Modal.Root opened={opened} onClose={close} size={"65%"}>
+        <Modal.Root opened={props.opened} onClose={props.onClose} size={"65%"}>
             <Modal.Overlay/>
             <Modal.Content>
                 <Modal.Header>
@@ -47,8 +47,13 @@ const ModalMedia = () => {
                 <div className=' bg-[#202124] pt-10 pb-12 flex flex-col gap-5'>
                 <div className=' flex flex-wrap item-center gap-5 mx-auto'>
                 {/* upload      */}
-                <div onDragOver={handleDragOver} onDrop={handleDrop} className=" border border-[#3f4245] bg-[#161618] rounded-md flex flex-col justify-center items-center gap-3 w-[161px] h-[161px]">
-            <div className="w-[60px] h-[60px] bg-[#202124] rounded-full flex justify-center items-center mx-auto">
+                <div onDragOver={handleDragOver} onDrop={handleDrop}
+                className=" border border-[#3f4245] bg-[#161618] rounded-md flex flex-col justify-center items-center gap-3 w-[161px] h-[161px]">
+            <div
+            onClick={() => {
+                document.querySelector(".input-field").click();
+            }}
+            className="cursor-pointer w-[60px] h-[60px] bg-[#202124] rounded-full flex justify-center items-center mx-auto">
                 <div className="w-[40px] h-[40px] bg-[#212328] rounded-full flex justify-center items-center border-dashed border-2 border-[#7E7F80]">
                 <MdOutlineCloudUpload size={25} className="text-[#8AB4F8]" />
                 </div>
@@ -83,7 +88,6 @@ const ModalMedia = () => {
                     return(
                         <div onClick={()=> dispatch(setOnclickActive(img.id))} 
                         onMouseEnter={()=> dispatch(setSelectActive(img.id))} 
-                        // onMouseOut={()=> dispatch(setSelectActive(null))} 
                         key={img.id} className={`
                         ${selectActive == img.id && " hover:border-opacity-100" }
                         ${onclickActive == img.id && "modal-active border-opacity-100"}
@@ -105,9 +109,6 @@ const ModalMedia = () => {
             </Modal.Content>
 
         </Modal.Root>
-    <Group position="center">
-        <Button onClick={open}>Open centered Modal</Button>
-      </Group>
     </>
   )
 }
