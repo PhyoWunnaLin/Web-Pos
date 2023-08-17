@@ -8,13 +8,13 @@ export const profileSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    SetProfileNavLinkActive : (state,{payload})=>{
+    setProfileNavLinkActive : (state,{payload})=>{
         state.profileNavLinkActive = payload;
         localStorage.setItem("profileNavLinkActive",state.profileNavLinkActive);
     }
   },
 })
 
-export const { SetProfileNavLinkActive} = profileSlice.actions
+export const { setProfileNavLinkActive} = profileSlice.actions
 
 export default profileSlice.reducer

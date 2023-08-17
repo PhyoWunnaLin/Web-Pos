@@ -17,7 +17,7 @@
 
 .mantine-Accordion-itemTitle{
     color: #e8eaed;
-    /* background-color: #202124; */
+    /* background-color: red; */
 }
 
 .mantine-Accordion-chevron{
@@ -40,6 +40,10 @@
 
 .nav:hover span{
     color: #8ab4f8 !important;
+}
+
+.sidebarActive{
+  color: #8ab4f8 !important;
 }
 
 .scrollbar{
