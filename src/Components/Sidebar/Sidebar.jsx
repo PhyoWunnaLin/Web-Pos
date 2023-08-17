@@ -1,5 +1,5 @@
 import React from "react";
-import {MdOutlinePermMedia,MdOutlineNotificationsActive} from "react-icons/md";
+import {MdOutlineNotificationsActive} from "react-icons/md";
 import {BsFillMoonStarsFill,BsPersonCircle, BsPersonSquare} from "react-icons/bs";
 import {AiOutlineHome} from "react-icons/ai"
 import {CiShop} from "react-icons/ci";
@@ -11,12 +11,13 @@ import {HiOutlinePhotograph} from "react-icons/hi"
 import "./sidebar.css"
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useLoginMutation } from "../../Redux/API/authApi";
+import { useLogoutMutation } from "../../Redux/API/authApi";
 import Cookies from 'js-cookie';
 import { removeToken } from "../../Redux/Services/authSlice";
+import { Loader } from '@mantine/core';
 
 const Sidebar = () => {
-    const [logout] = useLoginMutation();
+    const [logout , {isLoading}] = useLogoutMutation();
     const dispatch = useDispatch();
     const location = useLocation();
     const sidebarActive = location.pathname;
@@ -25,12 +26,12 @@ const Sidebar = () => {
     const nav = useNavigate();
 
     const logoutHandler = async(e)=>{
-        const data = await logout(token);
+        const {data} = await logout(token);
         console.log(data);
-        // dispatch(removeToken())
-        // if(){
-        //     nav("/login")
-        // }
+        if(data.message){
+            nav("/login")
+            dispatch(removeToken())
+        }
     }
     return(
         <div className=" select-none">
@@ -196,10 +197,19 @@ const Sidebar = () => {
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Logout  */}
-                    <p onClick={logoutHandler} className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#df7272]">
+                    {isLoading ? 
+
+                    <p className="flex items-center gap-2 px-5 py-3 hover:bg-[#202124]">
+                        <span className=" text-[20px] text-[#df7272]"><RxExit/></span>
+                        <span className=" tracking-wider font-medium text-[#df7272]">Logout</span>
+                        <span><Loader color="red" size="sm" className="pt-[3px]"/></span>
+                    </p> : 
+                    
+                    <p onClick={logoutHandler} className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#df7272] ">
                         <span className=" text-[20px]"><RxExit/></span>
                         <span className=" tracking-wider font-medium">Logout</span>
-                    </p>
+                    </p>}
+
                 <div className=" border-b border-[#3f4245]" />
 
             </div>
