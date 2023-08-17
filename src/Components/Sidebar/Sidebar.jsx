@@ -9,12 +9,29 @@ import { Accordion } from '@mantine/core';
 import {PiNotepadBold, PiUserCirclePlusDuotone, PiUserSquareFill} from "react-icons/pi"
 import {HiOutlinePhotograph} from "react-icons/hi"
 import "./sidebar.css"
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useLoginMutation } from "../../Redux/API/authApi";
+import Cookies from 'js-cookie';
+import { removeToken } from "../../Redux/Services/authSlice";
 
 const Sidebar = () => {
-    const location = useLocation()
+    const [logout] = useLoginMutation();
+    const dispatch = useDispatch();
+    const location = useLocation();
     const sidebarActive = location.pathname;
     // console.log(sidebarActive);
+    const token = Cookies.get("token")
+    const nav = useNavigate();
+
+    const logoutHandler = async(e)=>{
+        const data = await logout(token);
+        console.log(data);
+        // dispatch(removeToken())
+        // if(){
+        //     nav("/login")
+        // }
+    }
     return(
         <div className=" select-none">
 
@@ -179,12 +196,10 @@ const Sidebar = () => {
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Logout  */}
-                <Link to={'/login'}>
-                    <p className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#df7272]">
+                    <p onClick={logoutHandler} className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#df7272]">
                         <span className=" text-[20px]"><RxExit/></span>
                         <span className=" tracking-wider font-medium">Logout</span>
                     </p>
-                </Link>
                 <div className=" border-b border-[#3f4245]" />
 
             </div>
