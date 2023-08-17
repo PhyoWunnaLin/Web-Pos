@@ -18,7 +18,7 @@ const AdminProfile = () => {
           {/* Profile  */}
           <div>
             <ProfileTop 
-            img={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7lpk_T0p1lQEqmdbzT9DtlytfERJJJUKEqg&usqp=CAU"}/>
+            img={"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"}/>
           
             <ProfileBottom address={"yangon"} gender={"female"} DOB={"19/12/2002"} phone={"0999999999"} 
             email={"jj@gmail.com"} position={"Sale Executive"}/>
