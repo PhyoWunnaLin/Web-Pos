@@ -7,13 +7,13 @@ import {AiFillClockCircle} from "react-icons/ai"
 import {CiShop} from "react-icons/ci";
 import {BiSolidEditAlt} from "react-icons/bi"
 import { useDispatch, useSelector } from "react-redux";
-import { setProfileNavLinkActive } from "../../Redux/Services/profileSlice";
+import { setUserPp } from "../../Redux/Services/profileSlice";
 
 const Detail = () => {
   const dispatch = useDispatch();
 
-  const profileNavLinkActive = useSelector(state => state.profileSlice.profileNavLinkActive);
-  const profileNavLinkActive2 = localStorage.getItem("profileNavLinkActive");
+  const userPp = useSelector(state => state.profileSlice.userPp);
+  // const userPp2 = localStorage.getItem("userPp");
 
   return (
     <MainLayout>
@@ -67,12 +67,12 @@ const Detail = () => {
 
                     {/* profile navLink  */}
                     <div className=' flex items-center gap-20 ml-10 pb-5'>
-                        <div onClick={() => dispatch(setProfileNavLinkActive("Personal"))} className={` ${profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
+                        <div onClick={() => dispatch(setUserPp("Personal"))} className={` ${userPp == "Personal" || userPp == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
                             <span className=" text-[19px]"><CiShop/></span>
                             <span className=' font-semibold'>Personal</span>
                         </div>
 
-                        <div onClick={() => dispatch(setProfileNavLinkActive("Login Information"))} className={` ${profileNavLinkActive2 == "Login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
+                        <div onClick={() => dispatch(setUserPp("Login Information"))} className={` ${userPp == "Login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
                             <span className=" text-[19px]"><CiShop/></span>
                             <span className=' font-semibold'>Login Information</span>
                         </div>
@@ -85,7 +85,7 @@ const Detail = () => {
                 {/* pp bottom start  */}
                 <div className=' bg-[#191919]'>
                   {/* Personal  */}
-                  <div className={` ${profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
+                  <div className={` ${userPp == "Personal" || userPp == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
                         <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
                           <span className=' text-[#878787] w-[150px] font-semibold'>Address</span>
                           <span className=' text-[#fff]'>Yangon</span>
@@ -103,7 +103,7 @@ const Detail = () => {
                   </div>
 
                   {/* Login Information  */}
-                  <div className={` ${profileNavLinkActive2 == "Login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
+                  <div className={` ${userPp == "Login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
                           <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
                               <span className=' text-[#878787] w-[150px] font-semibold'>Phone</span>
                               <span className=' text-[#fff]'>099999999</span>

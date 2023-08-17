@@ -8,22 +8,22 @@ import "./adminProfile.css"
 import Banner from '../Banner/Banner'
 import MainLayout from '../../Layouts/MainLayout'
 import { useDispatch, useSelector } from 'react-redux'
-import { setProfileNavLinkActive } from '../../Redux/Services/profileSlice'
+import { setAdminPp } from '../../Redux/Services/profileSlice'
 
 const AdminProfile = () => {
   const dispatch = useDispatch();
 
-  const profileNavLinkActive = useSelector(state => state.profileSlice.profileNavLinkActive);
-  const profileNavLinkActive2 = localStorage.getItem("profileNavLinkActive");
+  const adminPp = useSelector(state => state.profileSlice.adminPp);
+  // const adminPp2 = localStorage.getItem("adminPp");
 
-  // console.log(profileNavLinkActive2);
+  console.log(adminPp);
 
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
         <div className="w-[95%] my-6 flex flex-col gap-8">
           {/* banner  */}
-            <Banner title={"Profile"} path1={"My Account"} path2={profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "Personal" : profileNavLinkActive2} button={true} route={"/profile/edit"} icon={true} btn={"edit Profile"}/>
+            <Banner title={"Profile"} path1={"My Account"} path2={adminPp == "Personal" || adminPp == null ? "Personal" : adminPp} button={true} route={"/profile/edit"} icon={true} btn={"edit Profile"}/>
 
           {/* Profile  */}
           <div>
@@ -64,12 +64,12 @@ const AdminProfile = () => {
 
                 {/* profile navLink  */}
                 <div className=' flex items-center gap-20 ml-10 pb-5'>
-                    <div onClick={() => dispatch(setProfileNavLinkActive("Personal"))} className={` ${profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
+                    <div onClick={() => dispatch(setAdminPp("Personal"))} className={` ${adminPp == "Personal" || adminPp == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
                         <span className=' font-semibold'>Personal</span>
                     </div>
 
-                    <div onClick={() => dispatch(setProfileNavLinkActive("Login Information"))} className={` ${profileNavLinkActive2 == "Login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
+                    <div onClick={() => dispatch(setAdminPp("Login Information"))} className={` ${adminPp == "Login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
                         <span className=' font-semibold'>Login Information</span>
                     </div>
@@ -81,7 +81,7 @@ const AdminProfile = () => {
             {/* pp bottom start  */}
             <div className=' bg-[#191919]'>
               {/* Personal  */}
-              <div className={` ${profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
+              <div className={` ${adminPp == "Personal" || adminPp == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
                     <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
                       <p className=' text-[#878787] w-[150px] font-semibold'>Address</p>
                       <p className=' text-[#fff]'>Yangon</p>
@@ -99,7 +99,7 @@ const AdminProfile = () => {
               </div>
 
               {/* Login Information  */}
-              <div className={` ${profileNavLinkActive2 == "Login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
+              <div className={` ${adminPp == "Login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
                       <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
                           <p className=' text-[#878787] w-[150px] font-semibold'>Phone</p>
                           <p className=' text-[#fff]'>099999999</p>
