@@ -8,11 +8,19 @@
 }
 
 .mantine-Modal-title{
+    user-select: none;
     color: #fff;
+    font-size: large;
+    letter-spacing: 1px;
 }
 
 .mantine-Modal-close{
     color: #fff;
+    transition: 300ms;
+}
+
+.mantine-Modal-close:hover{
+    background-color: #202124;
 }
 
 .mantine-Modal-content{
