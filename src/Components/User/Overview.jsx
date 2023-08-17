@@ -7,6 +7,7 @@ import "./overview.css";
 import Banner from "../Banner/Banner";
 import MainLayout from "../../Layouts/MainLayout";
 import { useNavigate } from "react-router-dom";
+import Dropdown from "../Dropdown/Dropdown";
 
 const Overview = () => {
   const nav = useNavigate();
@@ -49,11 +50,26 @@ const Overview = () => {
             </div>
             <div className="flex flex-col gap-3">
               <div className="relative">
-                <input type="text" placeholder="Search" className="search-input"/>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="search-input"
+                />
                 <div className="text-white absolute top-[10px] left-[11px]">
-                    <BiSearch size={20}/>
+                  <BiSearch size={20} />
                 </div>
               </div>
+              <div className="flex gap-5 items-center justify-end">
+                <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
+                  Sort : 
+                  <span><Dropdown name={"Last"} /></span>
+                </div>
+                <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
+                  Filter : 
+                  <span><Dropdown name={"All Files"} /></span>
+                </div>
+              </div>
+              <div></div>
             </div>
           </div>
           {/* table  */}
@@ -80,7 +96,7 @@ const Overview = () => {
                     <th className="p-4 text-start">{user.position}</th>
                     <th className="p-4 text-start">{user.email}</th>
                     <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                      <span className=" icon1 hover-up">
+                      <span className=" icon1 hover-up text-red-400">
                         <FaMinus />
                       </span>
                       <span className=" icon1 hover-up">

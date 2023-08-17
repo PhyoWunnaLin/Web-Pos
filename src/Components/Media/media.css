@@ -8,4 +8,8 @@
       width: 100%;
       overflow-x: auto;
     }
-  }
+}
+
+.drag-over{
+  background-color: red;
+}

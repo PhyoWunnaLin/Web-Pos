@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Banner from "../Banner/Banner";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { TfiMenuAlt } from "react-icons/tfi";
@@ -9,28 +9,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActive } from "../../Redux/Services/mediaSlice";
 
 const MediaCompo = () => {
+  const [hover,setHover] = useState(false)
   const state = useSelector((state) => state.mediaSlice.active);
   const active = localStorage.getItem("active");
   const dispatch = useDispatch();
   const [file, setFile] = useState("No Selected File");
   console.log(file);
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    setHover(false);
+  }
   const handleDragOver = (e) => {
     e.preventDefault();
-  }
+    setHover(true);
+  };
   const handleDrop = (e) => {
     e.preventDefault();
-    setFile(e.dataTransfer.files[0].name)
-  }
+    setFile(e.dataTransfer.files[0].name);
+  };
   return (
     <div className="bg-[#202124] w-full flex justify-center">
       <div className="w-[95%] my-6 flex flex-col gap-8">
         {/* header  */}
         <Banner title={"Media"} path1={"Uploader"} />
         {/* Uploader  */}
-        <div onDragOver={handleDragOver} onDrop={handleDrop} className="w-full border border-[#7E7F80] bg-[#161618] rounded-md flex flex-col gap-8 p-10 py-14">
-          <div className="w-[120px] h-[120px] bg-[#202124] rounded-full flex justify-center items-center mx-auto">
-            <div className="w-[85px] h-[85px] bg-[#212328] rounded-full flex justify-center items-center border-dashed border-2 border-[#7E7F80]">
-              <MdOutlineCloudUpload size={40} className="text-[#8AB4F8]" />
+        <div
+          onDragLeave={handleDragLeave}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          className={`${hover && " opacity-70"} drag w-full border border-[#7E7F80] bg-[#161618] rounded-md flex flex-col gap-8 p-10 py-14 duration-200`}
+        >
+          <div
+            onClick={() => {
+              document.querySelector(".input-field").click();
+            }}
+            className={`${hover && "scale-110"} w-[120px] h-[120px] bg-[#202124] rounded-full flex justify-center items-center mx-auto cursor-pointer duration-500`}
+          >
+            <div className={`${hover && "border-[#8AB4F8]"} w-[85px] h-[85px] bg-[#212328] rounded-full flex justify-center items-center border-dashed border-2 border-[#7E7F80] duration-500`}>
+              <MdOutlineCloudUpload size={40} className={`${hover && "animate-bounce"} text-[#8AB4F8]`} />
             </div>
           </div>
           <div className="flex gap-2 justify-center items-center">
