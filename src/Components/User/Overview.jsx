@@ -5,8 +5,13 @@ import {HiArrowNarrowRight} from "react-icons/hi"
 import "./overview.css"
 import Banner from "../Banner/Banner";
 import MainLayout from "../../Layouts/MainLayout";
+import { useNavigate } from "react-router-dom";
 
 const Overview = () => {
+    const nav = useNavigate();
+    const route = () => {
+        nav("/user/detail")
+    }
     const user = [
         {id:1 , name: "Messi", position: "Admin", email: "messi@gmail.com"},
         {id:2 , name: "Messi", position: "Admin", email: "messi@gmail.com"},
@@ -34,7 +39,7 @@ const Overview = () => {
             <tbody className=" tracking-wide text-sm">
                 {user.map(user => {
                     return(
-                        <tr key={user.id} className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]">
+                        <tr onClick={route} key={user.id} className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]">
                             <th className="p-4 text-start">{user.id}</th>
                             <th className="p-4 text-start">{user.name}</th>
                             <th className="p-4 text-start">{user.position}</th>
