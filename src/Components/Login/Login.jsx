@@ -64,7 +64,7 @@ const Login = () => {
             {isLoading ? (
               <button disabled={isLoading && true} className="btn mx-10 mt-6 flex justify-center item-center gap-3">
                 <span>Login</span> 
-                <Loader color="dark" size="sm"/>
+                <span><Loader color="dark" size="sm" className=" pt-1"/></span>
               </button>
             ) : (
               <button className="btn mx-10 mt-6 cursor-pointer flex justify-center item-center gap-3">
