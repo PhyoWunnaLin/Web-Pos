@@ -9,9 +9,12 @@ import { Accordion } from '@mantine/core';
 import {PiNotepadBold, PiUserCirclePlusDuotone, PiUserSquareFill} from "react-icons/pi"
 import {HiOutlinePhotograph} from "react-icons/hi"
 import "./sidebar.css"
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
+    const location = useLocation()
+    const sidebarActive = location.pathname;
+    // console.log(sidebarActive);
     return(
         <div className=" select-none">
 
@@ -36,7 +39,7 @@ const Sidebar = () => {
             <div className="text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] scrollbar overflow-y-auto fixed w-[210px] mt-[53px] h-screen pb-24">
 
                 {/* Overview  */}
-                <p className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#8ab4f8]">
+                <p className={` flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#8ab4f8]`}>
                     <span className=" text-[23px]"><AiOutlineHome/></span>
                     <span className=" font-bold tracking-wider">Overview</span>
                 </p>
@@ -118,7 +121,7 @@ const Sidebar = () => {
 
                         <Link to={'/user/overview'}>
                             <Accordion.Panel>
-                                <div className=" flex items-center nav">
+                                <div className={` flex items-center nav`}>
                                     <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
                                     <span className=" tracking-wider font-medium text-sm px-3 navLink">Overview</span>
                                 </div>
@@ -138,7 +141,7 @@ const Sidebar = () => {
 
                 {/* Media  */}
                 <Link to={'/media'}>
-                    <p className="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#8ab4f8]">
+                    <p className={`flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#8ab4f8]`}>
                         <span className=" text-[23px]"><HiOutlinePhotograph/></span>
                         <span className=" tracking-wider font-medium">Media</span>
                     </p>

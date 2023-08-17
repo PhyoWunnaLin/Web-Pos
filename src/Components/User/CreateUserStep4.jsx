@@ -34,13 +34,13 @@ const CreateUserStep4 = () => {
 
                         <div className=' ml-[213px]'>
                             <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>Khine zin thin</h1>
-                            <p className=' flex items-center gap-2 '>
+                            <div className=' flex items-center gap-2 '>
                                 <span className=' text-[#c5c1c1]'>Sale Executive /</span> 
                                 <p className=' flex items-center gap-1'>
                                     <span  className=' text-xs text-[#8ab4f8]'><AiFillClockCircle/></span>
                                     <span className=' text-[#fff] text-sm'>Active in 1 hr</span>
                                 </p>
-                            </p>
+                            </div>
                         </div>
 
                         <div className=' flex items-center gap-3 mr-8'>
