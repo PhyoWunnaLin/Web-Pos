@@ -1,0 +1,15 @@
+.mantine-Menu-dropdown{
+    background-color: #161618;
+    border-color: #7E7F80;
+}
+
+.mantine-Menu-item{
+    color: #FFFFFF;
+    transition: 0.5s;
+    letter-spacing: 0.05em;
+}
+
+.mantine-Menu-item:hover{
+    color: #FFFFFF;
+    background-color: #202124;
+}

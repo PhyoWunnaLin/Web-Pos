@@ -9,14 +9,30 @@ import CreateUserStep3 from "./CreateUserStep3";
 import CreateUserStep4 from "./CreateUserStep4";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import './successAlert.css';
 
 const CreateUser = () => {
   const steps = ["Personal", "Login Info", "Photo"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
   const nav = useNavigate();
-  const route = () => {
-    nav("/user/overview");
+  const showAlert = () => {
+    Swal.fire({
+      customClass : {
+        title: 'swal2-title'
+      },
+      title: "Successfully created an account",
+      icon: "success",
+      confirmButtonText: "SEE ALL USERS",
+      showCloseButton: true,
+      width: 400,
+      background: "#161618",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        nav("/user/overview")
+      }
+    })
   };
   return (
     <MainLayout>
@@ -63,7 +79,7 @@ const CreateUser = () => {
                 );
               })}
               <div className="mt-8">
-                <Link to={currentStep == 4 && "/user/overview"}>
+                <Link onClick={currentStep == 4 && showAlert }>
                   <button
                     onClick={() => {
                       {
