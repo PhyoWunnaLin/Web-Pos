@@ -85,10 +85,10 @@ const ModalMedia = () => {
                         onMouseEnter={()=> dispatch(setSelectActive(img.id))} 
                         // onMouseOut={()=> dispatch(setSelectActive(null))} 
                         key={img.id} className={`
-                        ${selectActive == img.id && "hover:border-2 hover:border-[#5e90e0]" }
-                        ${onclickActive == img.id && "active"}
-                        rounded`}>
-                            <img src={img.name} alt="" className=' rounded w-[161px] h-[161px] object-cover' />
+                        ${selectActive == img.id && " hover:border-opacity-100" }
+                        ${onclickActive == img.id && "modal-active border-opacity-100"}
+                        rounded border-2 border-blue-600 border-opacity-0`}>
+                            <img src={img.name} alt="" className=' rounded w-[161px] h-[161px] object-cover ' />
                         </div>
                     )
                 })}

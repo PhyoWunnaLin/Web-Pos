@@ -19,10 +19,10 @@ const ProfileTop = (props) => {
     <div className=''>
         <div className=' bg-[#161618] border-b border-[#878787]'>
         {/* profile img  */}
-        <div className='pb-10 pt-7 mt-10 flex items-center relative'>
-            <div className=' absolute top-[-40px] left-[40px]'>
-                <div className=' relative rounded-full w-[55%]'>
-                    <img src={props.img} alt="" className=' rounded-full'/>
+        <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
+            <div className=' absolute top-[-70px] left-[38px]'>
+                <div className=' relative rounded-full w-[150px] h-[150px]'>
+                    <img src={props.img} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
 
                     <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
                     <BiSolidEditAlt size={18}/>
@@ -32,7 +32,7 @@ const ProfileTop = (props) => {
 
             <div className= " flex justify-between w-full">
 
-                <div className=' ml-[190px]'>
+                <div className=' ml-[220px]'>
                     <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>Khine zin thin</h1>
                     <p className=' flex items-center gap-2 '>
                         <span className=' text-[#c5c1c1]'>Sale Executive /</span> 
