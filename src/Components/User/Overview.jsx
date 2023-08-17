@@ -96,7 +96,7 @@ const Overview = () => {
                     <th className="p-4 text-start">{user.position}</th>
                     <th className="p-4 text-start">{user.email}</th>
                     <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                      <span className=" icon1 hover-up text-red-400">
+                      <span className=" icon1 hover-up text-[#E64848]">
                         <FaMinus />
                       </span>
                       <span className=" icon1 hover-up">
