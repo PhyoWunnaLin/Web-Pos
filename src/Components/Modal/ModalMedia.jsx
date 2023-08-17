@@ -34,7 +34,7 @@ const ModalMedia = (props) => {
 
   return (
     <>
-        <Modal.Root opened={props.opened} onClose={props.onClose} size={"65%"}>
+        <Modal.Root opened={props.opened} onClose={props.onClose} size={"65%"} centered>
             <Modal.Overlay/>
             <Modal.Content>
                 <Modal.Header>
