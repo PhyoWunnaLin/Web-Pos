@@ -42,16 +42,15 @@ const AdminProfile = () => {
                     </div>
 
                     <div className= " flex justify-between w-full">
-
                         <div className=' ml-[213px]'>
                             <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>Khine zin thin</h1>
-                            <p className=' flex items-center gap-2 '>
+                            <div className=' flex items-center gap-2 '>
                                 <span className=' text-[#c5c1c1]'>Sale Executive /</span> 
                                 <p className=' flex items-center gap-1'>
                                     <span  className=' text-xs text-[#8ab4f8]'><AiFillClockCircle/></span>
                                     <span className=' text-[#fff] text-sm'>Active in 1 hr</span>
                                 </p>
-                            </p>
+                            </div>
                         </div>
 
                         <div className=' flex items-center gap-3 mr-8'>
@@ -83,38 +82,38 @@ const AdminProfile = () => {
             <div className=' bg-[#191919]'>
               {/* Personal  */}
               <div className={` ${profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
-                    <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
-                      <span className=' text-[#878787] w-[150px] font-semibold'>Address</span>
-                      <span className=' text-[#fff]'>Yangon</span>
-                    </p>
+                    <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+                      <p className=' text-[#878787] w-[150px] font-semibold'>Address</p>
+                      <p className=' text-[#fff]'>Yangon</p>
+                    </div>
 
-                    <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
-                      <span className=' text-[#878787] w-[150px] font-semibold'>Gender</span>
-                      <span className=' text-[#fff]'>Female</span>
-                    </p>
+                    <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+                      <p className=' text-[#878787] w-[150px] font-semibold'>Gender</p>
+                      <p className=' text-[#fff]'>Female</p>
+                    </div>
                   
-                    <p className=' flex items-center gap-14 text-[17px] tracking-wide'>
-                      <span className=' text-[#878787] w-[150px] font-semibold'>Date Of Birth</span>
-                      <span className=' text-[#fff]'>19/12/2002</span>
-                    </p>
+                    <div className=' flex items-center gap-14 text-[17px] tracking-wide'>
+                      <p className=' text-[#878787] w-[150px] font-semibold'>Date Of Birth</p>
+                      <p className=' text-[#fff]'>19/12/2002</p>
+                    </div>
               </div>
 
               {/* Login Information  */}
               <div className={` ${profileNavLinkActive2 == "Login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
-                      <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
-                          <span className=' text-[#878787] w-[150px] font-semibold'>Phone</span>
-                          <span className=' text-[#fff]'>099999999</span>
-                      </p>
+                      <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+                          <p className=' text-[#878787] w-[150px] font-semibold'>Phone</p>
+                          <p className=' text-[#fff]'>099999999</p>
+                      </div>
 
-                      <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
-                          <span className=' text-[#878787] w-[150px] font-semibold'>Position</span>
-                          <span className=' text-[#fff]'>Sale Executive</span>
-                      </p>
+                      <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+                          <p className=' text-[#878787] w-[150px] font-semibold'>Position</p>
+                          <p className=' text-[#fff]'>Sale Executive</p>
+                      </div>
 
-                      <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
-                          <span className=' text-[#878787] w-[150px] font-semibold'>Mail</span>
-                          <span className=' text-[#fff]'>kzt@gmail.com</span>
-                      </p>
+                      <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+                          <p className=' text-[#878787] w-[150px] font-semibold'>Mail</p>
+                          <p className=' text-[#fff]'>kzt@gmail.com</p>
+                      </div>
               </div>
             </div>
             {/* pp bottom end  */}
