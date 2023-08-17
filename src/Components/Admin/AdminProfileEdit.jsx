@@ -5,7 +5,7 @@ import {AiFillClockCircle} from "react-icons/ai"
 import {CiShop} from "react-icons/ci";
 import {BiSolidEditAlt} from "react-icons/bi"
 import { useDispatch, useSelector } from 'react-redux';
-import { setProfileNavLinkActive } from '../../Redux/Services/profileSlice';
+import { setAdminEditPp } from '../../Redux/Services/profileSlice';
 import "./adminProfile.css"
 import MainLayout from '../../Layouts/MainLayout';
 import Banner from '../Banner/Banner';
@@ -13,16 +13,16 @@ import Banner from '../Banner/Banner';
 const AdminProfileEdit = () => {
   const dispatch = useDispatch();
 
-  const profileNavLinkActive = useSelector(state => state.profileSlice.profileNavLinkActive);
-  const profileNavLinkActive2 = localStorage.getItem("profileNavLinkActive");
+  const adminEditPp = useSelector(state => state.profileSlice.adminEditPp);
+//   const adminEditPp2 = localStorage.getItem("adminEditPp");
 
-  console.log(profileNavLinkActive2);
+//   console.log(adminEditPp2);
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
         <div className="w-[95%] mt-6 flex flex-col gap-8">
           {/* banner  */}
-            <Banner title={"Profile"} path1={"Edit"} path2={profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "Personal" : profileNavLinkActive2} btn={"My Profile"} button={true} route={"/profile/myAccount"} />
+            <Banner title={"Profile"} path1={"Edit"} path2={adminEditPp == "Personal" || adminEditPp == null ? "Personal" : adminEditPp} btn={"My Profile"} button={true} route={"/profile/myAccount"} />
 
           {/* Profile  */}
           <div>
@@ -64,17 +64,17 @@ const AdminProfileEdit = () => {
 
                 {/* profile navLink  */}
                 <div className=' flex items-center gap-20 ml-10 pb-5'>
-                    <div onClick={() => dispatch(setProfileNavLinkActive("Personal"))} className={` ${profileNavLinkActive2 == "Personal" || profileNavLinkActive2 == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
+                    <div onClick={() => dispatch(setAdminEditPp("Personal"))} className={` ${adminEditPp == "Personal" || adminEditPp == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
                         <span className=' font-semibold'>Personal</span>
                     </div>
 
-                    <div onClick={() => dispatch(setProfileNavLinkActive("Login Information"))} className={` ${profileNavLinkActive2 == "Login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
+                    <div onClick={() => dispatch(setAdminEditPp("Login Information"))} className={` ${adminEditPp == "Login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
                         <span className=' font-semibold'>Login Information</span>
                     </div>
 
-                    <div onClick={() => dispatch(setProfileNavLinkActive("Password"))} className={` ${profileNavLinkActive2 == "Password" && "active"} navLink cursor-pointer flex items-center gap-2`}>
+                    <div onClick={() => dispatch(setAdminEditPp("Password"))} className={` ${adminEditPp == "Password" && "active"} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
                         <span className=' font-semibold'>Password</span>
                     </div>
@@ -86,7 +86,7 @@ const AdminProfileEdit = () => {
           {/* pp bottom start  */}
           <div className=" bg-[#191919] mb-10">
               {/* Personal form  */}
-              <div className={`${profileNavLinkActive2 == "Personal" ? "block" : "hidden"}`}>
+              <div className={`${adminEditPp == "Personal" ? "block" : "hidden"}`}>
                 <form className="p-10 flex flex-col gap-6 w-full">
                     <div className="flex justify-between gap-5">
                     <label className="text-[#FFFFFF] font-medium tracking-wider">
@@ -159,7 +159,7 @@ const AdminProfileEdit = () => {
               </div>
 
               {/* Login Information  */}
-              <div className={`${profileNavLinkActive2 == "Login Information" ? "block" : "hidden"}`}>
+              <div className={`${adminEditPp == "Login Information" ? "block" : "hidden"}`}>
                 <form className="p-10 flex flex-col gap-6 w-full">
                     <div className="flex justify-between gap-5">
                     <label className="text-[#FFFFFF] font-medium tracking-wider">
@@ -192,7 +192,7 @@ const AdminProfileEdit = () => {
               </div>
 
               {/* password  */}
-              <div className={`${profileNavLinkActive2 == "Password" ? "block" : "hidden"}`}>
+              <div className={`${adminEditPp == "Password" ? "block" : "hidden"}`}>
                 <form className="p-10 flex flex-col gap-6 w-full">
                     <div className="flex justify-between gap-5">
                     <label className="text-[#FFFFFF] font-medium tracking-wider">

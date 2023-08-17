@@ -34,6 +34,7 @@ const MediaCompo = () => {
         <Banner title={"Media"} path1={"Uploader"} />
         {/* Uploader  */}
         <div
+          onDropCapture={handleDragLeave}
           onDragLeave={handleDragLeave}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
@@ -43,10 +44,10 @@ const MediaCompo = () => {
             onClick={() => {
               document.querySelector(".input-field").click();
             }}
-            className={`${hover && "scale-110"} w-[120px] h-[120px] bg-[#202124] rounded-full flex justify-center items-center mx-auto cursor-pointer duration-500`}
+            className={`${hover && "scale-110 bg-white"} w-[120px] h-[120px] bg-[#202124] rounded-full flex justify-center items-center mx-auto cursor-pointer duration-500`}
           >
-            <div className={`${hover && "border-[#8AB4F8]"} w-[85px] h-[85px] bg-[#212328] rounded-full flex justify-center items-center border-dashed border-2 border-[#7E7F80] duration-500`}>
-              <MdOutlineCloudUpload size={40} className={`${hover && "animate-bounce"} text-[#8AB4F8]`} />
+            <div className={`${hover && "border-blue-500 bg-white"} w-[85px] h-[85px] bg-[#212328] rounded-full flex justify-center items-center border-dashed border-2 border-[#7E7F80] duration-500`}>
+              <MdOutlineCloudUpload size={40} className={`${hover && "animate-bounce text-blue-500"} text-[#8AB4F8]`} />
             </div>
           </div>
           <div className="flex gap-2 justify-center items-center">
