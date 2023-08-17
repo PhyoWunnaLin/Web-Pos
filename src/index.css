@@ -14,6 +14,10 @@ body{
     @apply  bg-[#202124] border border-[#7E7F80] py-[6px] px-5 rounded-md outline-none text-[#E8EAED] focus:border-[#E8EAED] duration-300 font-medium placeholder:tracking-wider placeholder:text-[#7E7F80];
 }
 
+.search-input{
+    @apply  bg-[#202124] border border-[#7E7F80] py-[6px] pr-5 pl-10 rounded-md outline-none text-[#FFFFFF] focus:border-[#E8EAED] duration-300 font-medium placeholder:tracking-wider placeholder:text-[#FFFFFF];
+}
+
 .btn{
     @apply  bg-[#8bb4f6] py-2 px-5 rounded-md font-medium hover:bg-[#5f7dad] duration-300;
 }
