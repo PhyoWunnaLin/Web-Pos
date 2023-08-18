@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {HiOutlineMailOpen} from "react-icons/hi"
 import {BsTelephoneOutbound} from "react-icons/bs"
 import {AiFillClockCircle} from "react-icons/ai"
@@ -9,14 +9,23 @@ import { setAdminEditPp } from '../../Redux/Services/profileSlice';
 import "./adminProfile.css"
 import MainLayout from '../../Layouts/MainLayout';
 import Banner from '../Banner/Banner';
+import Cookies from 'js-cookie';
+import PersonalForm from './PersonalForm';
+import LoginInfoEditForm from './LoginInfoEditForm';
+import ChangePasswordForm from './ChangePasswordForm';
+import { Loader } from '@mantine/core';
+import { useGetProfileQuery } from '../../Redux/API/adminApi';
 
 const AdminProfileEdit = () => {
-  const dispatch = useDispatch();
+    const token = Cookies.get("token");
+    const {data, isLoading} = useGetProfileQuery(token);
+    const user = data?.user[0];
 
-  const adminEditPp = useSelector(state => state.profileSlice.adminEditPp);
-//   const adminEditPp2 = localStorage.getItem("adminEditPp");
+    const dispatch = useDispatch();
 
-//   console.log(adminEditPp2);
+    const adminEditPp = useSelector(state => state.profileSlice.adminEditPp);
+    //   const adminEditPp2 = localStorage.getItem("adminEditPp");
+    //   console.log(adminEditPp2);
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
@@ -31,21 +40,30 @@ const AdminProfileEdit = () => {
                 {/* profile img  */}
                 <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                     <div className=' absolute top-[-70px] left-[33px]'>
+                      {isLoading ? (
+                        <div className=' relative rounded-full w-[150px] h-[150px] border border-[#878787]'>
+                        <div className=' absolute top-[44%] left-[43%]'><Loader color="gray" size="sm" className=" pt-1"/></div>
+
+                        <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
+                        <BiSolidEditAlt size={18}/>
+                        </div>
+                    </div>
+                      ) : (
                         <div className=' relative rounded-full w-[150px] h-[150px]'>
-                            <img src={"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                            <img src={user?.role ? user?.photo :"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
 
                             <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
                             <BiSolidEditAlt size={18}/>
                             </div>
                         </div>
+                      )}
                     </div>
 
                     <div className= " flex justify-between w-full">
-
                         <div className=' ml-[213px]'>
-                            <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>Khine zin thin</h1>
+                            <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>{user?.name}</h1>
                             <div className=' flex items-center gap-2 '>
-                                <span className=' text-[#c5c1c1]'>Sale Executive /</span> 
+                                <span className=' text-[#c5c1c1]'>{user?.role} /</span> 
                                 <p className=' flex items-center gap-1'>
                                     <span  className=' text-xs text-[#8ab4f8]'><AiFillClockCircle/></span>
                                     <span className=' text-[#fff] text-sm'>Active in 1 hr</span>
@@ -87,148 +105,17 @@ const AdminProfileEdit = () => {
           <div className=" bg-[#191919] mb-10">
               {/* Personal form  */}
               <div className={`${adminEditPp == "Personal" ? "block" : "hidden"}`}>
-                <form className="p-10 flex flex-col gap-6 w-full">
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        Name
-                    </label>
-                    <input
-                        type="text"
-                        placeholder="Your Name"
-                        className="input w-[70%]"
-                    />
-                    </div>
-
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        Phone
-                    </label>
-                    <input type="text" className="input w-[70%]" />
-                    </div>
-
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        Date Of Birth
-                    </label>
-                    <input type="text" className="input w-[70%]" />
-                    </div>
-
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        Gender
-                    </label>
-                    <div className=" flex gap-4 items-center w-[70%] text-[#FFFFFF] font-medium tracking-wider">
-                        <input
-                        type="radio"
-                        name="gender"
-                        // checked
-                        style={{ width: "18px", height: "18px" }}
-                        />
-                        Male
-                        <input
-                        type="radio"
-                        name="gender"
-                        style={{ width: "18px", height: "18px" }}
-                        />
-                        Female
-                    </div>
-                    </div>
-
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        Address
-                    </label>
-                    <textarea
-                        placeholder="Your Address..."
-                        cols="30"
-                        rows="4"
-                        className="input w-[70%]"
-                    ></textarea>
-                    </div>
-
-                    {/* btn  */}
-                    <div className=" flex items-center gap-5 mt-8">
-                    <button className="btn3 flex gap-2 items-center border border-[#7E7F80] text-[#7E7F80]">
-                        Cancle
-                    </button>
-                    <button className="btn flex gap-2 items-center border border-[#3f4245]">
-                        Save
-                    </button>
-                    </div>
-                </form>
+                <PersonalForm/>
               </div>
 
               {/* Login Information  */}
               <div className={`${adminEditPp == "Login Information" ? "block" : "hidden"}`}>
-                <form className="p-10 flex flex-col gap-6 w-full">
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        Phone Number
-                    </label>
-                    <input
-                        type="text"
-                        className="input w-[70%]"
-                    />
-                    </div>
-                    
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        Email
-                    </label>
-                    <input type="email" className="input w-[70%]" />
-                    </div>
-                    
-
-                    {/* btn  */}
-                    <div className=" flex items-center gap-5 mt-8">
-                    <button className="btn3 flex gap-2 items-center border border-[#7E7F80] text-[#7E7F80]">
-                        Cancle
-                    </button>
-                    <button className="btn flex gap-2 items-center border border-[#3f4245]">
-                        Save
-                    </button>
-                    </div>
-                </form>
+                <LoginInfoEditForm/>
               </div>
 
               {/* password  */}
               <div className={`${adminEditPp == "Password" ? "block" : "hidden"}`}>
-                <form className="p-10 flex flex-col gap-6 w-full">
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        Current Password
-                    </label>
-                    <input
-                        type="password"
-                        className="input w-[70%]"
-                    />
-                    </div>
-                    
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        New Password
-                    </label>
-                    <input type="password" className="input w-[70%]" />
-                    </div>
-
-                    <div className="flex justify-between gap-5">
-                    <label className="text-[#FFFFFF] font-medium tracking-wider">
-                        Confirm Password
-                    </label>
-                    <input type="password" className="input w-[70%]" />
-                    </div>
-                    
-
-                    {/* btn  */}
-                    <div className=" flex items-center gap-5 mt-8">
-                    <button className="btn3 flex gap-2 items-center border border-[#7E7F80] text-[#7E7F80]">
-                        Cancel
-                    </button>
-                    <button className="btn flex gap-2 items-center border border-[#3f4245]">
-                        Save
-                    </button>
-                    </div>
-                </form>
+                <ChangePasswordForm/>
               </div>
           </div>
           {/* pp bottom end  */}

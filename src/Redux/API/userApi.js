@@ -1,26 +1,24 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
-export const profileApi = createApi({
-    reducerPath: "profileApi",
+export const userApi = createApi({
+    reducerPath: "userApi",
     baseQuery: fetchBaseQuery({baseUrl: `https://g.mmsdev.site/api/v1`}),
-    tagTypes: ["profile"],
+    tagTypes: ["user"],
     endpoints: (builder) => ({
-        adminProfile: builder.query({
+        getUserList: builder.query({
             query: (token) => ({
-                url: "/profile",
+                url: "/user-lists",
                 headers: {authorization : `Bearer ${token}`},
             }),
-            providesTags: ["profile"],
+            providesTags: ["user"]
         }),
 
-        editProfile: builder.mutation({
-            query: ({token,newData}) => ({
-                url: "/edit",
-                method: "PUT",
-                body: newData,
+        getUserProfile: builder.query({
+            query: ({token,id}) => ({
+                url: `/check-profile/${id}`,
                 headers: {authorization : `Bearer ${token}`},
             }),
-            invalidatesTags: ["profile"],
+            providesTags: ["user"]
         }),
 
         createUser: builder.mutation({
@@ -30,10 +28,9 @@ export const profileApi = createApi({
                 body: user,
                 headers: {authorization : `Bearer ${token}`},
             }),
-            invalidatesTags: ["profile"],
+            invalidatesTags: ["user"],
         }),
-
         
     })
 })
-export const { useAdminProfileQuery, useEditProfileMutation ,useCreateUserMutation } = profileApi
+export const { useGetUserListQuery, useGetUserProfileQuery ,useCreateUserMutation } = userApi
