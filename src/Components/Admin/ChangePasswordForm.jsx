@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { useChangePasswordMutation } from '../../Redux/API/authApi';
 import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { removeToken } from '../../Redux/Services/authSlice';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const ChangePasswordForm = () => {
     const token = Cookies.get("token");
@@ -8,13 +12,31 @@ const ChangePasswordForm = () => {
     const [current_password,setCurrentPassword] = useState("")
     const [password,setPassword] = useState("")
     const [password_confirmation,setPasswordConfirmation] = useState("")
+    const dispatch = useDispatch();
+    const nav = useNavigate();
 
-    const changePasswordHandler = async(e)=> {
+    const changePasswordHandler = async (e)=> {
         try{
             e.preventDefault();
             const newData = {current_password,password,password_confirmation};
-            const data = await changePassword({token,newPassword:newData});
-            console.log(data);
+            const {data} = await changePassword({token,newPassword:newData});
+            if(data?.message){
+                Swal.fire({
+                    customClass : {
+                      title: 'swal2-title'
+                    },
+                    title: "Please login again",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                    width: 400,
+                    background: "#161618",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      nav("/login")
+                      dispatch(removeToken());
+                    }
+                  })
+            }
         }catch(error){
             console.log(error);
         }

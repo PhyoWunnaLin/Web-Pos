@@ -11,12 +11,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setAdminPp } from '../../Redux/Services/profileSlice'
 import Cookies from 'js-cookie';
 import { useGetProfileQuery } from '../../Redux/API/adminApi';
-import { Loader } from '@mantine/core';
+import Loader from '../Loader/Loader';
 
 const AdminProfile = () => {
   const token = Cookies.get("token");
   const {data, isLoading} = useGetProfileQuery(token)
-  // console.log(data)
   const admin = data?.user
   console.log(admin);
 
@@ -35,29 +34,22 @@ const AdminProfile = () => {
             <Banner title={"Profile"} path1={"My Account"} path2={adminPp == "Personal" || adminPp == null ? "Personal" : adminPp} button={true} route={"/profile/edit"} icon={true} btn={"edit Profile"}/>
 
           {/* Profile  */}
-          <div>
+          {isLoading ? 
+          <div className=" ">
+            <Loader/>
+          </div> : <div>
             {/* pp top start  */}
             <div className=' bg-[#161618] border-b border-[#878787]'>
                 {/* profile img  */}
                 <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                     <div className=' absolute top-[-70px] left-[33px]'>
-                    {isLoading ? (
-                        <div className=' relative rounded-full w-[150px] h-[150px] border border-[#878787]'>
-                        <div className=' absolute top-[44%] left-[43%]'><Loader color="gray" size="sm" className=" pt-1"/></div>
-
-                        <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
-                        <BiSolidEditAlt size={18}/>
-                        </div>
-                    </div>
-                      ) : (
-                        <div className=' relative rounded-full w-[150px] h-[150px]'>
+                    <div className=' relative rounded-full w-[150px] h-[150px]'>
                             <img src={admin?.photo ? admin?.photo :"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
 
                             <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
                             <BiSolidEditAlt size={18}/>
                             </div>
                         </div>
-                      )}
                     </div>
 
                     <div className= " flex justify-between w-full">
@@ -136,7 +128,7 @@ const AdminProfile = () => {
               </div>
             </div>
             {/* pp bottom end  */}
-          </div>
+          </div>}
           {/* profile end  */}
 
         </div>

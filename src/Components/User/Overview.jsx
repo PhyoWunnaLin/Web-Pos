@@ -22,21 +22,22 @@ const Overview = () => {
   const userList = data?.users;
 
   const nav = useNavigate();
-  const route = () => {
-    nav(`/user/detail/`);
+  
+  const route = (id) => {
+    nav(`/user/detail/${id}`);
   };
   
 
   const banHandler = () => {
     Swal.fire({
-      title: 'Are you sure?',
+      title: 'Do you want to ban this user?',
       icon: 'warning',
       iconColor: "#E64848",
       background: "#161618",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#E64848',
       cancelButtonColor: '#24262b',
-      confirmButtonText: 'Yes, ban!'
+      confirmButtonText: 'Ban User'
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
@@ -47,7 +48,6 @@ const Overview = () => {
           title: "Successfully baned an account",
           icon: "success",
           confirmButtonText: "SEE ALL USERS",
-          // showCloseButton: true,
           width: 400,
           background: "#161618",
         })
@@ -130,10 +130,10 @@ const Overview = () => {
                     key={user?.id}
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user?.id}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user?.name}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user?.role}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user?.email}</td>
+                    <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.id}</td>
+                    <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.name}</td>
+                    <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.role}</td>
+                    <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.email}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                       <Link to={'/user/overview'}>
