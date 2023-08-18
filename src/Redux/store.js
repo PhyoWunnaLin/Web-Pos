@@ -6,6 +6,7 @@ import authSlice from './Services/authSlice'
 import { userApi } from './API/userApi'
 import { adminApi } from './API/adminApi'
 import { mediaApi } from './API/mediaApi'
+import { inventoryApi } from './API/inventoryApi'
 
 export const store = configureStore({
   reducer: {
@@ -13,10 +14,11 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer,
     [mediaApi.reducerPath]: mediaApi.reducer,
+    [inventoryApi.reducerPath]: inventoryApi.reducer,
     profileSlice : profileSlice,
     mediaSlice : mediaSlice,
     authSlice : authSlice
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware, adminApi.middleware, mediaApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware, adminApi.middleware, mediaApi.middleware, inventoryApi.middleware),
 })
