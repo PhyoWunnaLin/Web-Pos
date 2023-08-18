@@ -52,7 +52,7 @@ body{
 }
 
 .icon1{
-    @apply bg-[#a3a3a5] p-2 rounded-full cursor-pointer duration-300;
+    @apply bg-[#434344] p-2 rounded-full cursor-pointer duration-300;
 }
 
 .icon2{

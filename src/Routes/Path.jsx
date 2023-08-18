@@ -20,7 +20,7 @@ const Path = () => {
         <Route path="/login" element={<Login/>} />
         <Route path="/user/overview" element={<Overview/>} />
         <Route path="/user/create" element={<CreateUser/>} />
-        <Route path="/user/detail" element={<Detail/>} />
+        <Route path="/user/detail/:id" element={<Detail/>} />
         <Route path="/profile/myAccount" element={<AdminProfile/>} />
         <Route path="/profile/edit" element={<AdminProfileEdit/>} />
         <Route path="/media" element={<Media/>} />
