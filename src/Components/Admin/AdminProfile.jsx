@@ -15,8 +15,8 @@ import Cookies from 'js-cookie';
 const AdminProfile = () => {
   const token = Cookies.get("token");
   const {data} = useAdminProfileQuery(token)
-  console.log(data)
-  const admin = data?.user[0]
+  console.log(data?.user)
+  const admin = data?.user
 
   const dispatch = useDispatch();
 

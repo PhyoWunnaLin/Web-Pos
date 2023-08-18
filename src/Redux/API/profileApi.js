@@ -7,7 +7,7 @@ export const profileApi = createApi({
     endpoints: (builder) => ({
         adminProfile: builder.query({
             query: (token) => ({
-                url: "/user-profile",
+                url: "/profile",
                 headers: {authorization : `Bearer ${token}`},
             }),
             providesTags: ["profile"],
