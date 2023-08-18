@@ -27,16 +27,16 @@ const MediaTable = () => {
                 {medias.map(media => {
                     return(
                         <tr key={media.id} className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]">
-                            <th className="p-4 text-start">{media.id}</th>
-                            <th className="p-4 text-start">{media.name}</th>
-                            <th className="p-4 text-start">{media.account}</th>
-                            <th className="p-4 text-start">{media.date}</th>
-                            <th className="p-4 text-start">{media.time}</th>
-                            <th className="p-4 text-start">{media.fileSize}</th>
-                            <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
+                            <td className="p-4 text-start">{media.id}</td>
+                            <td className="p-4 text-start">{media.name}</td>
+                            <td className="p-4 text-start">{media.account}</td>
+                            <td className="p-4 text-start">{media.date}</td>
+                            <td className="p-4 text-start">{media.time}</td>
+                            <td className="p-4 text-start">{media.fileSize}</td>
+                            <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                                <span className=' text-white cursor-pointer hover:text-red-500 duration-300'><BiTrash size={16}/></span> 
                                <span className=' text-white cursor-pointer hover:text-[#8AB4F8]'><BsFiles/></span> 
-                            </th>
+                            </td>
                         </tr>
                     )
                 })}
