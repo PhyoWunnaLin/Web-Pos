@@ -18,12 +18,12 @@ import { useGetUserListQuery } from "../../Redux/API/userApi";
 const Overview = () => {
   const token = Cookies.get("token")
   const {data, isLoading} = useGetUserListQuery(token);
-  // console.log(data?.users);
+  console.log(data?.users);
   const userList = data?.users;
 
   const nav = useNavigate();
   const route = () => {
-    nav("/user/detail");
+    nav(`/user/detail/`);
   };
   
 
@@ -127,13 +127,13 @@ const Overview = () => {
               {userList?.map((user) => {
                 return (
                   <tr
-                    key={user.id}
+                    key={user?.id}
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user.id}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user.name}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user.role}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user.email}</td>
+                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user?.id}</td>
+                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user?.name}</td>
+                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user?.role}</td>
+                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user?.email}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                       <Link to={'/user/overview'}>
