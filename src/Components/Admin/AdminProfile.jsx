@@ -9,14 +9,21 @@ import Banner from '../Banner/Banner'
 import MainLayout from '../../Layouts/MainLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAdminPp } from '../../Redux/Services/profileSlice'
+import { useAdminProfileQuery } from '../../Redux/API/profileApi';
+import Cookies from 'js-cookie';
 
 const AdminProfile = () => {
+  const token = Cookies.get("token");
+  const {data} = useAdminProfileQuery(token)
+  console.log(data)
+  const admin = data?.user[0]
+
   const dispatch = useDispatch();
 
   const adminPp = useSelector(state => state.profileSlice.adminPp);
   // const adminPp2 = localStorage.getItem("adminPp");
 
-  console.log(adminPp);
+  // console.log(adminPp);
 
   return (
     <MainLayout>
@@ -33,7 +40,7 @@ const AdminProfile = () => {
                 <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                     <div className=' absolute top-[-70px] left-[33px]'>
                         <div className=' relative rounded-full w-[150px] h-[150px]'>
-                            <img src={"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                            <img src={admin?.user_photo ? admin?.user_photo : "https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg" } alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
 
                             <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
                             <BiSolidEditAlt size={18}/>
@@ -43,9 +50,9 @@ const AdminProfile = () => {
 
                     <div className= " flex justify-between w-full">
                         <div className=' ml-[213px]'>
-                            <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>Khine zin thin</h1>
+                            <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>{admin?.name}</h1>
                             <div className=' flex items-center gap-2 '>
-                                <span className=' text-[#c5c1c1]'>Sale Executive /</span> 
+                                <span className=' text-[#c5c1c1]'>{admin?.role} /</span> 
                                 <p className=' flex items-center gap-1'>
                                     <span  className=' text-xs text-[#8ab4f8]'><AiFillClockCircle/></span>
                                     <span className=' text-[#fff] text-sm'>Active in 1 hr</span>
@@ -84,17 +91,17 @@ const AdminProfile = () => {
               <div className={` ${adminPp == "Personal" || adminPp == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
                     <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
                       <p className=' text-[#878787] w-[150px] font-semibold'>Address</p>
-                      <p className=' text-[#fff]'>Yangon</p>
+                      <p className=' text-[#fff]'>{admin?.address ? admin?.address : "Yangon" }</p>
                     </div>
 
                     <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
                       <p className=' text-[#878787] w-[150px] font-semibold'>Gender</p>
-                      <p className=' text-[#fff]'>Female</p>
+                      <p className=' text-[#fff]'>{admin?.gender}</p>
                     </div>
                   
                     <div className=' flex items-center gap-14 text-[17px] tracking-wide'>
                       <p className=' text-[#878787] w-[150px] font-semibold'>Date Of Birth</p>
-                      <p className=' text-[#fff]'>19/12/2002</p>
+                      <p className=' text-[#fff]'>{admin?.date_of_birth? admin?.date_of_birth: "19/12/2002" }</p>
                     </div>
               </div>
 
@@ -102,17 +109,17 @@ const AdminProfile = () => {
               <div className={` ${adminPp == "Login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
                       <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
                           <p className=' text-[#878787] w-[150px] font-semibold'>Phone</p>
-                          <p className=' text-[#fff]'>099999999</p>
+                          <p className=' text-[#fff]'>{admin?.phone? admin?.phone: "099999999" }</p>
                       </div>
 
                       <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
                           <p className=' text-[#878787] w-[150px] font-semibold'>Position</p>
-                          <p className=' text-[#fff]'>Sale Executive</p>
+                          <p className=' text-[#fff]'>{admin?.role}</p>
                       </div>
 
                       <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
                           <p className=' text-[#878787] w-[150px] font-semibold'>Mail</p>
-                          <p className=' text-[#fff]'>kzt@gmail.com</p>
+                          <p className=' text-[#fff]'>{admin?.email}</p>
                       </div>
               </div>
             </div>
