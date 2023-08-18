@@ -8,7 +8,6 @@ import "./overview.css";
 import Banner from "../Banner/Banner";
 import MainLayout from "../../Layouts/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
-import Dropdown from "../Dropdown/Dropdown";
 import Loader from "../Loader/Loader";
 import Swal from "sweetalert2";
 import "./successAlert.css"

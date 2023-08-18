@@ -7,24 +7,19 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import "../../User/overview.css";
 import MainLayout from "../../../Layouts/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
-import Dropdown from "../../Dropdown/Dropdown";
-import Loader from "../../Loader/Loader";
 import Banner2 from '../../Banner/Banner2';
 import { useGetProductsQuery } from '../../../Redux/API/inventoryApi';
+import { TfiMenuAlt } from 'react-icons/tfi';
+import { TbBorderAll } from 'react-icons/tb';
+import ProductTable from './ProductTable';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActive } from '../../../Redux/Services/productSlice';
+import ProductsCard from './ProductsCard';
 
 const Products = () => {
-    const token = Cookies.get("token");
-    const {data, isLoading} = useGetProductsQuery(token);
-    console.log(data);
-
-    const nav = useNavigate();
-  const route = () => {
-    nav(`/user/detail/`);
-  };
-
-    const pd = [
-        {id: 1, name: "apple", brand: "melon", salePrice: 300, unit: "s", stock: 100  }
-    ]
+  const state = useSelector((state) => state.productSlice.active);
+  const active = localStorage.getItem("productActive");
+  const dispatch = useDispatch();
   return (
     <div>
         <MainLayout>
@@ -47,18 +42,8 @@ const Products = () => {
           <div className=" flex justify-between items-center">
             <div className=" flex flex-col gap-3">
               <h1 className=" text-white font-medium text-2xl tracking-wide">
-                Staff Overview
+                Product Overview
               </h1>
-              <div className="py-2 px-3 flex border-2 border-[#7E7F80] rounded-md">
-                <p className=" tracking-wide text-sm font-medium text-[#FFFFFF] border-r-2 cursor-pointer border-[#7E7F80] pr-3">
-                  This Month
-                </p>
-                <p className=" tracking-wide text-sm font-medium text-[#8bb4f6] cursor-pointer pl-3">
-                  Last Month
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3">
               <div className="relative">
                 <input
                   type="text"
@@ -69,71 +54,46 @@ const Products = () => {
                   <BiSearch size={20} />
                 </div>
               </div>
-              <div className="flex gap-5 items-center justify-end">
+            </div>
+            <div className="flex gap-5 items-center justify-end">
                 <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                   Sort : 
-                  <span><Dropdown name={"Last"} /></span>
+                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                    <option className="bg-[#161618] hover:bg-[#202124]" value="">Last</option>
+                    <option className="bg-[#161618] hover:bg-[#202124]" value="">first</option>
+                  </select>
                 </div>
                 <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                   Filter : 
-                  <span><Dropdown name={"All Files"} /></span>
+                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
+                    <option className="bg-[#161618] hover:bg-[#202124]" value="">All Files</option>
+                    <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
+                  </select>
                 </div>
-              </div>
-              <div></div>
+                <div className="flex">
+                  <button
+                    onClick={() => dispatch(setActive("1"))}
+                    className={`${
+                      active != "2" && "text-[#8AB4F8]"
+                    } flex justify-center items-center w-10 h-10 rounded-l-md border border-[#7E7F80] text-[#7E7F80]`}
+                  >
+                    <TfiMenuAlt size={20} />
+                  </button>
+                  <button
+                    onClick={() => dispatch(setActive("2"))}
+                    className={`${
+                      active == 2 && "text-[#8AB4F8]"
+                    } flex justify-center items-center w-10 h-10 rounded-r-md border-l-0 border border-[#7E7F80] text-[#7E7F80]`}
+                  >
+                    <TbBorderAll size={20} />
+                  </button>
+                </div>
             </div>
           </div>
           {/* table  */}
-          {isLoading ? (
-          <div className=" ">
-            <Loader/>
-          </div>) 
-          : (
-            <table className=" text-white table-responsive">
-            <thead className=" tracking-wider text-sm border border-[#7E7F80]">
-              <tr>
-                <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
-                <th className="p-4 max-[800px]:pr-24 text-start">NAME</th>
-                <th className="p-4 max-[800px]:pr-16 text-start">BRAND</th>
-                <th className="p-4 max-[800px]: pr-40 text-start">UNIT</th>
-                <th className="p-4 max-[800px]: pr-40 text-start">SALE PRICE</th>
-                <th className="p-4 max-[800px]: pr-40 text-start">TOTAL STOCK</th>
-                <th className="p-4 ">...</th>
-              </tr>
-            </thead>
-            <tbody className=" tracking-wide text-sm">
-              {pd?.map((pd) => {
-                return (
-                  <tr
-                    key={pd?.id}
-                    className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
-                  >
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.id}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.name}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.brand}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.unit}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.salePrice}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.stock}</td>
-                    
-                    <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                      <Link to={'/user/overview'}>
-                      <p className="hover-scale icon1">
-                        <AiOutlinePlus />
-                      </p>
-                      </Link>
-
-                      <span className=" icon1 hover-scale">
-                        <BiEditAlt />
-                      </span>
-                      <span className=" icon1 hover-scale">
-                        <HiArrowNarrowRight />
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          )}
+          <div>
+            {active == "2" ? <ProductsCard/> : <ProductTable/>}
+          </div>
         </div>
       </div>
     </MainLayout>
