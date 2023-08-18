@@ -10,6 +10,7 @@ import Media from "../Pages/Media";
 import ScrollTop from "../Components/ScrollTop/ScrollTop";
 import Detail from "../Components/User/Detail";
 import Routegaurd from "../Components/Routegaurd";
+import Products from "../Components/Inventory/Product/Products";
 
 const Path = () => {
   return (
@@ -24,6 +25,7 @@ const Path = () => {
         <Route path="/profile/myAccount" element={<AdminProfile/>} />
         <Route path="/profile/edit" element={<AdminProfileEdit/>} />
         <Route path="/media" element={<Media/>} />
+        <Route path="/inventory/products" element={<Products/>} />
       </Routes>
     </>
   );

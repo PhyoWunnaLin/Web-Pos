@@ -4,8 +4,10 @@ import {BsFillMoonStarsFill,BsPersonCircle, BsPersonSquare} from "react-icons/bs
 import {AiOutlineHome} from "react-icons/ai"
 import {CiShop} from "react-icons/ci";
 import {TbPointFilled} from "react-icons/tb"
+import {MdKeyboardArrowDown} from "react-icons/md"
 import {RxExit} from "react-icons/rx"
-import { Accordion } from '@mantine/core';
+// import { Accordion } from '@mantine/core';
+import { Accordion, AccordionHeader, AccordionBody, } from "@material-tailwind/react";
 import {PiNotepadBold, PiUserCirclePlusDuotone, PiUserSquareFill} from "react-icons/pi"
 import {HiOutlinePhotograph} from "react-icons/hi"
 import "./sidebar.css"
@@ -18,12 +20,16 @@ import { Loader } from '@mantine/core';
 
 const Sidebar = () => {
     const [logout , {isLoading}] = useLogoutMutation();
-    const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(0);
+    
+     const dispatch = useDispatch();
     const location = useLocation();
     const sidebarActive = location.pathname;
     // console.log(sidebarActive);
     const token = Cookies.get("token")
     const nav = useNavigate();
+
+    const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
     const logoutHandler = async(e)=>{
         const {data} = await logout(token);
@@ -33,6 +39,8 @@ const Sidebar = () => {
             dispatch(removeToken())
         }
     }
+
+    
     return(
         <div className=" select-none">
 
@@ -57,109 +65,100 @@ const Sidebar = () => {
             <div className="text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] scrollbar overflow-y-auto fixed w-[210px] mt-[53px] h-screen pb-24">
 
                 {/* Overview  */}
-                <p className={` flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#8ab4f8]`}>
+                <p className={` flex items-center gap-2 px-5 py-3 cursor-pointer sidebarLink`}>
                     <span className=" text-[23px]"><AiOutlineHome/></span>
                     <span className=" font-bold tracking-wider">Overview</span>
                 </p>
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Sale  */}
-                <Accordion>
-                    <Accordion.Item value="customization">
-                        <Accordion.Control>
-                            <div className=" flex items-center text-[#e8eaed] gap-2">
-                                <span className=" text-[23px]"><CiShop/></span>
-                                <span className=" tracking-wider font-medium">Sale</span>
-                            </div>
-                        </Accordion.Control>
+                <Accordion open={open === 1} >
+                <div onClick={() => handleOpen(1)} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                    <div className=" flex items-center gap-2">
+                    <span className=" text-[23px]"><CiShop/></span>
+                    <span className=" tracking-wider font-medium">Sale</span>
+                    </div>
+                    <div className=" text-xl"><MdKeyboardArrowDown/></div>
+                </div>
+                <AccordionBody className="">
+                    <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Cashier</span>
+                    </div>
 
-                        <Accordion.Panel>
-                            <div className=" flex items-center nav ">
-                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                <span className=" tracking-wider text-sm font-medium px-3 navLink">Cashier</span>
-                            </div>
-                        </Accordion.Panel>
-                        <Accordion.Panel>
-                            <div className=" flex items-center nav">
-                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                <span className=" tracking-wider text-sm font-medium px-3 navLink">Recent</span>
-                            </div>
-                        </Accordion.Panel>
-                    </Accordion.Item>
+                    <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Recent</span>
+                    </div>
+                </AccordionBody>
                 </Accordion>
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Inventory  */}
-                <Accordion>
-                    <Accordion.Item value="customization">
-                        <Accordion.Control>
-                            <div className=" flex items-center text-[#e8eaed] gap-2">
-                                <span className=" text-[23px]"><PiNotepadBold/></span>
-                                <span className=" tracking-wider font-medium">Inventory</span>
-                            </div>
-                        </Accordion.Control>
+                <Accordion open={open === 2} >
+                <div onClick={() => handleOpen(2)} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                    <div className=" flex items-center gap-2">
+                    <span className=" text-[23px]"><PiNotepadBold/></span>
+                    <span className=" tracking-wider font-medium">Inventory</span>
+                    </div>
+                    <div className=" text-xl"><MdKeyboardArrowDown/></div>
+                </div>
+                <AccordionBody className="">
+                    <Link to={'/inventory/products'}>
+                    <div className={` ${sidebarActive == "/inventory/products" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Products</span>
+                    </div>
+                    </Link>
 
-                        <Accordion.Panel>
-                            <div className=" flex items-center nav">
-                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                <span className=" tracking-wider font-medium text-sm px-3 navLink">Products</span>
-                            </div>
-                        </Accordion.Panel>
-                        <Accordion.Panel>
-                            <div className=" flex items-center nav">
-                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                <span className=" tracking-wider font-medium text-sm px-3 navLink">Add Product</span>
-                            </div>
-                        </Accordion.Panel>
-                        <Accordion.Panel>
-                            <div className=" flex items-center nav">
-                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                <span className=" tracking-wider font-medium text-sm px-3 navLink">Stock Control</span>
-                            </div>
-                        </Accordion.Panel>
-                        <Accordion.Panel>
-                            <div className=" flex items-center nav">
-                                <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                <span className=" tracking-wider font-medium text-sm px-3 navLink">Manage Brands</span>
-                            </div>
-                        </Accordion.Panel>
-                    </Accordion.Item>
+                    <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Add Product</span>
+                    </div>
+
+                    <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Stock Control</span>
+                    </div>
+
+                    <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Manage Brands</span>
+                    </div>
+                </AccordionBody>
                 </Accordion>
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* User  */}
-                <Accordion>
-                    <Accordion.Item value="customization">
-                        <Accordion.Control>
-                            <div className=" flex items-center text-[hsl(216,12%,92%)] gap-2">
-                                <span className=" text-[23px]"><PiUserCirclePlusDuotone/></span>
-                                <span className=" tracking-wider font-medium">User</span>
-                            </div>
-                        </Accordion.Control>
+                <Accordion open={open === 3} >
+                <div onClick={() => handleOpen(3)} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                    <div className=" flex items-center gap-2">
+                    <span className=" text-[23px]"><PiUserCirclePlusDuotone/></span>
+                    <span className=" tracking-wider font-medium">User</span>
+                    </div>
+                    <div className=" text-xl"><MdKeyboardArrowDown/></div>
+                </div>
+                <AccordionBody className="">
+                    <Link to={'/user/overview'}>
+                    <div className={` ${sidebarActive == "/user/overview" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Overview</span>
+                    </div>
+                    </Link>
 
-                        <Link to={'/user/overview'}>
-                            <Accordion.Panel>
-                                <div className={` flex items-center nav`}>
-                                    <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                    <span className=" tracking-wider font-medium text-sm px-3 navLink">Overview</span>
-                                </div>
-                            </Accordion.Panel>
-                        </Link>
-                        <Link to={'/user/create'}>
-                            <Accordion.Panel>
-                                <div className=" flex items-center nav">
-                                    <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                    <span className=" tracking-wider font-medium text-sm px-3 navLink">Create User</span>
-                                </div>
-                            </Accordion.Panel>
-                        </Link>
-                    </Accordion.Item>
+                    <Link to={'/user/create'}>
+                    <div className={` ${sidebarActive == "/user/create" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Create User</span>
+                    </div>
+                    </Link>
+                </AccordionBody>
                 </Accordion>
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Media  */}
                 <Link to={'/media'}>
-                    <p className={`flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-[#202124] hover:text-[#8ab4f8]`}>
+                    <p className={`flex items-center gap-2 px-5 py-3 cursor-pointer sidebarLink ${sidebarActive == "/media" && "sidebarActive"}`}>
                         <span className=" text-[23px]"><HiOutlinePhotograph/></span>
                         <span className=" tracking-wider font-medium">Media</span>
                     </p>
@@ -167,32 +166,29 @@ const Sidebar = () => {
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Profile  */}
-                <Accordion>
-                    <Accordion.Item value="customization">
-                        <Accordion.Control>
-                            <div className=" flex items-center text-[hsl(216,12%,92%)] gap-2">
-                                <span className=" text-[23px]"><PiUserSquareFill/></span>
-                                <span className=" tracking-wider font-medium">Profile</span>
-                            </div>
-                        </Accordion.Control>
+                <Accordion open={open === 4} >
+                <div onClick={() => handleOpen(4)} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                    <div className=" flex items-center gap-2">
+                    <span className=" text-[23px]"><PiUserSquareFill/></span>
+                    <span className=" tracking-wider font-medium">Profile</span>
+                    </div>
+                    <div className=" text-xl"><MdKeyboardArrowDown/></div>
+                </div>
+                <AccordionBody className="">
+                    <Link to={'/profile/myAccount'}>
+                    <div className={` ${sidebarActive == "/profile/myAccount" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">My Account</span>
+                    </div>
+                    </Link>
 
-                        <Link to={'/profile/myAccount'}>
-                            <Accordion.Panel>
-                                <div className=" flex items-center nav">
-                                    <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                    <span className=" tracking-wider font-medium text-sm px-3 navLink">My Account</span>
-                                </div>
-                            </Accordion.Panel>
-                        </Link>
-                        <Link to={'/profile/edit'}>
-                            <Accordion.Panel>
-                                <div className=" flex items-center nav">
-                                    <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                                    <span className=" tracking-wider font-medium text-sm px-3 navLink">Edit</span>
-                                </div>
-                            </Accordion.Panel>
-                        </Link>
-                    </Accordion.Item>
+                    <Link to={'/profile/edit'}>
+                    <div className={` ${sidebarActive == "/profile/edit" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Edit</span>
+                    </div>
+                    </Link>
+                </AccordionBody>
                 </Accordion>
                 <div className=" border-b border-[#3f4245]" />
 
