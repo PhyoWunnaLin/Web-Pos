@@ -30,6 +30,10 @@ body{
     @apply  bg-transparent py-2 px-7 rounded-md font-medium hover:bg-[#24262b] duration-300;
 }
 
+.btn4{
+    @apply  bg-transparent border border-[#7E7F80] py-2 px-7 rounded-md font-medium hover:bg-[#24262b] duration-300;
+}
+
 .step-item{
     @apply flex gap-3 relative items-center;
 }

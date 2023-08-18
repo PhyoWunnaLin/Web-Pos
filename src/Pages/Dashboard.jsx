@@ -1,12 +1,12 @@
 import React from 'react'
 import MainLayout from '../Layouts/MainLayout'
-import ModalMedia from '../Components/Modal/ModalMedia'
+import Products from '../Components/Inventory/Product/Products'
 
 const Dashboard = () => {
   return (
-    <MainLayout>
-      <ModalMedia/>
-    </MainLayout>
+    // <MainLayout>
+      <Products/>
+    // </MainLayout>
   )
 }
 
