@@ -13,8 +13,8 @@ import Cookies from 'js-cookie';
 import PersonalForm from './PersonalForm';
 import LoginInfoEditForm from './LoginInfoEditForm';
 import ChangePasswordForm from './ChangePasswordForm';
-import { Loader } from '@mantine/core';
 import { useGetProfileQuery } from '../../Redux/API/adminApi';
+import Loader from '../Loader/Loader';
 
 const AdminProfileEdit = () => {
     const token = Cookies.get("token");
@@ -34,7 +34,10 @@ const AdminProfileEdit = () => {
             <Banner title={"Profile"} path1={"Edit"} path2={adminEditPp == "Personal" || adminEditPp == null ? "Personal" : adminEditPp} btn={"My Profile"} button={true} route={"/profile/myAccount"} />
 
           {/* Profile  */}
-          <div>
+          {isLoading ? 
+          <div className=" ">
+            <Loader/>
+          </div> : <div>
             {/* pp top start  */}
             <div className=' bg-[#161618] border-b border-[#878787]'>
                 {/* profile img  */}
@@ -121,7 +124,7 @@ const AdminProfileEdit = () => {
           {/* pp bottom end  */}
 
 
-          </div>
+          </div>}
 
         </div>
       </div>
