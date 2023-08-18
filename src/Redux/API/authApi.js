@@ -21,7 +21,17 @@ export const authApi = createApi({
                 headers: {authorization : `Bearer ${token}`},
             }),
             invalidatesTags: ["auth"]
+        }),
+
+        changePassword: builder.mutation({
+            query: ({token,newPassword}) => ({
+                url: "/password-update",
+                method: "PUT",
+                body: newPassword,
+                headers: {authorization : `Bearer ${token}`},
+            }),
+            invalidatesTags: ["auth"],
         })
     })
 })
-export const { useLoginMutation, useLogoutMutation} = authApi
+export const { useLoginMutation, useLogoutMutation, useChangePasswordMutation} = authApi

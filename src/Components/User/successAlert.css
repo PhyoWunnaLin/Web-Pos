@@ -12,6 +12,10 @@
 
 .swal2-title{
     color: white;
-    font-size: larger;
+    font-size: large;
     letter-spacing: 0.05em;
+}
+
+.custom-swal-popup {
+  border: none !important;
 }

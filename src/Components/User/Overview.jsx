@@ -3,11 +3,15 @@ import { FaMinus } from "react-icons/fa";
 import { BiEditAlt } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+import { BsDash } from 'react-icons/bs'
 import "./overview.css";
 import Banner from "../Banner/Banner";
 import MainLayout from "../../Layouts/MainLayout";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Dropdown from "../Dropdown/Dropdown";
+import "./successAlert.css"
+import Swal from "sweetalert2";
+
 
 const Overview = () => {
   const nav = useNavigate();
@@ -20,6 +24,35 @@ const Overview = () => {
     { id: 3, name: "Messi", position: "Admin", email: "messi@gmail.com" },
     { id: 4, name: "Messi", position: "Admin", email: "messi@gmail.com" },
   ];
+
+  const banHandler = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      iconColor: "#E64848",
+      background: "#161618",
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#24262b',
+      confirmButtonText: 'Yes, ban!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          customClass : {
+            title: 'swal2-title',
+            popup: 'custom-swal-popup'
+          },
+          title: "Successfully baned an account",
+          icon: "success",
+          confirmButtonText: "SEE ALL USERS",
+          // showCloseButton: true,
+          width: 400,
+          background: "#161618",
+        })
+      }
+    })
+  }
+
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
@@ -87,22 +120,25 @@ const Overview = () => {
               {user.map((user) => {
                 return (
                   <tr
-                    onClick={route}
                     key={user.id}
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
-                    <th className="p-4 text-start">{user.id}</th>
-                    <th className="p-4 text-start">{user.name}</th>
-                    <th className="p-4 text-start">{user.position}</th>
-                    <th className="p-4 text-start">{user.email}</th>
+                    <th onClick={route} className=" cursor-pointer p-4 text-start">{user.id}</th>
+                    <th onClick={route} className=" cursor-pointer p-4 text-start">{user.name}</th>
+                    <th onClick={route} className=" cursor-pointer p-4 text-start">{user.position}</th>
+                    <th onClick={route} className=" cursor-pointer p-4 text-start">{user.email}</th>
+                    
                     <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                      <span className=" icon1 hover-up text-[#E64848]">
+                      <Link to={'/user/overview'}>
+                      <p onClick={banHandler} className="hover-scale icon1 text-[#E64848]">
                         <FaMinus />
-                      </span>
-                      <span className=" icon1 hover-up">
+                      </p>
+                      </Link>
+
+                      <span className=" icon1 hover-scale">
                         <BiEditAlt />
                       </span>
-                      <span className=" icon1 hover-up">
+                      <span className=" icon1 hover-scale">
                         <HiArrowNarrowRight />
                       </span>
                     </th>
