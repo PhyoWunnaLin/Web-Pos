@@ -46,7 +46,7 @@ const Login = () => {
           </h1>
 
           {/* form  */}
-          <form onClick={loginHandler} className="flex flex-col gap-5 mx-5 mt-5">
+          <form onSubmit={loginHandler} className="flex flex-col gap-5 mx-5 mt-5">
             <div className="flex flex-col gap-2">
               <label className="text-[#FFFFFF] font-medium tracking-widest">
                 Email
@@ -62,7 +62,7 @@ const Login = () => {
             </div>
 
             {isLoading ? (
-              <button disabled={isLoading && true} className="btn mx-10 mt-6 flex justify-center item-center gap-3">
+              <button disabled className="btn mx-10 mt-6 flex justify-center item-center gap-3">
                 <span>Login</span> 
                 <span><Loader color="dark" size="sm" className=" pt-1"/></span>
               </button>

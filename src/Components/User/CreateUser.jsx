@@ -25,7 +25,7 @@ const CreateUser = () => {
       title: "Successfully created an account",
       icon: "success",
       confirmButtonText: "SEE ALL USERS",
-      showCloseButton: true,
+      // showCloseButton: true,
       width: 400,
       background: "#161618",
     }).then((result) => {
