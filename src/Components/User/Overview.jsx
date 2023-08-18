@@ -3,7 +3,7 @@ import { FaMinus } from "react-icons/fa";
 import { BiEditAlt } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
-import { BsDash } from 'react-icons/bs'
+import { HiBan } from 'react-icons/hi'
 import "./overview.css";
 import Banner from "../Banner/Banner";
 import MainLayout from "../../Layouts/MainLayout";
@@ -11,19 +11,21 @@ import { Link, useNavigate } from "react-router-dom";
 import Dropdown from "../Dropdown/Dropdown";
 import "./successAlert.css"
 import Swal from "sweetalert2";
-
+import Cookies from "js-cookie";
+import Loader from "../Loader/Loader";
+import { useGetUserListQuery } from "../../Redux/API/userApi";
 
 const Overview = () => {
+  const token = Cookies.get("token")
+  const {data, isLoading} = useGetUserListQuery(token);
+  // console.log(data?.users);
+  const userList = data?.users;
+
   const nav = useNavigate();
   const route = () => {
     nav("/user/detail");
   };
-  const user = [
-    { id: 1, name: "Messi", position: "Admin", email: "messi@gmail.com" },
-    { id: 2, name: "Messi", position: "Admin", email: "messi@gmail.com" },
-    { id: 3, name: "Messi", position: "Admin", email: "messi@gmail.com" },
-    { id: 4, name: "Messi", position: "Admin", email: "messi@gmail.com" },
-  ];
+  
 
   const banHandler = () => {
     Swal.fire({
@@ -106,7 +108,12 @@ const Overview = () => {
             </div>
           </div>
           {/* table  */}
-          <table className=" text-white table-responsive">
+          {isLoading ? (
+          <div className=" ">
+            <Loader/>
+          </div>) 
+          : (
+            <table className=" text-white table-responsive">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
                 <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
@@ -117,21 +124,21 @@ const Overview = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {user.map((user) => {
+              {userList?.map((user) => {
                 return (
                   <tr
                     key={user.id}
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
-                    <th onClick={route} className=" cursor-pointer p-4 text-start">{user.id}</th>
-                    <th onClick={route} className=" cursor-pointer p-4 text-start">{user.name}</th>
-                    <th onClick={route} className=" cursor-pointer p-4 text-start">{user.position}</th>
-                    <th onClick={route} className=" cursor-pointer p-4 text-start">{user.email}</th>
+                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user.id}</td>
+                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user.name}</td>
+                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user.role}</td>
+                    <td onClick={route} className=" cursor-pointer p-4 text-start">{user.email}</td>
                     
-                    <th className="p-4 justify-center flex gap-3 items-center overflow-hidden">
+                    <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                       <Link to={'/user/overview'}>
-                      <p onClick={banHandler} className="hover-scale icon1 text-[#E64848]">
-                        <FaMinus />
+                      <p onClick={banHandler} className="hover-scale icon1 text-[#e94343]">
+                        <HiBan />
                       </p>
                       </Link>
 
@@ -141,12 +148,13 @@ const Overview = () => {
                       <span className=" icon1 hover-scale">
                         <HiArrowNarrowRight />
                       </span>
-                    </th>
+                    </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+          )}
         </div>
       </div>
     </MainLayout>

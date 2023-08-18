@@ -8,8 +8,14 @@ import {CiShop} from "react-icons/ci";
 import {BiSolidEditAlt} from "react-icons/bi"
 import { useDispatch, useSelector } from "react-redux";
 import { setUserPp } from "../../Redux/Services/profileSlice";
+import { useGetProfileQuery } from "../../Redux/API/adminApi";
+import Cookies from "js-cookie";
+import { useParams } from "react-router-dom";
 
 const Detail = () => {
+  const token = Cookies.get("token")
+  const {data, isLoading} = useGetProfileQuery()
+  
   const dispatch = useDispatch();
 
   const userPp = useSelector(state => state.profileSlice.userPp);
