@@ -6,6 +6,7 @@ import Loader from "../../Loader/Loader";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
+import "../../User/overview.css"
 
 const ProductTable = () => {
   const token = Cookies.get("token");
@@ -30,7 +31,7 @@ const ProductTable = () => {
       id: 2,
       name: "banana",
       brand: "melon",
-      salePrice: 300,
+      salePrice: 30000,
       unit: "s",
       stock: 100,
     },
@@ -51,15 +52,15 @@ const ProductTable = () => {
             <Loader/>
           </div>) 
           : (
-            <table className=" text-white table-responsive">
+            <table className=" text-white table-responsive w-full">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
                 <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
                 <th className="p-4 max-[800px]:pr-24 text-start">NAME</th>
                 <th className="p-4 max-[800px]:pr-16 text-start">BRAND</th>
-                <th className="p-4 max-[800px]: pr-40 text-start">UNIT</th>
-                <th className="p-4 max-[800px]: pr-40 text-start">SALE PRICE</th>
-                <th className="p-4 max-[800px]: pr-40 text-start">TOTAL STOCK</th>
+                <th className="p-4 max-[800px]:pr-40 text-start">UNIT</th>
+                <th className="p-4 max-[800px]:pr-40 text-end ">SALE PRICE</th>
+                <th className="p-4 max-[800px]:pr-40 text-end">TOTAL STOCK</th>
                 <th className="p-4 ">...</th>
               </tr>
             </thead>
@@ -74,8 +75,8 @@ const ProductTable = () => {
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.name}</td>
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.brand}</td>
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.unit}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.salePrice}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.stock}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.salePrice}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.stock}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                       <Link to={'/user/overview'}>

@@ -12,6 +12,7 @@ export const inventoryApi = createApi({
       }),
       providesTags: ["inventory"],
     }),
+    
     getProductDetail: builder.query({
       query: ({ token, id }) => ({
         url: `/product/${id}`,
@@ -19,6 +20,16 @@ export const inventoryApi = createApi({
       }),
       providesTags: ["inventory"],
     }),
+
+    getStocks: builder.query({
+      query: ({token}) => ({
+        url: "/stock",
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["inventory"],
+    })
+
+
   }),
 });
-export const { useGetProductsQuery , useGetProductDetailQuery } = inventoryApi;
+export const { useGetProductsQuery , useGetProductDetailQuery, useGetStocksQuery } = inventoryApi;

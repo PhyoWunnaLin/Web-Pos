@@ -109,13 +109,13 @@ const BanUser = () => {
           <Loader/>
         </div>) 
         : (
-          <table className=" text-white table-responsive">
+          <table className=" text-white table-responsive w-full">
           <thead className=" tracking-wider text-sm border border-[#7E7F80]">
             <tr>
-              <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
-              <th className="p-4 max-[800px]:pr-24 text-start">NAME</th>
-              <th className="p-4 max-[800px]:pr-16 text-start">POSITION</th>
-              <th className="p-4 max-[800px]: pr-40 text-start">EMAIL</th>
+              <th className="p-4 text-start">NO</th>
+              <th className="p-4 text-start">NAME</th>
+              <th className="p-4 text-start">POSITION</th>
+              <th className="p-4 text-start">EMAIL</th>
               <th className="p-4 ">...</th>
             </tr>
           </thead>

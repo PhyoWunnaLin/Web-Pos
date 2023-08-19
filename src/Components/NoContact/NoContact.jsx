@@ -12,10 +12,10 @@ const NoContact = (props) => {
           />
         </div>
         <div className="flex flex-col mx-auto">
-        <h1 className=" text-xl text-white font-bold tracking-wider text-center">
+        <h1 className=" text-lg text-white tracking-widest font-semibold text-center">
           {title1}
         </h1>
-        <h1 className=" text-xl text-white font-bold tracking-wider text-center">
+        <h1 className=" text-white tracking-widest text-center">
           {title2}
         </h1>
         </div>
