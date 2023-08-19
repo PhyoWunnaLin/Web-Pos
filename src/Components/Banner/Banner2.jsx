@@ -18,8 +18,6 @@ const Banner2 = (props) => {
             {props.path1}
             <span className="text-[#8ab4f8]"> /</span>{" "}
             {props.path2 && props.path2}
-            <span className="text-[#8ab4f8]">{props.path2 && " /"}</span>{" "}
-            {props.path3 && props.path3}
           </p>
         </div>
 
