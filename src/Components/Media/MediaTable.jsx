@@ -13,7 +13,7 @@ const MediaTable = () => {
   return (
       <table className="w-full text-white table-responsive2">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
-                <tr>
+                <tr className='select-none'>
                     <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
                     <th className="p-4 max-[800px]:pr-16 text-start">NAME</th>
                     <th className="p-4 max-[800px]:pr-24 text-start">ACCOUNT</th>
@@ -26,7 +26,7 @@ const MediaTable = () => {
             <tbody className=" tracking-wide text-sm">
                 {medias.map(media => {
                     return(
-                        <tr key={media.id} className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]">
+                        <tr key={media.id} className=" hover:bg-[#161618] select-none duration-300  border border-[#7E7F80]">
                             <td className="p-4 text-start">{media.id}</td>
                             <td className="p-4 text-start">{media.name}</td>
                             <td className="p-4 text-start">{media.account}</td>

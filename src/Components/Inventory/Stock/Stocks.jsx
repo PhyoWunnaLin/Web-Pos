@@ -6,6 +6,7 @@ import NoContact from '../../NoContact/NoContact';
 import { BiSearch } from "react-icons/bi";
 import { useGetStocksQuery } from '../../../Redux/API/inventoryApi';
 import Cookies from "js-cookie"
+import { Link, useNavigate } from "react-router-dom";
 import "../../User/overview.css"
 
 const Stocks = () => {
@@ -13,9 +14,15 @@ const Stocks = () => {
     const {data, isLoading} = useGetStocksQuery(token)
     console.log(data);
 
+    const nav = useNavigate();
+
+    const route = (id) => {
+      nav(`/stock/detail/${id}`);
+    };
+
     const stocks = [
-        {id: 1, name: "BANANA", userName: "dd", q: 10, create: 12/7/2023},
-        {id: 2, name: "BANANA", userName: "dd", q: 10, create: 12/7/2023}
+        {id: 1, pdName: "BANANA", userName: "dd", q: 10, create: 12/7/2023},
+        {id: 2, pdName: "BANANA", userName: "dd", q: 10, create: 12/7/2023}
     ]
 
   return (
@@ -39,7 +46,7 @@ const Stocks = () => {
             {/* banner2  */}
             <div className='flex flex-col gap-3'>
               <h1 className=" text-white font-medium text-2xl tracking-wide">
-                    Product Overview
+                    Stock Overview
               </h1>
               <div className=" flex justify-between items-center">           
                   <form className="relative">
@@ -81,8 +88,9 @@ const Stocks = () => {
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
                 <th className="p-4 text-start">NO</th>
+                <th className="p-4 text-start">PRODUCT NAME</th>
                 <th className="p-4 text-start">USER NAME</th>
-                <th className="p-4 text-start">ADDED QUANTITY</th>
+                <th className="p-4 text-end">ADDED QUANTITY</th>
                 <th className="p-4 text-start">CREATED AT</th>
               </tr>
             </thead>
@@ -94,8 +102,9 @@ const Stocks = () => {
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.id}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.name}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.pdName}</td>
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.userName}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.q}</td>
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.create}</td>
                   </tr>
                 );

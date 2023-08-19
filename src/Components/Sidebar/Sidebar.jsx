@@ -141,15 +141,18 @@ const Sidebar = () => {
                     </Link>
 
                     <Link to={'/inventory/stockControl'}>
-                    <div className={` ${sidebarActive == "/inventory/addProduct" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                    <div className={` ${sidebarActive == "/inventory/stockControl" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
                         <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
                         <span className=" tracking-wider text-sm font-medium px-3 navLink">Stock Control</span>
                     </div>
                     </Link>
-                    <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
+                    
+                    <Link to={'/inventory/brand'}>
+                    <div className={` ${sidebarActive == "/inventory/brand" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
                         <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
-                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Manage Brands</span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Manage Brand</span>
                     </div>
+                    </Link>
                 </AccordionBody>
                 </Accordion>
                 <div className=" border-b border-[#3f4245]" />

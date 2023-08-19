@@ -1,7 +1,7 @@
 import React from "react";
-import { BiEditAlt } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+import { BiEditAlt } from "react-icons/bi";
 import { HiBan } from 'react-icons/hi'
 import "./overview.css";
 import Banner from "../Banner/Banner";

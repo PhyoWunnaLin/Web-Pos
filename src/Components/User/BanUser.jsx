@@ -42,6 +42,12 @@ const BanUser = () => {
           })
         // const data = await unBanUser({token,id})
     }
+
+    const nav = useNavigate();
+  
+    const route = (id) => {
+      nav(`/brand/detail/${id}`);
+    };
     const user = [
         {id: 1, name: "dd", position: "staff", email: "dd@gmial.com"},
         {id: 2, name: "dd", position: "staff", email: "dd@gmial.com"}
