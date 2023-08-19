@@ -15,7 +15,7 @@ body{
 }
 
 .search-input{
-    @apply  bg-[#202124] border border-[#7E7F80] py-[6px] pr-5 pl-10 rounded-md outline-none text-[#FFFFFF] focus:border-[#E8EAED] duration-300 font-medium placeholder:tracking-wider placeholder:text-[#FFFFFF];
+    @apply  bg-[#202124] border-2 border-[#383b3d] py-[6px] pr-5 pl-10 rounded-md outline-none text-[#FFFFFF] focus:border-[#E8EAED] duration-300 font-medium placeholder:tracking-wider placeholder:text-[#FFFFFF];
 }
 
 .btn{

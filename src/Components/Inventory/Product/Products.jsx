@@ -9,7 +9,7 @@ import { TbBorderAll } from 'react-icons/tb';
 import ProductTable from './ProductTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActive } from '../../../Redux/Services/productSlice';
-import ProductsCard from './ProductsCard';
+import ProductCard from './ProductCard';
 
 const Products = () => {
   const state = useSelector((state) => state.productSlice.active);
@@ -31,7 +31,7 @@ const Products = () => {
             btn2={"Add Product"}
             button1={true}
             button2={true}
-            // route={"/user/create"}
+            // route2={"/inventory/addProduct"}
           />
           {/* banner2  */}
           <div className='flex flex-col gap-3'>
@@ -87,7 +87,7 @@ const Products = () => {
           </div>
           {/* table  */}
           <div>
-            {active == "2" ? <ProductsCard/> : <ProductTable/>}
+            {active == "2" ? <ProductCard/> : <ProductTable/>}
           </div>
         </div>
       </div>
