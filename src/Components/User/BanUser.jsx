@@ -56,8 +56,9 @@ const BanUser = () => {
           path1={"User"}
           path2={"Banned"}
           icon={true}
-          btn={"Create User"}
-          button={true}
+          btn2={"Create User"}
+          button2={true}
+          route={"/user/create"}
         //   route={"/user/create"}
         />
         {user?.length == 0 ? 
@@ -71,7 +72,7 @@ const BanUser = () => {
           {/* banner2  */}
         <div className="flex flex-col gap-3">
           <h1 className=" text-white font-medium text-2xl tracking-wide">
-                Staff Overview
+              Banned User Overview
           </h1>
           <div className=" flex justify-between items-center">
             <div className="relative">
