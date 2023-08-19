@@ -9,7 +9,7 @@ import { TbBorderAll } from 'react-icons/tb';
 import ProductTable from './ProductTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActive } from '../../../Redux/Services/productSlice';
-import ProductsCard from './ProductsCard';
+import ProductCard from './ProductCard';
 
 const Products = () => {
   const state = useSelector((state) => state.productSlice.active);
@@ -54,14 +54,14 @@ const Products = () => {
             <div className="flex gap-5 items-center justify-end">
                 <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                   Sort : 
-                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#383b3d] rounded text-white tracking-wider outline-none">
                     <option className="bg-[#161618] hover:bg-[#202124]" value="">Last</option>
                     <option className="bg-[#161618] hover:bg-[#202124]" value="">first</option>
                   </select>
                 </div>
                 <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                   Filter : 
-                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
+                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#383b3d] rounded-md text-white tracking-wider outline-none">
                     <option className="bg-[#161618] hover:bg-[#202124]" value="">All Files</option>
                     <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
                   </select>
@@ -88,7 +88,7 @@ const Products = () => {
           </div>
           {/* table  */}
           <div>
-            {active == "2" ? <ProductsCard/> : <ProductTable/>}
+            {active == "2" ? <ProductCard/> : <ProductTable/>}
           </div>
         </div>
       </div>
