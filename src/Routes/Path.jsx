@@ -15,6 +15,7 @@ import AddProducts from "../Components/Inventory/Product/AddProducts";
 import ProductDetail from "../Components/Inventory/Product/productDetail";
 import BanUser from "../Components/User/BanUser";
 import Stocks from "../Components/Inventory/Stock/Stocks"
+import Brands from "../Components/Inventory/Brand/Brands";
 
 const Path = () => {
   return (
@@ -34,6 +35,7 @@ const Path = () => {
         <Route path="/inventory/product/productDetail/:id" element={<ProductDetail/>} />
         <Route path="/inventory/addProduct" element={<AddProducts/>} />
         <Route path="/inventory/stockControl" element={<Stocks/>} />
+        <Route path="/inventory/brand" element={<Brands/>} />
       </Routes>
     </>
   );
