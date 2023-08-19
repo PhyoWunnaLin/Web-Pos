@@ -46,7 +46,7 @@ const Sidebar = () => {
     }, [acc2]);
 
     useEffect(() => {
-        setOpenAcc3(sidebarActive == "/user/overview" || sidebarActive == "/user/create" || openAcc3 == false && true );
+        setOpenAcc3(sidebarActive == "/user/overview" || sidebarActive == "/user/create" || sidebarActive == "/user/ban" || openAcc3 == false && true );
     }, [acc3]);
 
     useEffect(() => {
@@ -174,6 +174,13 @@ const Sidebar = () => {
                     <div className={` ${sidebarActive == "/user/create" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
                         <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
                         <span className=" tracking-wider text-sm font-medium px-3 navLink">Create User</span>
+                    </div>
+                    </Link>
+
+                    <Link to={'/user/ban'}>
+                    <div className={` ${sidebarActive == "/user/ban" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Banned User</span>
                     </div>
                     </Link>
                 </AccordionBody>
