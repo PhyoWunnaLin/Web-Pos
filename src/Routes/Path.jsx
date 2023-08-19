@@ -13,6 +13,7 @@ import Routegaurd from "../Components/Routegaurd";
 import Products from "../Components/Inventory/Product/Products";
 import AddProducts from "../Components/Inventory/Product/AddProducts";
 import ProductDetail from "../Components/Inventory/Product/productDetail";
+import BanUser from "../Components/User/BanUser";
 
 const Path = () => {
   return (
@@ -24,6 +25,7 @@ const Path = () => {
         <Route path="/user/overview" element={<Overview/>} />
         <Route path="/user/create" element={<CreateUser/>} />
         <Route path="/user/detail/:id" element={<Detail/>} />
+        <Route path="/user/ban" element={<BanUser/>} />
         <Route path="/profile/myAccount" element={<AdminProfile/>} />
         <Route path="/profile/edit" element={<AdminProfileEdit/>} />
         <Route path="/media" element={<Media/>} />

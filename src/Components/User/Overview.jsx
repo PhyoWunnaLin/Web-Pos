@@ -11,13 +11,14 @@ import Loader from "../Loader/Loader";
 import Swal from "sweetalert2";
 import "./successAlert.css"
 import Cookies from "js-cookie";
-import { useGetUserListQuery } from "../../Redux/API/userApi";
+import { useBanUserMutation, useGetUserListQuery } from "../../Redux/API/userApi";
 import NoContact from "../NoContact/NoContact";
 
 const Overview = () => {
   const token = Cookies.get("token")
   const {data, isLoading} = useGetUserListQuery(token);
-  console.log(data?.users?.length);
+  const [banUser] = useBanUserMutation();
+  // console.log(data?.users?.length);
   const length = data?.users?.length
   const userList = data?.users;
 
