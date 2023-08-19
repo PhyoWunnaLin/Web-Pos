@@ -102,7 +102,7 @@ const Sidebar = () => {
                     </div>
                     <div className=" text-xl"><MdKeyboardArrowDown/></div>
                 </div>
-                <AccordionBody className="py-0">
+                <AccordionBody className="">
                     <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
                         <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
                         <span className=" tracking-wider text-sm font-medium px-3 navLink">Cashier</span>
@@ -140,11 +140,12 @@ const Sidebar = () => {
                     </div>
                     </Link>
 
-                    <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
+                    <Link to={'/inventory/stockControl'}>
+                    <div className={` ${sidebarActive == "/inventory/addProduct" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
                         <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
                         <span className=" tracking-wider text-sm font-medium px-3 navLink">Stock Control</span>
                     </div>
-
+                    </Link>
                     <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
                         <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
                         <span className=" tracking-wider text-sm font-medium px-3 navLink">Manage Brands</span>

@@ -17,9 +17,9 @@ const MediaTable = () => {
                     <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
                     <th className="p-4 max-[800px]:pr-16 text-start">NAME</th>
                     <th className="p-4 max-[800px]:pr-24 text-start">ACCOUNT</th>
-                    <th className="p-4 max-[800px]:pr-16 text-start">DATE</th>
-                    <th className="p-4 max-[800px]:pr-16 text-start">TIME</th>
-                    <th className="p-4 max-[800px]:pr-5 text-start">FILE SIZE</th>
+                    <th className="p-4 max-[800px]:pr-16 text-end">DATE</th>
+                    <th className="p-4 max-[800px]:pr-16 text-end">TIME</th>
+                    <th className="p-4 max-[800px]:pr-5 text-end">FILE SIZE</th>
                     <th className="p-4 ">...</th>
                 </tr>
             </thead>
@@ -30,9 +30,9 @@ const MediaTable = () => {
                             <td className="p-4 text-start">{media.id}</td>
                             <td className="p-4 text-start">{media.name}</td>
                             <td className="p-4 text-start">{media.account}</td>
-                            <td className="p-4 text-start">{media.date}</td>
-                            <td className="p-4 text-start">{media.time}</td>
-                            <td className="p-4 text-start">{media.fileSize}</td>
+                            <td className="p-4 text-end">{media.date}</td>
+                            <td className="p-4 text-end">{media.time}</td>
+                            <td className="p-4 text-end">{media.fileSize}</td>
                             <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                                <span className=' text-white cursor-pointer hover:text-red-500 duration-300'><BiTrash size={16}/></span> 
                                <span className=' text-white cursor-pointer hover:text-[#8AB4F8]'><BsFiles/></span> 
