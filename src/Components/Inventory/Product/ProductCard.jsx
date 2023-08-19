@@ -1,7 +1,7 @@
 import React from 'react'
 import { useGetProductsQuery } from '../../../Redux/API/inventoryApi';
 import Loader from '../../Loader/Loader';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import "./products.css"
 
@@ -83,13 +83,15 @@ const ProductCard = () => {
              <div className=' flex flex-wrap gap-5'>
                 {pd.map(pd => {
                   return(
-                    <div key={pd.id} className='w-[200px] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card'>
-                      <img src={pd.img} alt="" className=' w-full h-[65%] rounded-md object-cover' />
-                      <div className=' flex flex-col gap-1 items-end px-5 py-2 '>
-                        <p className='text-[#e8eaed] text-lg tracking-wider'>{pd.name}</p>
-                        <p className=' tracking-wider text-[hsl(0,3%,76%)]'>{pd.salePrice} kyat</p>
+                    <Link to={`/inventory/product/productDetail/${pd.id}`}  key={pd.id}>
+                      <div className='w-[200px] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card'>
+                        <img src={pd.img} alt="" className=' w-full h-[65%] rounded-md object-cover' />
+                        <div className=' flex flex-col gap-1 items-end px-5 py-2 '>
+                          <p className='text-[#e8eaed] text-lg tracking-wider'>{pd.name}</p>
+                          <p className=' tracking-wider text-[hsl(0,3%,76%)]'>{pd.salePrice} kyat</p>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   )
                 })}
             </div>

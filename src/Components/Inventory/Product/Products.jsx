@@ -31,7 +31,7 @@ const Products = () => {
             btn2={"Add Product"}
             button1={true}
             button2={true}
-            // route={"/user/create"}
+            // route2={"/inventory/addProduct"}
           />
           {/* banner2  */}
           <div className='flex flex-col gap-3'>

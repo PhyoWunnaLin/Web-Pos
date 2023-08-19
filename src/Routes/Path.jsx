@@ -12,6 +12,7 @@ import Detail from "../Components/User/Detail";
 import Routegaurd from "../Components/Routegaurd";
 import Products from "../Components/Inventory/Product/Products";
 import AddProducts from "../Components/Inventory/Product/AddProducts";
+import ProductDetail from "../Components/Inventory/Product/productDetail";
 
 const Path = () => {
   return (
@@ -27,7 +28,8 @@ const Path = () => {
         <Route path="/profile/edit" element={<AdminProfileEdit/>} />
         <Route path="/media" element={<Media/>} />
         <Route path="/inventory/products" element={<Products/>} />
-        <Route path="/inventory/addProducts" element={<AddProducts/>} />
+        <Route path="/inventory/product/productDetail/:id" element={<ProductDetail/>} />
+        <Route path="/inventory/addProduct" element={<AddProducts/>} />
       </Routes>
     </>
   );
