@@ -19,7 +19,7 @@ const Login = () => {
       e.preventDefault();
       const user = {email,password};
       const {data} = await login(user);
-      console.log(data);
+      // console.log(data);
       dispatch(addToken(data?.token))
       if(data?.token){
         nav("/")

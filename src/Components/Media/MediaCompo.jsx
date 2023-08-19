@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../Banner/Banner";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { TfiMenuAlt } from "react-icons/tfi";
@@ -7,14 +7,21 @@ import MediaTable from "./MediaTable";
 import MediaImage from "./MediaImage";
 import { useDispatch, useSelector } from "react-redux";
 import { setActive } from "../../Redux/Services/mediaSlice";
+import { useCreatePhotoMutation, useGetPhotoQuery } from "../../Redux/API/mediaApi";
+import Cookies from "js-cookie";
 
 const MediaCompo = () => {
+  const token = Cookies.get("token");
+  const [createPhoto, {isLoading}] = useCreatePhotoMutation();
+  const {data} = useGetPhotoQuery(token);
+  console.log(data);
   const [hover,setHover] = useState(false)
   const state = useSelector((state) => state.mediaSlice.active);
   const active = localStorage.getItem("active");
   const dispatch = useDispatch();
   const [file, setFile] = useState("No Selected File");
   console.log(file);
+
   const handleDragLeave = (e) => {
     e.preventDefault();
     setHover(false);
@@ -23,9 +30,18 @@ const MediaCompo = () => {
     e.preventDefault();
     setHover(true);
   };
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setFile(e.dataTransfer.files[0].name);
+  const handleDrop = async(e) => {
+    try{
+      e.preventDefault();
+      setFile(e.dataTransfer.files);
+      // if(file && file.length <= 5){
+          const photoData = await createPhoto({token,photo:file})
+          console.log(photoData);
+          // }
+        }catch(error){
+          console.log(error);
+        }
+    
   };
   return (
     <div className="bg-[#202124] w-full flex justify-center">
@@ -50,14 +66,17 @@ const MediaCompo = () => {
               <MdOutlineCloudUpload size={40} className={`${hover && "animate-bounce text-blue-500"} text-[#8AB4F8]`} />
             </div>
           </div>
+
           <div className="flex gap-2 justify-center items-center">
+            <form>
             <input
+              multiple
               type="file"
-              accept="image/*"
+              accept="image/jpg,image/jpeg"
               className="input-field"
               hidden
               onChange={({ target: { files } }) => {
-                files[0] && setFile(files[0].name);
+                files && setFile(files);
               }}
             />
             <p
@@ -72,7 +91,9 @@ const MediaCompo = () => {
               {" "}
               Drag and Image
             </p>
+            </form>
           </div>
+
         </div>
         <div className="w-full flex items-center justify-between">
           <p className="text-[#c5c1c1] tracking-wide">

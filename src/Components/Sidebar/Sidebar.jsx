@@ -55,7 +55,7 @@ const Sidebar = () => {
 
     const logoutHandler = async(e)=>{
         const {data} = await logout(token);
-        console.log(data);
+        // console.log(data);
         if(data.message){
             nav("/login")
             dispatch(removeToken())
