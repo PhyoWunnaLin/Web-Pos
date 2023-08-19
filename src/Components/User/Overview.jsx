@@ -1,5 +1,4 @@
 import React from "react";
-import { FaMinus } from "react-icons/fa";
 import { BiEditAlt } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
@@ -13,11 +12,13 @@ import Swal from "sweetalert2";
 import "./successAlert.css"
 import Cookies from "js-cookie";
 import { useGetUserListQuery } from "../../Redux/API/userApi";
+import NoContact from "../NoContact/NoContact";
 
 const Overview = () => {
   const token = Cookies.get("token")
   const {data, isLoading} = useGetUserListQuery(token);
-  console.log(data?.users);
+  console.log(data?.users?.length);
+  const length = data?.users?.length
   const userList = data?.users;
 
   const nav = useNavigate();
@@ -67,38 +68,46 @@ const Overview = () => {
             button={true}
             route={"/user/create"}
           />
-          {/* banner2  */}
-          <div className=" flex justify-between items-center">
-            <div className=" flex flex-col gap-3">
-              <h1 className=" text-white font-medium text-2xl tracking-wide">
-                Staff Overview
-              </h1>
+          {length == 0 ? 
+          
+          // no user 
+          <NoContact image={"https://img.freepik.com/free-icon/user_318-215753.jpg?t=st=1692434065~exp=1692434665~hmac=2980c4d803170dbf42c0125a36bc3a7bb74abd9db2f59410965813f7c678e325"} title1={"No User !"} title2={"Please Create User"} />
+
+           : 
+          
+          <div className="flex flex-col gap-8">
+            {/* banner2  */}
+          <div className="flex flex-col gap-3">
+            <h1 className=" text-white font-medium text-2xl tracking-wide">
+                  Staff Overview
+            </h1>
+            <div className=" flex justify-between items-center">
               <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="search-input"
-                />
-                <div className="text-white absolute top-[10px] left-[11px]">
-                  <BiSearch size={20} />
-                </div>
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    className="search-input"
+                  />
+                  <div className="text-white absolute top-[10px] left-[11px]">
+                    <BiSearch size={20} />
+                  </div>
               </div>
-            </div>
-            <div className="flex gap-5 items-center justify-end">
-                <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
-                  Sort : 
-                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
-                    <option className="bg-[#161618] hover:bg-[#202124]" value="">Last</option>
-                    <option className="bg-[#161618] hover:bg-[#202124]" value="">first</option>
-                  </select>
-                </div>
-                <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
-                  Filter : 
-                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
-                    <option className="bg-[#161618] hover:bg-[#202124]" value="">All Files</option>
-                    <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
-                  </select>
-                </div>
+              <div className="flex gap-5 items-center justify-end mt-1">
+                  <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
+                    Sort : 
+                    <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                      <option className="bg-[#161618] hover:bg-[#202124]" value="">Last</option>
+                      <option className="bg-[#161618] hover:bg-[#202124]" value="">first</option>
+                    </select>
+                  </div>
+                  <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
+                    Filter : 
+                    <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
+                      <option className="bg-[#161618] hover:bg-[#202124]" value="">All Files</option>
+                      <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
+                    </select>
+                  </div>
+              </div>
             </div>
           </div>
           {/* table  */}
@@ -149,6 +158,7 @@ const Overview = () => {
             </tbody>
           </table>
           )}
+          </div>}
         </div>
       </div>
     </MainLayout>
