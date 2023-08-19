@@ -1,13 +1,12 @@
-import React from 'react'
-import MainLayout from '../Layouts/MainLayout'
-import Products from '../Components/Inventory/Product/Products'
+import React from "react";
+import MainLayout from "../Layouts/MainLayout";
 
 const Dashboard = () => {
   return (
     <MainLayout>
-       {/* <Products/> */}
-     </MainLayout>
-  )
-}
 
-export default Dashboard
+    </MainLayout>
+  );
+};
+
+export default Dashboard;
