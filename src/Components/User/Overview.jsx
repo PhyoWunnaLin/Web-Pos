@@ -8,7 +8,6 @@ import "./overview.css";
 import Banner from "../Banner/Banner";
 import MainLayout from "../../Layouts/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
-import Dropdown from "../Dropdown/Dropdown";
 import Loader from "../Loader/Loader";
 import Swal from "sweetalert2";
 import "./successAlert.css"
@@ -74,16 +73,6 @@ const Overview = () => {
               <h1 className=" text-white font-medium text-2xl tracking-wide">
                 Staff Overview
               </h1>
-              <div className="py-2 px-3 flex border-2 border-[#7E7F80] rounded-md">
-                <p className=" tracking-wide text-sm font-medium text-[#FFFFFF] border-r-2 cursor-pointer border-[#7E7F80] pr-3">
-                  This Month
-                </p>
-                <p className=" tracking-wide text-sm font-medium text-[#8bb4f6] cursor-pointer pl-3">
-                  Last Month
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3">
               <div className="relative">
                 <input
                   type="text"
@@ -94,17 +83,22 @@ const Overview = () => {
                   <BiSearch size={20} />
                 </div>
               </div>
-              <div className="flex gap-5 items-center justify-end">
+            </div>
+            <div className="flex gap-5 items-center justify-end">
                 <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                   Sort : 
-                  <span><Dropdown name={"Last"} /></span>
+                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                    <option className="bg-[#161618] hover:bg-[#202124]" value="">Last</option>
+                    <option className="bg-[#161618] hover:bg-[#202124]" value="">first</option>
+                  </select>
                 </div>
                 <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                   Filter : 
-                  <span><Dropdown name={"All Files"} /></span>
+                  <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
+                    <option className="bg-[#161618] hover:bg-[#202124]" value="">All Files</option>
+                    <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
+                  </select>
                 </div>
-              </div>
-              <div></div>
             </div>
           </div>
           {/* table  */}

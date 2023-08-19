@@ -1,26 +1,33 @@
-import React from 'react'
-import Cookies from 'js-cookie';
+import React from "react";
+import { useGetProductsQuery } from "../../../Redux/API/inventoryApi";
+import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
+import Loader from "../../Loader/Loader";
+import { AiOutlinePlus } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
-import { AiOutlinePlus } from 'react-icons/ai'
-import { Link, useNavigate } from "react-router-dom";
-import "../../User/overview.css";
-import Loader from "../../Loader/Loader";
-import { useGetProductsQuery } from '../../../Redux/API/inventoryApi';
 
 const ProductTable = () => {
-    const token = Cookies.get("token");
-    const {data, isLoading} = useGetProductsQuery(token);
-    console.log(data);
+  const token = Cookies.get("token");
+  const { data, isLoading } = useGetProductsQuery(token);
+  console.log(data);
 
-    const nav = useNavigate();
-    const route = () => {
+  const nav = useNavigate();
+  const route = () => {
     nav(`/user/detail/`);
   };
 
-    const pd = [
-        {id: 1, name: "apple", brand: "melon", salePrice: 300, unit: "s", stock: 100  }
-    ]
+  const pd = [
+    {
+      id: 1,
+      name: "apple",
+      brand: "melon",
+      salePrice: 300,
+      unit: "s",
+      stock: 100,
+    },
+  ];
+  
   return (
     <div>
         {isLoading ? (
@@ -75,7 +82,8 @@ const ProductTable = () => {
           </table>
           )}
     </div>
-  )
-}
+  );
+};
 
-export default ProductTable
+export default ProductTable;
+
