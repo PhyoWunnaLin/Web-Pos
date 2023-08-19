@@ -27,6 +27,7 @@ const ProductTable = () => {
       stock: 100,
     },
   ];
+  
   return (
     <div>
         {isLoading ? (
@@ -85,3 +86,4 @@ const ProductTable = () => {
 };
 
 export default ProductTable;
+

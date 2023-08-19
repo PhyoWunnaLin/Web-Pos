@@ -4,9 +4,9 @@ import Products from '../Components/Inventory/Product/Products'
 
 const Dashboard = () => {
   return (
-    // <MainLayout>
-      <Products/>
-    // </MainLayout>
+    <MainLayout>
+       {/* <Products/> */}
+     </MainLayout>
   )
 }
 

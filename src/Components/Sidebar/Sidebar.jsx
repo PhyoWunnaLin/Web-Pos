@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {MdOutlineNotificationsActive} from "react-icons/md";
 import {BsFillMoonStarsFill,BsPersonCircle, BsPersonSquare} from "react-icons/bs";
 import {AiOutlineHome} from "react-icons/ai"
@@ -6,7 +6,6 @@ import {CiShop} from "react-icons/ci";
 import {TbPointFilled} from "react-icons/tb"
 import {MdKeyboardArrowDown} from "react-icons/md"
 import {RxExit} from "react-icons/rx"
-// import { Accordion } from '@mantine/core';
 import { Accordion, AccordionHeader, AccordionBody, } from "@material-tailwind/react";
 import {PiNotepadBold, PiUserCirclePlusDuotone, PiUserSquareFill} from "react-icons/pi"
 import {HiOutlinePhotograph} from "react-icons/hi"
@@ -20,16 +19,39 @@ import { Loader } from '@mantine/core';
 
 const Sidebar = () => {
     const [logout , {isLoading}] = useLogoutMutation();
-    const [open, setOpen] = React.useState(0);
+    const [openAcc1, setOpenAcc1] = useState(false);
+    const [openAcc2, setOpenAcc2] = useState(false);
+    const [openAcc3, setOpenAcc3] = useState(false);
+    const [openAcc4, setOpenAcc4] = useState(false);
     
-     const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const location = useLocation();
     const sidebarActive = location.pathname;
+    const acc4 = sidebarActive == "/profile/myAccount" || sidebarActive == "/profile/edit";
+    const acc3 = sidebarActive == "/user/overview" || sidebarActive == "/user/create";
+    const acc2 = sidebarActive == "/inventory/products";
     // console.log(sidebarActive);
     const token = Cookies.get("token")
     const nav = useNavigate();
 
-    const handleOpen = (value) => setOpen(open === value ? 0 : value);
+    const handleOpenAcc1 = () => {
+        setOpenAcc1((cur) => !cur);
+    }
+    const handleOpenAcc2 = () => setOpenAcc2((cur) => !cur);
+    const handleOpenAcc3 = () => setOpenAcc3((cur) => !cur);
+    const handleOpenAcc4 = () => setOpenAcc4((cur) => !cur);
+
+    useEffect(() => {
+        setOpenAcc2(sidebarActive == "/inventory/products" || openAcc2 == false && true );
+    }, [acc2]);
+
+    useEffect(() => {
+        setOpenAcc3(sidebarActive == "/user/overview" || sidebarActive == "/user/create" || openAcc3 == false && true );
+    }, [acc3]);
+
+    useEffect(() => {
+        setOpenAcc4(sidebarActive == "/profile/myAccount" || sidebarActive == "/profile/edit" || openAcc4 == false && true );
+    }, [acc4]);
 
     const logoutHandler = async(e)=>{
         const {data} = await logout(token);
@@ -72,8 +94,8 @@ const Sidebar = () => {
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Sale  */}
-                <Accordion open={open === 1} >
-                <div onClick={() => handleOpen(1)} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                <Accordion open={openAcc1} >
+                <div onClick={handleOpenAcc1}  className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
                     <div className=" flex items-center gap-2">
                     <span className=" text-[23px]"><CiShop/></span>
                     <span className=" tracking-wider font-medium">Sale</span>
@@ -95,8 +117,8 @@ const Sidebar = () => {
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Inventory  */}
-                <Accordion open={open === 2} >
-                <div onClick={() => handleOpen(2)} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                <Accordion open={openAcc2} >
+                <div onClick={handleOpenAcc2} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
                     <div className=" flex items-center gap-2">
                     <span className=" text-[23px]"><PiNotepadBold/></span>
                     <span className=" tracking-wider font-medium">Inventory</span>
@@ -130,8 +152,8 @@ const Sidebar = () => {
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* User  */}
-                <Accordion open={open === 3} >
-                <div onClick={() => handleOpen(3)} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                <Accordion open={openAcc3} >
+                <div onClick={handleOpenAcc3} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
                     <div className=" flex items-center gap-2">
                     <span className=" text-[23px]"><PiUserCirclePlusDuotone/></span>
                     <span className=" tracking-wider font-medium">User</span>
@@ -166,8 +188,8 @@ const Sidebar = () => {
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Profile  */}
-                <Accordion open={open === 4} >
-                <div onClick={() => handleOpen(4)} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                <Accordion open={openAcc4} >
+                <div onClick={handleOpenAcc4} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
                     <div className=" flex items-center gap-2">
                     <span className=" text-[23px]"><PiUserSquareFill/></span>
                     <span className=" tracking-wider font-medium">Profile</span>

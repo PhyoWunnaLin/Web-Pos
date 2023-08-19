@@ -1,10 +1,5 @@
-import Cookies from 'js-cookie';
 import React from 'react'
-import { BiEditAlt } from "react-icons/bi";
-import { HiArrowNarrowRight } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
-import { AiOutlinePlus } from 'react-icons/ai'
-import "../../User/overview.css";
 import MainLayout from "../../../Layouts/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Banner2 from '../../Banner/Banner2';
@@ -20,6 +15,7 @@ const Products = () => {
   const state = useSelector((state) => state.productSlice.active);
   const active = localStorage.getItem("productActive");
   const dispatch = useDispatch();
+  
   return (
     <div>
         <MainLayout>
