@@ -1,19 +1,18 @@
-import React, { useState } from "react";
-import MainLayout from "../../Layouts/MainLayout";
-import CreateUserStep1 from "./CreateUserStep1";
-import Banner from "../Banner/Banner";
-import { ImArrowRight2 } from "react-icons/im";
-import { TiTick } from "react-icons/ti";
-import CreateUserStep2 from "./CreateUserStep2";
-import CreateUserStep3 from "./CreateUserStep3";
-import CreateUserStep4 from "./CreateUserStep4";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
-import './successAlert.css';
+import React, { useState } from 'react'
+import MainLayout from '../../../Layouts/MainLayout'
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
+import { TiTick } from 'react-icons/ti';
+import { Link } from 'react-router-dom';
+import { ImArrowRight2 } from 'react-icons/im';
+import Banner2 from '../../Banner/Banner2';
+import AddProductStep1 from './AddProductStep1';
+import AddProductStep3 from './AddProductStep3';
+import AddProductStep2 from './AddProductStep2';
+import AddProductStep4 from './AddProductStep4';
 
-const CreateUser = () => {
-  const steps = ["Personal", "Login Info", "Photo"];
+const AddProducts = () => {
+  const steps = ["Information", "Price", "Photo"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
   const nav = useNavigate();
@@ -22,10 +21,9 @@ const CreateUser = () => {
       customClass : {
         title: 'swal2-title'
       },
-      title: "Successfully created an account",
+      title: "Successfully created an product",
       icon: "success",
-      confirmButtonText: "SEE ALL USERS",
-      // showCloseButton: true,
+      confirmButtonText: "OK",
       width: 400,
       background: "#161618",
     }).then((result) => {
@@ -39,20 +37,20 @@ const CreateUser = () => {
       <div className="bg-[#202124] w-full flex justify-center">
         <div className="w-[95%] my-6 flex flex-col gap-8">
           {/* header  */}
-          <Banner
-            title={"User"}
-            path1={"Create User"}
-            btn={"User List"}
-            button={true}
-            route={"/user/overview"}
+          <Banner2
+            title={"Add Product"}
+            path1={"Inventory"}
+            path2={"Add Product"}
+            btn2={"Product List"}
+            button2={true}
           />
           {/* form  */}
           <div className="flex gap-10">
             <div className="w-[65%]">
-              {currentStep == 1 && <CreateUserStep1 />}
-              {currentStep == 2 && <CreateUserStep2 />}
-              {currentStep == 3 && <CreateUserStep3 />}
-              {currentStep == 4 && <CreateUserStep4 />}
+              {currentStep == 1 && <AddProductStep1 />}
+              {currentStep == 2 && <AddProductStep2 />}
+              {currentStep == 3 && <AddProductStep3 />}
+              {currentStep == 4 && <AddProductStep4 />}
             </div>
             <div className="flex flex-col mt-16">
               {steps.map((step, i) => {
@@ -104,7 +102,7 @@ const CreateUser = () => {
         </div>
       </div>
     </MainLayout>
-  );
-};
+  )
+}
 
-export default CreateUser;
+export default AddProducts
