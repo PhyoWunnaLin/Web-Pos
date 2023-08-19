@@ -82,7 +82,7 @@ const Overview = () => {
                   Staff Overview
             </h1>
             <div className=" flex justify-between items-center">
-              <div className="relative">
+              <form className="relative">
                   <input
                     type="text"
                     placeholder="Search"
@@ -91,7 +91,7 @@ const Overview = () => {
                   <div className="text-white absolute top-[10px] left-[11px]">
                     <BiSearch size={20} />
                   </div>
-              </div>
+              </form>
               <div className="flex gap-5 items-center justify-end mt-1">
                   <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                     Sort : 

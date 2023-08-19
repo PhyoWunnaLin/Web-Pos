@@ -43,6 +43,7 @@ const AddProducts = () => {
             path2={"Add Product"}
             btn2={"Product List"}
             button2={true}
+            route={"/inventory/products"}
           />
           {/* form  */}
           <div className="flex gap-10">

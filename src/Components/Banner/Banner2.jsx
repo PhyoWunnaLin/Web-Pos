@@ -7,6 +7,9 @@ const Banner2 = (props) => {
   const route = () => {
     nav(props.route);
   }
+  const route2 = () => {
+    nav(props.route2);
+  }
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -18,12 +21,14 @@ const Banner2 = (props) => {
             {props.path1}
             <span className="text-[#8ab4f8]"> /</span>{" "}
             {props.path2 && props.path2}
+            {props.path3 && <span className="text-[#8ab4f8]"> /</span>}{" "}
+            {props.path3 && props.path3}
           </p>
         </div>
 
         <div className=" flex gap-3">
         {props.button1 && (
-          <button onClick={props.route && route} className="btn4 flex gap-2 items-center ">
+          <button onClick={props.route2 && route2} className="btn4 flex gap-2 items-center ">
             {props.btn1 && <span className="text-[#8ab4f8]">{props.btn1}</span>}
           </button>
         )}
