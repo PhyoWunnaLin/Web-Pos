@@ -13,14 +13,30 @@ const ProductTable = () => {
   console.log(data);
 
   const nav = useNavigate();
-  const route = () => {
-    nav(`/user/detail/`);
+  const route = (id) => {
+    nav(`/inventory/product/productDetail/${id}`);
   };
 
   const pd = [
     {
       id: 1,
       name: "apple",
+      brand: "melon",
+      salePrice: 300,
+      unit: "s",
+      stock: 100,
+    },
+    {
+      id: 2,
+      name: "banana",
+      brand: "melon",
+      salePrice: 300,
+      unit: "s",
+      stock: 100,
+    },
+    {
+      id: 3,
+      name: "orange",
       brand: "melon",
       salePrice: 300,
       unit: "s",
@@ -54,12 +70,12 @@ const ProductTable = () => {
                     key={pd?.id}
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.id}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.name}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.brand}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.unit}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.salePrice}</td>
-                    <td onClick={route} className=" cursor-pointer p-4 text-start">{pd?.stock}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.id}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.name}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.brand}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.unit}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.salePrice}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.stock}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                       <Link to={'/user/overview'}>
