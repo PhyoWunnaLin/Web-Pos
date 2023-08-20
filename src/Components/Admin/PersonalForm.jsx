@@ -45,7 +45,7 @@ const PersonalForm = () => {
 
             // console.log(data);
            
-            if(data?.data){
+            if(data?.data?.message){
                 editPpCancelHandler();
                 showAlert();
 

@@ -33,7 +33,7 @@ const BanUser = () => {
             if (result.isConfirmed) {
               const data = await unBanUser({token,id})
               // console.log(data);
-              if(data?.message){
+              if(data?.data?.message){
                 Swal.fire({
                   customClass : {
                     title: 'swal2-title',
