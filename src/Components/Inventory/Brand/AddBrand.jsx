@@ -99,25 +99,25 @@ const AddBrand = ({ open, setOpen }) => {
           <label className="text-[#FFFFFF] font-medium tracking-wider">
             Brand Name
           </label>
-          <input value={name} onChange={e => setName(e.target.value)} type="text" className="input" />
+          <input required value={name} onChange={e => setName(e.target.value)} type="text" className="input" />
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-[#FFFFFF] font-medium tracking-wider">
             Company Name
           </label>
-          <input value={company} onChange={e => setCompany(e.target.value)} type="text" className="input" />
+          <input required value={company} onChange={e => setCompany(e.target.value)} type="text" className="input" />
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-[#FFFFFF] font-medium tracking-wider">
             Agent
           </label>
-          <input value={agent} onChange={e => setAgent(e.target.value)} type="text" className="input" />
+          <input required value={agent} onChange={e => setAgent(e.target.value)} type="text" className="input" />
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-[#FFFFFF] font-medium tracking-wider">
             Phone
           </label>
-          <input value={phone} onChange={e => setPhone(e.target.value)} type="number" className="input" />
+          <input required value={phone} onChange={e => setPhone(e.target.value)} type="number" className="input" />
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-[#FFFFFF] font-medium tracking-wider">
