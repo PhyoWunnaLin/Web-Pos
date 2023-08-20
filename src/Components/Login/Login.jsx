@@ -4,7 +4,8 @@ import { Link, useNavigate} from "react-router-dom";
 import {useDispatch} from 'react-redux';
 import { useLoginMutation } from "../../Redux/API/authApi";
 import { addToken } from "../../Redux/Services/authSlice";
-import { Loader } from '@mantine/core';
+import { Loader, PasswordInput, TextInput } from '@mantine/core';
+import "./login.css"
 
 const Login = () => {
   const [ login, {isLoading}] = useLoginMutation();
@@ -48,10 +49,12 @@ const Login = () => {
           {/* form  */}
           <form onSubmit={loginHandler} className="flex flex-col gap-5 mx-5 mt-5">
             <div className="flex flex-col gap-2">
-              <label className="text-[#FFFFFF] font-medium tracking-widest">
+              <label className="text-[#FFFFFF] font-medium tracking-widest ">
                 Email
               </label>
               <input value={email} onChange={(e)=> setEmail(e.target.value)} type="email" className="login-input" />
+
+              <TextInput label="Email" size='md'/>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -59,6 +62,8 @@ const Login = () => {
                 Password
               </label>
               <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="login-input" />
+
+              <PasswordInput label="Password" size='md'/>
             </div>
 
             {isLoading ? (
