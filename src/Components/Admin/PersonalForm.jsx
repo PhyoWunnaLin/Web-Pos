@@ -14,6 +14,20 @@ const PersonalForm = () => {
     const [address,setAddress] = useState("");
     const [user_photo,setPhoto] = useState("");
 
+    const showAlert = () => {
+        Swal.fire({
+          customClass : {
+            title: 'swal2-title'
+          },
+          title: "Successfully updated an account",
+          icon: "success",
+          confirmButtonText: "OK",
+          // showCloseButton: true,
+          width: 400,
+          background: "#161618",
+        })
+      };
+
     const editPpCancelHandler = () => {
         setName(""),
         setPhone(""),
@@ -28,20 +42,13 @@ const PersonalForm = () => {
             e.preventDefault()
             const newPpData = {name, phone, date_of_birth, gender, address, user_photo}
             const data = await editProfile({token,newData:newPpData})
+
             // console.log(data);
-            if(data?.message){
-                editPpCancelHandler()
-                Swal.fire({
-                    customClass : {
-                      title: 'swal2-title'
-                    },
-                    title: "update user successfully",
-                    icon: "success",
-                    confirmButtonText: "OK",
-                    // showCloseButton: true,
-                    width: 400,
-                    background: "#161618",
-                  })
+           
+            if(data?.data){
+                editPpCancelHandler();
+                showAlert();
+
             }
         }catch(error){
             console.log(error);
@@ -55,6 +62,7 @@ const PersonalForm = () => {
                         Name
                     </label>
                     <input onChange={(e)=>setName(e.target.value)}
+                        required
                         value={name}
                         type="text"
                         placeholder="Your Name"
@@ -82,17 +90,20 @@ const PersonalForm = () => {
                     </label>
                     <div className=" flex gap-4 items-center w-[70%] text-[#FFFFFF] font-medium tracking-wider">
                         <input onChange={(e)=>setGender(e.target.value)}
+                        required
                         type="radio"
                         name="gender"
                         value={"male"}
-                        // checked
+                        checked={gender === "male"}
                         style={{ width: "18px", height: "18px" }}
                         />
                         Male
                         <input onChange={(e)=>setGender(e.target.value)}
+                        required
                         value={"female"}
                         type="radio"
                         name="gender"
+                        checked={gender === "female"}
                         style={{ width: "18px", height: "18px" }}
                         />
                         Female
