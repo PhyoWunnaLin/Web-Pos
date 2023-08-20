@@ -42,6 +42,12 @@ const ChangePasswordForm = () => {
         }
     }
 
+    const changePasswordCancel = () => {
+        setCurrentPassword(""),
+        setPassword(""),
+        setPasswordConfirmation("")
+    }
+
   return (
     <div>
         <form onSubmit={changePasswordHandler} className="p-10 flex flex-col gap-6 w-full">
@@ -49,7 +55,7 @@ const ChangePasswordForm = () => {
                     <label className="text-[#FFFFFF] font-medium tracking-wider">
                         Current Password
                     </label>
-                    <input onChange={(e)=>setCurrentPassword(e.target.value)}
+                    <input required value={current_password} onChange={(e)=>setCurrentPassword(e.target.value)}
                         type="password"
                         className="input w-[70%]"
                     />
@@ -59,20 +65,20 @@ const ChangePasswordForm = () => {
                     <label className="text-[#FFFFFF] font-medium tracking-wider">
                         New Password
                     </label>
-                    <input onChange={(e)=>setPassword(e.target.value)} type="password" className="input w-[70%]" />
+                    <input required value={password} onChange={(e)=>setPassword(e.target.value)} type="password" className="input w-[70%]" />
             </div>
 
             <div className="flex justify-between gap-5">
                     <label className="text-[#FFFFFF] font-medium tracking-wider">
                         Confirm Password
                     </label>
-                    <input onChange={(e)=>setPasswordConfirmation(e.target.value)} type="password" className="input w-[70%]" />
+                    <input required value={password_confirmation} onChange={(e)=>setPasswordConfirmation(e.target.value)} type="password" className="input w-[70%]" />
             </div>
                     
 
             {/* btn  */}
             <div className=" flex items-center gap-5 mt-8">
-                    <button className="btn3 flex gap-2 items-center border border-[#7E7F80] text-[#7E7F80]">
+                    <button type='submit' onClick={changePasswordCancel} className="btn3 flex gap-2 items-center border border-[#7E7F80] text-[#7E7F80]">
                         Cancel
                     </button>
                     <button className="btn flex gap-2 items-center border border-[#3f4245]">

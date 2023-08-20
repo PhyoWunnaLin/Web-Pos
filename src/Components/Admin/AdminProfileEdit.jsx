@@ -19,7 +19,8 @@ import Loader from '../Loader/Loader';
 const AdminProfileEdit = () => {
     const token = Cookies.get("token");
     const {data, isLoading} = useGetProfileQuery(token);
-    const user = data?.user[0];
+    const user = data?.user;
+    // console.log(user);
 
     const dispatch = useDispatch();
 

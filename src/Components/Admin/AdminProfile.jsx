@@ -17,7 +17,7 @@ const AdminProfile = () => {
   const token = Cookies.get("token");
   const {data, isLoading} = useGetProfileQuery(token)
   const admin = data?.user
-  console.log(admin);
+  // console.log(admin);
 
   const dispatch = useDispatch();
 
