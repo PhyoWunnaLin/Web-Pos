@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BiPlus } from "react-icons/bi";
+import { RxCross2 } from "react-icons/rx";
 
-const AddBrand = ({ open }) => {
+const AddBrand = ({ open, setOpen }) => {
   const [file, setFile] = useState("No Selected File");
 
   return (
@@ -10,7 +11,13 @@ const AddBrand = ({ open }) => {
         open ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-0"
       } duration-500 fixed top-0 right-0 z-40 py-5 bg-[#202124] h-screen overflow-y-auto scrollbar w-[300px] px-8 border-l border-[#7E7F80] flex flex-col gap-5`}
     >
-      <h1 className=" text-white font-bold tracking-wider text-xl">
+      <div
+        onClick={() => setOpen(!open)}
+        className="hover:bg-[#ffffff15] duration-200 p-[3px] absolute top-1 left-1 cursor-pointer rounded"
+      >
+        <RxCross2 className=" text-white" />
+      </div>
+      <h1 className=" text-white font-bold tracking-wider text-xl mt-2">
         Add New Brand
       </h1>
       <div className="flex flex-col gap-5">

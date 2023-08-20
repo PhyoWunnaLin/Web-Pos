@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../../User/successAlert.css"
 import AddBrand from './AddBrand';
+import { FiPlus } from 'react-icons/fi';
 
 const Brands = () => {
     const [open,setOpen] = useState(false);
@@ -82,8 +83,10 @@ const Brands = () => {
               icon={true}
             />
             <div ref={ref}>
-              <button onClick={() => setOpen(!open)} className='btn'>Add Stock</button>
-              <AddBrand open={open}/>
+              <button onClick={() => setOpen(!open)} className='btn flex gap-2 items-center'><span className=" text-[#161618]">
+                <FiPlus />
+              </span> Add Brand</button>
+              <AddBrand open={open} setOpen={setOpen}/>
             </div>
           </div>
           {brands?.length == 0  ? 
