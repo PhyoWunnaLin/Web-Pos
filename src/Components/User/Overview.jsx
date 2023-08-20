@@ -21,6 +21,8 @@ const Overview = () => {
   // console.log(data?.users?.length);
   const length = data?.users?.length
   const userList = data?.users;
+  // console.log(userList);
+  const unBanList = userList?.filter(user => user?.banned == 0);
 
   const nav = useNavigate();
   
@@ -29,7 +31,7 @@ const Overview = () => {
   };
   
 
-  const banHandler = () => {
+  const banHandler = (id) => {
     Swal.fire({
       title: 'Do you want to ban this user?',
       icon: 'warning',
@@ -39,19 +41,24 @@ const Overview = () => {
       confirmButtonColor: '#E64848',
       cancelButtonColor: '#24262b',
       confirmButtonText: 'Ban User'
-    }).then((result) => {
+    }).then(async(result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          customClass : {
-            title: 'swal2-title',
-            popup: 'custom-swal-popup'
-          },
-          title: "Successfully baned an account",
-          icon: "success",
-          confirmButtonText: "SEE ALL USERS",
-          width: 400,
-          background: "#161618",
-        })
+        const data = await banUser({token,id})
+        // console.log(data);
+        if(data?.message){
+          Swal.fire({
+            customClass : {
+              title: 'swal2-title',
+              popup: 'custom-swal-popup'
+            },
+            title: "Successfully baned an account",
+            icon: "success",
+            confirmButtonText: "OK",
+            width: 400,
+            background: "#161618",
+          })
+        }
+        
       }
     })
   }
@@ -69,7 +76,7 @@ const Overview = () => {
             button={true}
             route={"/user/create"}
           />
-          {length == 0 ? 
+          {unBanList?.length == 0 ? 
           
           // no user 
           <NoContact image={"https://img.freepik.com/free-icon/user_318-215753.jpg?t=st=1692434065~exp=1692434665~hmac=2980c4d803170dbf42c0125a36bc3a7bb74abd9db2f59410965813f7c678e325"} title1={"No User !"} title2={"Please Create User"} />
@@ -128,7 +135,7 @@ const Overview = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {userList?.map((user) => {
+              {unBanList?.map((user) => {
                 return (
                   <tr
                     key={user?.id}
@@ -141,7 +148,7 @@ const Overview = () => {
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                       <Link to={'/user/overview'}>
-                      <p onClick={banHandler} className="hover-scale icon1 text-[#e94343]">
+                      <p onClick={()=>banHandler(user?.id)} className="hover-scale icon1 text-[#e94343]">
                         <HiBan />
                       </p>
                       </Link>

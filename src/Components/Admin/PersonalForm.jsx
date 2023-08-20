@@ -42,10 +42,13 @@ const PersonalForm = () => {
             e.preventDefault()
             const newPpData = {name, phone, date_of_birth, gender, address, user_photo}
             const data = await editProfile({token,newData:newPpData})
-            console.log(data);
+
+            // console.log(data);
+           
             if(data?.data){
                 editPpCancelHandler();
                 showAlert();
+
             }
         }catch(error){
             console.log(error);
