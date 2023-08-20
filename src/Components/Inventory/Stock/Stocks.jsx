@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Loader from "../../Loader/Loader";
 import MainLayout from "../../../Layouts/MainLayout";
 import Banner2 from '../../Banner/Banner2';
@@ -8,8 +8,10 @@ import { useGetStocksQuery } from '../../../Redux/API/inventoryApi';
 import Cookies from "js-cookie"
 import { Link, useNavigate } from "react-router-dom";
 import "../../User/overview.css"
+import AddStock from './AddStock';
 
 const Stocks = () => {
+    const [open,setOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetStocksQuery(token)
     console.log(data);
@@ -24,20 +26,37 @@ const Stocks = () => {
         {id: 1, pdName: "BANANA", userName: "dd", q: 10, create: 12/7/2023},
         {id: 2, pdName: "BANANA", userName: "dd", q: 10, create: 12/7/2023}
     ]
+    const ref = useRef()
+    useEffect(() => {
+      const checkIfClickedOutside = e => {
+        if (open && ref.current && !ref.current.contains(e.target)) {
+          setOpen(false)
+        }
+      }
+      document.addEventListener("click", checkIfClickedOutside)
+      return () => {
+        document.removeEventListener("click", checkIfClickedOutside)
+      }
+    }, [open])
 
   return (
+    <>
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
         <div className="w-[95%] my-6 flex flex-col gap-8">
           {/* banner  */}
-          <Banner2
-            title={"Stock Control"}
-            path1={"Inventory"}
-            path2={"Stock Control"}
-            btn2={"Add Stock"}
-            button2={true}
-            icon={true}
-          />
+          <div className=' flex justify-between items-center'>
+            <Banner2
+              title={"Stock Control"}
+              path1={"Inventory"}
+              path2={"Stock Control"}
+              icon={true}
+            />  
+            <div ref={ref}>
+              <button onClick={() => setOpen(!open)} className='btn'>Add Stock</button>
+              <AddStock open={open} setOpen={setOpen}/>
+            </div>
+          </div>
           {stocks?.length == 0  ? 
 
           <NoContact image={"https://img.freepik.com/free-icon/user_318-215753.jpg?t=st=1692434065~exp=1692434665~hmac=2980c4d803170dbf42c0125a36bc3a7bb74abd9db2f59410965813f7c678e325"} title1={"No Stock !"} title2={"Please ADD Stock"} /> : 
@@ -118,6 +137,7 @@ const Stocks = () => {
         </div>
       </div>
     </MainLayout>
+    </>
   )
 }
 

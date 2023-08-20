@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { BiSearch } from "react-icons/bi";
 import Loader from '../../Loader/Loader';
 import MainLayout from "../../../Layouts/MainLayout";
@@ -8,11 +8,13 @@ import { useGetBrandsQuery } from '../../../Redux/API/inventoryApi';
 import Cookies from "js-cookie"
 import { BiEditAlt } from "react-icons/bi";
 import { HiBan } from 'react-icons/hi'
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../../User/successAlert.css"
+import AddBrand from './AddBrand';
 
 const Brands = () => {
+    const [open,setOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetBrandsQuery(token);
     console.log(data);
@@ -23,6 +25,18 @@ const Brands = () => {
     nav(`/brand/detail/${id}`);
   };
   
+  const ref = useRef()
+    useEffect(() => {
+      const checkIfClickedOutside = e => {
+        if (open && ref.current && !ref.current.contains(e.target)) {
+          setOpen(false)
+        }
+      }
+      document.addEventListener("click", checkIfClickedOutside)
+      return () => {
+        document.removeEventListener("click", checkIfClickedOutside)
+      }
+    }, [open])
 
   const banHandler = () => {
     Swal.fire({
@@ -43,7 +57,7 @@ const Brands = () => {
           },
           title: "Successfully baned a brand",
           icon: "success",
-          confirmButtonText: "SEE ALL USERS",
+          confirmButtonText: "OK",
           width: 400,
           background: "#161618",
         })
@@ -60,15 +74,18 @@ const Brands = () => {
       <div className="bg-[#202124] w-full flex justify-center">
         <div className="w-[95%] my-6 flex flex-col gap-8">
           {/* banner  */}
-          <Banner2
-            title={"Manage Brands"}
-            path1={"Inventory"}
-            path2={"Manage Brands"}
-            icon={true}
-            btn2={"Add Brand"}
-            button2={true}
-            // route={"/inventory/addProduct"}
-          />
+          <div  className=' flex justify-between items-center'>
+            <Banner2
+              title={"Manage Brands"}
+              path1={"Inventory"}
+              path2={"Manage Brands"}
+              icon={true}
+            />
+            <div ref={ref}>
+              <button onClick={() => setOpen(!open)} className='btn'>Add Stock</button>
+              <AddBrand open={open}/>
+            </div>
+          </div>
           {brands?.length == 0  ? 
 
           <NoContact image={"https://img.freepik.com/free-icon/user_318-215753.jpg?t=st=1692434065~exp=1692434665~hmac=2980c4d803170dbf42c0125a36bc3a7bb74abd9db2f59410965813f7c678e325"} title1={"No Brand !"} title2={"Please ADD Brand"} /> : 
