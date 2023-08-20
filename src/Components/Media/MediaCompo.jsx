@@ -121,9 +121,9 @@ const MediaCompo = () => {
             </button>
           </div>
         </div>
-        {/* <div className="w-ful">
+        <div className="w-ful">
           {active == "2" ? <MediaImage /> : <MediaTable />}
-        </div> */}
+        </div>
       </div>
     </div>
   );
