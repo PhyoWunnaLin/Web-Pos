@@ -1,0 +1,65 @@
+/* TEXT INPUT */
+.mantine-TextInput-input{
+    background-color: #161618;
+    color: #fff;
+    border: 2px #7E7F80 solid;
+    border-radius: 6px;
+}
+
+.mantine-TextInput-input:focus{
+    border: 2px #fff solid;
+}
+
+.mantine-TextInput-label{
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    font-size: 16px;
+}
+
+
+
+/* PASSWORD  */
+.mantine-PasswordInput-innerInput{
+    background-color: #161618;
+    color: #fff;
+    border: none;
+}
+.mantine-PasswordInput-innerInput:focus.mantine-PasswordInput-input{
+    border-color: white !important;
+}
+
+/* input border  */
+.mantine-PasswordInput-input{
+    border: 2px #7E7F80 solid;
+    border-radius: 6px;
+    border-right: none;
+}
+
+/* label */
+.mantine-PasswordInput-label{
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    font-size: 16px;
+}
+
+/* right section  */
+.mantine-PasswordInput-rightSection{
+    background-color: #7E7F80;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border: none;
+}
+
+/* eyes  */
+.mantine-PasswordInput-visibilityToggle:hover{
+    color: white;
+    background-color: #7E7F80;
+}
+
+.mantine-PasswordInput-visibilityToggle{
+    color: white;
+    background-color: #7E7F80;
+
+}
