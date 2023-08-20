@@ -45,7 +45,7 @@ const Overview = () => {
       if (result.isConfirmed) {
         const data = await banUser({token,id})
         // console.log(data);
-        if(data?.message){
+        if(data?.data?.message){
           Swal.fire({
             customClass : {
               title: 'swal2-title',
