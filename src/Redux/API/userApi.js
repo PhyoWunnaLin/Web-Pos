@@ -36,15 +36,18 @@ export const userApi = createApi({
                 url: `/user/${id}/ban`,
                 method: "POST",
                 headers: {authorization : `Bearer ${token}`},
-            })
+            }),
+            invalidatesTags: ["user"],
         }),
+        
 
         unBanUser: builder.mutation({
             query: ({token,id,unBan}) => ({
                 url: `/user/${id}/unban`,
                 method: "POST",
                 headers: {authorization : `Bearer ${token}`},
-            })
+            }),
+            invalidatesTags: ["user"],
         })
         
     })

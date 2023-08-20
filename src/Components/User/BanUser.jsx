@@ -9,11 +9,15 @@ import NoContact from '../NoContact/NoContact';
 import Cookies from "js-cookie"
 import Swal from "sweetalert2";
 import "./successAlert.css"
-import { useUnBanUserMutation } from '../../Redux/API/userApi';
+import { useGetUserListQuery, useUnBanUserMutation } from '../../Redux/API/userApi';
 
 const BanUser = () => {
     const token = Cookies.get("token")
-    const [unBanUser, {isLoading}] = useUnBanUserMutation();
+    const {data, isLoading} = useGetUserListQuery(token);
+    const [unBanUser] = useUnBanUserMutation();
+
+    const userList = data?.users;
+    const banList = userList?.filter(user => user.banned == 1)
 
     const unBanHandler = async(id)=>{
         Swal.fire({
@@ -25,22 +29,25 @@ const BanUser = () => {
             confirmButtonColor: '#fff',
             cancelButtonColor: '#24262b',
             confirmButtonText: 'RESTORE'
-          }).then((result) => {
+          }).then(async(result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                customClass : {
-                  title: 'swal2-title',
-                  popup: 'custom-swal-popup'
-                },
-                title: "Successfully restore an account",
-                icon: "success",
-                confirmButtonText: "SEE ALL USERS",
-                width: 400,
-                background: "#161618",
-              })
+              const data = await unBanUser({token,id})
+              // console.log(data);
+              if(data?.message){
+                Swal.fire({
+                  customClass : {
+                    title: 'swal2-title',
+                    popup: 'custom-swal-popup'
+                  },
+                  title: "Successfully restore an account",
+                  icon: "success",
+                  confirmButtonText: "SEE ALL USERS",
+                  width: 400,
+                  background: "#161618",
+                })
+              }
             }
           })
-        // const data = await unBanUser({token,id})
     }
 
     const nav = useNavigate();
@@ -67,7 +74,7 @@ const BanUser = () => {
           route={"/user/create"}
         //   route={"/user/create"}
         />
-        {user?.length == 0 ? 
+        {banList?.length == 0 ? 
         
         // no user 
         <NoContact image={"https://img.freepik.com/free-icon/user_318-215753.jpg?t=st=1692434065~exp=1692434665~hmac=2980c4d803170dbf42c0125a36bc3a7bb74abd9db2f59410965813f7c678e325"} title1={"No Banned User !"}  />
@@ -126,7 +133,7 @@ const BanUser = () => {
             </tr>
           </thead>
           <tbody className=" tracking-wide text-sm">
-            {user?.map((user) => {
+            {banList?.map((user) => {
               return (
                 <tr
                   key={user?.id}
@@ -134,7 +141,7 @@ const BanUser = () => {
                 >
                   <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.id}</td>
                   <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.name}</td>
-                  <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.position}</td>
+                  <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.role}</td>
                   <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.email}</td>
                   
                   <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
