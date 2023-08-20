@@ -7,7 +7,7 @@ const AddBrand = ({ open }) => {
   return (
     <form
       className={`${
-        open ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-"
+        open ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-0"
       } duration-500 fixed top-0 right-0 z-40 py-5 bg-[#202124] h-screen overflow-y-auto scrollbar w-[300px] px-8 border-l border-[#7E7F80] flex flex-col gap-5`}
     >
       <h1 className=" text-white font-bold tracking-wider text-xl">
