@@ -31,11 +31,18 @@ const MediaCompo = () => {
   const handleDrop = async(e) => {
     setFile(e.dataTransfer.files);
       try{
-        e.preventDefault();
-        // if(file && file.length <= 5){
+            e.preventDefault();
             const photoData = await createPhoto({token,photo:file})
             console.log(photoData);
-            // }
+          }catch(error){
+            console.log(error);
+        }
+  };
+  const handleChange = async(files) => {
+    console.log(files)
+      try{
+            const photoData = await createPhoto({token,photo:files})
+            console.log(photoData);
           }catch(error){
             console.log(error);
         }
@@ -64,8 +71,7 @@ const MediaCompo = () => {
             </div>
           </div>
 
-          <div className="flex gap-2 justify-center items-center">
-            <form>
+           <form  className="flex gap-2 justify-center items-center">
             <input
               multiple
               type="file"
@@ -74,7 +80,7 @@ const MediaCompo = () => {
               name="photo"
               hidden
               onChange={({ target: { files } }) => {
-                files && setFile(files);
+                files && handleChange(files);
               }}
             />
             <p
@@ -89,8 +95,7 @@ const MediaCompo = () => {
               {" "}
               Drag and Image
             </p>
-            </form>
-          </div>
+          </form>
 
         </div>
         <div className="w-full flex items-center justify-between">
