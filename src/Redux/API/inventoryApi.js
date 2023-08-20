@@ -12,7 +12,7 @@ export const inventoryApi = createApi({
       }),
       providesTags: ["inventory"],
     }),
-    
+
     getProductDetail: builder.query({
       query: ({ token, id }) => ({
         url: `/product/${id}`,
@@ -22,7 +22,7 @@ export const inventoryApi = createApi({
     }),
 
     getStocks: builder.query({
-      query: ({token}) => ({
+      query: ({ token }) => ({
         url: "/stock",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -30,14 +30,28 @@ export const inventoryApi = createApi({
     }),
 
     getBrands: builder.query({
-      query: ({token}) => ({
+      query: ( token ) => ({
         url: "/brand",
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["inventory"],
-    })
+    }),
 
-
+    createBrand: builder.mutation({
+      query: ({ token, newData }) => ({
+        url: "/brand",
+        method: "POST",
+        body: newData,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["inventory"],
+    }),
   }),
 });
-export const { useGetProductsQuery , useGetProductDetailQuery, useGetStocksQuery, useGetBrandsQuery } = inventoryApi;
+export const {
+  useGetProductsQuery,
+  useGetProductDetailQuery,
+  useGetStocksQuery,
+  useGetBrandsQuery,
+  useCreateBrandMutation
+} = inventoryApi;

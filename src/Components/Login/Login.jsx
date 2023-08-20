@@ -8,6 +8,7 @@ import { Loader, PasswordInput, TextInput } from '@mantine/core';
 import "./login.css"
 
 const Login = () => {
+  const [invalid,setInvalid] = useState("")
   const [ login, {isLoading}] = useLoginMutation();
   const [email,setEmail] = useState("admin@gmail.com");
   const [password,setPassword] = useState("asdffdsa");
@@ -20,7 +21,8 @@ const Login = () => {
       e.preventDefault();
       const user = {email,password};
       const {data} = await login(user);
-      // console.log(data);
+      console.log(data);
+      setInvalid(data?.message)
       dispatch(addToken(data?.token))
       if(data?.token){
         nav("/")
@@ -54,7 +56,7 @@ const Login = () => {
               </label>
               <input value={email} onChange={(e)=> setEmail(e.target.value)} type="email" className="login-input" />
 
-              <TextInput label="Email" size='md'/>
+              {/* <TextInput label="Email" size='md'/> */}
             </div>
 
             <div className="flex flex-col gap-2">
@@ -63,8 +65,9 @@ const Login = () => {
               </label>
               <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="login-input" />
 
-              <PasswordInput label="Password" size='md'/>
+              {/* <PasswordInput label="Password" size='md'/> */}
             </div>
+            {invalid != "" && <p className="text-sm text-[#e94343] tracking-widest -mt-2">* {invalid}</p>}
 
             {isLoading ? (
               <button disabled className="btn mx-10 mt-6 flex justify-center item-center gap-3">

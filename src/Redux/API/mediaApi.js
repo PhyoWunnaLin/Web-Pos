@@ -16,7 +16,7 @@ export const mediaApi = createApi({
         }),
 
         getPhoto: builder.query({
-            query: ({token}) => ({
+            query: (token) => ({
                 url: `/photo`,
                 method: "GET",
                 headers: {authorization : `Bearer ${token}`},

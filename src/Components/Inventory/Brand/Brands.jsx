@@ -18,7 +18,8 @@ const Brands = () => {
     const [open,setOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetBrandsQuery(token);
-    console.log(data);
+    console.log(data?.data);
+    const brands = data?.data
 
     const nav = useNavigate();
   
@@ -66,10 +67,10 @@ const Brands = () => {
     })
   }
 
-    const brands = [
-        {id: 1, brandName: "go go", comName: "Dutch Lady", agent: "no no", phone: "09999", dec: "hello"},
-        {id: 2, brandName: "go go", comName: "Dutch Lady", agent: "no no", phone: "0909090483", dec: "hello"},
-    ]
+    // const brands = [
+    //     {id: 1, brandName: "go go", comName: "Dutch Lady", agent: "no no", phone: "09999", dec: "hello"},
+    //     {id: 2, brandName: "go go", comName: "Dutch Lady", agent: "no no", phone: "0909090483", dec: "hello"},
+    // ]
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
@@ -148,18 +149,18 @@ const Brands = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {brands?.map((pd) => {
+              {brands?.map((brand) => {
                 return (
                   <tr
-                    key={pd?.id}
+                    key={brand?.id}
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.id}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.brandName}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.comName}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.agent}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.phone}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.dec}</td>
+                    <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-start">{brand?.id}</td>
+                    <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-start">{brand?.name}</td>
+                    <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-start">{brand?.company}</td>
+                    <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-start">{brand?.agent}</td>
+                    <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-end">{brand?.phone}</td>
+                    <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-end">{brand?.description}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                       <p onClick={banHandler} className="hover-scale icon1 text-[#e94343]">
