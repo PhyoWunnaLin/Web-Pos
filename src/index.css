@@ -62,3 +62,7 @@ body{
 .icon2{
     @apply bg-[#202124] p-[10px] rounded-full cursor-pointer duration-300;
 }
+
+.egjg{
+    background-color: #ffffff28;
+}

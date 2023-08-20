@@ -9,6 +9,7 @@ import Cookies from "js-cookie"
 import { Link, useNavigate } from "react-router-dom";
 import "../../User/overview.css"
 import AddStock from './AddStock';
+import { FiPlus } from 'react-icons/fi';
 
 const Stocks = () => {
     const [open,setOpen] = useState(false);
@@ -53,7 +54,9 @@ const Stocks = () => {
               icon={true}
             />  
             <div ref={ref}>
-              <button onClick={() => setOpen(!open)} className='btn'>Add Stock</button>
+              <button onClick={() => setOpen(!open)} className='btn flex gap-2 items-center'><span className=" text-[#161618]">
+                <FiPlus />
+              </span> Add Stock</button>
               <AddStock open={open} setOpen={setOpen}/>
             </div>
           </div>
