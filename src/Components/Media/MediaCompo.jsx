@@ -13,13 +13,11 @@ import Cookies from "js-cookie";
 const MediaCompo = () => {
   const token = Cookies.get("token");
   const [createPhoto, {isLoading}] = useCreatePhotoMutation();
-  const {data} = useGetPhotoQuery(token);
-  console.log(data);
   const [hover,setHover] = useState(false)
   const state = useSelector((state) => state.mediaSlice.active);
   const active = localStorage.getItem("active");
   const dispatch = useDispatch();
-  const [file, setFile] = useState("No Selected File");
+  const [file, setFile] = useState('');
   console.log(file);
 
   const handleDragLeave = (e) => {
@@ -31,17 +29,16 @@ const MediaCompo = () => {
     setHover(true);
   };
   const handleDrop = async(e) => {
-    try{
-      e.preventDefault();
-      setFile(e.dataTransfer.files);
-      // if(file && file.length <= 5){
-          const photoData = await createPhoto({token,photo:file})
-          console.log(photoData);
-          // }
-        }catch(error){
-          console.log(error);
+    setFile(e.dataTransfer.files);
+      try{
+        e.preventDefault();
+        // if(file && file.length <= 5){
+            const photoData = await createPhoto({token,photo:file})
+            console.log(photoData);
+            // }
+          }catch(error){
+            console.log(error);
         }
-    
   };
   return (
     <div className="bg-[#202124] w-full flex justify-center">
@@ -74,6 +71,7 @@ const MediaCompo = () => {
               type="file"
               accept="image/jpg,image/jpeg"
               className="input-field"
+              name="photo"
               hidden
               onChange={({ target: { files } }) => {
                 files && setFile(files);
@@ -118,9 +116,9 @@ const MediaCompo = () => {
             </button>
           </div>
         </div>
-        <div className="w-ful">
+        {/* <div className="w-ful">
           {active == "2" ? <MediaImage /> : <MediaTable />}
-        </div>
+        </div> */}
       </div>
     </div>
   );

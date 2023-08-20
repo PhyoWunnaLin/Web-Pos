@@ -2,8 +2,13 @@ import React from 'react'
 import {BiTrash} from 'react-icons/bi'
 import {BsFiles} from 'react-icons/bs'
 import './media.css'
+import { useGetPhotoQuery } from '../../Redux/API/mediaApi'
+import Cookies from 'js-cookie'
 
 const MediaTable = () => {
+    const token = Cookies.get("token")
+    const {data} = useGetPhotoQuery(token);
+    console.log(data);
     const medias = [
         {id:1 , name: 12932, account: "Messi",date: 12/7/2023,time: "10:00 AM", fileSize: "2MB"},
         {id:2 , name: 12932, account: "Messi",date: 12/7/2023,time: "9:00 AM", fileSize: "2MB"},
