@@ -10,11 +10,11 @@ const AddStock = ({ open, setOpen }) => {
     >
       <div
         onClick={() => setOpen(!open)}
-        className="hover:bg-[#ffffff15] duration-200 p-[3px] absolute top-1 left-1 cursor-pointer rounded"
+        className="hover:bg-[#ffffff15] duration-200 p-[3px] absolute top-2 left-2 cursor-pointer rounded"
       >
         <RxCross2 className=" text-white" />
       </div>
-      <h1 className=" text-white font-bold tracking-wider text-xl mt-2">
+      <h1 className=" text-white font-bold tracking-wider text-xl mt-3">
         Add Stock
       </h1>
       <div className="flex flex-col gap-5">
