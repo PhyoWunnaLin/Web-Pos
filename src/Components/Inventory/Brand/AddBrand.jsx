@@ -5,9 +5,8 @@ import { RxCross2 } from "react-icons/rx";
 import Swal from "sweetalert2";
 import {
   useCreateBrandMutation,
+  useEditBrandMutation,
   useGetBrandsQuery,
-  useGetSingleBrandQuery,
-  useUpdateBrandMutation,
 } from "../../../Redux/API/inventoryApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setBrands } from "../../../Redux/Services/productSlice";
@@ -16,7 +15,7 @@ const AddBrand = ({ open, setOpen, id }) => {
 
   const token = Cookies.get("token");
   const [createBrand] = useCreateBrandMutation();
-  const [updateBrand] = useUpdateBrandMutation();
+  const [editBrand] = useEditBrandMutation();
   // const { data ,isLoading } = useGetSingleBrandQuery({ token, id });
   const { data ,isLoading } = useGetBrandsQuery(token)
   // console.log(data);
@@ -85,11 +84,11 @@ const AddBrand = ({ open, setOpen, id }) => {
     });
   };
 
-  const handleUpdateBrand = async (e) => {
+  const handleEditBrand = async (e) => {
     try {
       e.preventDefault();
       const newData = { photo, name, company, agent, phone, description };
-      const { data } = await updateBrand({ token, id, newData });
+      const { data } = await editBrand({ token, id, newData });
       console.log(data?.data);
       if (data?.data) {
         setOpen(!open);
@@ -209,7 +208,7 @@ const AddBrand = ({ open, setOpen, id }) => {
   } else if(id != null) {
     return (
           <form
-          onSubmit={handleUpdateBrand}
+          onSubmit={handleEditBrand}
           className={`${
             open ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-0"
           } duration-500 fixed top-0 right-0 z-40 py-5 bg-[#202124] h-screen overflow-y-auto scrollbar w-[300px] px-8 border-l border-[#7E7F80] flex flex-col gap-5`}
