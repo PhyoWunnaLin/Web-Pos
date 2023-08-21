@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie"
 import { useGetBrandsQuery } from "../../../Redux/API/inventoryApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setPdForm1 } from "../../../Redux/Services/productSlice";
 
-const AddProductStep1 = () => {
+const AddProductStep1 = ({currentStep}) => {
   const token = Cookies.get("token")
   const {data} = useGetBrandsQuery(token)
   const brands = data?.data
@@ -12,10 +14,15 @@ const AddProductStep1 = () => {
   const [stock,setStock] = useState()
   const [unit,setUnit] = useState("")
   const [more_information,setMoreInfo] = useState("")
-  
+  const dispatch = useDispatch()
+  // const pd = useSelector(state => state.productSlice.pdForm1)
   const pdData = {name,brand_id,unit,more_information,stock}
-  // console.log(pdData);
+  // console.log(pd);
+  // console.log(currentStep)
 
+  useEffect(()=>{
+    dispatch(setPdForm1(pdData))
+  },[currentStep])
 
   return (
     <form className="border border-[#7E7F80] bg-[#161618] p-10 flex flex-col gap-6 w-full rounded-md">

@@ -21,6 +21,16 @@ export const inventoryApi = createApi({
       providesTags: ["inventory"],
     }),
 
+    createProduct: builder.mutation({
+      query: ({ token, pdData }) => ({
+        url: "/product",
+        method: "POST",
+        body: pdData,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["inventory"],
+    }),
+
     getStocks: builder.query({
       query: ({ token }) => ({
         url: "/stock",
@@ -73,5 +83,6 @@ export const {
   useGetBrandsQuery,
   useCreateBrandMutation,
   useEditBrandMutation,
-  useGetSingleBrandQuery
+  useGetSingleBrandQuery,
+  useCreateProductMutation
 } = inventoryApi;

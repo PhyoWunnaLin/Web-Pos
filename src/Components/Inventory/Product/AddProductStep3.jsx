@@ -1,13 +1,25 @@
 import { useDisclosure } from "@mantine/hooks";
-import React from "react";
+import React, { useState } from "react";
 import ModalMedia from "../../Modal/ModalMedia";
 import { PiUserFocus } from "react-icons/pi";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { FaRegImages } from "react-icons/fa";
 import { ImImages } from "react-icons/im";
+import { useDispatch, useSelector } from "react-redux";
+import { setPdForm3 } from "../../../Redux/Services/productSlice";
 
-const AddProductStep3 = () => {
+const AddProductStep3 = ({currentStep}) => {
   const [opened, { open, close }] = useDisclosure(false);
+  // const pd = useSelector(state => state.productSlice.pdForm2)
+  // console.log(pd)
+  const dispatch = useDispatch()
+
+  const [photo,setPhoto] = useState("")
+
+  // useEffect(()=>{
+  //   dispatch(setPdForm3(photo))
+  // },[currentStep])
+
   return (
     <>
       <form className="border border-[#7E7F80] bg-[#161618] p-10 flex flex-col gap-8 w-full rounded-md">

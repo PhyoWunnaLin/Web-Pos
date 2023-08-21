@@ -13,7 +13,7 @@ const ModalMedia = (props) => {
     const token = Cookies.get("token")
     const {data, isLoading} = useGetPhotoQuery(token);
     const mediaData = data?.data
-    console.log(mediaData);
+    // console.log(mediaData);
 
     const dispatch = useDispatch();
     const selectActive = useSelector((state) => state.mediaSlice.selectActive);
