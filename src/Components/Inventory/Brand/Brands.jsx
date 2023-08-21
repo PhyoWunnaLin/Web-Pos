@@ -12,16 +12,23 @@ import Swal from "sweetalert2";
 import "../../User/successAlert.css"
 import AddBrand from './AddBrand';
 import { FiPlus } from 'react-icons/fi';
+import { setBrands } from '../../../Redux/Services/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Brands = () => {
     const [id,setId] = useState(null);
     const [open,setOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetBrandsQuery(token);
-    console.log(data?.data);
-    const brands = data?.data
+    // console.log(data?.data);
+    const brands = useSelector(state => state.productSlice.brands) 
+    const dispatch = useDispatch()
     const ref = useRef()
     const ref2 = useRef()
+
+    useEffect(()=>{
+      dispatch(setBrands(data?.data))
+    },[data])
 
     useEffect(() => {
       const checkIfClickedOutside = e => {
