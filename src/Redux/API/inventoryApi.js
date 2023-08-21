@@ -55,7 +55,7 @@ export const inventoryApi = createApi({
       invalidatesTags: ["inventory"],
     }),
 
-    updateBrand: builder.mutation({
+    editBrand: builder.mutation({
       query: ({ token, id ,newData }) => ({
         url: `/brand/${id}`,
         method: "PUT",
@@ -72,6 +72,6 @@ export const {
   useGetStocksQuery,
   useGetBrandsQuery,
   useCreateBrandMutation,
-  useUpdateBrandMutation,
+  useEditBrandMutation,
   useGetSingleBrandQuery
 } = inventoryApi;
