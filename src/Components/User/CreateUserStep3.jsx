@@ -1,11 +1,19 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {PiUserFocus} from 'react-icons/pi'
 import {BiSolidEditAlt} from 'react-icons/bi'
 import { useDisclosure } from '@mantine/hooks';
 import ModalMedia from '../Modal/ModalMedia';
+import { useDispatch } from "react-redux";
+import { setUserForm3 } from "../../Redux/Services/userSlice";
 
-const CreateUserStep3 = () => {
+const CreateUserStep3 = ({currentStep}) => {
   const [opened, { open, close }] = useDisclosure(false);
+  const [photo,setPhoto] = useState("")
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(setUserForm3(photo))
+  },[currentStep])
 
   return (
     <>

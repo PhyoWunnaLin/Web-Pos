@@ -9,6 +9,10 @@ import { setUserCreatePp } from "../../Redux/Services/profileSlice";
 
 const CreateUserStep4 = () => {
   const dispatch = useDispatch();
+  const userForm1 = useSelector(state => state.userSlice.userForm1)
+  const userForm2 = useSelector(state => state.userSlice.userForm2)
+  const userForm3 = useSelector(state => state.userSlice.userForm3)
+  // console.log(userForm2)
 
   const userCreatePp = useSelector(state => state.profileSlice.userCreatePp);
   // const userCreatePp2 = localStorage.getItem("userCreatePp");
@@ -33,9 +37,9 @@ const CreateUserStep4 = () => {
                     <div className= " flex justify-between w-full">
 
                         <div className=' ml-[213px]'>
-                            <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>Khine zin thin</h1>
+                            <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>{userForm1?.name}</h1>
                             <div className=' flex items-center gap-2 '>
-                                <span className=' text-[#c5c1c1]'>Sale Executive /</span> 
+                                <span className=' text-[#c5c1c1]'>{userForm2?.position} /</span> 
                                 <p className=' flex items-center gap-1'>
                                     <span  className=' text-xs text-[#8ab4f8]'><AiFillClockCircle/></span>
                                     <span className=' text-[#fff] text-sm'>Active in 1 hr</span>
@@ -74,17 +78,17 @@ const CreateUserStep4 = () => {
               <div className={` ${userCreatePp == "Personal" || userCreatePp == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
                     <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
                       <span className=' text-[#878787] w-[150px] font-semibold'>Address</span>
-                      <span className=' text-[#fff]'>Yangon</span>
+                      <span className=' text-[#fff]'>{userForm1?.address}</span>
                     </p>
 
                     <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
                       <span className=' text-[#878787] w-[150px] font-semibold'>Gender</span>
-                      <span className=' text-[#fff]'>Female</span>
+                      <span className=' text-[#fff]'>{userForm1?.gender}</span>
                     </p>
                   
                     <p className=' flex items-center gap-14 text-[17px] tracking-wide'>
                       <span className=' text-[#878787] w-[150px] font-semibold'>Date Of Birth</span>
-                      <span className=' text-[#fff]'>19/12/2002</span>
+                      <span className=' text-[#fff]'>{userForm1?.DOB}</span>
                     </p>
               </div>
 
@@ -92,17 +96,17 @@ const CreateUserStep4 = () => {
               <div className={` ${userCreatePp == "Login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
                       <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
                           <span className=' text-[#878787] w-[150px] font-semibold'>Phone</span>
-                          <span className=' text-[#fff]'>099999999</span>
+                          <span className=' text-[#fff]'>{userForm1?.phone}</span>
                       </p>
 
                       <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
                           <span className=' text-[#878787] w-[150px] font-semibold'>Position</span>
-                          <span className=' text-[#fff]'>Sale Executive</span>
+                          <span className=' text-[#fff]'>{userForm2?.position}</span>
                       </p>
 
                       <p className=' flex items-center gap-14 text-[17px] tracking-wider'>
                           <span className=' text-[#878787] w-[150px] font-semibold'>Mail</span>
-                          <span className=' text-[#fff]'>kzt@gmail.com</span>
+                          <span className=' text-[#fff]'>{userForm2?.email}</span>
                       </p>
               </div>
             </div>

@@ -28,7 +28,7 @@ const AddProducts = () => {
   const createProductHandler = async(e)=>{
     try{
       e.preventDefault();
-      const pdData = {name: form1?.name, brand_id: form1?.brand_id, actual_price: form2?.realPrice, sale_price: form2?.price, unit: form1?.unit, more_information: form1?.more_information, photo: "" }
+      const pdData = {name: form1?.name, brand_id: form1?.brand_id, actual_price: form2?.realPrice, sale_price: form2?.price, unit: form1?.unit, more_information: form1?.more_information, photo: form3?.photo }
       const data = await createProduct({token,pdData})
       // console.log(data)
       if(data?.data){
@@ -38,6 +38,7 @@ const AddProducts = () => {
       console.log(error)
     }
   }
+  
   const showAlert = () => {
     Swal.fire({
       customClass : {

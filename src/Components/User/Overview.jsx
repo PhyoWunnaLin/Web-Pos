@@ -38,6 +38,7 @@ const Overview = () => {
       iconColor: "#E64848",
       background: "#161618",
       showCancelButton: true,
+      showCloseButton: true,
       confirmButtonColor: '#E64848',
       cancelButtonColor: '#24262b',
       confirmButtonText: 'Ban User'
@@ -54,6 +55,7 @@ const Overview = () => {
             title: "Successfully baned an account",
             icon: "success",
             confirmButtonText: "OK",
+            showCloseButton: true,
             width: 400,
             background: "#161618",
           })

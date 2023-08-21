@@ -74,7 +74,7 @@ const AddProductStep1 = ({currentStep}) => {
           More Info
         </label>
         <textarea onChange={(e)=> setMoreInfo(e.target.value)}
-          placeholder="Your Address..."
+          placeholder=""
           cols="30"
           rows="4"
           className="input w-[70%]"

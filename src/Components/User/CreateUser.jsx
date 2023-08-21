@@ -10,29 +10,53 @@ import CreateUserStep4 from "./CreateUserStep4";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import './successAlert.css';
+import "./successAlert.css";
+import { useSelector } from "react-redux";
+import { useCreateUserMutation } from "../../Redux/API/userApi";
+import Cookies from "js-cookie";
 
 const CreateUser = () => {
   const steps = ["Personal", "Login Info", "Photo"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
   const nav = useNavigate();
+  const token = Cookies.get("token")
+  const [createUser] = useCreateUserMutation()
+  const userForm1 = useSelector(state => state.userSlice.userForm1)
+  const userForm2 = useSelector(state => state.userSlice.userForm2)
+  const userForm3 = useSelector(state => state.userSlice.userForm3)
+  // console.log(userForm2)
+
+  const createUserHandler = async(e)=>{
+    try{
+      e.preventDefault();
+      const userData = {name: userForm1?.name, phone: userForm1?.phone, date_of_birth: userForm1?.DOB, gender: userForm1?.gender, address: userForm1?.address, email: userForm2?.email, password: userForm2?.password, password_confirmation: userForm2?.confirm_Password, role: userForm2?.position, user_photo: userForm3?.photo }
+      const data = await createUser({token,userData})
+      console.log(data)
+      if(data?.data){
+        showAlert()
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
+
   const showAlert = () => {
     Swal.fire({
-      customClass : {
-        title: 'swal2-title'
+      customClass: {
+        title: "swal2-title",
       },
       title: "Successfully created an account",
       icon: "success",
-      confirmButtonText: "SEE ALL USERS",
+      confirmButtonText: "OK",
       // showCloseButton: true,
       width: 400,
       background: "#161618",
     }).then((result) => {
       if (result.isConfirmed) {
-        nav("/user/overview")
+        nav("/user/overview");
       }
-    })
+    });
   };
   return (
     <MainLayout>
@@ -49,10 +73,26 @@ const CreateUser = () => {
           {/* form  */}
           <div className="flex gap-10">
             <div className="w-[65%]">
-              {currentStep == 1 && <CreateUserStep1 />}
+              {/* {currentStep == 1 && <CreateUserStep1 />}
               {currentStep == 2 && <CreateUserStep2 />}
               {currentStep == 3 && <CreateUserStep3 />}
-              {currentStep == 4 && <CreateUserStep4 />}
+              {currentStep == 4 && <CreateUserStep4 />} */}
+
+              <div className={`${currentStep == 1 ? "block" : " hidden"}`}>
+                <CreateUserStep1 currentStep={currentStep} />
+              </div>
+
+              <div className={`${currentStep == 2 ? "block" : " hidden"}`}>
+                <CreateUserStep2 currentStep={currentStep} />
+              </div>
+
+              <div className={`${currentStep == 3 ? "block" : " hidden"}`}>
+                <CreateUserStep3 currentStep={currentStep} />
+              </div>
+
+              <div className={`${currentStep == 4 ? "block" : " hidden"}`}>
+                <CreateUserStep4 currentStep={currentStep} />
+              </div>
             </div>
             <div className="flex flex-col mt-16">
               {steps.map((step, i) => {
@@ -79,7 +119,7 @@ const CreateUser = () => {
                 );
               })}
               <div className="mt-8">
-                <Link onClick={currentStep == 4 && showAlert }>
+                <Link onClick={currentStep == 4 && createUserHandler}>
                   <button
                     onClick={() => {
                       {

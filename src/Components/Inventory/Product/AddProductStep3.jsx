@@ -1,5 +1,5 @@
 import { useDisclosure } from "@mantine/hooks";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalMedia from "../../Modal/ModalMedia";
 import { PiUserFocus } from "react-icons/pi";
 import { BiSolidEditAlt } from "react-icons/bi";
@@ -16,9 +16,9 @@ const AddProductStep3 = ({currentStep}) => {
 
   const [photo,setPhoto] = useState("")
 
-  // useEffect(()=>{
-  //   dispatch(setPdForm3(photo))
-  // },[currentStep])
+  useEffect(()=>{
+    dispatch(setPdForm3(photo))
+  },[currentStep])
 
   return (
     <>
