@@ -1,11 +1,11 @@
 import React from "react";
 
 const NoContact = (props) => {
-  const { image, title1, title2 } = props;
+  const { image, title1, title2, size } = props;
   return (
     <div className="flex justify-center items-center">
       <div className=" flex-col flex gap-5 mt-20">
-        <div className="w-[30%] mx-auto">
+        <div className={`${size ? size :"w-[30%]"} mx-auto`}>
           <img
             src={image}
             className="w-full"
