@@ -16,7 +16,7 @@ const Products = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
   console.log(data?.data?.length);
-  const length = 2
+  const length = data?.data?.length
   const state = useSelector((state) => state.productSlice.active);
   const active = localStorage.getItem("productActive");
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const Products = () => {
           />
           {length == 0  ? 
 
-          <NoContact image={"https://img.freepik.com/free-icon/user_318-215753.jpg?t=st=1692434065~exp=1692434665~hmac=2980c4d803170dbf42c0125a36bc3a7bb74abd9db2f59410965813f7c678e325"} title1={"No Product !"} title2={"Please ADD Product"} /> : 
+          <NoContact image={"https://img.freepik.com/free-icon/shopping-cart_318-235954.jpg?t=st=1692634243~exp=1692634843~hmac=c604319f4b12c39a76ebf8622f2ff06fa416bacdc5447535e090a407656ec511"} title1={"No Product !"} title2={"Please Add Product"} /> : 
 
           <div className=' flex flex-col gap-8'>
             {/* banner2  */}

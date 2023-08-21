@@ -32,7 +32,7 @@ export const inventoryApi = createApi({
     }),
 
     getStocks: builder.query({
-      query: ({ token }) => ({
+      query: ( token ) => ({
         url: "/stock",
         headers: { authorization: `Bearer ${token}` },
       }),
