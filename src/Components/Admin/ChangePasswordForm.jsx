@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const ChangePasswordForm = () => {
+    const [invalid,setInvalid] = useState(false)
     const token = Cookies.get("token");
     const [changePassword] = useChangePasswordMutation();
     const [current_password,setCurrentPassword] = useState("")
@@ -20,6 +21,7 @@ const ChangePasswordForm = () => {
             e.preventDefault();
             const newData = {current_password,password,password_confirmation};
             const {data} = await changePassword({token,newPassword:newData});
+            console.log(data)
             if(data?.message){
                 Swal.fire({
                     customClass : {
@@ -36,6 +38,8 @@ const ChangePasswordForm = () => {
                       dispatch(removeToken());
                     }
                   })
+            }else{
+                setInvalid(!invalid)
             }
         }catch(error){
             console.log(error);
@@ -72,13 +76,17 @@ const ChangePasswordForm = () => {
                     <label className="text-[#FFFFFF] font-medium tracking-wider">
                         Confirm Password
                     </label>
-                    <input required value={password_confirmation} onChange={(e)=>setPasswordConfirmation(e.target.value)} type="password" className="input w-[70%]" />
+                    <div className='flex flex-col w-[70%]'>
+                    <input required value={password_confirmation} onChange={(e)=>setPasswordConfirmation(e.target.value)} type="password" className="input w-full" />
+                    {invalid && <p className='text-sm text-[#e94343] tracking-widest mt-2 -mb-3'>* Wrong Password Please Try Again</p> }       
+                    </div>
             </div>
-                    
-
             {/* btn  */}
             <div className=" flex items-center gap-5 mt-8">
-                    <button type='submit' onClick={changePasswordCancel} className="btn3 flex gap-2 items-center border border-[#7E7F80] text-[#7E7F80]">
+                    <button type='submit' onClick={() => {
+                        changePasswordCancel();
+                        setInvalid(!invalid);
+                    }} className="btn3 flex gap-2 items-center border border-[#7E7F80] text-[#7E7F80]">
                         Cancel
                     </button>
                     <button className="btn flex gap-2 items-center border border-[#3f4245]">

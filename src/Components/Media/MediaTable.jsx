@@ -4,14 +4,21 @@ import {BsFiles} from 'react-icons/bs'
 import './media.css'
 import { useGetPhotoQuery } from '../../Redux/API/mediaApi'
 import Cookies from 'js-cookie'
+import Loader from '../Loader/Loader'
 
 const MediaTable = () => {
     const token = Cookies.get("token")
-    const {data} = useGetPhotoQuery(token);
+    const {data , isLoading} = useGetPhotoQuery(token);
     console.log(data?.data);
     const medias = data?.data
   return (
-      <table className="w-full text-white table-responsive2">
+      <>
+      {isLoading ? 
+        <div className='-mt-20 mb-8'>
+            <Loader/>
+        </div> : 
+
+        <table className="w-full text-white table-responsive2">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
                 <tr className='select-none'>
                     <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
@@ -42,7 +49,8 @@ const MediaTable = () => {
                 })}
                 
             </tbody>
-        </table>
+        </table>}
+      </>
   )
 }
 
