@@ -10,12 +10,34 @@ import AddProductStep1 from './AddProductStep1';
 import AddProductStep3 from './AddProductStep3';
 import AddProductStep2 from './AddProductStep2';
 import AddProductStep4 from './AddProductStep4';
+import { useSelector } from 'react-redux';
+import { useCreateProductMutation } from '../../../Redux/API/inventoryApi';
+import Cookies from 'js-cookie';
 
 const AddProducts = () => {
   const steps = ["Information", "Price", "Photo"];
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
   const nav = useNavigate();
+  const token = Cookies.get("token")
+  const [createProduct] = useCreateProductMutation()
+  const form1 = useSelector(state => state.productSlice.pdForm1)
+  const form2 = useSelector(state => state.productSlice.pdForm2)
+  const form3 = useSelector(state => state.productSlice.pdForm3)
+
+  const createProductHandler = async(e)=>{
+    try{
+      e.preventDefault();
+      const pdData = {name: form1?.name, brand_id: form1?.brand_id, actual_price: form2?.realPrice, sale_price: form2?.price, unit: form1?.unit, more_information: form1?.more_information, photo: "" }
+      const data = await createProduct({token,pdData})
+      // console.log(data)
+      if(data?.data){
+        showAlert()
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
   const showAlert = () => {
     Swal.fire({
       customClass : {
@@ -28,7 +50,7 @@ const AddProducts = () => {
       background: "#161618",
     }).then((result) => {
       if (result.isConfirmed) {
-        nav("/user/overview")
+        nav("/inventory/products")
       }
     })
   };
@@ -48,10 +70,26 @@ const AddProducts = () => {
           {/* form  */}
           <div className="flex gap-10">
             <div className="w-[65%]">
-              {currentStep == 1 && <AddProductStep1 />}
+              {/* {currentStep == 1 && <AddProductStep1 currentStep={currentStep} />}
               {currentStep == 2 && <AddProductStep2 />}
               {currentStep == 3 && <AddProductStep3 />}
-              {currentStep == 4 && <AddProductStep4 />}
+              {currentStep == 4 && <AddProductStep4 />} */}
+              <div className={`${currentStep == 1 ? "block" : " hidden"}`}>
+              <AddProductStep1 currentStep={currentStep}/>
+              </div>
+
+              <div className={`${currentStep == 2 ? "block" : " hidden"}`}>
+              <AddProductStep2 currentStep={currentStep}/>
+              </div>
+
+              <div className={`${currentStep == 3 ? "block" : " hidden"}`}>
+              <AddProductStep3 currentStep={currentStep}/>
+              </div>
+
+              <div className={`${currentStep == 4 ? "block" : " hidden"}`}>
+              <AddProductStep4 currentStep={currentStep}/>
+              </div>
+           
             </div>
             <div className="flex flex-col mt-16">
               {steps.map((step, i) => {
@@ -78,8 +116,8 @@ const AddProducts = () => {
                 );
               })}
               <div className="mt-8">
-                <Link onClick={currentStep == 4 && showAlert }>
-                  <button
+                <Link onClick={currentStep == 4 && createProductHandler }>
+                  <button type='submit'
                     onClick={() => {
                       {
                         currentStep > 3

@@ -11,40 +11,14 @@ import "../../User/overview.css"
 const ProductTable = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
-  console.log(data);
+  const products = data?.data
+  console.log(products);
 
   const nav = useNavigate();
   const route = (id) => {
     nav(`/inventory/product/productDetail/${id}`);
   };
 
-  const pd = [
-    {
-      id: 1,
-      name: "apple",
-      brand: "melon",
-      salePrice: 300,
-      unit: "s",
-      stock: 100,
-    },
-    {
-      id: 2,
-      name: "banana",
-      brand: "melon",
-      salePrice: 30000,
-      unit: "s",
-      stock: 100,
-    },
-    {
-      id: 3,
-      name: "orange",
-      brand: "melon",
-      salePrice: 300,
-      unit: "s",
-      stock: 100,
-    },
-  ];
-  
   return (
     <div>
         {isLoading ? (
@@ -65,7 +39,7 @@ const ProductTable = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {pd?.map((pd) => {
+              {products?.map((pd) => {
                 return (
                   <tr
                     key={pd?.id}
@@ -73,10 +47,10 @@ const ProductTable = () => {
                   >
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.id}</td>
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.name}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.brand}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.brand_name}</td>
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.unit}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.salePrice}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.stock}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.sale_price}</td>
+                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.total_stock}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                       <Link to={'/user/overview'}>

@@ -9,6 +9,13 @@ import { setUserCreatePp } from '../../../Redux/Services/profileSlice'
 
 const AddProductStep4 = () => {
   const dispatch = useDispatch();
+  const form1 = useSelector(state => state.productSlice.pdForm1)
+  const form2 = useSelector(state => state.productSlice.pdForm2)
+  const form3 = useSelector(state => state.productSlice.pdForm3)
+
+  // console.log(form1)
+  // console.log(form2)
+  // console.log(form3)
 
   const userCreatePp = useSelector(state => state.profileSlice.userCreatePp);
   return (
@@ -32,15 +39,15 @@ const AddProductStep4 = () => {
                     <div className= " flex justify-between w-full">
 
                         <div className='flex flex-col gap-3 ml-[213px]'>
-                            <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>Blue Berry</h1>
+                            <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>{form1?.name}</h1>
                             <div className=' flex flex-col gap-1 text-sm'>
                               <div className='flex gap-1 tracking-wide font-medium'>
                                 <span className=' text-[#878787]'>Sale Price :</span>
-                                <span className=' text-[#FFFFFF]'>10,000 MMK</span>
+                                <span className=' text-[#FFFFFF]'>{form2?.price} MMK</span>
                               </div>
                               <div className='flex gap-1 tracking-wide font-medium'>
                                 <span className=' text-[#878787]'>Actual Price :</span>
-                                <span className=' text-[#FFFFFF]'>8,000 MMK</span>
+                                <span className=' text-[#FFFFFF]'>{form2?.realPrice} MMK</span>
                               </div>
                             </div>
                         </div>
@@ -66,25 +73,25 @@ const AddProductStep4 = () => {
               <div className={` pl-10 pt-6 pb-9 flex flex-col gap-5`}>
                     <p className=' flex items-center gap-14 text-[17px] tracking-wider font-medium'>
                       <span className=' text-[#878787] w-[150px]'>Name</span>
-                      <span className=' text-[#fff]'>: Bule Berry</span>
+                      <span className=' text-[#fff]'>: {form1?.name}</span>
                     </p>
 
                     <p className=' flex items-center gap-14 text-[17px] tracking-wider font-medium'>
                       <span className=' text-[#878787] w-[150px]'>Brand</span>
-                      <span className=' text-[#fff]'>: Burma</span>
+                      <span className=' text-[#fff]'>: {form1?.brand_id}</span>
                     </p>
                   
                     <p className=' flex items-center gap-14 text-[17px] tracking-wide font-medium'>
                       <span className=' text-[#878787] w-[150px]'>Stock</span>
-                      <span className=' text-[#fff]'>: 120</span>
+                      <span className=' text-[#fff]'>: {form1?.stock}</span>
                     </p>
                     <p className=' flex items-center gap-14 text-[17px] tracking-wide font-medium'>
                       <span className=' text-[#878787] w-[150px]'>Unit</span>
-                      <span className=' text-[#fff]'>: MMK</span>
+                      <span className=' text-[#fff]'>: {form1?.unit}</span>
                     </p>
                     <p className=' flex items-center gap-14 text-[17px] tracking-wide font-medium'>
                       <span className=' text-[#878787] w-[150px]'>More Information</span>
-                      <span className=' text-[#fff]'>: Fresh Fruits</span>
+                      <span className=' text-[#fff]'>: {form1?.more_information}</span>
                     </p>
               </div>
             </div>

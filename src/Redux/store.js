@@ -8,6 +8,7 @@ import { adminApi } from './API/adminApi'
 import { mediaApi } from './API/mediaApi'
 import { inventoryApi } from './API/inventoryApi'
 import productSlice from './Services/productSlice'
+import sidebarSlice from './Services/sidebarSlice'
 
 export const store = configureStore({
   reducer: {
@@ -19,7 +20,8 @@ export const store = configureStore({
     profileSlice : profileSlice,
     mediaSlice : mediaSlice,
     authSlice : authSlice,
-    productSlice : productSlice
+    productSlice : productSlice,
+    sidebarSlice : sidebarSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(authApi.middleware, userApi.middleware, adminApi.middleware, mediaApi.middleware, inventoryApi.middleware),

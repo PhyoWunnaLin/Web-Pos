@@ -11,47 +11,38 @@ import {PiNotepadBold, PiUserCirclePlusDuotone, PiUserSquareFill} from "react-ic
 import {HiOutlinePhotograph} from "react-icons/hi"
 import "./sidebar.css"
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "../../Redux/API/authApi";
 import Cookies from 'js-cookie';
 import { removeToken } from "../../Redux/Services/authSlice";
 import { Loader } from '@mantine/core';
+import { setOpenAcc1, setOpenAcc2, setOpenAcc3, setOpenAcc4 } from "../../Redux/Services/sidebarSlice";
 
 const Sidebar = () => {
     const [logout , {isLoading}] = useLogoutMutation();
-    const [openAcc1, setOpenAcc1] = useState(false);
-    const [openAcc2, setOpenAcc2] = useState(false);
-    const [openAcc3, setOpenAcc3] = useState(false);
-    const [openAcc4, setOpenAcc4] = useState(false);
-    
+    // const [openAcc1, setOpenAcc1] = useState(false);
+    const openAcc11 = useSelector(state => state.sidebarSlice.openAcc1)
+    const openAcc1 = JSON.parse(localStorage.getItem("openAcc1"))
+
+    const openAcc22 = useSelector(state => state.sidebarSlice.openAcc2)
+    const openAcc2 = JSON.parse(localStorage.getItem("openAcc2"))
+
+    const openAcc33 = useSelector(state => state.sidebarSlice.openAcc3)
+    const openAcc3 = JSON.parse(localStorage.getItem("openAcc3"))
+
+    const openAcc44 = useSelector(state => state.sidebarSlice.openAcc4)
+    const openAcc4 = JSON.parse(localStorage.getItem("openAcc4"))
+
     const dispatch = useDispatch();
     const location = useLocation();
     const sidebarActive = location.pathname;
-    const acc4 = sidebarActive == "/profile/myAccount" || sidebarActive == "/profile/edit";
-    const acc3 = sidebarActive == "/user/overview" || sidebarActive == "/user/create";
-    const acc2 = sidebarActive == "/inventory/products";
-    // console.log(sidebarActive);
     const token = Cookies.get("token")
     const nav = useNavigate();
 
-    const handleOpenAcc1 = () => {
-        setOpenAcc1((cur) => !cur);
-    }
-    const handleOpenAcc2 = () => setOpenAcc2((cur) => !cur);
-    const handleOpenAcc3 = () => setOpenAcc3((cur) => !cur);
-    const handleOpenAcc4 = () => setOpenAcc4((cur) => !cur);
-
-    useEffect(() => {
-        setOpenAcc2(sidebarActive == "/inventory/products" || openAcc2 == false && true );
-    }, [acc2]);
-
-    useEffect(() => {
-        setOpenAcc3(sidebarActive == "/user/overview" || sidebarActive == "/user/create" || sidebarActive == "/user/ban" || openAcc3 == false && true );
-    }, [acc3]);
-
-    useEffect(() => {
-        setOpenAcc4(sidebarActive == "/profile/myAccount" || sidebarActive == "/profile/edit" || openAcc4 == false && true );
-    }, [acc4]);
+    const handleOpenAcc1 = () => dispatch(setOpenAcc1(!openAcc11))
+    const handleOpenAcc2 = () => dispatch(setOpenAcc2(!openAcc22))
+    const handleOpenAcc3 = () => dispatch(setOpenAcc3(!openAcc33))
+    const handleOpenAcc4 = () => dispatch(setOpenAcc4(!openAcc44))
 
     const logoutHandler = async(e)=>{
         const {data} = await logout(token);
@@ -62,7 +53,6 @@ const Sidebar = () => {
         }
     }
 
-    
     return(
         <div className=" select-none">
 
