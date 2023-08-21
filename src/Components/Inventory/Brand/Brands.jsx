@@ -8,26 +8,21 @@ import { useGetBrandsQuery } from '../../../Redux/API/inventoryApi';
 import Cookies from "js-cookie"
 import { BiEditAlt } from "react-icons/bi";
 import { HiBan } from 'react-icons/hi'
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../../User/successAlert.css"
 import AddBrand from './AddBrand';
 import { FiPlus } from 'react-icons/fi';
 
 const Brands = () => {
+    const [id,setId] = useState(null);
     const [open,setOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetBrandsQuery(token);
     console.log(data?.data);
     const brands = data?.data
+    const ref = useRef()
+    const ref2 = useRef()
 
-    const nav = useNavigate();
-  
-  const route = (id) => {
-    nav(`/brand/detail/${id}`);
-  };
-  
-  const ref = useRef()
     useEffect(() => {
       const checkIfClickedOutside = e => {
         if (open && ref.current && !ref.current.contains(e.target)) {
@@ -39,6 +34,10 @@ const Brands = () => {
         document.removeEventListener("click", checkIfClickedOutside)
       }
     }, [open])
+
+    const handleOpen = () => {
+      setOpen(!open);
+    }
 
   const banHandler = () => {
     Swal.fire({
@@ -67,10 +66,6 @@ const Brands = () => {
     })
   }
 
-    // const brands = [
-    //     {id: 1, brandName: "go go", comName: "Dutch Lady", agent: "no no", phone: "09999", dec: "hello"},
-    //     {id: 2, brandName: "go go", comName: "Dutch Lady", agent: "no no", phone: "0909090483", dec: "hello"},
-    // ]
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
@@ -83,11 +78,14 @@ const Brands = () => {
               path2={"Manage Brands"}
               icon={true}
             />
-            <div ref={ref}>
-              <button onClick={() => setOpen(!open)} className='btn flex gap-2 items-center'><span className=" text-[#161618]">
+            <div>
+              <button onClick={() => {
+                handleOpen();
+                setId(null)
+              }} className='btn flex gap-2 items-center'><span className=" text-[#161618]">
                 <FiPlus />
               </span> Add Brand</button>
-              <AddBrand open={open} setOpen={setOpen}/>
+              <AddBrand open={open} setOpen={setOpen} id={id}/>
             </div>
           </div>
           {brands?.length == 0  ? 
@@ -167,11 +165,13 @@ const Brands = () => {
                         <HiBan />
                       </p>
 
-                      <span className=" icon1 hover-scale">
+                      <span onClick={() => {
+                        setId(brand?.id);
+                        handleOpen();
+                      }} className=" icon1 hover-scale">
                         <BiEditAlt />
                       </span>
                     </td>
-
                   </tr>
                 );
               })}

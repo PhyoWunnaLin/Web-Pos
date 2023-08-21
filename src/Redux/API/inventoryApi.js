@@ -30,17 +30,35 @@ export const inventoryApi = createApi({
     }),
 
     getBrands: builder.query({
-      query: ( token ) => ({
+      query: (token) => ({
         url: "/brand",
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["inventory"],
     }),
 
+    getSingleBrand:builder.query({
+      query:({token,id}) => ({
+        url:`/brand/${id}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags:['inventory']
+    }),
+
     createBrand: builder.mutation({
       query: ({ token, newData }) => ({
         url: "/brand",
         method: "POST",
+        body: newData,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["inventory"],
+    }),
+
+    updateBrand: builder.mutation({
+      query: ({ token, id ,newData }) => ({
+        url: `/brand/${id}`,
+        method: "PUT",
         body: newData,
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -53,5 +71,7 @@ export const {
   useGetProductDetailQuery,
   useGetStocksQuery,
   useGetBrandsQuery,
-  useCreateBrandMutation
+  useCreateBrandMutation,
+  useUpdateBrandMutation,
+  useGetSingleBrandQuery
 } = inventoryApi;

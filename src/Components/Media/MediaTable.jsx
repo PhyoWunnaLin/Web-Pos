@@ -14,7 +14,7 @@ const MediaTable = () => {
   return (
       <>
       {isLoading ? 
-        <div className=" ">
+        <div className='-mt-20 mb-8'>
             <Loader/>
         </div> : 
 
