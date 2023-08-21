@@ -15,6 +15,7 @@ const BanUser = () => {
     const token = Cookies.get("token")
     const {data, isLoading} = useGetUserListQuery(token);
     const [unBanUser] = useUnBanUserMutation();
+    const nav = useNavigate()
 
     const userList = data?.users;
     const banList = userList?.filter(user => user.banned == 1)
@@ -26,6 +27,7 @@ const BanUser = () => {
             iconColor: "#fff",
             background: "#161618",
             showCancelButton: true,
+            showCloseButton: true,
             confirmButtonColor: '#fff',
             cancelButtonColor: '#24262b',
             confirmButtonText: 'RESTORE'
@@ -41,24 +43,24 @@ const BanUser = () => {
                   },
                   title: "Successfully restore an account",
                   icon: "success",
+                  showCloseButton: true,
                   confirmButtonText: "SEE ALL USERS",
                   width: 400,
                   background: "#161618",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    nav("/user/overview")
+                  }
                 })
               }
             }
           })
     }
-
-    const nav = useNavigate();
   
     const route = (id) => {
       nav(`/brand/detail/${id}`);
     };
-    const user = [
-        {id: 1, name: "dd", position: "staff", email: "dd@gmial.com"},
-        {id: 2, name: "dd", position: "staff", email: "dd@gmial.com"}
-    ]
+    
   return (
     <MainLayout>
     <div className="bg-[#202124] w-full flex justify-center">

@@ -22,10 +22,10 @@ export const userApi = createApi({
         }),
 
         createUser: builder.mutation({
-            query: ({token,user}) => ({
+            query: ({token,userData}) => ({
                 url: "/register",
                 method: "POST",
-                body: user,
+                body: userData,
                 headers: {authorization : `Bearer ${token}`},
             }),
             invalidatesTags: ["user"],
