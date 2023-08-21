@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     active: null,
     selectActive: null,
-    onclickActive: null
+    onclickActive: null,
+    selectImg: null,
+    insert: false,
 }
 
 export const mediaSlice = createSlice({
@@ -19,12 +21,20 @@ export const mediaSlice = createSlice({
       state.selectActive = payload;
   },
 
-  setOnclickActive : (state,{payload})=>{
-    state.onclickActive = payload;
-}
+    setOnclickActive : (state,{payload})=>{
+      state.onclickActive = payload;
+  },
+
+    setSelectImg : (state,{payload})=>{
+      state.selectImg = payload;
+    },
+
+    setInsert : (state,{payload})=>{
+      state.insert = payload;
+    }
   },
 })
 
-export const { setActive, setSelectActive, setOnclickActive } = mediaSlice.actions
+export const { setActive, setSelectActive, setOnclickActive, setSelectImg, setInsert } = mediaSlice.actions
 
 export default mediaSlice.reducer

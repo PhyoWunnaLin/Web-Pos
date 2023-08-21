@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectActive, setOnclickActive } from '../../Redux/Services/mediaSlice';
+import { setSelectActive, setOnclickActive, setSelectImg, setInsert } from '../../Redux/Services/mediaSlice';
 import "./modalMedia.css"
 import { Modal} from '@mantine/core';
 import { useGetPhotoQuery } from '../../Redux/API/mediaApi';
@@ -27,6 +27,11 @@ const ModalMedia = (props) => {
     const handleDrop = (e) => {
         e.preventDefault();
         setFile(e.dataTransfer.files[0].name)
+    }
+
+    const selectImgHandler = (id,url)=>{
+        dispatch(setOnclickActive(id))
+        dispatch(setSelectImg(url))
     }
 
     // const [opened, { open, close }] = useDisclosure(false);
@@ -92,13 +97,13 @@ const ModalMedia = (props) => {
                         {/* img  */}
                         {mediaData?.map(img => {
                             return(
-                                <div onClick={()=> dispatch(setOnclickActive(img.id))} 
-                                onMouseEnter={()=> dispatch(setSelectActive(img.id))} 
-                                key={img.id} className={`
-                                ${selectActive == img.id && " hover:border-opacity-100" }
-                                ${onclickActive == img.id && "modal-active border-opacity-100"}
+                                <div onClick={()=> selectImgHandler(img?.id,img?.url)} 
+                                onMouseEnter={()=> dispatch(setSelectActive(img?.id))} 
+                                key={img?.id} className={`
+                                ${selectActive == img?.id && " hover:border-opacity-100" }
+                                ${onclickActive == img?.id && "modal-active border-opacity-100"}
                                 rounded border-2 border-blue-600 border-opacity-0`}>
-                                    <img src={img.url} alt="" className=' rounded w-[161px] h-[161px] object-cover ' />
+                                    <img src={img?.url} alt="" className=' rounded w-[161px] h-[161px] object-cover ' />
                                 </div>
                             )
                         })}
@@ -106,7 +111,11 @@ const ModalMedia = (props) => {
         
                         {onclickActive && (
                             <div className='flex justify-end'>
-                            <button className=' btn'>INSERT</button>
+                    <Modal.CloseButton>
+                    <button onClick={()=> dispatch(setInsert(true))} className=' btn'>INSERT</button>
+
+                    </Modal.CloseButton>
+
                         </div>
                         )}
                     </div>
