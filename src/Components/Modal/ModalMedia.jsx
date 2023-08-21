@@ -7,6 +7,7 @@ import { Modal} from '@mantine/core';
 import { useGetPhotoQuery } from '../../Redux/API/mediaApi';
 import Cookies from 'js-cookie';
 import ImageLoader from '../Loader/ImageLoader';
+import { RxCross2 } from 'react-icons/rx';
 // import { useDisclosure } from '@mantine/hooks';
 
 const ModalMedia = (props) => {
@@ -43,7 +44,9 @@ const ModalMedia = (props) => {
             <Modal.Content>
                 <Modal.Header>
                     <Modal.Title>Select an image</Modal.Title>
-                    <Modal.CloseButton></Modal.CloseButton>
+                    <Modal.CloseButton>
+                        <button><RxCross2 className=" text-white" /></button>
+                    </Modal.CloseButton>
                 </Modal.Header>
 
                 <Modal.Body>
