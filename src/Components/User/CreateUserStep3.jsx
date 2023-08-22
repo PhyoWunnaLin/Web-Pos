@@ -12,11 +12,12 @@ const CreateUserStep3 = ({currentStep}) => {
   const selectImg = useSelector(state => state.mediaSlice.selectImg)
   const dispatch = useDispatch()
   const insert = useSelector(state => state.mediaSlice.insert)
+  const userForm3 = useSelector(state => state.userSlice.userForm3)
+
   
-  // useEffect(()=>{
-  //   setPhoto(selectImg),
-  //   dispatch(setUserForm3(photo))
-  // },[currentStep])
+  useEffect(()=>{
+    dispatch(setUserForm3(selectImg))
+  },[currentStep,selectImg])
 
   const clearImgHandler = (e)=>{
     e.preventDefault()

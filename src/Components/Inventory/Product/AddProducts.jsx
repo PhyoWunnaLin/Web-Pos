@@ -10,9 +10,10 @@ import AddProductStep1 from './AddProductStep1';
 import AddProductStep3 from './AddProductStep3';
 import AddProductStep2 from './AddProductStep2';
 import AddProductStep4 from './AddProductStep4';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useCreateProductMutation } from '../../../Redux/API/inventoryApi';
 import Cookies from 'js-cookie';
+import { setSelectActive, setSelectImg } from '../../../Redux/Services/mediaSlice';
 
 const AddProducts = () => {
   const steps = ["Information", "Price", "Photo"];
@@ -24,13 +25,15 @@ const AddProducts = () => {
   const form1 = useSelector(state => state.productSlice.pdForm1)
   const form2 = useSelector(state => state.productSlice.pdForm2)
   const form3 = useSelector(state => state.productSlice.pdForm3)
+  // console.log(form3);
+  const dispatch = useDispatch()
 
   const createProductHandler = async(e)=>{
     try{
       e.preventDefault();
-      const pdData = {name: form1?.name, brand_id: form1?.brand_id, actual_price: form2?.realPrice, sale_price: form2?.price, unit: form1?.unit, more_information: form1?.more_information, photo: form3?.photo }
+      const pdData = {name: form1?.name, brand_id: form1?.brand_id, actual_price: form2?.realPrice, sale_price: form2?.price, unit: form1?.unit, more_information: form1?.more_information, photo: form3 }
       const data = await createProduct({token,pdData})
-      // console.log(data)
+      console.log(data)
       if(data?.data){
         showAlert()
       }
@@ -46,7 +49,8 @@ const AddProducts = () => {
       },
       title: "Successfully created an product",
       icon: "success",
-      confirmButtonText: "OK",
+      confirmButtonText: "SEE ALL PRODUCTS",
+      showCloseButton: true,
       width: 400,
       background: "#161618",
     }).then((result) => {

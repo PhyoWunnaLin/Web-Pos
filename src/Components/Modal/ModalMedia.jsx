@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectActive, setOnclickActive, setSelectImg, setInsert } from '../../Redux/Services/mediaSlice';
@@ -47,6 +47,12 @@ const ModalMedia = (props) => {
             dispatch(setInsert(true)); // Insert the selected image
         }
     }
+
+    useEffect(()=>{
+        if(props.opened){
+            dispatch(setOnclickActive(null))
+        }
+    },[props.opened])
 
     // const [opened, { open, close }] = useDisclosure(false);
 
@@ -117,7 +123,7 @@ const ModalMedia = (props) => {
                                 onMouseEnter={()=> dispatch(setSelectActive(img?.id))} 
                                 key={img?.id} className={`
                                 ${selectActive == img?.id && " hover:border-opacity-100" }
-                                ${onclickActive == img?.id && "modal-active border-opacity-100"}
+                                ${onclickActive == img?.id && onclickActive != null?"modal-active border-opacity-100" : ""}
                                 rounded border-2 border-blue-600 border-opacity-0`}>
                                     <img src={img?.url} alt="" className=' cursor-pointer rounded w-[161px] h-[161px] object-cover ' />
                                 </div>

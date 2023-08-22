@@ -34,7 +34,7 @@ const PersonalForm = () => {
         setDOB(""),
         setGender(null),
         setAddress(""),
-        setPhone("")
+        setPhoto("")
     }
 
     const editProfileHandler = async(e) => {

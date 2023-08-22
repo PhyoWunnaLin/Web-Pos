@@ -24,14 +24,13 @@ const CreateUser = () => {
   const [createUser] = useCreateUserMutation()
   const userForm1 = useSelector(state => state.userSlice.userForm1)
   const userForm2 = useSelector(state => state.userSlice.userForm2)
-  // const userForm3 = useSelector(state => state.userSlice.userForm3)
-  const selectImg = useSelector(state => state.mediaSlice.selectImg)
+  const userForm3 = useSelector(state => state.userSlice.userForm3)
   // console.log(selectImg)
 
   const createUserHandler = async(e)=>{
     try{
       e.preventDefault();
-      const userData = {name: userForm1?.name, phone: userForm1?.phone, date_of_birth: userForm1?.DOB, gender: userForm1?.gender, address: userForm1?.address, email: userForm2?.email, password: userForm2?.password, password_confirmation: userForm2?.confirm_Password, role: userForm2?.position, user_photo: selectImg }
+      const userData = {name: userForm1?.name, phone: userForm1?.phone, date_of_birth: userForm1?.DOB, gender: userForm1?.gender, address: userForm1?.address, email: userForm2?.email, password: userForm2?.password, password_confirmation: userForm2?.confirm_Password, role: userForm2?.position, user_photo: userForm3 }
       const data = await createUser({token,userData})
       // console.log(data)
       if(data?.data){
