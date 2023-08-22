@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActive } from "../../Redux/Services/mediaSlice";
 import { useCreatePhotoMutation, useGetPhotoQuery } from "../../Redux/API/mediaApi";
 import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 
 const MediaCompo = () => {
   const token = Cookies.get("token");
@@ -18,17 +19,31 @@ const MediaCompo = () => {
   const active = localStorage.getItem("active");
   const dispatch = useDispatch();
   const [file, setFile] = useState('');
-  console.log(file);
+  // console.log(file);
 
   const handleSubmit = async (files) => {
-    console.log(files);
+    // console.log(files);
     const photos = new FormData();
     for (let i = 0 ; i < files.length; i++){
       photos.append("photos[]",files[i],files[i].name);
     }
 
     const data = await createPhoto({token,photos});
-    console.log(data);
+    // console.log(data);
+    
+    if(data?.data?.message){
+      Swal.fire({
+        customClass: {
+          title: "swal2-title",
+        },
+        title: "Successfully upload photo",
+        icon: "success",
+        confirmButtonText: "OK",
+        // showCloseButton: true,
+        width: 400,
+        background: "#161618",
+      });
+    }
 
   }
 
@@ -61,7 +76,7 @@ const MediaCompo = () => {
             className={`${hover && "scale-110 bg-white"} w-[120px] h-[120px] bg-[#202124] rounded-full flex justify-center items-center mx-auto cursor-pointer duration-500`}
           >
             <div className={`${hover && "border-blue-500 bg-white"} w-[85px] h-[85px] bg-[#212328] rounded-full flex justify-center items-center border-dashed border-2 border-[#7E7F80] duration-500`}>
-              <MdOutlineCloudUpload size={40} className={`${hover && "animate-bounce text-blue-500"} text-[#8AB4F8]`} />
+              <MdOutlineCloudUpload size={40} className={` text-[#8AB4F8]`} />
             </div>
           </div>
 

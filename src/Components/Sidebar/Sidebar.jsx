@@ -57,7 +57,7 @@ const Sidebar = () => {
         <div className=" select-none">
 
             {/* navbar  */}
-            <div className=" flex justify-between items-center border-b border-[#3f4245] text-[#e8eaed] bg-[#202124] px-5 py-3 b-60 fixed w-full z-50">
+            <div className=" flex justify-between items-center border-b border-[#3f4245] text-[#e8eaed] bg-[#202124] px-5 py-3 b-60 fixed w-full z-10">
                 <h1 className=" font-semibold tracking-wider text-lg">MMS</h1>
                 <div className=" flex gap-5 items-center">
                     <p className=" text-xl">

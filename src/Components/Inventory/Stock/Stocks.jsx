@@ -12,6 +12,7 @@ import AddStock from './AddStock';
 import { FiPlus } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchStock } from '../../../Redux/Services/productSlice';
+import noPd from "../../../assets/noPd3.png"
 
 const Stocks = () => {
     const [open,setOpen] = useState(false);
@@ -44,7 +45,7 @@ const Stocks = () => {
           </div>
           {stocks?.length == 0  ? 
 
-          <NoContact image={"https://img.freepik.com/free-icon/user_318-215753.jpg?t=st=1692434065~exp=1692434665~hmac=2980c4d803170dbf42c0125a36bc3a7bb74abd9db2f59410965813f7c678e325"} title1={"No Stock !"} title2={"Please ADD Stock"} /> : 
+          <NoContact image={noPd} size={"w-[55%]"} title1={"No Stock !"} title2={"Please ADD Stock"} /> : 
 
           <div className=' flex flex-col gap-8'>
             {/* banner2  */}
