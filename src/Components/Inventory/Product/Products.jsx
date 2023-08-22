@@ -11,6 +11,7 @@ import { setActive, setSearchProduct } from '../../../Redux/Services/productSlic
 import ProductCard from './ProductCard';
 import Cookies from 'js-cookie';
 import NoContact from '../../NoContact/NoContact';
+import noPd from "../../../assets/noPd3.png"
 
 const Products = () => {
   const token = Cookies.get("token");
@@ -38,9 +39,9 @@ const Products = () => {
             button2={true}
             route={"/inventory/addProduct"}
           />
-          {length != 0  ? 
+          {length == 0  ? 
 
-          <NoContact image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD2nJuLtFkNi5xctjKXOkrWnUfBpHU-XoNiA&usqp=CAU"} title1={"No Product !"} title2={"Please Add Product"} /> : 
+          <NoContact image={noPd} size={"w-[55%]"} title1={"No Product !"} title2={"Please Add Product"} /> : 
 
           <div className=' flex flex-col gap-8'>
             {/* banner2  */}
