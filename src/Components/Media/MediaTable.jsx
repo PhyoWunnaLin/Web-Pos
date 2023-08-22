@@ -12,7 +12,7 @@ const MediaTable = () => {
     const token = Cookies.get("token")
     const {data , isLoading} = useGetPhotoQuery(token);
     const [deletePhoto] = useDeletePhotoMutation();
-    console.log(data?.data);
+    // console.log(data?.data);
     const medias = data?.data
 
     const handleDeletePhoto = (id) => {

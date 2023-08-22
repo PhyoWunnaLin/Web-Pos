@@ -38,9 +38,9 @@ const Products = () => {
             button2={true}
             route={"/inventory/addProduct"}
           />
-          {length == 0  ? 
+          {length != 0  ? 
 
-          <NoContact image={"https://img.freepik.com/free-icon/shopping-cart_318-235954.jpg?t=st=1692634243~exp=1692634843~hmac=c604319f4b12c39a76ebf8622f2ff06fa416bacdc5447535e090a407656ec511"} title1={"No Product !"} title2={"Please Add Product"} /> : 
+          <NoContact image={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD2nJuLtFkNi5xctjKXOkrWnUfBpHU-XoNiA&usqp=CAU"} title1={"No Product !"} title2={"Please Add Product"} /> : 
 
           <div className=' flex flex-col gap-8'>
             {/* banner2  */}
