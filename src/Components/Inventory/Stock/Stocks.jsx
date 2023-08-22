@@ -15,30 +15,14 @@ const Stocks = () => {
     const [open,setOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetStocksQuery(token)
-    console.log(data);
+    console.log(data?.data);
+    const stocks = data?.data
 
     const nav = useNavigate();
 
     const route = (id) => {
       nav(`/stock/detail/${id}`);
     };
-
-    const stocks = [
-        {id: 1, pdName: "BANANA", userName: "dd", q: 10, create: 12/7/2023},
-        {id: 2, pdName: "BANANA", userName: "dd", q: 10, create: 12/7/2023}
-    ]
-    const ref = useRef()
-    useEffect(() => {
-      const checkIfClickedOutside = e => {
-        if (open && ref.current && !ref.current.contains(e.target)) {
-          setOpen(false)
-        }
-      }
-      document.addEventListener("click", checkIfClickedOutside)
-      return () => {
-        document.removeEventListener("click", checkIfClickedOutside)
-      }
-    }, [open])
 
   return (
     <>
@@ -53,12 +37,6 @@ const Stocks = () => {
               path2={"Stock Control"}
               icon={true}
             />  
-            <div ref={ref}>
-              <button onClick={() => setOpen(!open)} className='btn flex gap-2 items-center'><span className=" text-[#161618]">
-                <FiPlus />
-              </span> Add Stock</button>
-              <AddStock open={open} setOpen={setOpen}/>
-            </div>
           </div>
           {stocks?.length == 0  ? 
 
@@ -117,17 +95,17 @@ const Stocks = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {stocks?.map((pd) => {
+              {stocks?.map((stock) => {
                 return (
                   <tr
-                    key={pd?.id}
+                    key={stock?.id}
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.id}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.pdName}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.userName}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.q}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.create}</td>
+                    <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-start">{stock?.id}</td>
+                    <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-start">{stock?.product_id}</td>
+                    <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-start">{stock?.user_name}</td>
+                    <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-end">{stock?.quantity}</td>
+                    <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-start">{stock?.created_at}</td>
                   </tr>
                 );
               })}

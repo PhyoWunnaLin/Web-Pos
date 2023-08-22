@@ -6,18 +6,25 @@ import { CiShop } from 'react-icons/ci'
 import { HiOutlineMailOpen } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserCreatePp } from '../../../Redux/Services/profileSlice'
+import { useGetBrandsQuery } from '../../../Redux/API/inventoryApi'
+import Cookies from 'js-cookie'
 
 const AddProductStep4 = () => {
+  const token = Cookies.get("token");
   const dispatch = useDispatch();
   const form1 = useSelector(state => state.productSlice.pdForm1)
   const form2 = useSelector(state => state.productSlice.pdForm2)
   const form3 = useSelector(state => state.productSlice.pdForm3)
+  const {data} = useGetBrandsQuery(token);
+  const brandId = form1?.brand_id
+  const products = data?.data
+  const brandName = brandId && products?.filter((product) => product?.id == brandId);
+  const name = brandName && brandName[0]?.name;
+  console.log(name)
 
-  // console.log(form1)
-  // console.log(form2)
-  // console.log(form3)
 
   const userCreatePp = useSelector(state => state.profileSlice.userCreatePp);
+  
   return (
     <div className="">
       {/* Profile  */}
@@ -78,7 +85,7 @@ const AddProductStep4 = () => {
 
                     <p className=' flex items-center gap-14 text-[17px] tracking-wider font-medium'>
                       <span className=' text-[#878787] w-[150px]'>Brand</span>
-                      <span className=' text-[#fff]'>: {form1?.brand_id}</span>
+                      <span className=' text-[#fff]'>: {name}</span>
                     </p>
                   
                     <p className=' flex items-center gap-14 text-[17px] tracking-wide font-medium'>
