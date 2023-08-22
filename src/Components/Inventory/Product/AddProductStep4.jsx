@@ -7,6 +7,7 @@ import { HiOutlineMailOpen } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserCreatePp } from '../../../Redux/Services/profileSlice'
 import { useGetBrandsQuery } from '../../../Redux/API/inventoryApi'
+import {PiUserFocus} from 'react-icons/pi'
 import Cookies from 'js-cookie'
 
 const AddProductStep4 = () => {
@@ -20,9 +21,7 @@ const AddProductStep4 = () => {
   const products = data?.data
   const brandName = brandId && products?.filter((product) => product?.id == brandId);
   const name = brandName && brandName[0]?.name;
-  console.log(name)
-
-
+  // console.log(name)
   const userCreatePp = useSelector(state => state.profileSlice.userCreatePp);
   
   return (
@@ -34,13 +33,19 @@ const AddProductStep4 = () => {
                 {/* profile img  */}
                 <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                     <div className=' absolute top-[-70px] left-[33px]'>
-                        <div className=' relative rounded-full w-[150px] h-[150px]'>
-                            <img src={"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
-
-                            <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
-                            <BiSolidEditAlt size={18}/>
-                            </div>
-                        </div>
+                    {form3 ? (
+                <div className="w-[150px] h-[150px] bg-[#202124] rounded-full mx-auto border-dashed border-2 border-[#8AB4F8] flex justify-center items-center relative">
+                  <img
+                    src={form3}
+                    className="w-[150px] h-[150px] object-cover absolute rounded-full"
+                    alt=""
+                  />
+                </div>
+              ) : (
+                <div className="w-[150px] h-[150px] bg-[#202124] rounded-full mx-auto border-dashed border-2 border-[#8AB4F8] flex justify-center items-center relative">
+                  <PiUserFocus className=" text-white" size={45} />
+                </div>
+              )}
                     </div>
 
                     <div className= " flex justify-between w-full">

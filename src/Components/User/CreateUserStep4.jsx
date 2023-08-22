@@ -12,8 +12,7 @@ const CreateUserStep4 = () => {
   const dispatch = useDispatch();
   const userForm1 = useSelector((state) => state.userSlice.userForm1);
   const userForm2 = useSelector((state) => state.userSlice.userForm2);
-  // const userForm3 = useSelector(state => state.userSlice.userForm3)
-  const selectImg = useSelector((state) => state.mediaSlice.selectImg);
+  const userForm3 = useSelector(state => state.userSlice.userForm3)
   // console.log(userForm2)
 
   const userCreatePp = useSelector((state) => state.profileSlice.userCreatePp);
@@ -27,10 +26,10 @@ const CreateUserStep4 = () => {
           {/* profile img  */}
           <div className="pb-10 pt-7 mt-[73px] flex items-center relative">
             <div className=" absolute top-[-70px] left-[33px]">
-              {selectImg ? (
+              {userForm3 ? (
                 <div className="w-[150px] h-[150px] bg-[#202124] rounded-full mx-auto border-dashed border-2 border-[#8AB4F8] flex justify-center items-center relative">
                   <img
-                    src={selectImg}
+                    src={userForm3}
                     className="w-[150px] h-[150px] object-cover absolute rounded-full"
                     alt=""
                   />
