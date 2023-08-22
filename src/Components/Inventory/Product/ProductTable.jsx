@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGetProductsQuery } from "../../../Redux/API/inventoryApi";
 import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,13 +8,30 @@ import { BiEditAlt } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import "../../User/overview.css"
 import { useSelector } from "react-redux";
+import AddStock from "../Stock/AddStock";
 
 const ProductTable = () => {
+  const [id,setId] = useState(null);
+  const [open,setOpen] = useState(false);
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
   const products = data?.data
   const searchProduct = useSelector(state => state.productSlice.searchProduct)
   // console.log(searchProduct);
+
+  const ref = useRef()
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      if (open && ref.current && !ref.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener("click", checkIfClickedOutside)
+    return () => {
+      document.removeEventListener("click", checkIfClickedOutside)
+    }
+  }, [open])
+
 
   const nav = useNavigate();
   const route = (id) => {
@@ -22,6 +39,10 @@ const ProductTable = () => {
   };
 
   return (
+    <>
+    <div>
+    <AddStock open={open} setOpen={setOpen} id={id}/>
+    </div>
     <div>
         {isLoading ? (
           <div className=" ">
@@ -61,12 +82,12 @@ const ProductTable = () => {
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.total_stock}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                      <Link to={'/user/overview'}>
-                      <p className="hover-scale icon1">
+                      <p onClick={() => {
+                        setId(pd?.id);
+                        setOpen(!open)
+                      }} className="hover-scale icon1">
                         <AiOutlinePlus />
                       </p>
-                      </Link>
-
                       <span className=" icon1 hover-scale">
                         <BiEditAlt />
                       </span>
@@ -81,6 +102,7 @@ const ProductTable = () => {
           </table>
           )}
     </div>
+    </>
   );
 };
 
