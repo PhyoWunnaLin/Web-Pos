@@ -39,7 +39,7 @@ const ProductDetail = () => {
                     <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                         <div className=' absolute top-[-70px] left-[33px]'>
                             <div className=' relative rounded-full w-[150px] h-[150px]'>
-                                <img src={"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                                <img src={product?.photo ? product?.photo :"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
 
                                 <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
                                 <BiSolidEditAlt size={18}/>
