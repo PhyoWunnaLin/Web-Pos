@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./overview.css";
 import { BiSearch } from "react-icons/bi";
 import MainLayout from "../../Layouts/MainLayout";
@@ -10,6 +10,8 @@ import Cookies from "js-cookie"
 import Swal from "sweetalert2";
 import "./successAlert.css"
 import { useGetUserListQuery, useUnBanUserMutation } from '../../Redux/API/userApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchBanUser, setUsers } from '../../Redux/Services/userSlice';
 
 const BanUser = () => {
     const token = Cookies.get("token")
@@ -17,8 +19,12 @@ const BanUser = () => {
     const [unBanUser] = useUnBanUserMutation();
     const nav = useNavigate()
 
-    const userList = data?.users;
+    const dispatch = useDispatch()
+    const users = useSelector(state => state.userSlice.users)
+    const userList = users?.users;
     const banList = userList?.filter(user => user.banned == 1)
+    const searchBanUser = useSelector(state => state.userSlice.searchBanUser)
+    // console.log(searchBanUser);
 
     const unBanHandler = async(id)=>{
         Swal.fire({
@@ -56,7 +62,7 @@ const BanUser = () => {
             }
           })
     }
-  
+
     const route = (id) => {
       nav(`/brand/detail/${id}`);
     };
@@ -91,7 +97,7 @@ const BanUser = () => {
           </h1>
           <div className=" flex justify-between items-center">
             <div className="relative">
-                <input
+                <input onChange={(e)=> dispatch(setSearchBanUser(e.target.value))}
                   type="text"
                   placeholder="Search"
                   className="search-input"
@@ -135,7 +141,13 @@ const BanUser = () => {
             </tr>
           </thead>
           <tbody className=" tracking-wide text-sm">
-            {banList?.map((user) => {
+            {banList?.filter(user => {
+              if(searchBanUser === ""){
+                return user
+              }else if(user?.name.toLowerCase().includes(searchBanUser.toLowerCase())){
+                return user
+              }
+            }).map((user) => {
               return (
                 <tr
                   key={user?.id}

@@ -10,13 +10,17 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../User/overview.css"
 import AddStock from './AddStock';
 import { FiPlus } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchStock } from '../../../Redux/Services/productSlice';
 
 const Stocks = () => {
     const [open,setOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetStocksQuery(token)
-    console.log(data?.data);
     const stocks = data?.data
+    const dispatch = useDispatch()
+    const searchStock = useSelector(state => state.productSlice.searchStock)
+    // console.log(stocks);
 
     const nav = useNavigate();
 
@@ -50,7 +54,7 @@ const Stocks = () => {
               </h1>
               <div className=" flex justify-between items-center">           
                   <form className="relative">
-                    <input
+                    <input onChange={(e)=> dispatch(setSearchStock(e.target.value))}
                       type="text"
                       placeholder="Search"
                       className="search-input"
@@ -95,7 +99,13 @@ const Stocks = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {stocks?.map((stock) => {
+              {stocks?.filter(stock => {
+                if(searchStock === ""){
+                  return stock
+                }else if(stock?.user_name.toLowerCase().includes(searchStock.toLowerCase())){
+                  return stock
+                }
+              }).map((stock) => {
                 return (
                   <tr
                     key={stock?.id}

@@ -4,12 +4,15 @@ import Loader from '../../Loader/Loader';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import "./products.css"
+import { useSelector } from 'react-redux';
 
 const ProductCard = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
-  // console.log(data);
   const products = data?.data
+  const searchProduct = useSelector(state => state.productSlice.searchProduct)
+  
+  // console.log(data);
 
   const nav = useNavigate();
   const route = () => {
@@ -25,7 +28,13 @@ const ProductCard = () => {
           : (
           <div className=' pl-2'>
              <div className=' flex flex-wrap gap-5'>
-                {products?.map(pd => {
+                {products?.filter(pd => {
+                if(searchProduct === ""){
+                  return pd
+                }else if(pd?.name.toLowerCase().includes(searchProduct.toLowerCase())){
+                  return pd
+                }
+              }).map(pd => {
                   return(
                     <Link to={`/inventory/product/productDetail/${pd?.id}`}  key={pd?.id}>
                       <div className='w-[200px] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card'>

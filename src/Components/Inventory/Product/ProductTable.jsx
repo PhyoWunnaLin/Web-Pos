@@ -7,6 +7,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import "../../User/overview.css"
+import { useSelector } from "react-redux";
 import AddStock from "../Stock/AddStock";
 
 const ProductTable = () => {
@@ -15,6 +16,8 @@ const ProductTable = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
   const products = data?.data
+  const searchProduct = useSelector(state => state.productSlice.searchProduct)
+  // console.log(searchProduct);
 
   const ref = useRef()
   useEffect(() => {
@@ -59,7 +62,13 @@ const ProductTable = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {products?.map((pd) => {
+              {products?.filter(pd => {
+                if(searchProduct === ""){
+                  return pd
+                }else if(pd?.name.toLowerCase().includes(searchProduct.toLowerCase())){
+                  return pd
+                }
+              }).map((pd) => {
                 return (
                   <tr
                     key={pd?.id}
