@@ -16,6 +16,7 @@ import ProductDetail from "../Components/Inventory/Product/productDetail";
 import BanUser from "../Components/User/BanUser";
 import Stocks from "../Components/Inventory/Stock/Stocks"
 import Brands from "../Components/Inventory/Brand/Brands";
+import EditUser from "../Components/User/EditUser/EditUser";
 
 const Path = () => {
   return (
@@ -26,6 +27,7 @@ const Path = () => {
         <Route path="/login" element={<Login/>} />
         <Route path="/user/overview" element={<Overview/>} />
         <Route path="/user/create" element={<CreateUser/>} />
+        <Route path="/user/edit" element={<EditUser/>} />
         <Route path="/user/detail/:id" element={<Detail/>} />
         <Route path="/user/ban" element={<BanUser/>} />
         <Route path="/profile/myAccount" element={<AdminProfile/>} />

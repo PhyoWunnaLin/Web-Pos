@@ -64,7 +64,6 @@ const ModalMedia = (props) => {
                 <Modal.Header>
                     <Modal.Title>Select an image</Modal.Title>
                     <Modal.CloseButton>
-                        <button><RxCross2 className=" text-white" /></button>
                     </Modal.CloseButton>
                 </Modal.Header>
 
