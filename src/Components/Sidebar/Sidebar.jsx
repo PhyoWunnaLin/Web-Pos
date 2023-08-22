@@ -57,7 +57,7 @@ const Sidebar = () => {
         <div className=" select-none">
 
             {/* navbar  */}
-            <div className=" flex justify-between items-center border-b border-[#3f4245] text-[#e8eaed] bg-[#202124] px-5 py-3 b-60 fixed w-full z-40">
+            <div className=" flex justify-between items-center border-b border-[#3f4245] text-[#e8eaed] bg-[#202124] px-5 py-3 b-60 fixed w-full z-50">
                 <h1 className=" font-semibold tracking-wider text-lg">MMS</h1>
                 <div className=" flex gap-5 items-center">
                     <p className=" text-xl">
@@ -74,7 +74,7 @@ const Sidebar = () => {
             {/* navbar end */}
 
             {/* sidebar  */}
-            <div className="text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] scrollbar overflow-y-auto fixed w-[210px] mt-[53px] h-screen pb-24">
+            <div className="text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] scrollbar overflow-y-auto fixed w-[210px] mt-[53px] h-screen pb-24 z-50">
 
                 {/* Overview  */}
                 <p className={` flex items-center gap-2 px-5 py-3 cursor-pointer sidebarLink`}>
