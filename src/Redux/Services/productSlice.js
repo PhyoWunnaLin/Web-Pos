@@ -5,7 +5,10 @@ const initialState = {
     brands: null,
     pdForm1: null,
     pdForm2: null,
-    pdForm3: null
+    pdForm3: null,
+    searchProduct: "",
+    searchBrand: "",
+    searchStock: ""
 }
 
 export const productSlice = createSlice({
@@ -32,9 +35,21 @@ export const productSlice = createSlice({
     setPdForm3 : (state,{payload}) => {
       state.pdForm3 = payload;
     },
+
+    setSearchProduct : (state,{payload}) => {
+      state.searchProduct = payload;
+    },
+
+    setSearchBrand : (state,{payload}) => {
+      state.searchBrand = payload;
+    },
+
+    setSearchStock : (state,{payload}) => {
+      state.searchStock = payload;
+    },
   },
 })
 
-export const { setActive, setBrands, setPdForm1, setPdForm2, setPdForm3 } = productSlice.actions
+export const { setActive, setBrands, setPdForm1, setPdForm2, setPdForm3, setSearchProduct, setSearchBrand, setSearchStock } = productSlice.actions
 
 export default productSlice.reducer

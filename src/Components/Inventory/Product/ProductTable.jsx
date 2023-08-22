@@ -7,12 +7,14 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import "../../User/overview.css"
+import { useSelector } from "react-redux";
 
 const ProductTable = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
   const products = data?.data
-  console.log(products);
+  const searchProduct = useSelector(state => state.productSlice.searchProduct)
+  // console.log(searchProduct);
 
   const nav = useNavigate();
   const route = (id) => {
@@ -39,7 +41,13 @@ const ProductTable = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {products?.map((pd) => {
+              {products?.filter(pd => {
+                if(searchProduct === ""){
+                  return pd
+                }else if(pd?.name.toLowerCase().includes(searchProduct.toLowerCase())){
+                  return pd
+                }
+              }).map((pd) => {
                 return (
                   <tr
                     key={pd?.id}

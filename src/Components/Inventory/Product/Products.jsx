@@ -7,7 +7,7 @@ import { TfiMenuAlt } from 'react-icons/tfi';
 import { TbBorderAll } from 'react-icons/tb';
 import ProductTable from './ProductTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActive } from '../../../Redux/Services/productSlice';
+import { setActive, setSearchProduct } from '../../../Redux/Services/productSlice';
 import ProductCard from './ProductCard';
 import Cookies from 'js-cookie';
 import NoContact from '../../NoContact/NoContact';
@@ -15,7 +15,7 @@ import NoContact from '../../NoContact/NoContact';
 const Products = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
-  console.log(data?.data?.length);
+  // console.log(data?.data?.length);
   const length = data?.data?.length
   const state = useSelector((state) => state.productSlice.active);
   const active = localStorage.getItem("productActive");
@@ -50,7 +50,7 @@ const Products = () => {
               </h1>
               <div className=" flex justify-between items-center">           
                   <form className="relative">
-                    <input
+                    <input onChange={(e)=> dispatch(setSearchProduct(e.target.value))}
                       type="text"
                       placeholder="Search"
                       className="search-input"

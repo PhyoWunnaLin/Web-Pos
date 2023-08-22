@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import "../../User/successAlert.css"
 import AddBrand from './AddBrand';
 import { FiPlus } from 'react-icons/fi';
-import { setBrands } from '../../../Redux/Services/productSlice';
+import { setBrands, setSearchBrand } from '../../../Redux/Services/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Brands = () => {
@@ -20,8 +20,9 @@ const Brands = () => {
     const [open,setOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetBrandsQuery(token);
-    // console.log(data?.data);
     const brands = useSelector(state => state.productSlice.brands) 
+    const searchBrand = useSelector(state => state.productSlice.searchBrand) 
+    // console.log(searchBrand);
     const dispatch = useDispatch()
     const ref = useRef()
     const ref2 = useRef()
@@ -107,7 +108,7 @@ const Brands = () => {
               </h1>
               <div className=" flex justify-between items-center">           
                   <form className="relative">
-                    <input
+                    <input onChange={(e)=> dispatch(setSearchBrand(e.target.value))}
                       type="text"
                       placeholder="Search"
                       className="search-input"
@@ -154,7 +155,13 @@ const Brands = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {brands?.map((brand) => {
+              {brands?.filter(brand => {
+                if(searchBrand === ""){
+                  return brand
+                }else if(brand?.name.toLowerCase().includes(searchBrand.toLowerCase())){
+                  return brand
+                }
+              }).map((brand) => {
                 return (
                   <tr
                     key={brand?.id}

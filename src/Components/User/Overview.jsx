@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import { BiEditAlt } from "react-icons/bi";
@@ -13,19 +13,26 @@ import "./successAlert.css"
 import Cookies from "js-cookie";
 import { useBanUserMutation, useGetUserListQuery } from "../../Redux/API/userApi";
 import NoContact from "../NoContact/NoContact";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchUnBanUser, setUsers } from "../../Redux/Services/userSlice";
 
 const Overview = () => {
   const token = Cookies.get("token")
   const {data, isLoading} = useGetUserListQuery(token);
   const [banUser] = useBanUserMutation();
-  // console.log(data?.users?.length);
-  const length = data?.users?.length
-  const userList = data?.users;
-  // console.log(userList);
+
+  const dispatch = useDispatch()
+  const users = useSelector(state => state.userSlice.users)
+  const userList = users?.users;
   const unBanList = userList?.filter(user => user?.banned == 0);
+  const searchUnBanUser = useSelector(state => state.userSlice.searchUnBanUser)
+  // console.log(searchUnBanUser);
 
   const nav = useNavigate();
-  
+
+  useEffect(()=>{
+    dispatch(setUsers(data))
+  },[data])
   const route = (id) => {
     nav(`/user/detail/${id}`);
   };
@@ -38,7 +45,7 @@ const Overview = () => {
       iconColor: "#E64848",
       background: "#161618",
       showCancelButton: true,
-      showCloseButton: true,
+      // showCloseButton: true,
       confirmButtonColor: '#E64848',
       cancelButtonColor: '#24262b',
       confirmButtonText: 'Ban User'
@@ -55,7 +62,7 @@ const Overview = () => {
             title: "Successfully baned an account",
             icon: "success",
             confirmButtonText: "OK",
-            showCloseButton: true,
+            // showCloseButton: true,
             width: 400,
             background: "#161618",
           })
@@ -93,7 +100,7 @@ const Overview = () => {
             </h1>
             <div className=" flex justify-between items-center">
               <form className="relative">
-                  <input
+                  <input onChange={(e)=> dispatch(setSearchUnBanUser(e.target.value))}
                     type="text"
                     placeholder="Search"
                     className="search-input"
@@ -137,7 +144,13 @@ const Overview = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {unBanList?.map((user) => {
+              {unBanList?.filter(user => {
+                if(searchUnBanUser === ""){
+                  return user
+                }else if(user?.name.toLowerCase().includes(searchUnBanUser.toLowerCase())){
+                  return user
+                }
+              }).map((user) => {
                 return (
                   <tr
                     key={user?.id}
