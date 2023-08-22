@@ -30,9 +30,22 @@ const ModalMedia = (props) => {
         setFile(e.dataTransfer.files[0].name)
     }
 
-    const selectImgHandler = (id,url)=>{
-        dispatch(setOnclickActive(id))
-        dispatch(setSelectImg(url))
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const selectImgHandler = (id, url) => {
+        if (selectedImage === url) {
+            setSelectedImage(null); // Deselect the image if it's already selected
+        } else {
+            setSelectedImage(url); // Select the clicked image
+            dispatch(setOnclickActive(id)); // Activate onclickActive for the clicked image
+        }
+    }
+
+    const insertImageHandler = () => {
+        if (selectedImage) {
+            dispatch(setSelectImg(selectedImage)); // Set the selected image in the Redux store
+            dispatch(setInsert(true)); // Insert the selected image
+        }
     }
 
     // const [opened, { open, close }] = useDisclosure(false);
@@ -106,7 +119,7 @@ const ModalMedia = (props) => {
                                 ${selectActive == img?.id && " hover:border-opacity-100" }
                                 ${onclickActive == img?.id && "modal-active border-opacity-100"}
                                 rounded border-2 border-blue-600 border-opacity-0`}>
-                                    <img src={img?.url} alt="" className=' rounded w-[161px] h-[161px] object-cover ' />
+                                    <img src={img?.url} alt="" className=' cursor-pointer rounded w-[161px] h-[161px] object-cover ' />
                                 </div>
                             )
                         })}
@@ -114,12 +127,11 @@ const ModalMedia = (props) => {
         
                         {onclickActive && (
                             <div className='flex justify-end'>
-                    <Modal.CloseButton>
-                    <button onClick={()=> dispatch(setInsert(true))} className=' btn'>INSERT</button>
+                                <Modal.CloseButton>
+                                <button onClick={insertImageHandler} className=' btn text-black'>INSERT</button>
 
-                    </Modal.CloseButton>
-
-                        </div>
+                                </Modal.CloseButton>
+                            </div>
                         )}
                     </div>
                         </div>

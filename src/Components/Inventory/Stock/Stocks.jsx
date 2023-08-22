@@ -102,7 +102,7 @@ const Stocks = () => {
               {stocks?.filter(stock => {
                 if(searchStock === ""){
                   return stock
-                }else if(stock?.user_name.toLowerCase().includes(searchStock.toLowerCase())){
+                }else if(stock?.product_name.toLowerCase().includes(searchStock.toLowerCase())){
                   return stock
                 }
               }).map((stock) => {
@@ -112,7 +112,7 @@ const Stocks = () => {
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
                     <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-start">{stock?.id}</td>
-                    <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-start">{stock?.product_id}</td>
+                    <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-start">{stock?.product_name}</td>
                     <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-start">{stock?.user_name}</td>
                     <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-end">{stock?.quantity}</td>
                     <td onClick={() => route(stock?.id)} className=" cursor-pointer p-4 text-start">{stock?.created_at}</td>

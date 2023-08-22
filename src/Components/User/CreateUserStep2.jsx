@@ -20,6 +20,7 @@ const CreateUserStep2 = ({currentStep}) => {
           Position
         </label>
         <select onChange={(e)=> setPosition(e.target.value)} className="input w-[70%]">
+          <option disabled>Select Position</option>
           <option value="staff">Staff</option>
           <option value="admin">Admin</option>
         </select>
