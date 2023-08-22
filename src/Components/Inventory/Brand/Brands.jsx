@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { BiSearch } from "react-icons/bi";
+import { BiSearch, BiTrash } from "react-icons/bi";
 import Loader from '../../Loader/Loader';
 import MainLayout from "../../../Layouts/MainLayout";
 import Banner2 from '../../Banner/Banner2';
 import NoContact from '../../NoContact/NoContact';
-import { useGetBrandsQuery } from '../../../Redux/API/inventoryApi';
+import { useDeleteBrandMutation, useGetBrandsQuery } from '../../../Redux/API/inventoryApi';
 import Cookies from "js-cookie"
 import { BiEditAlt } from "react-icons/bi";
 import { HiBan } from 'react-icons/hi'
@@ -20,6 +20,7 @@ const Brands = () => {
     const [open,setOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetBrandsQuery(token);
+    const [deleteBrand] = useDeleteBrandMutation();
     const brands = useSelector(state => state.productSlice.brands) 
     const searchBrand = useSelector(state => state.productSlice.searchBrand) 
     // console.log(searchBrand);
@@ -47,32 +48,39 @@ const Brands = () => {
       setOpen(!open);
     }
 
-  const banHandler = () => {
-    Swal.fire({
-      title: 'Do you want to ban this brand?',
-      icon: 'warning',
-      iconColor: "#E64848",
-      background: "#161618",
-      showCancelButton: true,
-      confirmButtonColor: '#E64848',
-      cancelButtonColor: '#24262b',
-      confirmButtonText: 'Ban brand'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          customClass : {
-            title: 'swal2-title',
-            popup: 'custom-swal-popup'
-          },
-          title: "Successfully baned a brand",
-          icon: "success",
-          confirmButtonText: "OK",
-          width: 400,
-          background: "#161618",
-        })
-      }
-    })
-  }
+    const handleDeleteBrand = (id) => {
+      Swal.fire({
+        title: 'Do you want to delete this brand?',
+        icon: 'warning',
+        iconColor: "#E64848",
+        background: "#161618",
+        showCancelButton: true,
+        // showCloseButton: true,
+        confirmButtonColor: '#E64848',
+        cancelButtonColor: '#24262b',
+        confirmButtonText: 'Delete'
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          const data = await deleteBrand({token,id})
+          console.log(data);
+          if(data?.data?.message){
+            Swal.fire({
+              customClass : {
+                title: 'swal2-title',
+                popup: 'custom-swal-popup'
+              },
+              title: "Successfully delete a brand",
+              icon: "success",
+              confirmButtonText: "OK",
+              // showCloseButton: true,
+              width: 400,
+              background: "#161618",
+            })
+          }
+          
+        }
+      })
+    }
 
   return (
     <MainLayout>
@@ -175,8 +183,8 @@ const Brands = () => {
                     <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-end">{brand?.description}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                      <p onClick={banHandler} className="hover-scale icon1 text-[#e94343]">
-                        <HiBan />
+                      <p onClick={() => handleDeleteBrand(brand?.id)} className="hover-scale icon1 text-[#e94343]">
+                        <BiTrash />
                       </p>
 
                       <span onClick={() => {
