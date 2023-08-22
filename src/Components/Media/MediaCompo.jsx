@@ -20,6 +20,18 @@ const MediaCompo = () => {
   const [file, setFile] = useState('');
   console.log(file);
 
+  const handleSubmit = async (files) => {
+    console.log(files);
+    const photos = new FormData();
+    for (let i = 0 ; i < files.length; i++){
+      photos.append("photos[]",files[i],files[i].name);
+    }
+
+    const data = await createPhoto({token,photos});
+    console.log(data);
+
+  }
+
   const handleDragLeave = (e) => {
     e.preventDefault();
     setHover(false);
@@ -28,25 +40,7 @@ const MediaCompo = () => {
     e.preventDefault();
     setHover(true);
   };
-  const handleDrop = async(e) => {
-    setFile(e.dataTransfer.files);
-      try{
-            e.preventDefault();
-            const photoData = await createPhoto({token,photo:file})
-            console.log(photoData);
-          }catch(error){
-            console.log(error);
-        }
-  };
-  const handleChange = async(files) => {
-    console.log(files)
-      try{
-            const photoData = await createPhoto({token,photo:files})
-            console.log(photoData);
-          }catch(error){
-            console.log(error);
-        }
-  };
+
   return (
     <div className="bg-[#202124] w-full flex justify-center">
       <div className="w-[95%] my-6 flex flex-col gap-8">
@@ -57,7 +51,7 @@ const MediaCompo = () => {
           onDropCapture={handleDragLeave}
           onDragLeave={handleDragLeave}
           onDragOver={handleDragOver}
-          onDrop={handleDrop}
+          onDrop={(e) => handleSubmit([...e.dataTransfer.files])}
           className={`${hover && " opacity-70"} drag w-full border border-[#7E7F80] bg-[#161618] rounded-md flex flex-col gap-8 p-10 py-14 duration-200`}
         >
           <div
@@ -77,11 +71,8 @@ const MediaCompo = () => {
               type="file"
               accept="image/jpg,image/jpeg"
               className="input-field"
-              name="photo"
               hidden
-              onChange={({ target: { files } }) => {
-                files && handleChange(files);
-              }}
+              onChange={(e) => handleSubmit([...e.target.files])}
             />
             <p
               onClick={() => {

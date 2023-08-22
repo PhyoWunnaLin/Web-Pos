@@ -2,16 +2,53 @@ import React from 'react'
 import {BiTrash} from 'react-icons/bi'
 import {BsFiles} from 'react-icons/bs'
 import './media.css'
-import { useGetPhotoQuery } from '../../Redux/API/mediaApi'
+import { useDeletePhotoMutation, useGetPhotoQuery } from '../../Redux/API/mediaApi'
 import Cookies from 'js-cookie'
 import Loader from '../Loader/Loader'
 import NoContact from '../NoContact/NoContact'
+import Swal from 'sweetalert2'
 
 const MediaTable = () => {
     const token = Cookies.get("token")
     const {data , isLoading} = useGetPhotoQuery(token);
+    const [deletePhoto] = useDeletePhotoMutation();
     console.log(data?.data);
     const medias = data?.data
+
+    const handleDeletePhoto = (id) => {
+        Swal.fire({
+          title: 'Do you want to delete this photo?',
+          icon: 'warning',
+          iconColor: "#E64848",
+          background: "#161618",
+          showCancelButton: true,
+          // showCloseButton: true,
+          confirmButtonColor: '#E64848',
+          cancelButtonColor: '#24262b',
+          confirmButtonText: 'Delete'
+        }).then(async(result) => {
+          if (result.isConfirmed) {
+            const data = await deletePhoto({token,id})
+            console.log(data);
+            if(data?.data?.message){
+              Swal.fire({
+                customClass : {
+                  title: 'swal2-title',
+                  popup: 'custom-swal-popup'
+                },
+                title: "Successfully delete a photo",
+                icon: "success",
+                confirmButtonText: "OK",
+                // showCloseButton: true,
+                width: 400,
+                background: "#161618",
+              })
+            }
+            
+          }
+        })
+      }
+
   return (
       <>
       {medias?.length == 0 ? (
@@ -48,7 +85,7 @@ const MediaTable = () => {
                                 <td className="p-4 text-end">{media?.created_at}</td>
                                 <td className="p-4 text-end">{media?.size}</td>
                                 <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                                   <span className=' text-white cursor-pointer hover:text-red-500 duration-300'><BiTrash size={16}/></span> 
+                                   <span onClick={() => handleDeletePhoto(media?.id)} className=' text-white cursor-pointer hover:text-red-500 duration-300'><BiTrash size={16}/></span> 
                                    <span className=' text-white cursor-pointer hover:text-[#8AB4F8]'><BsFiles/></span> 
                                 </td>
                             </tr>

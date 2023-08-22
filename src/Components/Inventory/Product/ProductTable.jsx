@@ -1,23 +1,59 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useGetProductsQuery } from "../../../Redux/API/inventoryApi";
+import { useDeleteProductMutation, useGetProductsQuery } from "../../../Redux/API/inventoryApi";
 import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../Loader/Loader";
 import { AiOutlinePlus } from "react-icons/ai";
-import { BiEditAlt } from "react-icons/bi";
+import { BiEditAlt, BiTrash } from "react-icons/bi";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import "../../User/overview.css"
 import { useSelector } from "react-redux";
 import AddStock from "../Stock/AddStock";
+import Swal from "sweetalert2";
 
 const ProductTable = () => {
   const [id,setId] = useState(null);
   const [open,setOpen] = useState(false);
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
+  const [deleteProduct] = useDeleteProductMutation();
   const products = data?.data
   const searchProduct = useSelector(state => state.productSlice.searchProduct)
   // console.log(searchProduct);
+
+  const handleDeleteProduct = (id) => {
+    Swal.fire({
+      title: 'Do you want to delete this product?',
+      icon: 'warning',
+      iconColor: "#E64848",
+      background: "#161618",
+      showCancelButton: true,
+      // showCloseButton: true,
+      confirmButtonColor: '#E64848',
+      cancelButtonColor: '#24262b',
+      confirmButtonText: 'Delete'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        const data = await deleteProduct({token,id})
+        console.log(data);
+        if(data?.data?.message){
+          Swal.fire({
+            customClass : {
+              title: 'swal2-title',
+              popup: 'custom-swal-popup'
+            },
+            title: "Successfully delete a product",
+            icon: "success",
+            confirmButtonText: "OK",
+            // showCloseButton: true,
+            width: 400,
+            background: "#161618",
+          })
+        }
+        
+      }
+    })
+  }
 
   const ref = useRef()
   useEffect(() => {
@@ -82,6 +118,7 @@ const ProductTable = () => {
                     <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.total_stock}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
+                      <span onClick={() => handleDeleteProduct(pd?.id)} className="icon1 hover-scale"><BiTrash className="text-[#e94343]"/></span>
                       <p onClick={() => {
                         setId(pd?.id);
                         setOpen(!open)
@@ -91,7 +128,7 @@ const ProductTable = () => {
                       <span className=" icon1 hover-scale">
                         <BiEditAlt />
                       </span>
-                      <span className=" icon1 hover-scale">
+                      <span onClick={() => route(pd?.id)} className=" icon1 hover-scale">
                         <HiArrowNarrowRight />
                       </span>
                     </td>
