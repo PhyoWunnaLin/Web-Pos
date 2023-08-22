@@ -3,7 +3,7 @@ import MainLayout from '../../../Layouts/MainLayout'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
-import { useEditProductMutation } from '../../../Redux/API/inventoryApi';
+import { useEditProductMutation, useGetProductDetailQuery } from '../../../Redux/API/inventoryApi';
 import Banner2 from '../../Banner/Banner2';
 import EditProductStep1 from './EditProductStep1';
 import EditProductStep2 from './EditProductStep2';
@@ -11,6 +11,8 @@ import EditProductStep3 from './EditProductStep3';
 import EditProductStep4 from './EditProductStep4';
 import { TiTick } from 'react-icons/ti';
 import { ImArrowRight2 } from 'react-icons/im';
+import Loader from '../../Loader/Loader';
+import Swal from 'sweetalert2';
 
 const EditProduct = () => {
     const {id} = useParams();
@@ -19,6 +21,9 @@ const EditProduct = () => {
     const [complete, setComplete] = useState(false);
     const nav = useNavigate();
     const token = Cookies.get("token")
+    const {data , isLoading} = useGetProductDetailQuery({token,id});
+    console.log(data?.data);
+    const detail = data?.data
     const [editProduct] = useEditProductMutation();
     const form1 = useSelector(state => state.productSlice.editPdForm1)
     const form2 = useSelector(state => state.productSlice.editPdForm2)
@@ -27,8 +32,8 @@ const EditProduct = () => {
     const editProductHandler = async(e)=>{
         try{
           e.preventDefault();
-          const pdData = {name: form1?.name, brand_id: form1?.brand_id, actual_price: form2?.realPrice, sale_price: form2?.price, unit: form1?.unit, more_information: form1?.more_information, photo: form3 }
-          const data = await editProduct({token,id,pdData})
+          const newData = {name: form1?.name, brand_id: form1?.brand_id, actual_price: form2?.realPrice, sale_price: form2?.price, unit: form1?.unit, more_information: form1?.more_information, photo: form3 }
+          const data = await editProduct({token,id,newData})
           console.log(data)
           if(data?.data){
             showAlert()
@@ -70,22 +75,22 @@ const EditProduct = () => {
             route={"/inventory/products"}
           />
           {/* form  */}
-          <div className="flex gap-10">
+          {isLoading ? <div><Loader/></div> : <div className="flex gap-10">
             <div className="w-[65%]">
               <div className={`${currentStep == 1 ? "block" : " hidden"}`}>
-              <EditProductStep1 currentStep={currentStep} id={id}/>
+              <EditProductStep1 currentStep={currentStep} detail={detail}/>
               </div>
 
               <div className={`${currentStep == 2 ? "block" : " hidden"}`}>
-              <EditProductStep2 currentStep={currentStep} id={id}/>
+              <EditProductStep2 currentStep={currentStep} detail={detail}/>
               </div>
 
               <div className={`${currentStep == 3 ? "block" : " hidden"}`}>
-              <EditProductStep3 currentStep={currentStep} id={id}/>
+              <EditProductStep3 currentStep={currentStep} detail={detail}/>
               </div>
 
               <div className={`${currentStep == 4 ? "block" : " hidden"}`}>
-              <EditProductStep4 currentStep={currentStep} id={id}/>
+              <EditProductStep4 currentStep={currentStep} detail={detail}/>
               </div>
            
             </div>
@@ -135,7 +140,7 @@ const EditProduct = () => {
                 </Link>
               </div>
             </div>
-          </div>
+          </div>}
         </div>
       </div>
     </MainLayout>
