@@ -73,6 +73,9 @@ const ProductTable = () => {
   const route = (id) => {
     nav(`/inventory/product/productDetail/${id}`);
   };
+  const route2 = (id) => {
+    nav(`/inventory/product/editProduct/${id}`);
+  };
 
   return (
     <>
@@ -125,7 +128,7 @@ const ProductTable = () => {
                       }} className="hover-scale icon1">
                         <AiOutlinePlus />
                       </p>
-                      <span className=" icon1 hover-scale">
+                      <span onClick={() => route2(pd?.id)} className=" icon1 hover-scale">
                         <BiEditAlt />
                       </span>
                       <span onClick={() => route(pd?.id)} className=" icon1 hover-scale">

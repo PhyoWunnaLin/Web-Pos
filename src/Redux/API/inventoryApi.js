@@ -40,6 +40,16 @@ export const inventoryApi = createApi({
       invalidatesTags: ["inventory"],
     }),
 
+    editProduct: builder.mutation({
+      query: ({ token, id, newData }) => ({
+        url: `/product/${id}`,
+        method: "PUT",
+        body: newData,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      invalidatesTags: ["inventory"],
+    }),
+
     getStocks: builder.query({
       query: (token) => ({
         url: "/stock",
@@ -94,14 +104,14 @@ export const inventoryApi = createApi({
       invalidatesTags: ["inventory"],
     }),
 
-    deleteBrand:builder.mutation({
+    deleteBrand: builder.mutation({
       query: ({ token, id }) => ({
         url: `/brand/${id}`,
-        method:"DELETE",
+        method: "DELETE",
         headers: { authorization: `Bearer ${token}` },
       }),
-      invalidatesTags:["inventory"]
-    })
+      invalidatesTags: ["inventory"],
+    }),
   }),
 });
 export const {
@@ -115,5 +125,6 @@ export const {
   useCreateProductMutation,
   useCreateStockMutation,
   useDeleteProductMutation,
-  useDeleteBrandMutation
+  useDeleteBrandMutation,
+  useEditProductMutation
 } = inventoryApi;
