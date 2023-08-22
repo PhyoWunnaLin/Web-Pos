@@ -168,9 +168,12 @@ const Overview = () => {
                       </p>
                       </Link>
 
-                      <span className=" icon1 hover-scale">
+                      <Link to={'/user/edit'}>
+                      <p className=" icon1 hover-scale">
                         <BiEditAlt />
-                      </span>
+                      </p>
+                      </Link>
+                      
                       <span className=" icon1 hover-scale">
                         <HiArrowNarrowRight />
                       </span>
