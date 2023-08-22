@@ -8,9 +8,9 @@ import { CiShop } from 'react-icons/ci';
 const EditProductStep4 = () => {
     const token = Cookies.get("token");
     const dispatch = useDispatch();
-    const form1 = useSelector(state => state.productSlice.pdForm1)
-    const form2 = useSelector(state => state.productSlice.pdForm2)
-    const form3 = useSelector(state => state.productSlice.pdForm3)
+    const form1 = useSelector(state => state.productSlice.editPdForm1)
+    const form2 = useSelector(state => state.productSlice.editPdForm2)
+    const form3 = useSelector(state => state.productSlice.editPdForm3)
     const {data} = useGetBrandsQuery(token);
     const brandId = form1?.brand_id
     const products = data?.data

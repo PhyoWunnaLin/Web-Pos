@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setEditPdForm2 } from '../../../Redux/Services/productSlice'
 
-const EditProductStep2 = ({currentStep}) => {
-    const [price,setPrice] = useState("")
-    const [realPrice,setRealPrice] = useState("")
+const EditProductStep2 = ({currentStep , detail}) => {
+    const [price,setPrice] = useState(detail?.sale_price)
+    const [realPrice,setRealPrice] = useState(detail?.actual_price)
     const pdData = {price, realPrice}
     const dispatch = useDispatch()
   
@@ -17,7 +17,7 @@ const EditProductStep2 = ({currentStep}) => {
           <label className="text-[#FFFFFF] font-medium tracking-wider">
             Actual-Price
           </label>
-          <input onChange={(e)=> setRealPrice(e.target.value)}
+          <input value={realPrice} onChange={(e)=> setRealPrice(e.target.value)}
             type="text"
             className="input w-[70%]"
           />
@@ -26,7 +26,7 @@ const EditProductStep2 = ({currentStep}) => {
           <label className="text-[#FFFFFF] font-medium tracking-wider">
             Sale-Price
           </label>
-          <input onChange={(e)=> setPrice(e.target.value)} type="text" className="input w-[70%]" />
+          <input value={price} onChange={(e)=> setPrice(e.target.value)} type="text" className="input w-[70%]" />
         </div>
       </form>
   )
