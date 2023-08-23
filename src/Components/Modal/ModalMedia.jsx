@@ -151,7 +151,7 @@ const ModalMedia = (props) => {
         
                         {onclickActive && (
                                 <Modal.CloseButton>
-                            <div className=' mr-28'>
+                            <div className=' mr-28 mt-5'>
                                 <button onClick={insertImageHandler} className=' btn text-black'>INSERT</button>
 
                             </div>
