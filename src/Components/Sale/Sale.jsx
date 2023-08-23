@@ -6,6 +6,7 @@ import { MdOutlineNotificationsActive } from "react-icons/md";
 import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
 import { Loader } from "@mantine/core";
 import { Link } from "react-router-dom";
+import SaleCalc from "./SaleCalc";
 
 const Sale = () => {
   const token = Cookies.get("token");
@@ -31,9 +32,9 @@ const Sale = () => {
       {/* cashier  */}
       <div className="flex mt-[53px]">
         {/* product  */}
-        <div className="w-[65%] flex flex-col gap-5">
+        <div className="w-[70%] flex flex-col gap-5">
           {/* banner  */}
-          <div className="w-f flex justify-between items-center border-b border-[#3f4245] py-5 px-5">
+          <div className=" flex justify-between items-center border-b border-[#3f4245] py-5 px-5">
             <div className="w-[50%] flex gap-4">
               <p className="text-[hsl(0,3%,76%)] tracking-wide">
                 Sale <span className="text-[#8ab4f8]">/</span> Cashier{" "}
@@ -90,7 +91,9 @@ const Sale = () => {
           </div>
         </div>
         {/* calculator */}
-        <div></div>
+        <div className="w-[30%] fixed top-0 right-0">
+          <SaleCalc/>
+        </div>
       </div>
     </div>
   );
