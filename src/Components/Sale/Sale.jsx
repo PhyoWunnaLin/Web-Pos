@@ -5,13 +5,19 @@ import { BsFillMoonStarsFill, BsPersonCircle } from "react-icons/bs";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
 import { Loader } from "@mantine/core";
-import { Link } from "react-router-dom";
 import SaleCalc from "./SaleCalc";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchSaleProduct } from "../../Redux/Services/saleSlice";
 
 const Sale = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
   const products = data?.data;
+  const searchSaleProduct = useSelector(
+    (state) => state.saleSlice.searchSaleProduct
+  );
+  const dispatch = useDispatch();
+
   return (
     <div className="relative">
       {/* navbar  */}
@@ -44,6 +50,7 @@ const Sale = () => {
             </div>
             <form className="relative">
               <input
+                onChange={(e) => dispatch(setSearchSaleProduct(e.target.value))}
                 type="text"
                 placeholder="Search"
                 className="search-input"
@@ -60,11 +67,20 @@ const Sale = () => {
                 <Loader />
               </div>
             ) : (
-              <div className=" pl-2">
+              <div className="mx-5">
                 <div className=" flex flex-wrap gap-5">
-                  {products.map((pd) => {
+                  {products.filter((pd) => {
+                      if (searchSaleProduct === "") {
+                        return pd;
+                      } else if (pd?.name.toLowerCase().includes(searchSaleProduct.toLowerCase())) {
+                        return pd;
+                      }
+                    }).map((pd) => {
                       return (
-                        <div key={pd?.id} className="w-[200px] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card">
+                        <div
+                          key={pd?.id}
+                          className="w-[23.2%] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card"
+                        >
                           <img
                             src={
                               pd?.photo
@@ -92,7 +108,7 @@ const Sale = () => {
         </div>
         {/* calculator */}
         <div className="w-[30%] fixed top-0 right-0">
-          <SaleCalc/>
+          <SaleCalc />
         </div>
       </div>
     </div>
