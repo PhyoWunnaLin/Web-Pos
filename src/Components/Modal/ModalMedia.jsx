@@ -8,6 +8,7 @@ import { useCreatePhotoMutation, useGetPhotoQuery } from '../../Redux/API/mediaA
 import Cookies from 'js-cookie';
 import ImageLoader from '../Loader/ImageLoader';
 import { RxCross2 } from 'react-icons/rx';
+import Swal from 'sweetalert2';
 // import { useDisclosure } from '@mantine/hooks';
 
 const ModalMedia = (props) => {
@@ -23,7 +24,7 @@ const ModalMedia = (props) => {
     // console.log(selectActive);
 
     const handleSubmit = async (files) => {
-        console.log(files);
+        // console.log(files);
         const photos = new FormData();
         for (let i = 0 ; i < files.length; i++){
           photos.append("photos[]",files[i],files[i].name);
@@ -31,6 +32,20 @@ const ModalMedia = (props) => {
     
         const data = await createPhoto({token,photos});
         console.log(data);
+        
+        if(data?.data?.message){
+          Swal.fire({
+            customClass: {
+              title: "swal2-title",
+            },
+            title: "Successfully upload photo",
+            icon: "success",
+            confirmButtonText: "OK",
+            // showCloseButton: true,
+            width: 400,
+            background: "#161618",
+          });
+        }
     
       }
 
@@ -102,7 +117,7 @@ const ModalMedia = (props) => {
                         accept="image/*"
                         className="input-field"
                         hidden
-                        onChange={(e)=>handleSubmit([...e.target.files])}
+                        onChange={(e) => handleSubmit([...e.target.files])}
                         />
                         <p
                         onClick={() => {
@@ -135,12 +150,12 @@ const ModalMedia = (props) => {
                         </div>
         
                         {onclickActive && (
-                            <div className='flex justify-end'>
                                 <Modal.CloseButton>
+                            <div className=' mr-28'>
                                 <button onClick={insertImageHandler} className=' btn text-black'>INSERT</button>
 
-                                </Modal.CloseButton>
                             </div>
+                                </Modal.CloseButton>
                         )}
                     </div>
                         </div>
