@@ -35,7 +35,7 @@ const Recent = () => {
                 {userList?.length == 0 ? 
           
           // no user 
-          <NoContact image={"https://img.freepik.com/free-icon/user_318-215753.jpg?t=st=1692434065~exp=1692434665~hmac=2980c4d803170dbf42c0125a36bc3a7bb74abd9db2f59410965813f7c678e325"} title1={"No User !"} title2={"Please Create User"} />
+          <NoContact image={"https://static.thenounproject.com/png/3518204-200.png"} size={"w-[60%]"} title1={"No Recent Voucher !"} />
 
            : 
           
@@ -43,7 +43,7 @@ const Recent = () => {
             {/* banner2  */}
           <div className="flex flex-col gap-3">
             <h1 className=" text-white font-medium text-2xl tracking-wide">
-                  Staff Overview
+                  Sale Overview
             </h1>
             <div className=" flex justify-between items-center">
               <form className="relative">

@@ -1,10 +1,10 @@
 import React from 'react'
 import { useGetProductsQuery } from '../../../Redux/API/inventoryApi';
-import Loader from '../../Loader/Loader';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import "./products.css"
 import { useSelector } from 'react-redux';
+import ImageLoader from '../../Loader/ImageLoader';
 
 const ProductCard = () => {
   const token = Cookies.get("token");
@@ -23,7 +23,7 @@ const ProductCard = () => {
     <div>
       {isLoading ? (
           <div className=" ">
-            <Loader/>
+            <ImageLoader/>
           </div>) 
           : (
           <div className=' pl-2'>

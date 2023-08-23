@@ -5,19 +5,24 @@ import { useDisclosure } from '@mantine/hooks';
 import ModalMedia from '../Modal/ModalMedia';
 import { useDispatch, useSelector } from "react-redux";
 import { setUserForm3 } from "../../Redux/Services/userSlice";
-import { setInsert, setSelectImg } from '../../Redux/Services/mediaSlice';
+import { setInsert } from '../../Redux/Services/mediaSlice';
 
 const CreateUserStep3 = ({currentStep}) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const selectImg = useSelector(state => state.mediaSlice.selectImg)
   const dispatch = useDispatch()
   const insert = useSelector(state => state.mediaSlice.insert)
   const userForm3 = useSelector(state => state.userSlice.userForm3)
+  const userSelectImg = useSelector(state => state.mediaSlice.userSelectImg)
+
+
+  useEffect(()=>{
+    dispatch(setInsert(false))
+  },[])
 
   
   useEffect(()=>{
-    dispatch(setUserForm3(selectImg))
-  },[currentStep,selectImg])
+    dispatch(setUserForm3(userSelectImg))
+  },[currentStep,userSelectImg])
 
   const clearImgHandler = (e)=>{
     e.preventDefault()
@@ -34,7 +39,7 @@ const CreateUserStep3 = ({currentStep}) => {
         <div
         onClick={open}
        className=' cursor-pointer w-[150px] h-[150px] bg-[#202124] rounded-full mx-auto border-dashed border-2 border-[#8AB4F8] flex justify-center items-center relative'>
-        <img src={selectImg} className='w-[150px] h-[150px] object-cover absolute rounded-full' alt="" />
+        <img src={userSelectImg} className='w-[150px] h-[150px] object-cover absolute rounded-full' alt="" />
         <div className='h-7 w-7 hover:bg-[#c1c5cc] hover:scale-[1.1] duration-200 rounded-full flex items-center bg-white justify-center absolute right-4 bottom-0'>
           <BiSolidEditAlt size={18}/>
         </div>

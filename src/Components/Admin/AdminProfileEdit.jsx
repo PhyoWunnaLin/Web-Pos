@@ -17,13 +17,16 @@ import { useGetProfileQuery } from '../../Redux/API/adminApi';
 import Loader from '../Loader/Loader';
 import ModalMedia from '../Modal/ModalMedia';
 import { useDisclosure } from "@mantine/hooks";
+import { PiUserFocus } from 'react-icons/pi';
 
 const AdminProfileEdit = () => {
     const [opened, { open, close }] = useDisclosure(false);
     const token = Cookies.get("token");
     const {data, isLoading} = useGetProfileQuery(token);
     const user = data?.user;
-    // console.log(user);
+    const adminSelectImg = useSelector(state => state.mediaSlice.adminSelectImg)
+
+    console.log(adminSelectImg);
 
     const dispatch = useDispatch();
 
@@ -47,13 +50,29 @@ const AdminProfileEdit = () => {
                 {/* profile img  */}
                 <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                     <div className=' absolute top-[-70px] left-[33px]'>
-                    <div onClick={open} className=' cursor-pointer relative rounded-full w-[150px] h-[150px]'>
-                            <img src={user?.photo ? user?.photo :"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                    {user?.photo ? (
+                      <div onClick={open} className=' cursor-pointer relative rounded-full w-[150px] h-[150px]'>
+                        <img src={user?.photo ? user?.photo : adminSelectImg} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
 
-                            <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
-                            <BiSolidEditAlt size={18}/>
-                            </div>
+                        <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
+                        <BiSolidEditAlt size={18}/>
                         </div>
+                      </div>
+                    ) : (
+                      <div
+                      onClick={open}
+                     className=' cursor-pointer w-[150px] h-[150px] bg-[#202124] rounded-full mx-auto border-dashed border-2 border-[#8AB4F8] flex justify-center items-center relative'>
+                      {adminSelectImg ? (
+                        <img src={user?.photo ? user?.photo : adminSelectImg} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                      ): (
+                      <PiUserFocus className=' text-white' size={45}/>
+                      )}
+                      <div className='h-7 w-7 hover:bg-[#c1c5cc] hover:scale-[1.1] duration-200 rounded-full flex items-center bg-white justify-center absolute right-4 bottom-0'>
+                        <BiSolidEditAlt size={18}/>
+                      </div>
+                    </div>
+                    )}
+
                     </div>
 
                     <div className= " flex justify-between w-full">

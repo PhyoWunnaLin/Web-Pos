@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiFillClockCircle } from 'react-icons/ai'
 import { BiSolidEditAlt } from 'react-icons/bi'
 import { BsTelephoneOutbound } from 'react-icons/bs'
@@ -9,6 +9,7 @@ import { setUserCreatePp } from '../../../Redux/Services/profileSlice'
 import { useGetBrandsQuery } from '../../../Redux/API/inventoryApi'
 import {PiUserFocus} from 'react-icons/pi'
 import Cookies from 'js-cookie'
+import { setInsert } from '../../../Redux/Services/mediaSlice'
 
 const AddProductStep4 = () => {
   const token = Cookies.get("token");
@@ -22,7 +23,7 @@ const AddProductStep4 = () => {
   const brandName = brandId && products?.filter((product) => product?.id == brandId);
   const name = brandName && brandName[0]?.name;
   const userCreatePp = useSelector(state => state.profileSlice.userCreatePp);
-  
+
   return (
     <div className="">
       {/* Profile  */}
