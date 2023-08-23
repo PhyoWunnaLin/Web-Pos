@@ -38,6 +38,7 @@ const Products = () => {
             button1={true}
             button2={true}
             route={"/inventory/addProduct"}
+            route2={"/sale/cashier"}
           />
           {length == 0  ? 
 
