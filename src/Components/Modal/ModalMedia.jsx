@@ -1,27 +1,28 @@
 import React, {useState, useEffect} from 'react'
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectActive, setOnclickActive, setSelectImg, setInsert } from '../../Redux/Services/mediaSlice';
+import { setSelectActive, setOnclickActive,setPdSelectImg, setInsert, setUserSelectImg, setAdminSelectImg } from '../../Redux/Services/mediaSlice';
 import "./modalMedia.css"
 import { Modal} from '@mantine/core';
 import { useCreatePhotoMutation, useGetPhotoQuery } from '../../Redux/API/mediaApi';
 import Cookies from 'js-cookie';
 import ImageLoader from '../Loader/ImageLoader';
-import { RxCross2 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
+import { useLocation } from 'react-router-dom';
 // import { useDisclosure } from '@mantine/hooks';
 
 const ModalMedia = (props) => {
     const token = Cookies.get("token")
     const {data} = useGetPhotoQuery(token);
     const mediaData = data?.data
-  const [createPhoto, {isLoading}] = useCreatePhotoMutation();
-    // console.log(mediaData);
+    const [createPhoto, {isLoading}] = useCreatePhotoMutation();
+    const location = useLocation()
+    const path = location.pathname
 
     const dispatch = useDispatch();
     const selectActive = useSelector((state) => state.mediaSlice.selectActive);
     const onclickActive = useSelector((state) => state.mediaSlice.onclickActive);
-    // console.log(selectActive);
+    console.log(path);
 
     const handleSubmit = async (files) => {
         // console.log(files);
@@ -63,9 +64,15 @@ const ModalMedia = (props) => {
     }
 
     const insertImageHandler = () => {
-        if (selectedImage) {
-            dispatch(setSelectImg(selectedImage)); // Set the selected image in the Redux store
+        if(path == "/inventory/addProduct") {
+            dispatch(setPdSelectImg(selectedImage)); // Set the selected image in the Redux store
             dispatch(setInsert(true)); // Insert the selected image
+        }else if(path == "/user/create"){
+            dispatch(setUserSelectImg(selectedImage)); 
+            dispatch(setInsert(true)); 
+        }else if(path == "/profile/edit"){
+            dispatch(setAdminSelectImg(selectedImage)); 
+            dispatch(setInsert(true));    
         }
     }
 

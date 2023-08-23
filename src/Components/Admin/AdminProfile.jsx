@@ -12,6 +12,9 @@ import { setAdminPp } from '../../Redux/Services/profileSlice'
 import Cookies from 'js-cookie';
 import { useGetProfileQuery } from '../../Redux/API/adminApi';
 import Loader from '../Loader/Loader';
+import { PiUserFocus } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
+import person from "../../assets/person.jpg"
 
 const AdminProfile = () => {
   const token = Cookies.get("token");
@@ -43,13 +46,19 @@ const AdminProfile = () => {
                 {/* profile img  */}
                 <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                     <div className=' absolute top-[-70px] left-[33px]'>
-                    <div className=' relative rounded-full w-[150px] h-[150px]'>
-                            <img src={admin?.photo ? admin?.photo :"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
-
-                            {/* <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
-                            <BiSolidEditAlt size={18}/>
-                            </div> */}
+                    {admin?.photo ? (
+                      <Link to={"/profile/edit"}>
+                        <div className=' cursor-pointer relative rounded-full w-[150px] h-[150px]'>
+                        <img src={admin?.photo && admin?.photo} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
                         </div>
+                      </Link>
+                    ) : (
+                      <Link to={"/profile/edit"}>
+                        <div className=' cursor-pointer relative rounded-full w-[150px] h-[150px]'>
+                        <img src={person} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                        </div>
+                      </Link>
+                    )}
                     </div>
 
                     <div className= " flex justify-between w-full">

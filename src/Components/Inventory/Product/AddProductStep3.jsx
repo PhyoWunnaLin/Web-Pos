@@ -14,13 +14,16 @@ const AddProductStep3 = ({currentStep}) => {
   // const pd = useSelector(state => state.productSlice.pdForm2)
   // console.log(pd)
   const dispatch = useDispatch()
-  const selectImg = useSelector(state => state.mediaSlice.selectImg)
+  const pdSelectImg = useSelector(state => state.mediaSlice.pdSelectImg)
   const insert = useSelector(state => state.mediaSlice.insert)
 
+  useEffect(()=>{
+    dispatch(setInsert(false))
+  },[])
 
   useEffect(()=>{
-    dispatch(setPdForm3(selectImg))
-  },[currentStep,selectImg])
+    dispatch(setPdForm3(pdSelectImg))
+  },[currentStep,pdSelectImg])
 
   const clearImgHandler = (e)=>{
     e.preventDefault()
@@ -39,7 +42,7 @@ const AddProductStep3 = ({currentStep}) => {
         <div
         onClick={open}
        className=' cursor-pointer w-[150px] h-[150px] bg-[#202124] rounded-full mx-auto border-dashed border-2 border-[#8AB4F8] flex justify-center items-center relative'>
-        <img src={selectImg} className='w-[150px] h-[150px] object-cover absolute rounded-full' alt="" />
+        <img src={pdSelectImg} className='w-[150px] h-[150px] object-cover absolute rounded-full' alt="" />
         <div className='h-7 w-7 hover:bg-[#c1c5cc] hover:scale-[1.1] duration-200 rounded-full flex items-center bg-white justify-center absolute right-4 bottom-0'>
           <BiSolidEditAlt size={18}/>
         </div>
