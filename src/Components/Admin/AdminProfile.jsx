@@ -46,10 +46,10 @@ const AdminProfile = () => {
                 {/* profile img  */}
                 <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                     <div className=' absolute top-[-70px] left-[33px]'>
-                    {admin?.photo ? (
+                    {admin?.user_photo ? (
                       <Link to={"/profile/edit"}>
                         <div className=' cursor-pointer relative rounded-full w-[150px] h-[150px]'>
-                        <img src={admin?.photo && admin?.photo} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                        <img src={admin?.user_photo && admin?.user_photo} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
                         </div>
                       </Link>
                     ) : (

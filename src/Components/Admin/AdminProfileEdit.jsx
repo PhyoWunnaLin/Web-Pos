@@ -18,6 +18,8 @@ import Loader from '../Loader/Loader';
 import ModalMedia from '../Modal/ModalMedia';
 import { useDisclosure } from "@mantine/hooks";
 import { PiUserFocus } from 'react-icons/pi';
+import { setAdminSelectImg } from '../../Redux/Services/mediaSlice';
+import person from "../../assets/person.jpg"
 
 const AdminProfileEdit = () => {
     const [opened, { open, close }] = useDisclosure(false);
@@ -26,7 +28,12 @@ const AdminProfileEdit = () => {
     const user = data?.user;
     const adminSelectImg = useSelector(state => state.mediaSlice.adminSelectImg)
 
-    console.log(adminSelectImg);
+    // console.log(user);
+
+    const clearImgHandler = (e)=>{
+      e.preventDefault()
+      dispatch(setAdminSelectImg(person))
+    }
 
     const dispatch = useDispatch();
 
@@ -50,20 +57,27 @@ const AdminProfileEdit = () => {
                 {/* profile img  */}
                 <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                     <div className=' absolute top-[-70px] left-[33px]'>
-                    {user?.photo ? (
-                      <div onClick={open} className=' cursor-pointer relative rounded-full w-[150px] h-[150px]'>
-                        <img src={user?.photo ? user?.photo : adminSelectImg} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                    {user?.user_photo? (
+                      <div>
+                        <div onClick={open} className=' cursor-pointer relative rounded-full w-[150px] h-[150px]'>
+                        <img src={adminSelectImg ? adminSelectImg : user?.user_photo} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
 
                         <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
                         <BiSolidEditAlt size={18}/>
                         </div>
+
                       </div>
+                        <div className=' text-center'>
+                        <button onClick={clearImgHandler} className='bg-transparent border border-[#7E7F80] rounded-md hover:bg-[#24262b] duration-300 text-xs text-[#7E7F80] px-1 mt-2 py-1'>remove photo</button>
+                        </div>
+                      </div>
+
                     ) : (
                       <div
                       onClick={open}
                      className=' cursor-pointer w-[150px] h-[150px] bg-[#202124] rounded-full mx-auto border-dashed border-2 border-[#8AB4F8] flex justify-center items-center relative'>
                       {adminSelectImg ? (
-                        <img src={user?.photo ? user?.photo : adminSelectImg} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                        <img src={adminSelectImg} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
                       ): (
                       <PiUserFocus className=' text-white' size={45}/>
                       )}
