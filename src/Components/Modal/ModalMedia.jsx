@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectActive, setOnclickActive, setSelectImg, setInsert } from '../../Redux/Services/mediaSlice';
 import "./modalMedia.css"
 import { Modal} from '@mantine/core';
-import { useGetPhotoQuery } from '../../Redux/API/mediaApi';
+import { useCreatePhotoMutation, useGetPhotoQuery } from '../../Redux/API/mediaApi';
 import Cookies from 'js-cookie';
 import ImageLoader from '../Loader/ImageLoader';
 import { RxCross2 } from 'react-icons/rx';
@@ -12,8 +12,9 @@ import { RxCross2 } from 'react-icons/rx';
 
 const ModalMedia = (props) => {
     const token = Cookies.get("token")
-    const {data, isLoading} = useGetPhotoQuery(token);
+    const {data} = useGetPhotoQuery(token);
     const mediaData = data?.data
+  const [createPhoto, {isLoading}] = useCreatePhotoMutation();
     // console.log(mediaData);
 
     const dispatch = useDispatch();
@@ -21,14 +22,19 @@ const ModalMedia = (props) => {
     const onclickActive = useSelector((state) => state.mediaSlice.onclickActive);
     // console.log(selectActive);
 
-    const [file, setFile] = useState("No Selected File");
-    const handleDragOver = (e) => {
-        e.preventDefault();
-    }
-    const handleDrop = (e) => {
-        e.preventDefault();
-        setFile(e.dataTransfer.files[0].name)
-    }
+    const handleSubmit = async (files) => {
+        console.log(files);
+        const photos = new FormData();
+        for (let i = 0 ; i < files.length; i++){
+          photos.append("photos[]",files[i],files[i].name);
+        }
+    
+        const data = await createPhoto({token,photos});
+        console.log(data);
+    
+      }
+
+
 
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -79,7 +85,7 @@ const ModalMedia = (props) => {
                         <div className=' bg-[#202124] pt-10 pb-12 flex flex-col gap-5'>
                         <div className=' flex flex-wrap item-center gap-5 mx-auto'>
                         {/* upload      */}
-                        <div onDragOver={handleDragOver} onDrop={handleDrop}
+                        <div
                         className=" border border-[#3f4245] bg-[#161618] rounded-md flex flex-col justify-center items-center gap-3 w-[161px] h-[161px]">
                     <div
                     onClick={() => {
@@ -96,9 +102,7 @@ const ModalMedia = (props) => {
                         accept="image/*"
                         className="input-field"
                         hidden
-                        onChange={({ target: { files } }) => {
-                            files[0] && setFile(files[0].name);
-                        }}
+                        onChange={(e)=>handleSubmit([...e.target.files])}
                         />
                         <p
                         onClick={() => {
