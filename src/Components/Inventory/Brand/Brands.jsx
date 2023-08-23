@@ -18,7 +18,7 @@ import noPd from "../../../assets/noPd3.png"
 
 const Brands = () => {
     const [id,setId] = useState(null);
-    const [open,setOpen] = useState(false);
+    const [sidebarOpen,setSidebarOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetBrandsQuery(token);
     const [deleteBrand] = useDeleteBrandMutation();
@@ -43,10 +43,10 @@ const Brands = () => {
       return () => {
         document.removeEventListener("click", checkIfClickedOutside)
       }
-    }, [open])
+    }, [sidebarOpen])
 
     const handleOpen = () => {
-      setOpen(!open);
+      setSidebarOpen(!sidebarOpen);
     }
 
     const handleDeleteBrand = (id) => {
@@ -102,7 +102,7 @@ const Brands = () => {
               }} className='btn flex gap-2 items-center'><span className=" text-[#161618]">
                 <FiPlus />
               </span> Add Brand</button>
-              <AddBrand open={open} setOpen={setOpen} id={id}/>
+              <AddBrand sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} id={id}/>
             </div>
           </div>
           {brands?.length == 0  ? 

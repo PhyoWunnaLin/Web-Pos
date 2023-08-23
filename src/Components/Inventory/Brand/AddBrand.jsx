@@ -10,8 +10,11 @@ import {
 } from "../../../Redux/API/inventoryApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setBrands } from "../../../Redux/Services/productSlice";
+import ModalMedia from "../../Modal/ModalMedia";
+import { useDisclosure } from "@mantine/hooks";
+import Sidebar from "../../Sidebar/Sidebar";
 
-const AddBrand = ({ open, setOpen, id }) => {
+const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
 
   const token = Cookies.get("token");
   const [createBrand] = useCreateBrandMutation();
@@ -30,6 +33,8 @@ const AddBrand = ({ open, setOpen, id }) => {
   const [agent, setAgent] = useState(id == null ? "" : data?.data?.agent);
   const [phone, setPhone] = useState(id == null ? "" : data?.data?.phone);
   const [description, setDescription] = useState(id == null ? "" : data?.data?.description);
+  const [opened, { open, close }] = useDisclosure(false);
+
 
   const showAlert = () => {
     Swal.fire({
@@ -62,7 +67,7 @@ const AddBrand = ({ open, setOpen, id }) => {
       console.log(data?.data);
       if (data?.data) {
         reset();
-        setOpen(!open);
+        setSidebarOpen(!sidebarOpen);
         showAlert();
       }
     } catch (error) {
@@ -91,7 +96,7 @@ const AddBrand = ({ open, setOpen, id }) => {
       const { data } = await editBrand({ token, id, newData });
       console.log(data?.data);
       if (data?.data) {
-        setOpen(!open);
+        setSidebarOpen(!sidebarOpen);
         showAlert2();
       }
     } catch (error) {
@@ -104,11 +109,11 @@ const AddBrand = ({ open, setOpen, id }) => {
       <form
         onSubmit={handleCreateBrand}
         className={`${
-          open ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-0"
+          sidebarOpen ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-0"
         } duration-500 fixed top-0 right-0 z-40 py-5 bg-[#202124] h-screen overflow-y-auto scrollbar w-[300px] px-8 border-l border-[#7E7F80] flex flex-col gap-5`}
       >
         <div
-          onClick={() => setOpen(!open)}
+          onClick={() => setSidebarOpen(!sidebarOpen)}
           className="hover:bg-[#ffffff15] duration-200 p-[3px] absolute top-2 left-2 cursor-pointer rounded"
         >
           <RxCross2 className=" text-white" />
@@ -118,23 +123,10 @@ const AddBrand = ({ open, setOpen, id }) => {
         </h1>
         <div className="flex flex-col gap-5">
           <div
-            onClick={() => {
-              document.querySelector(".input-field").click();
-            }}
+                          onClick={open}
             className="bg-[#383C3E] py-5 border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
           >
             <div className=" flex flex-col">
-              <input
-                value={photo}
-                multiple
-                type="file"
-                accept="image/jpg,image/jpeg"
-                className="input-field"
-                hidden
-                onChange={({ target: { files } }) => {
-                  files && setPhoto(files);
-                }}
-              />
               <BiPlus className=" text-white mx-auto" size={20} />
               <p className=" text-white font-medium tracking-wider text-center">
                 Add Image
@@ -203,6 +195,8 @@ const AddBrand = ({ open, setOpen, id }) => {
           </div>
         </div>
         <button className="btn mt-auto">Save</button>
+        <ModalMedia opened={opened} onClose={close}/>
+
       </form>
     );
   } else if(id != null) {
@@ -210,11 +204,11 @@ const AddBrand = ({ open, setOpen, id }) => {
           <form
           onSubmit={handleEditBrand}
           className={`${
-            open ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-0"
+            sidebarOpen ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-0"
           } duration-500 fixed top-0 right-0 z-40 py-5 bg-[#202124] h-screen overflow-y-auto scrollbar w-[300px] px-8 border-l border-[#7E7F80] flex flex-col gap-5`}
         >
           <div
-            onClick={() => setOpen(!open)}
+            onClick={() => setSidebarOpen(!sidebarOpen)}
             className="hover:bg-[#ffffff15] duration-200 p-[3px] absolute top-2 left-2 cursor-pointer rounded"
           >
             <RxCross2 className=" text-white" />
@@ -225,9 +219,7 @@ const AddBrand = ({ open, setOpen, id }) => {
           <div className="flex flex-col gap-5">
               {/* update img  */}
             <div
-              onClick={() => {
-                document.querySelector(".input-field").click();
-              }}
+              onClick={open}
               className="bg-[#383C3E] py-5 border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
             >
               <div className=" flex flex-col">
@@ -321,6 +313,9 @@ const AddBrand = ({ open, setOpen, id }) => {
             </div>
           </div>
           <button className="btn mt-auto">Save</button>
+
+
+          <ModalMedia opened={opened} onClose={close}/>
           </form>
     );
   }
