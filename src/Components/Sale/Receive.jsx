@@ -3,14 +3,29 @@ import { BsFillMoonStarsFill, BsPersonCircle } from 'react-icons/bs'
 import { ImArrowLeft2 } from 'react-icons/im'
 import { MdOutlineNotificationsActive } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import './receive.css'
 
 const Receive = () => {
+  const printHandler = () => {
+    const printContent = document.getElementById('print-content');
+    if (printContent) {
+      // const originalContents = document.body.innerHTML;
+      const printContents = printContent.innerHTML;
+
+      document.body.innerHTML = printContents;
+      window.print();
+
+      // document.body.innerHTML = originalContents;
+    }
+  };
+
   const data = [
     {id:1, name: "Lipstick", qty: "1 khu", price: "10000 kyat", total: "10000"},
     {id:2, name: "Lipstick", qty: "1 khu", price: "10000 kyat", total: "10000"},
     {id:3, name: "Lipstick", qty: "1 khu", price: "10000 kyat", total: "10000"},
     {id:4, name: "Lipstick", qty: "1 khu", price: "10000 kyat", total: "10000"},
   ]
+
   return (
     <div className=" bg-[#202124]">
       {/* navbar  */}
@@ -44,24 +59,25 @@ const Receive = () => {
 
       {/* receive  */}
       <div className=' pt-[130px] pb-10 flex justify-center items-center'>
-        <div className=' w-[50%] bg-[#161618] px-5 pt-9 pb-10 text-[#e8eaed]'>
+        <div className=' w-[50%] bg-[#161618] px-5 pt-9 pb-10 text-[#e8eaed] receive-shadow rounded'>
+        <div id="print-content" className=' w-full'>
           <h1 className=' text-[25px] font-semibold px-8 pb-4 tracking-wide'>Receive</h1>
 
           <div>
             {/* voucher data  */}
-            {data.map(data => {
+            {data?.map(data => {
               return(
-                <div className=' border-b pt-1 border-[#3f4245] flex justify-between items-center'>
+                <div key={data?.id} className=' border-b pt-1 border-[#3f4245] flex justify-between items-center'>
                   <div className=' px-8 pb-2 flex flex-col'>
-                    <p className=' tracking-wide text-lg'>{data.name}</p>
+                    <p className=' tracking-wide text-lg'>{data?.name}</p>
                     <p className=' flex gap-2 tracking-wide text-[hsl(0,1%,67%)] '>
-                      <span className=''>{data.qty}</span>
-                      <span className=' text-end'>{data.price}</span>
+                      <span className=''>{data?.qty}</span>
+                      <span className=' text-end'>{data?.price}</span>
                     </p>
                   </div>
 
                   <div>
-                    <p className=' px-8 font-semibold text-xl tracking-wider'>{data.total}</p>
+                    <p className=' px-8 font-semibold text-xl tracking-wider'>{data?.total}</p>
                   </div>
                 </div>
               )
@@ -77,14 +93,16 @@ const Receive = () => {
               <p className='text-[hsl(0,1%,67%)] text-end tracking-wide'>Tax-400</p>
               </div>
             </div>
+          </div>
 
-            {/* button  */}
-            <div className=' flex justify-center mt-8'>
-              <button className=' btn text-black w-[60%] tracking-wide'>
+        </div>
+
+         {/* button  */}
+         <div className=' flex justify-center mt-8'>
+              <button onClick={printHandler} className=' btn text-black w-[60%] tracking-wide'>
                 Print
               </button>
             </div>
-          </div>
         </div>
       </div>
     </div>
