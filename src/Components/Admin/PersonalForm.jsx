@@ -3,6 +3,7 @@ import { useEditProfileMutation } from '../../Redux/API/adminApi';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import "../User/successAlert.css"
+import { useSelector } from 'react-redux';
 
 const PersonalForm = () => {
     const token = Cookies.get("token");
@@ -12,7 +13,7 @@ const PersonalForm = () => {
     const [date_of_birth,setDOB] = useState("");
     const [gender,setGender] = useState("");
     const [address,setAddress] = useState("");
-    const [user_photo,setPhoto] = useState("");
+    const adminSelectImg = useSelector(state => state.mediaSlice.adminSelectImg)
 
     const showAlert = () => {
         Swal.fire({
@@ -40,14 +41,14 @@ const PersonalForm = () => {
     const editProfileHandler = async(e) => {
         try{
             e.preventDefault()
-            const newPpData = {name, phone, date_of_birth, gender, address, user_photo}
+            const newPpData = {name, phone, date_of_birth, gender, address, user_photo:adminSelectImg}
             const data = await editProfile({token,newData:newPpData})
 
-            // console.log(data);
+            console.log(data);
            
             if(data?.data?.message){
-                editPpCancelHandler();
                 showAlert();
+                editPpCancelHandler();
 
             }
         }catch(error){
