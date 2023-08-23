@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  searchRecentVoucher: ""
+  searchRecentVoucher: "",
+  searchSaleProduct: "",
 }
 
 export const saleSlice = createSlice({
@@ -10,10 +11,14 @@ export const saleSlice = createSlice({
   reducers: {
    setSearchRecentVoucher: (state,{payload}) => {
     state.searchRecentVoucher = payload
-   }
+   },
+
+   setSearchSaleProduct : (state,{payload}) => {
+    state.searchSaleProduct = payload;
+  },
   },
 })
 
-export const { setSearchRecentVoucher } = saleSlice.actions
+export const { setSearchRecentVoucher,setSearchSaleProduct } = saleSlice.actions
 
 export default saleSlice.reducer
