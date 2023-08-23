@@ -14,6 +14,7 @@ import AddBrand from './AddBrand';
 import { FiPlus } from 'react-icons/fi';
 import { setBrands, setSearchBrand } from '../../../Redux/Services/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import noPd from "../../../assets/noPd3.png"
 
 const Brands = () => {
     const [id,setId] = useState(null);
@@ -106,7 +107,7 @@ const Brands = () => {
           </div>
           {brands?.length == 0  ? 
 
-          <NoContact image={"https://img.freepik.com/free-icon/user_318-215753.jpg?t=st=1692434065~exp=1692434665~hmac=2980c4d803170dbf42c0125a36bc3a7bb74abd9db2f59410965813f7c678e325"} title1={"No Brand !"} title2={"Please ADD Brand"} /> : 
+          <NoContact image={noPd} size={"w-[55%]"} title1={"No Brand !"} title2={"Please ADD Brand"} /> : 
 
           <div className=' flex flex-col gap-8'>
             {/* banner2  */}
