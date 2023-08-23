@@ -93,15 +93,19 @@ const Sidebar = () => {
                     <div className=" text-xl"><MdKeyboardArrowDown/></div>
                 </div>
                 <AccordionBody className="py-0">
-                    <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
+                    <Link to={'/sale/cashier'}>
+                    <div className={` ${sidebarActive == "/sale/cashier" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
                         <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
                         <span className=" tracking-wider text-sm font-medium px-3 navLink">Cashier</span>
                     </div>
+                    </Link>
 
-                    <div className=" cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav">
+                    <Link to={'/sale/recent'}>
+                    <div className={` ${sidebarActive == "/sale/recent" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
                         <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
                         <span className=" tracking-wider text-sm font-medium px-3 navLink">Recent</span>
                     </div>
+                    </Link>
                 </AccordionBody>
                 </Accordion>
                 <div className=" border-b border-[#3f4245]" />

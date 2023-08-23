@@ -18,6 +18,9 @@ import Stocks from "../Components/Inventory/Stock/Stocks"
 import Brands from "../Components/Inventory/Brand/Brands";
 import EditUser from "../Components/User/EditUser/EditUser";
 import EditProduct from "../Components/Inventory/EditProduct/EditProduct";
+import Sale from "../Components/Sale/Sale";
+import Recent from "../Components/Sale/Recent";
+import Receive from "../Components/Sale/Receive";
 
 const Path = () => {
   return (
@@ -40,6 +43,9 @@ const Path = () => {
         <Route path="/inventory/addProduct" element={<AddProducts/>} />
         <Route path="/inventory/stockControl" element={<Stocks/>} />
         <Route path="/inventory/brand" element={<Brands/>} />
+        <Route path="/sale/cashier" element={<Sale/>} />
+        <Route path="/sale/receive" element={<Receive/>} />
+        <Route path="/sale/recent" element={<Recent/>} />
       </Routes>
     </>
   );
