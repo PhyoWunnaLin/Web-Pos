@@ -12,6 +12,7 @@ import ProductCard from './ProductCard';
 import Cookies from 'js-cookie';
 import NoContact from '../../NoContact/NoContact';
 import noPd from "../../../assets/noPd3.png"
+import { setPdEditSelectImg } from '../../../Redux/Services/mediaSlice';
 
 const Products = () => {
   const token = Cookies.get("token");
@@ -21,6 +22,12 @@ const Products = () => {
   const state = useSelector((state) => state.productSlice.active);
   const active = localStorage.getItem("productActive");
   const dispatch = useDispatch();
+
+  (function() {
+    if(true){
+        dispatch(setPdEditSelectImg(null)); 
+    }
+})();
   
   return (
     <div>

@@ -12,7 +12,7 @@ const EditProductStep3 = ({currentStep , detail}) => {
     const dispatch = useDispatch()
     const pdEditSelectImg = useSelector(state => state.mediaSlice.pdEditSelectImg)
     const insert = useSelector(state => state.mediaSlice.insert)
-    // console.log(detail)
+    // console.log(pdEditSelectImg)
 
     useEffect(()=>{
       dispatch(setEditPdForm3(pdEditSelectImg))

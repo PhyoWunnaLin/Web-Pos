@@ -15,14 +15,14 @@ import Loader from '../Loader/Loader';
 import { PiUserFocus } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 import person from "../../assets/person.jpg"
+import { setAdminSelectImg } from '../../Redux/Services/mediaSlice';
+
 
 const AdminProfile = () => {
   const token = Cookies.get("token");
   const {data, isLoading} = useGetProfileQuery(token)
   const admin = data?.user
-  // console.log(admin);
-
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const adminPp = useSelector(state => state.profileSlice.adminPp);
   // const adminPp2 = localStorage.getItem("adminPp");

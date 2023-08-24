@@ -4,10 +4,10 @@ import { BiSearch } from "react-icons/bi";
 import { BsFillMoonStarsFill, BsPersonCircle } from "react-icons/bs";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
-import { Loader } from "@mantine/core";
 import SaleCalc from "./SaleCalc";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchSaleProduct } from "../../Redux/Services/saleSlice";
+import ImageLoader from "../Loader/ImageLoader";
 
 const Sale = () => {
   const token = Cookies.get("token");
@@ -64,10 +64,10 @@ const Sale = () => {
           <div>
             {isLoading ? (
               <div className=" flex justify-center">
-                <Loader />
+                <ImageLoader />
               </div>
             ) : (
-              <div className="mx-5">
+              <div className="ml-2">
                 <div className=" flex flex-wrap gap-5">
                   {products.filter((pd) => {
                       if (searchSaleProduct === "") {
@@ -91,10 +91,10 @@ const Sale = () => {
                             className=" w-full h-[65%] rounded-md object-cover"
                           />
                           <div className=" flex flex-col gap-1 items-end px-5 py-2 ">
-                            <p className="text-[#e8eaed] text-lg tracking-wider">
+                            <p className="text-[#e8eaed] text-end text-lg tracking-wider">
                               {pd?.name}
                             </p>
-                            <p className=" tracking-wider text-[hsl(0,3%,76%)]">
+                            <p className=" tracking-wider text-end text-[hsl(0,3%,76%)]">
                               {pd?.sale_price} kyat
                             </p>
                           </div>
