@@ -12,12 +12,10 @@ import Loader from '../Loader/Loader'
 const Recent = () => {
     const token = Cookies.get("token")
     const {data , isLoading} = useRecentVoucherQuery(token)
+    const recent = data?.data 
     const searchRecentVoucher = useSelector(state => state.saleSlice.searchRecentVoucher)
     // console.log(searchRecentVoucher);
     const dispatch = useDispatch()
-
-    const users = useSelector(state => state.userSlice.users)
-    const userList = users?.users;
 
   return (
     <MainLayout>
@@ -93,10 +91,10 @@ const Recent = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {userList?.filter(rVoucher => {
+              {recent?.filter(rVoucher => {
                 if(searchRecentVoucher === ""){
                   return rVoucher
-                }else if(rVoucher?.name.toLowerCase().includes(searchRecentVoucher.toLowerCase())){
+                }else if(rVoucher?.voucher_number.toLowerCase().includes(searchRecentVoucher.toLowerCase())){
                   return rVoucher
                 }
               }).map((rVoucher) => {
@@ -106,9 +104,12 @@ const Recent = () => {
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
                     <td className=" p-4 text-start">{rVoucher?.id}</td>
-                    <td className=" p-4 text-start">{rVoucher?.name}</td>
-                    <td className=" p-4 text-start">{rVoucher?.role}</td>
-                    <td className=" p-4 text-start">{rVoucher?.email}</td>
+                    <td className=" p-4 text-start">{rVoucher?.voucher_number}</td>
+                    <td className=" p-4 text-start">{rVoucher?.total}</td>
+                    <td className=" p-4 text-start">{rVoucher?.tax}</td>
+                    <td className=" p-4 text-start">{rVoucher?.net_total}</td>
+                    <td className=" p-4 text-start">{rVoucher?.created_at}</td>
+                    <td className=" p-4 text-start">{rVoucher?.created_time}</td>
                     
                     
                   </tr>
