@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useEditBrandMutation, useGetSingleBrandQuery } from "../../../Redux/API/inventoryApi";
 import { useDisclosure } from "@mantine/hooks";
 import { useSelector } from "react-redux";
@@ -9,22 +9,31 @@ import ModalMedia from "../../Modal/ModalMedia";
 import Loader from "../../Loader/Loader";
 import Swal from "sweetalert2";
 
-const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id}) => {
+const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id,setId}) => {
   const token = Cookies.get("token");
   const [editBrand] = useEditBrandMutation();
   const {data , isLoading} = useGetSingleBrandQuery({token,id})
   console.log(data?.data);
   const brand = data?.data
-  const [photo, setPhoto] = useState(data?.data?.photo);
-  const [name, setName] = useState(data?.data?.name);
-  const [company, setCompany] = useState(data?.data?.company);
-  const [agent, setAgent] = useState(data?.data?.agent);
-  const [phone, setPhone] = useState(data?.data?.phone);
-  const [description, setDescription] = useState(data?.data?.description);
+  const [photo, setPhoto] = useState();
+  const [name, setName] = useState();
+  const [company, setCompany] = useState();
+  const [agent, setAgent] = useState();
+  const [phone, setPhone] = useState();
+  const [description, setDescription] = useState();
   const [opened, { open, close }] = useDisclosure(false);
   const brandSelectImg = useSelector(
     (state) => state.mediaSlice.brandSelectImg
   );
+
+  useEffect(() => {
+    setPhoto(data?.data?.photo);
+    setName(data?.data?.name);
+    setCompany(data?.data?.company);
+    setAgent(data?.data?.agent);
+    setPhone(data?.data?.phone);
+    setDescription(data?.data?.description);
+  },[data])
 
   const showAlert2 = () => {
     Swal.fire({
@@ -44,8 +53,8 @@ const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id}) => {
     try {
       e.preventDefault();
       const newData = { photo, name, company, agent, phone, description };
-      const { data } = await editBrand({ token, id, newData });
-      console.log(data?.data);
+      const data = await editBrand({ token, id, newData });
+      console.log(data);
       if (data?.data) {
         setEditSidebarOpen(!editSidebarOpen);
         showAlert2();
@@ -66,7 +75,10 @@ const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id}) => {
         } duration-500 fixed top-0 right-0 z-40 py-5 bg-[#202124] h-screen overflow-y-auto scrollbar w-[300px] px-8 border-l border-[#7E7F80] flex flex-col gap-5`}
       >
         <div
-          onClick={() => setEditSidebarOpen(!editSidebarOpen)}
+          onClick={() => {
+            setEditSidebarOpen(!editSidebarOpen);
+            setId(null);
+          }}
           className="hover:bg-[#ffffff15] duration-200 p-[3px] absolute top-2 left-2 cursor-pointer rounded"
         >
           <RxCross2 className=" text-white" />
@@ -74,7 +86,7 @@ const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id}) => {
         <h1 className=" text-white font-bold tracking-wider text-xl mt-3">
           Update Brand
         </h1>
-        {data?.data.id ? <div className="flex flex-col gap-5">
+        {data?.data?.name ? <div className="flex flex-col gap-5">
           {/* update img  */}
           {photo ? (
             <div
