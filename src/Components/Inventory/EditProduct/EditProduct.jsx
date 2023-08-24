@@ -22,7 +22,7 @@ const EditProduct = () => {
     const nav = useNavigate();
     const token = Cookies.get("token")
     const {data , isLoading} = useGetProductDetailQuery({token,id});
-    console.log(data?.data);
+    // console.log(data?.data);
     const detail = data?.data
     const [editProduct] = useEditProductMutation();
     const form1 = useSelector(state => state.productSlice.editPdForm1)
@@ -67,9 +67,10 @@ const EditProduct = () => {
         <div className="w-[95%] my-6 flex flex-col gap-8">
           {/* header  */}
           <Banner2
-            title={"Add Product"}
+            title={"Edit Product"}
             path1={"Inventory"}
-            path2={"Add Product"}
+            path2={"Product"}
+            path3={"Edit Product"}
             btn2={"Product List"}
             button2={true}
             route={"/inventory/products"}

@@ -15,26 +15,29 @@ import { useDisclosure } from "@mantine/hooks";
 import Sidebar from "../../Sidebar/Sidebar";
 
 const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
-
   const token = Cookies.get("token");
   const [createBrand] = useCreateBrandMutation();
   const [editBrand] = useEditBrandMutation();
   // const { data ,isLoading } = useGetSingleBrandQuery({ token, id });
-  const { data ,isLoading } = useGetBrandsQuery(token)
+  const { data, isLoading } = useGetBrandsQuery(token);
   // console.log(data);
   // console.log(id);
-  const dispatch = useDispatch()
-  const brands = useSelector(state => state.productSlice.brands) 
-  const singleBrand = brands?.filter(brand => brand?.id == id)
-  console.log(singleBrand);
+  const dispatch = useDispatch();
+  const brands = useSelector((state) => state.productSlice.brands);
+  const singleBrand = brands?.filter((brand) => brand?.id == id);
+  // console.log(singleBrand[0].photo);
   const [photo, setPhoto] = useState(id == null ? "" : data?.data?.photo);
   const [name, setName] = useState(id == null ? "" : data?.data?.name);
   const [company, setCompany] = useState(id == null ? "" : data?.data?.company);
   const [agent, setAgent] = useState(id == null ? "" : data?.data?.agent);
   const [phone, setPhone] = useState(id == null ? "" : data?.data?.phone);
-  const [description, setDescription] = useState(id == null ? "" : data?.data?.description);
+  const [description, setDescription] = useState(
+    id == null ? "" : data?.data?.description
+  );
   const [opened, { open, close }] = useDisclosure(false);
-
+  const brandSelectImg = useSelector(
+    (state) => state.mediaSlice.brandSelectImg
+  );
 
   const showAlert = () => {
     Swal.fire({
@@ -62,7 +65,7 @@ const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
   const handleCreateBrand = async (e) => {
     try {
       e.preventDefault();
-      const newData = { photo, name, company, agent, phone, description };
+      const newData = { photo:brandSelectImg, name, company, agent, phone, description };
       const { data } = await createBrand({ token, newData });
       console.log(data?.data);
       if (data?.data) {
@@ -109,7 +112,9 @@ const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
       <form
         onSubmit={handleCreateBrand}
         className={`${
-          sidebarOpen ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-0"
+          sidebarOpen
+            ? "top-0 right-0 opacity-100"
+            : " top-0 right-[-400px] opacity-0"
         } duration-500 fixed top-0 right-0 z-40 py-5 bg-[#202124] h-screen overflow-y-auto scrollbar w-[300px] px-8 border-l border-[#7E7F80] flex flex-col gap-5`}
       >
         <div
@@ -122,17 +127,29 @@ const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
           Add New Brand
         </h1>
         <div className="flex flex-col gap-5">
-          <div
-                          onClick={open}
-            className="bg-[#383C3E] py-5 border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
-          >
-            <div className=" flex flex-col">
-              <BiPlus className=" text-white mx-auto" size={20} />
-              <p className=" text-white font-medium tracking-wider text-center">
-                Add Image
-              </p>
+          {brandSelectImg ? (
+            <div
+              onClick={open}
+              className="bg-[#383C3E] w-full h-[95px] border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
+            >
+              <div className=" flex flex-col">
+                <img src={brandSelectImg} className="w-full h-[95px] rounded-md object-cover" alt="" />
+              </div>
             </div>
-          </div>
+          ) : (
+            <div
+              onClick={open}
+              className="bg-[#383C3E] py-5 border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
+            >
+              <div className=" flex flex-col">
+                <BiPlus className=" text-white mx-auto" size={20} />
+                <p className=" text-white font-medium tracking-wider text-center">
+                  Add Image
+                </p>
+              </div>
+            </div>
+          )}
+
           <div className="flex flex-col gap-2">
             <label className="text-[#FFFFFF] font-medium tracking-wider">
               Brand Name
@@ -195,128 +212,133 @@ const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
           </div>
         </div>
         <button className="btn mt-auto">Save</button>
-        <ModalMedia opened={opened} onClose={close}/>
-
+        <ModalMedia opened={opened} onClose={close} />
       </form>
     );
-  } else if(id != null) {
+  } else if (id != null) {
     return (
-          <form
-          onSubmit={handleEditBrand}
-          className={`${
-            sidebarOpen ? "top-0 right-0 opacity-100" : " top-0 right-[-400px] opacity-0"
-          } duration-500 fixed top-0 right-0 z-40 py-5 bg-[#202124] h-screen overflow-y-auto scrollbar w-[300px] px-8 border-l border-[#7E7F80] flex flex-col gap-5`}
+      <form
+        onSubmit={handleEditBrand}
+        className={`${
+          sidebarOpen
+            ? "top-0 right-0 opacity-100"
+            : " top-0 right-[-400px] opacity-0"
+        } duration-500 fixed top-0 right-0 z-40 py-5 bg-[#202124] h-screen overflow-y-auto scrollbar w-[300px] px-8 border-l border-[#7E7F80] flex flex-col gap-5`}
+      >
+        <div
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="hover:bg-[#ffffff15] duration-200 p-[3px] absolute top-2 left-2 cursor-pointer rounded"
         >
-          <div
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="hover:bg-[#ffffff15] duration-200 p-[3px] absolute top-2 left-2 cursor-pointer rounded"
-          >
-            <RxCross2 className=" text-white" />
-          </div>
-          <h1 className=" text-white font-bold tracking-wider text-xl mt-3">
-            Update Brand
-          </h1>
-          <div className="flex flex-col gap-5">
-              {/* update img  */}
+          <RxCross2 className=" text-white" />
+        </div>
+        <h1 className=" text-white font-bold tracking-wider text-xl mt-3">
+          Update Brand
+        </h1>
+        <div className="flex flex-col gap-5">
+          {/* update img  */}
+          {singleBrand[0]?.photo ? (
             <div
               onClick={open}
-              className="bg-[#383C3E] py-5 border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
+              className="bg-[#383C3E] w-full h-[95px] border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
             >
               <div className=" flex flex-col">
-                <input
-                  value={photo}
-                  multiple
-                  type="file"
-                  accept="image/jpg,image/jpeg"
-                  className="input-field"
-                  hidden
-                  onChange={({ target: { files } }) => {
-                    files && setPhoto(files);
-                  }}
-                />
-                <BiPlus className=" text-white mx-auto" size={20} />
-                <p className=" text-white font-medium tracking-wider text-center">
-                  Add Image
-                </p>
+                <img src={brandSelectImg ? brandSelectImg : singleBrand[0].photo} className="w-full h-[95px] rounded-md object-cover" alt="" />
               </div>
-    
             </div>
-    
-              {/* update brand name  */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[#FFFFFF] font-medium tracking-wider">
-                Brand Name
-              </label>
-              <input
-                required
-                value={singleBrand[0]?.name}
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                className="input"
-              />
+          ) : (
+            <div
+              onClick={open}
+              className="bg-[#383C3E] border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
+            >
+              {brandSelectImg ? (
+                <div className=" flex flex-col">
+                <img src={brandSelectImg} className="w-full h-[95px] rounded-md object-cover" alt="" />
+              </div>
+              ):(
+                <div className=" flex flex-col py-5">
+                  <BiPlus className=" text-white mx-auto" size={20} />
+                  <p className=" text-white font-medium tracking-wider text-center">
+                    Add Image
+                  </p>
+                </div>
+              )}
             </div>
-    
-            {/* update company name  */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[#FFFFFF] font-medium tracking-wider">
-                Company Name
-              </label>
-              <input
-                required
-                value={singleBrand[0]?.company}
-                onChange={(e) => setCompany(e.target.value)}
-                type="text"
-                className="input"
-              />
-            </div>
-    
-            {/* update agent  */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[#FFFFFF] font-medium tracking-wider">
-                Agent
-              </label>
-              <input
-                required
-                value={singleBrand[0]?.agent}
-                onChange={(e) => setAgent(e.target.value)}
-                type="text"
-                className="input"
-              />
-            </div>
-    
-            {/* update phone */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[#FFFFFF] font-medium tracking-wider">
-                Phone
-              </label>
-              <input
-                required
-                value={singleBrand[0]?.phone}
-                onChange={(e) => setPhone(e.target.value)}
-                type="number"
-                className="input"
-              />
-            </div>
-    
-            {/* update dec  */}
-            <div className="flex flex-col gap-2">
-              <label className="text-[#FFFFFF] font-medium tracking-wider">
-                Description
-              </label>
-              <textarea
-                value={singleBrand[0]?.description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="input"
-                cols="30"
-                rows="3"
-              ></textarea>
-            </div>
+          )}
+
+          {/* update brand name  */}
+          <div className="flex flex-col gap-2">
+            <label className="text-[#FFFFFF] font-medium tracking-wider">
+              Brand Name
+            </label>
+            <input
+              required
+              value={singleBrand[0]?.name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              className="input"
+            />
           </div>
-          <button className="btn mt-auto">Save</button>
 
+          {/* update company name  */}
+          <div className="flex flex-col gap-2">
+            <label className="text-[#FFFFFF] font-medium tracking-wider">
+              Company Name
+            </label>
+            <input
+              required
+              value={singleBrand[0]?.company}
+              onChange={(e) => setCompany(e.target.value)}
+              type="text"
+              className="input"
+            />
+          </div>
 
-          <ModalMedia opened={opened} onClose={close}/>
-          </form>
+          {/* update agent  */}
+          <div className="flex flex-col gap-2">
+            <label className="text-[#FFFFFF] font-medium tracking-wider">
+              Agent
+            </label>
+            <input
+              required
+              value={singleBrand[0]?.agent}
+              onChange={(e) => setAgent(e.target.value)}
+              type="text"
+              className="input"
+            />
+          </div>
+
+          {/* update phone */}
+          <div className="flex flex-col gap-2">
+            <label className="text-[#FFFFFF] font-medium tracking-wider">
+              Phone
+            </label>
+            <input
+              required
+              value={singleBrand[0]?.phone}
+              onChange={(e) => setPhone(e.target.value)}
+              type="number"
+              className="input"
+            />
+          </div>
+
+          {/* update dec  */}
+          <div className="flex flex-col gap-2">
+            <label className="text-[#FFFFFF] font-medium tracking-wider">
+              Description
+            </label>
+            <textarea
+              value={singleBrand[0]?.description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="input"
+              cols="30"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+        <button className="btn mt-auto">Save</button>
+
+        <ModalMedia opened={opened} onClose={close} />
+      </form>
     );
   }
 };

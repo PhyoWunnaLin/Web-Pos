@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectActive, setOnclickActive,setPdSelectImg, setInsert, setUserSelectImg, setAdminSelectImg } from '../../Redux/Services/mediaSlice';
+import { setSelectActive, setOnclickActive,setPdSelectImg, setInsert, setUserSelectImg, setAdminSelectImg, setPdEditSelectImg, setBrandSelectImg, setBrandEditSelectImg } from '../../Redux/Services/mediaSlice';
 import "./modalMedia.css"
 import { Modal} from '@mantine/core';
 import { useCreatePhotoMutation, useGetPhotoQuery } from '../../Redux/API/mediaApi';
 import Cookies from 'js-cookie';
 import ImageLoader from '../Loader/ImageLoader';
 import Swal from 'sweetalert2';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 // import { useDisclosure } from '@mantine/hooks';
 
 const ModalMedia = (props) => {
@@ -18,11 +18,14 @@ const ModalMedia = (props) => {
     const [createPhoto, {isLoading}] = useCreatePhotoMutation();
     const location = useLocation()
     const path = location.pathname
+    const {id} = useParams()
+    // console.log(id);
+    // console.log(path == `/inventory/product/editProduct/${id}`)
 
     const dispatch = useDispatch();
     const selectActive = useSelector((state) => state.mediaSlice.selectActive);
     const onclickActive = useSelector((state) => state.mediaSlice.onclickActive);
-    console.log(path);
+    // console.log(path);
 
     const handleSubmit = async (files) => {
         // console.log(files);
@@ -73,6 +76,12 @@ const ModalMedia = (props) => {
         }else if(path == "/profile/edit"){
             dispatch(setAdminSelectImg(selectedImage)); 
             dispatch(setInsert(true));    
+        }else if(path == `/inventory/product/editProduct/${id}`){
+            dispatch(setPdEditSelectImg(selectedImage)); 
+            dispatch(setInsert(true));    
+        }else if(path == `/inventory/brand`){
+            dispatch(setBrandSelectImg(selectedImage)); 
+            dispatch(setInsert(true));    
         }
     }
 
@@ -103,7 +112,7 @@ const ModalMedia = (props) => {
                             </div>
                         </div>
                     ) : (
-                        <div className=' ml-8'>
+                        <div className=' ml-6'>
                         <div className=' bg-[#202124] pt-10 pb-12 flex flex-col gap-5'>
                         <div className=' flex flex-wrap item-center gap-5 mx-auto'>
                         {/* upload      */}
