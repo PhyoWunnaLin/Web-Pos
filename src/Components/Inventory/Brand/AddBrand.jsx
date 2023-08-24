@@ -13,6 +13,7 @@ import { setBrands } from "../../../Redux/Services/productSlice";
 import ModalMedia from "../../Modal/ModalMedia";
 import { useDisclosure } from "@mantine/hooks";
 import Sidebar from "../../Sidebar/Sidebar";
+import { setBrandSelectImg } from "../../../Redux/Services/mediaSlice";
 
 const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
   const token = Cookies.get("token");
@@ -36,6 +37,10 @@ const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
   const brandSelectImg = useSelector(
     (state) => state.mediaSlice.brandSelectImg
   );
+
+  // useEffect(()=>{
+  //   dispatch(setBrandSelectImg(null))
+  // },[brandSelectImg])
 
   const showAlert = () => {
     Swal.fire({
@@ -72,7 +77,7 @@ const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
         description,
       };
       const { data } = await createBrand({ token, newData });
-      console.log(data?.data);
+      console.log(data);
       if (data?.data) {
         reset();
         setSidebarOpen(!sidebarOpen);
@@ -191,7 +196,7 @@ const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
         </div>
       </div>
       <button className="btn mt-auto">Save</button>
-      <ModalMedia opened={opened} onClose={close} />
+      <ModalMedia sidebarOpen={sidebarOpen} opened={opened} onClose={close} />
     </form>
   );
 };
