@@ -16,6 +16,7 @@ import { setBrands, setSearchBrand } from '../../../Redux/Services/productSlice'
 import { useDispatch, useSelector } from 'react-redux';
 import noPd from "../../../assets/noPd3.png"
 import EditBrand from './EditBrand';
+import { setBrandEditSelectImg, setBrandSelectImg } from '../../../Redux/Services/mediaSlice';
 
 const Brands = () => {
     const [id,setId] = useState(null);
@@ -29,7 +30,7 @@ const Brands = () => {
     // console.log(searchBrand);
     const dispatch = useDispatch()
     const ref = useRef()
-    const ref2 = useRef()
+    // const ref2 = useRef()
 
     useEffect(()=>{
       dispatch(setBrands(data?.data))
@@ -193,6 +194,7 @@ const Brands = () => {
                       <span onClick={() => {
                         setId(brand?.id);
                         setEditSidebarOpen(!editSidebarOpen);
+                        dispatch(setBrandEditSelectImg(null))
                       }} className=" icon1 hover-scale">
                         <BiEditAlt />
                       </span>

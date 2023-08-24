@@ -20,12 +20,13 @@ const ModalMedia = (props) => {
     const path = location.pathname
     const {id} = useParams()
     // console.log(id);
-    // console.log(path == `/inventory/product`)
+    // console.log(!props.sidebarOpen)
+    // console.log(props.editSidebarOpen)
 
     const dispatch = useDispatch();
     const selectActive = useSelector((state) => state.mediaSlice.selectActive);
     const onclickActive = useSelector((state) => state.mediaSlice.onclickActive);
-    // console.log(props);
+    // console.log(props.sidebarOpen != false);
 
     const handleSubmit = async (files) => {
         // console.log(files);
@@ -77,8 +78,11 @@ const ModalMedia = (props) => {
         }else if(path == `/inventory/product/editProduct/${id}`){
             dispatch(setPdEditSelectImg(selectedImage)); 
             dispatch(setInsert(true));    
-        }else if(path == `/inventory/brand`){
+        }else if(props.sidebarOpen){
             dispatch(setBrandSelectImg(selectedImage)); 
+            dispatch(setInsert(true));    
+        }else if(props.editSidebarOpen){
+            dispatch(setBrandEditSelectImg(selectedImage)); 
             dispatch(setInsert(true));    
         }
     }

@@ -2,18 +2,19 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useEditBrandMutation, useGetSingleBrandQuery } from "../../../Redux/API/inventoryApi";
 import { useDisclosure } from "@mantine/hooks";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import { BiPlus } from "react-icons/bi";
 import ModalMedia from "../../Modal/ModalMedia";
 import Loader from "../../Loader/Loader";
 import Swal from "sweetalert2";
+import { setBrandEditSelectImg } from "../../../Redux/Services/mediaSlice";
 
 const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id,setId}) => {
   const token = Cookies.get("token");
   const [editBrand] = useEditBrandMutation();
   const {data , isLoading} = useGetSingleBrandQuery({token,id})
-  console.log(data?.data);
+  // console.log(data?.data);
   const brand = data?.data
   const [photo, setPhoto] = useState();
   const [name, setName] = useState();
@@ -22,9 +23,15 @@ const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id,setId}) => {
   const [phone, setPhone] = useState();
   const [description, setDescription] = useState();
   const [opened, { open, close }] = useDisclosure(false);
-  const brandSelectImg = useSelector(
-    (state) => state.mediaSlice.brandSelectImg
+  const brandEditSelectImg = useSelector(
+    (state) => state.mediaSlice.brandEditSelectImg
   );
+  // console.log(brandEditSelectImg);
+  const dispatch = useDispatch()
+
+  // useEffect(()=>{
+  //   dispatch(setBrandEditSelectImg(null))
+  // },[brandEditSelectImg])
 
   useEffect(() => {
     setPhoto(data?.data?.photo);
@@ -52,7 +59,7 @@ const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id,setId}) => {
   const handleEditBrand = async (e) => {
     try {
       e.preventDefault();
-      const newData = { photo, name, company, agent, phone, description };
+      const newData = { photo:brandEditSelectImg, name, company, agent, phone, description };
       const data = await editBrand({ token, id, newData });
       console.log(data);
       if (data?.data) {
@@ -66,7 +73,7 @@ const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id,setId}) => {
 
   return (
     <>
-    {isLoading ? <div><Loader/></div> : <form
+      <form
         onSubmit={handleEditBrand}
         className={`${
           editSidebarOpen
@@ -94,7 +101,7 @@ const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id,setId}) => {
               className="bg-[#383C3E] w-full h-[95px] border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
             >
               <div className=" flex flex-col">
-                <img src={brandSelectImg ? brandSelectImg : photo} className="w-full h-[95px] rounded-md object-cover" alt="" />
+                <img src={brandEditSelectImg ? brandEditSelectImg : photo} className="w-full h-[95px] rounded-md object-cover" alt="" />
               </div>
             </div>
           ) : (
@@ -102,9 +109,9 @@ const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id,setId}) => {
               onClick={open}
               className="bg-[#383C3E] border border-dashed border-[#7E7F80] rounded-md cursor-pointer"
             >
-              {brandSelectImg ? (
+              {brandEditSelectImg ? (
                 <div className=" flex flex-col">
-                <img src={brandSelectImg} className="w-full h-[95px] rounded-md object-cover" alt="" />
+                <img src={brandEditSelectImg} className="w-full h-[95px] rounded-md object-cover" alt="" />
               </div>
               ):(
                 <div className=" flex flex-col py-5">
@@ -189,8 +196,8 @@ const EditBrand = ({editSidebarOpen,setEditSidebarOpen,id,setId}) => {
         </div> : <div><Loader/></div>}
         <button className="btn mt-auto">Save</button>
 
-        <ModalMedia opened={opened} onClose={close} />
-      </form>}
+        <ModalMedia editSidebarOpen={editSidebarOpen} opened={opened} onClose={close} />
+      </form>
     </>
   );
 };
