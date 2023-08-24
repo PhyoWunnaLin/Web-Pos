@@ -21,8 +21,6 @@ const SaleCalc = () => {
     {id:4, name: "Lipstick", qty: "1 khu", price: "10000", total: "10000"},
   ]
 
-  console.log(data);
-
   return (
     <div className='w-full border-l border-[#3f4245] bg-[#161618]'>
       <div className='flex flex-col h-screen pt-14'>
@@ -49,7 +47,7 @@ const SaleCalc = () => {
                 )
               })}
         </div>
-        <div className=' flex justify-end bg-[#202124] text-[#e8eaed] mt-auto py-2'>
+        <div className=' flex justify-end text-[#e8eaed] mt-auto py-2'>
               <div className=' mx-8'>
               <p className='text-xl tracking-wide'>
                 <span>total-</span>

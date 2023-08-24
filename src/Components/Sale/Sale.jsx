@@ -6,7 +6,7 @@ import { MdOutlineNotificationsActive } from "react-icons/md";
 import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
 import SaleCalc from "./SaleCalc";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchSaleProduct } from "../../Redux/Services/saleSlice";
+import { setSaleItem, setSearchSaleProduct } from "../../Redux/Services/saleSlice";
 import ImageLoader from "../Loader/ImageLoader";
 
 const Sale = () => {
@@ -16,6 +16,8 @@ const Sale = () => {
   const searchSaleProduct = useSelector(
     (state) => state.saleSlice.searchSaleProduct
   );
+  const saleItem = useSelector((state) => state.saleSlice.saleItem);
+  console.log(saleItem)
   const dispatch = useDispatch();
 
   return (
@@ -78,8 +80,9 @@ const Sale = () => {
                     }).map((pd) => {
                       return (
                         <div
+                        onClick={() => dispatch(setSaleItem(pd))}
                           key={pd?.id}
-                          className="w-[23.2%] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card"
+                          className="w-[23.2%] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card "
                         >
                           <img
                             src={
