@@ -20,12 +20,12 @@ const ModalMedia = (props) => {
     const path = location.pathname
     const {id} = useParams()
     // console.log(id);
-    // console.log(path == `/inventory/product/editProduct/${id}`)
+    // console.log(path == `/inventory/product`)
 
     const dispatch = useDispatch();
     const selectActive = useSelector((state) => state.mediaSlice.selectActive);
     const onclickActive = useSelector((state) => state.mediaSlice.onclickActive);
-    // console.log(path);
+    // console.log(props);
 
     const handleSubmit = async (files) => {
         // console.log(files);
@@ -52,8 +52,6 @@ const ModalMedia = (props) => {
         }
     
       }
-
-
 
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -84,6 +82,7 @@ const ModalMedia = (props) => {
             dispatch(setInsert(true));    
         }
     }
+
 
     useEffect(()=>{
         if(props.opened){
