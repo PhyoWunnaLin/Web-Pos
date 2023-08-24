@@ -208,7 +208,7 @@ const Brands = () => {
 
         </div>
       </div>
-      {id != null && <EditBrand editSidebarOpen={editSidebarOpen} setEditSidebarOpen={setEditSidebarOpen} id={id}/>}
+      {id != null && <EditBrand editSidebarOpen={editSidebarOpen} setEditSidebarOpen={setEditSidebarOpen} id={id} setId={setId}/>}
     </MainLayout>
   )
 }
