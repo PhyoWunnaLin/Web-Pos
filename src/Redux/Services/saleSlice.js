@@ -5,7 +5,15 @@ const initialState = {
   searchSaleProduct: "",
   selectReceivePd: 1,
   qty: null,
-  saleItem : []
+  saleItem : [],
+  total:0
+}
+
+const totalAmount = (saleItem) => {
+  return saleItem.reduce(
+    (total, item) => total + item.sale_price * item.quantity ,
+    0
+  );
 }
 
 export const saleSlice = createSlice({
@@ -29,7 +37,13 @@ export const saleSlice = createSlice({
   },
 
   setSaleItem : (state , {payload} ) => {
-    state.saleItem = [...state.saleItem,payload]
+    const isExisted = state.saleItem.find((item) => item.id === payload.id);
+    if(isExisted){
+      return state
+    }else{
+      state.saleItem = [...state.saleItem,{...payload , quantity : 1}];
+    }
+    state.total = totalAmount(state.saleItem);
   }
 
   },

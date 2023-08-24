@@ -8,6 +8,8 @@ const SaleCalc = () => {
   const dispatch = useDispatch()
   const selectReceivePd = useSelector(state => state.saleSlice.selectReceivePd)
   const qty = useSelector(state => state.saleSlice.qty)
+  const saleItem = useSelector((state) => state.saleSlice.saleItem);
+  const total = useSelector((state) => state.saleSlice.total);
   // console.log(qty);
 
   const selectReceiveHandler = (id)=>{
@@ -26,37 +28,37 @@ const SaleCalc = () => {
       <div className='flex flex-col h-screen pt-14'>
         <h1 className=' text-[25px] font-semibold px-8 pb-4 tracking-wide text-white'>Receive</h1>
         <div className=' h-auto overflow-y-scroll scrollbar'>
-          {data?.map(data => {
+          {saleItem?.map(data => {
                 return(
                   <div onClick={(e)=>selectReceiveHandler(data?.id)}
                    key={data?.id} className={`${selectReceivePd == data?.id && "bg-[#ffffff15]"} border-b pt-1 border-[#3f4245] flex justify-between items-center hover:bg-[#ffffff15] cursor-pointer`}>
                     <div className=' px-8 pb-2 flex flex-col'>
                       <p className=' tracking-wide text-lg text-white'>{data?.name}</p>
                       <p className=' flex gap-2 text-sm tracking-wide text-[hsl(0,1%,67%)] '>
-                        <span className=''>{qty && selectReceivePd == data?.id? qty + " khu" : data?.qty}</span>
-                        <span className=' text-end'>{data?.price}</span>
+                        <span className=''>{data?.quantity + " khu"}</span>
+                        <span className=' text-end'>{data?.sale_price}</span>
                       </p>
                     </div>
 
                     <div>
                       <p className=' px-8 font-semibold text-lg tracking-wider text-white'>
-                        {selectReceivePd == data?.id ? parseFloat(data?.price) * qty : data?.price}
+                        {data?.sale_price}
                       </p>
                     </div>
                   </div> 
                 )
               })}
         </div>
-        <div className=' flex justify-end text-[#e8eaed] mt-auto py-2'>
-              <div className=' mx-8'>
+        {saleItem.length && <div className=' flex justify-end text-[#e8eaed] mt-auto py-2'>
+            <div className=' mx-8'>
               <p className='text-xl tracking-wide'>
                 <span>total-</span>
-                <span className=' font-semibold'>40000</span>
+                <span className=' font-semibold'>{total}</span>
               </p>
               <p className='text-[hsl(0,1%,67%)] text-end tracking-wide'>Tax-400</p>
-              </div>
             </div>
-        <div className='flex flex-col bg-[#202124]'>
+        </div>}
+        <div className={`flex flex-col bg-[#202124] ${saleItem.length == 0 ? "mt-auto" : "mt-0"}`}>
             <div className='flex border-y border-[#3f4245]'>
                 <p className='w-[33%] hover:bg-[#ffffff15] text-sm cursor-pointer py-2 px-4 border-r border-[#3f4245] text-white font-medium tracking-wide flex gap-1 items-center'><span> <BsPlus size={20}/> </span> Note</p>
                 <p className='w-[33%] hover:bg-[#ffffff15] text-sm cursor-pointer py-2 px-4 border-r border-[#3f4245] text-white font-medium tracking-wide'> Note</p>
