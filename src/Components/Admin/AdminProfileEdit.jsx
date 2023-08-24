@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {HiOutlineMailOpen} from "react-icons/hi"
 import {BsTelephoneOutbound} from "react-icons/bs"
 import {AiFillClockCircle} from "react-icons/ai"
@@ -20,6 +20,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { PiUserFocus } from 'react-icons/pi';
 import { setAdminSelectImg } from '../../Redux/Services/mediaSlice';
 import person from "../../assets/person.jpg"
+import { useLocation } from 'react-router-dom';
 
 const AdminProfileEdit = () => {
     const [opened, { open, close }] = useDisclosure(false);
@@ -27,6 +28,8 @@ const AdminProfileEdit = () => {
     const {data, isLoading} = useGetProfileQuery(token);
     const user = data?.user;
     const adminSelectImg = useSelector(state => state.mediaSlice.adminSelectImg)
+    const location = useLocation()
+    const path = location.pathname
 
     // console.log(user);
 
@@ -40,6 +43,8 @@ const AdminProfileEdit = () => {
     const adminEditPp = useSelector(state => state.profileSlice.adminEditPp);
     //   const adminEditPp2 = localStorage.getItem("adminEditPp");
     //   console.log(adminEditPp2);
+
+
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">

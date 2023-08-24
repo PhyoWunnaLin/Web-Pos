@@ -10,13 +10,13 @@ import ModalMedia from '../../Modal/ModalMedia';
 const EditProductStep3 = ({currentStep , detail}) => {
     const [opened, { open, close }] = useDisclosure(false);
     const dispatch = useDispatch()
-    const selectImg = useSelector(state => state.mediaSlice.selectImg)
+    const pdEditSelectImg = useSelector(state => state.mediaSlice.pdEditSelectImg)
     const insert = useSelector(state => state.mediaSlice.insert)
     // console.log(detail)
 
     useEffect(()=>{
-      dispatch(setEditPdForm3(selectImg))
-    },[currentStep,selectImg])
+      dispatch(setEditPdForm3(pdEditSelectImg))
+    },[currentStep,pdEditSelectImg])
   
     const clearImgHandler = (e)=>{
       e.preventDefault()
@@ -31,11 +31,11 @@ const EditProductStep3 = ({currentStep , detail}) => {
         </h1>
 
        {/* img  */}
-      {insert ? (
+      {detail?.photo ? (
         <div
         onClick={open}
        className=' cursor-pointer w-[150px] h-[150px] bg-[#202124] rounded-full mx-auto border-dashed border-2 border-[#8AB4F8] flex justify-center items-center relative'>
-        <img src={detail?.photo ? detail?.photo : selectImg } className='w-[150px] h-[150px] object-cover absolute rounded-full' alt="" />
+        <img src={pdEditSelectImg ? pdEditSelectImg : detail?.photo } className='w-[150px] h-[150px] object-cover absolute rounded-full' alt="" />
         <div className='h-7 w-7 hover:bg-[#c1c5cc] hover:scale-[1.1] duration-200 rounded-full flex items-center bg-white justify-center absolute right-4 bottom-0'>
           <BiSolidEditAlt size={18}/>
         </div>
@@ -44,7 +44,11 @@ const EditProductStep3 = ({currentStep , detail}) => {
         <div
         onClick={open}
        className=' cursor-pointer w-[150px] h-[150px] bg-[#202124] rounded-full mx-auto border-dashed border-2 border-[#8AB4F8] flex justify-center items-center relative'>
+        {pdEditSelectImg ? (
+          <img src={pdEditSelectImg} className='w-[150px] h-[150px] object-cover absolute rounded-full' alt="" />
+        ) : (
         <PiUserFocus className=' text-white' size={45}/>
+        )}
         <div className='h-7 w-7 hover:bg-[#c1c5cc] hover:scale-[1.1] duration-200 rounded-full flex items-center bg-white justify-center absolute right-4 bottom-0'>
           <BiSolidEditAlt size={18}/>
         </div>

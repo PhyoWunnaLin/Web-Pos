@@ -8,7 +8,10 @@ const initialState = {
     insert: false,
     pdSelectImg: null,
     userSelectImg: null,
-    adminSelectImg: null
+    adminSelectImg: null,
+    pdEditSelectImg: null,
+    brandSelectImg: null,
+    brandEditSelectImg: null,
 }
 
 export const mediaSlice = createSlice({
@@ -47,9 +50,21 @@ export const mediaSlice = createSlice({
     setAdminSelectImg : (state,{payload})=>{
       state.adminSelectImg = payload;
     },
+
+    setPdEditSelectImg : (state,{payload})=>{
+      state.pdEditSelectImg = payload;
+    },
+
+    setBrandSelectImg : (state,{payload})=>{
+      state.brandSelectImg = payload;
+    },
+
+    setBrandEditSelectImg : (state,{payload})=>{
+      state.brandEditSelectImg = payload;
+    },
   },
 })
 
-export const { setActive, setSelectActive, setOnclickActive, setSelectImg, setInsert, setPdSelectImg, setUserSelectImg, setAdminSelectImg } = mediaSlice.actions
+export const { setActive, setSelectActive, setOnclickActive, setSelectImg, setInsert, setPdSelectImg, setUserSelectImg, setAdminSelectImg, setPdEditSelectImg, setBrandSelectImg, setBrandEditSelectImg } = mediaSlice.actions
 
 export default mediaSlice.reducer
