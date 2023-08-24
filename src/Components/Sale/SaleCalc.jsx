@@ -2,9 +2,10 @@ import React from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { MdOutlineCancelPresentation } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteQuantity, setQty, setSelectReceivePd } from '../../Redux/Services/saleSlice'
+import { deleteQuantity, setQty, setReceiveData, setSelectReceivePd } from '../../Redux/Services/saleSlice'
 import { useCheckoutMutation } from '../../Redux/API/saleApi'
 import Cookies from 'js-cookie'
+import { Route, useNavigate } from 'react-router-dom'
 
 const SaleCalc = () => {
   const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const SaleCalc = () => {
   const tax = useSelector((state) => state.saleSlice.tax);
   const token = Cookies.get("token");
   const [checkout] = useCheckoutMutation();
+  const nav = useNavigate();
 
   const newData = { items : saleItem.map(item => {
     return(
@@ -29,8 +31,11 @@ const SaleCalc = () => {
 
   const handlePayment = async () => {
     try {
-      const data = await checkout({token,newData});
-      console.log(data)
+      const {data} = await checkout({token,newData});
+      if(data?.data) {
+        dispatch(setReceiveData(data?.data));
+        nav("/sale/receive");
+      }
     } catch (error) {
       console.log(error)
     }

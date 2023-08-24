@@ -8,6 +8,7 @@ const initialState = {
   saleItem: [],
   total: 0,
   tax:0,
+  receiveData: null
 };
 
 const totalAmount = (saleItem) => {
@@ -78,6 +79,10 @@ export const saleSlice = createSlice({
           return state
         }
       });
+    },
+
+    setReceiveData : (state , {payload}) => {
+        state.receiveData = payload
     }
 
   },
@@ -89,7 +94,8 @@ export const {
   setSelectReceivePd,
   setQty,
   setSaleItem,
-  deleteQuantity
+  deleteQuantity,
+  setReceiveData
 } = saleSlice.actions;
 
 export default saleSlice.reducer;
