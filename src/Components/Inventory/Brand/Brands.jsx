@@ -15,10 +15,12 @@ import { FiPlus } from 'react-icons/fi';
 import { setBrands, setSearchBrand } from '../../../Redux/Services/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import noPd from "../../../assets/noPd3.png"
+import EditBrand from './EditBrand';
 
 const Brands = () => {
     const [id,setId] = useState(null);
     const [sidebarOpen,setSidebarOpen] = useState(false);
+    const [editSidebarOpen,setEditSidebarOpen] = useState(false);
     const token = Cookies.get("token")
     const {data, isLoading} = useGetBrandsQuery(token);
     const [deleteBrand] = useDeleteBrandMutation();
@@ -190,7 +192,7 @@ const Brands = () => {
 
                       <span onClick={() => {
                         setId(brand?.id);
-                        handleOpen();
+                        setEditSidebarOpen(!editSidebarOpen);
                       }} className=" icon1 hover-scale">
                         <BiEditAlt />
                       </span>
@@ -206,6 +208,7 @@ const Brands = () => {
 
         </div>
       </div>
+      {id != null && <EditBrand editSidebarOpen={editSidebarOpen} setEditSidebarOpen={setEditSidebarOpen} id={id}/>}
     </MainLayout>
   )
 }
