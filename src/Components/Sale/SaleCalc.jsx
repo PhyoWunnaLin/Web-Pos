@@ -2,7 +2,9 @@ import React from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { MdOutlineCancelPresentation } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { setQty, setSelectReceivePd } from '../../Redux/Services/saleSlice'
+import { deleteQuantity, setQty, setSelectReceivePd } from '../../Redux/Services/saleSlice'
+import { useCheckoutMutation } from '../../Redux/API/saleApi'
+import Cookies from 'js-cookie'
 
 const SaleCalc = () => {
   const dispatch = useDispatch()
@@ -10,18 +12,35 @@ const SaleCalc = () => {
   const qty = useSelector(state => state.saleSlice.qty)
   const saleItem = useSelector((state) => state.saleSlice.saleItem);
   const total = useSelector((state) => state.saleSlice.total);
-  // console.log(qty);
+  const tax = useSelector((state) => state.saleSlice.tax);
+  const token = Cookies.get("token");
+  const [checkout] = useCheckoutMutation();
+
+  const newData = { items : saleItem.map(item => {
+    return(
+        {
+          product_id : item.id,
+          quantity : Number(item.quantity)
+        }
+    )
+  })}
+
+  console.log(newData)
+
+  const handlePayment = async () => {
+    try {
+      const data = await checkout({token,newData});
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  } 
 
   const selectReceiveHandler = (id)=>{
     dispatch(setSelectReceivePd(id))
   }
 
-  const data = [
-    {id:1, name: "Lipstick", qty: "1 khu", price: "10000", total: "10000"},
-    {id:2, name: "Lipstick", qty: "1 khu", price: "10000", total: "10000"},
-    {id:3, name: "Lipstick", qty: "1 khu", price: "10000", total: "10000"},
-    {id:4, name: "Lipstick", qty: "1 khu", price: "10000", total: "10000"},
-  ]
+
 
   return (
     <div className='w-full border-l border-[#3f4245] bg-[#161618]'>
@@ -35,14 +54,14 @@ const SaleCalc = () => {
                     <div className=' px-8 pb-2 flex flex-col'>
                       <p className=' tracking-wide text-lg text-white'>{data?.name}</p>
                       <p className=' flex gap-2 text-sm tracking-wide text-[hsl(0,1%,67%)] '>
-                        <span className=''>{data?.quantity + " khu"}</span>
+                        <span className=''> {data?.quantity == "" ? "0 khu" : data?.quantity + " khu"}</span>
                         <span className=' text-end'>{data?.sale_price}</span>
                       </p>
                     </div>
 
                     <div>
                       <p className=' px-8 font-semibold text-lg tracking-wider text-white'>
-                        {data?.sale_price}
+                        {data?.sale_price * Number(data?.quantity)}
                       </p>
                     </div>
                   </div> 
@@ -55,7 +74,7 @@ const SaleCalc = () => {
                 <span>total-</span>
                 <span className=' font-semibold'>{total}</span>
               </p>
-              <p className='text-[hsl(0,1%,67%)] text-end tracking-wide'>Tax-400</p>
+              <p className='text-[hsl(0,1%,67%)] text-end tracking-wide'>Tax-{tax.toFixed(2)}</p>
             </div>
         </div>}
         <div className={`flex flex-col bg-[#202124] ${saleItem.length == 0 ? "mt-auto" : "mt-0"}`}>
@@ -65,46 +84,46 @@ const SaleCalc = () => {
                 <p className='w-[33%] hover:bg-[#ffffff15] text-sm cursor-pointer py-2 px-4 text-white font-medium tracking-wide'> Note</p>
             </div>
             <div className='flex border-y border-[#3f4245]'>
-                <div onClick={()=> dispatch(setQty(1))} 
+                <div onClick={()=> dispatch(setQty({q:"1",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>1</div>
-                <div onClick={()=> dispatch(setQty(2))} 
+                <div onClick={()=> dispatch(setQty({q:"2",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>2</div>
-                <div onClick={()=> dispatch(setQty(3))} 
+                <div onClick={()=> dispatch(setQty({q:"3",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>3</div>
-                <div onClick={()=> dispatch(setQty("qty"))} 
+                <div
                  className='w-[25%] cursor-pointer bg-[#D7DAE0] py-3 font-bold text-center tracking-wider text-[#3F4245]'>QTY</div>
             </div>
             <div className='flex border-y border-[#3f4245]'>
-                <div onClick={()=> dispatch(setQty(4))} 
+                <div onClick={()=> dispatch(setQty({q:"4",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>4</div>
-                <div onClick={()=> dispatch(setQty(5))} 
+                <div onClick={()=> dispatch(setQty({q:"5",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>5</div>
-                <div onClick={()=> dispatch(setQty(6))} 
+                <div onClick={()=> dispatch(setQty({q:"6",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>6</div>
-                <div onClick={()=> dispatch(setQty("dis"))} 
+                <div
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer text-white py-3 font-medium text-center tracking-wider'>DIS</div>
             </div>
             <div className='flex border-y border-[#3f4245]'>
-                <div onClick={()=> dispatch(setQty(7))} 
+                <div onClick={()=> dispatch(setQty({q:"7",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>7</div>
-                <div onClick={()=> dispatch(setQty(8))} 
+                <div onClick={()=> dispatch(setQty({q:"8",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>8</div>
-                <div onClick={()=> dispatch(setQty(9))} 
+                <div onClick={()=> dispatch(setQty({q:"9",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>9</div>
-                <div onClick={()=> dispatch(setQty("price"))} 
+                <div 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer text-white py-3 font-medium text-center tracking-wider'>PRICE</div>
             </div>
             <div className='flex border-y border-[#3f4245]'>
-                <div onClick={()=> dispatch(setQty("+"))} 
+                <div
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>+/-</div>
-                <div onClick={()=> dispatch(setQty(0))} 
+                <div onClick={()=> dispatch(setQty({q:"0",id:selectReceivePd}))} 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>0</div>
-                <div onClick={()=> dispatch(setQty("."))} 
+                <div 
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer border-r-2 border-[#3f4245] text-white py-3 font-medium text-center'>.</div>
-                <div onClick={()=> dispatch(setQty())} 
+                <div onClick={() => dispatch(deleteQuantity(selectReceivePd))}
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer text-white py-3 font-medium text-center tracking-wider flex justify-center items-center'> <MdOutlineCancelPresentation size={21}/> </div>
             </div>
-            <button className='border-t hover:bg-[#ffffff15] border-[#3f4245] py-3 text-[#8ab4f8] font-medium tracking-wider'>Payment</button>
+            <button onClick={handlePayment} className='border-t hover:bg-[#ffffff15] border-[#3f4245] py-3 text-[#8ab4f8] font-medium tracking-wider'>Payment</button>
         </div>
       </div>
     </div>
