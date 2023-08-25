@@ -30,7 +30,7 @@ const Recent = () => {
                     button2={true}
                     route={"/sale/cashier"}
                 />
-                {userList?.length == 0 ? 
+                {recent?.length == 0 ? 
           
           // no user 
           <NoContact image={"https://static.thenounproject.com/png/3518204-200.png"} size={"w-[60%]"} title1={"No Recent Voucher !"} />
