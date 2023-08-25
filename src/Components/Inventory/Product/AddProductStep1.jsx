@@ -44,6 +44,7 @@ const AddProductStep1 = ({currentStep}) => {
           Brand
         </label>
         <select onChange={(e)=> setBrand(e.target.value)} required className="input w-[70%] tracking-wider">
+          <option></option>
           {brands?.map(brand => {
             return (
           <option key={brand?.id} value={brand?.id}>{brand?.name}</option>
