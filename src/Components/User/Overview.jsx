@@ -98,7 +98,7 @@ const Overview = () => {
             <h1 className=" text-white font-medium text-2xl tracking-wide">
                   Staff Overview
             </h1>
-            <div className=" flex justify-between items-center">
+            <div className=" flex justify-between items-center max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-3 ">
               <form className="relative">
                   <input onChange={(e)=> dispatch(setSearchUnBanUser(e.target.value))}
                     type="text"
@@ -133,7 +133,7 @@ const Overview = () => {
             <Loader/>
           </div>) 
           : (
-            <table className=" text-white table-responsive w-full">
+            <table className=" text-white w-full table-responsive">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
                 <th className="p-4 text-start">NO</th>
