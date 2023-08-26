@@ -9,7 +9,7 @@ const MainLayout = ({children}) => {
             <Sidebar/>
         </div>
 
-        <div className=' w-full ml-[209px] mt-[53px]'>
+        <div className=' w-full ml-[209px] max-lg:ml-0 mt-[53px]'>
             {children}
         </div>
     </div>

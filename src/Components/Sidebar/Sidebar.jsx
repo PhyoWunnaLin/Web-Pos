@@ -15,8 +15,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "../../Redux/API/authApi";
 import Cookies from 'js-cookie';
 import { removeToken } from "../../Redux/Services/authSlice";
-import { Loader } from '@mantine/core';
+import { Loader,Burger } from '@mantine/core';
 import { setOpenAcc1, setOpenAcc2, setOpenAcc3, setOpenAcc4 } from "../../Redux/Services/sidebarSlice";
+import { useDisclosure } from '@mantine/hooks';
 
 const Sidebar = () => {
     const [logout , {isLoading}] = useLogoutMutation();
@@ -53,6 +54,9 @@ const Sidebar = () => {
         }
     }
 
+    const [opened, { toggle }] = useDisclosure(false);
+    const label = opened ? 'Close navigation' : 'Open navigation';
+
     return(
         <div className=" select-none">
 
@@ -69,12 +73,15 @@ const Sidebar = () => {
                     <p>
                         <BsPersonCircle/>
                     </p>
+                   
+                    <Burger className=" max-lg:block hidden" color="#e8eaed" size="sm" opened={opened} onClick={toggle} aria-label={label} />
+                   
                 </div>
             </div>
             {/* navbar end */}
 
             {/* sidebar  */}
-            <div className="text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] scrollbar overflow-y-auto fixed w-[210px] mt-[53px] h-screen pb-24 z-50">
+            <div className={`text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] scrollbar overflow-y-auto fixed w-[210px] mt-[53px] h-screen pb-24 z-50 ${opened ? "left-0" : "max-lg:left-[-300px]"} transition-all ease-in duration-300`}>
 
                 {/* Overview  */}
                 <p className={` flex items-center gap-2 px-5 py-3 cursor-pointer sidebarLink`}>

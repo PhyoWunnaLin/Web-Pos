@@ -14,7 +14,7 @@ const Recent = () => {
     const {data , isLoading} = useRecentVoucherQuery(token)
     const recent = data?.data 
     const searchRecentVoucher = useSelector(state => state.saleSlice.searchRecentVoucher)
-    // console.log(searchRecentVoucher);
+    console.log(recent);
     const dispatch = useDispatch()
 
   return (

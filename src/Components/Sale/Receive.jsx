@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 
 const Receive = () => {
   const receiveData = useSelector((state) => state.saleSlice.receiveData);
-  console.log(receiveData)
+  // console.log(receiveData)
 
   const printHandler = () => {
     const printContent = document.getElementById('print-content');

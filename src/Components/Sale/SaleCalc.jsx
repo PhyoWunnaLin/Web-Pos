@@ -18,7 +18,7 @@ const SaleCalc = () => {
   const token = Cookies.get("token");
   const [checkout , {isLoading}] = useCheckoutMutation();
   const nav = useNavigate();
-  console.log(saleItem);
+  // console.log(saleItem);
 
   const newData = { items : saleItem.map(item => {
     return(

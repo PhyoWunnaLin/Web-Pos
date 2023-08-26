@@ -12,7 +12,7 @@ const Banner2 = (props) => {
   }
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex max-[535px]:flex-col max-[535px]:items-start max-[535px]:gap-3 justify-between items-center">
         <div className="flex flex-col gap-1">
           <h1 className=" text-white font-medium text-2xl tracking-wide">
             {props.title}

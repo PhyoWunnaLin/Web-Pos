@@ -57,7 +57,7 @@ const PersonalForm = () => {
     }
   return (
     <div>
-        <form onSubmit={editProfileHandler} className="p-10 flex flex-col gap-6 w-full">
+        <form onSubmit={editProfileHandler} className="p-10 max-[620px]:pl-7 flex flex-col gap-6 w-full">
                     <div className="flex justify-between gap-5">
                     <label className="text-[#FFFFFF] font-medium tracking-wider">
                         Name
