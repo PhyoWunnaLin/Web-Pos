@@ -1,3 +1,28 @@
 .receive-shadow{
     box-shadow: rgba(61, 60, 60, 0.658) 0px 4px 12px;
 }
+.border-bottom{
+    border-bottom: 1px solid #3f4245;
+}
+.total{
+    margin-top: 100px;
+}
+.tax-color{
+    color: hsl(0,1%,67%);
+}
+@media print {
+    .border-bottom{
+        border-bottom: none;
+    }
+    .title,.tax-color {
+      color: #e8eaed;
+    }
+    .receive-shadow{
+        box-shadow: none;
+        border: 1px #e8eaed solid;
+    }
+    .total{
+        margin-top: 0px !important;
+        border-top: 1px solid #e8eaed;
+    }
+  }
