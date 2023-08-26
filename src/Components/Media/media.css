@@ -13,3 +13,14 @@
 .drag-over{
   background-color: red;
 }
+
+.img-div:hover{
+  .img-icon{
+    opacity: 100%;
+  }
+}
+
+.img-icon{
+  opacity: 0;
+  transition: 300ms;
+}

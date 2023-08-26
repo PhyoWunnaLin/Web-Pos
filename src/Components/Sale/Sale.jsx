@@ -6,7 +6,7 @@ import { MdOutlineNotificationsActive } from "react-icons/md";
 import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
 import SaleCalc from "./SaleCalc";
 import { useDispatch, useSelector } from "react-redux";
-import { setSaleItem, setSearchSaleProduct } from "../../Redux/Services/saleSlice";
+import { setSaleItem, setSearchSaleProduct, setSelectReceivePd } from "../../Redux/Services/saleSlice";
 import ImageLoader from "../Loader/ImageLoader";
 import { Link } from "react-router-dom";
 
@@ -81,7 +81,10 @@ const Sale = () => {
                     }).map((pd) => {
                       return (
                         <div
-                        onClick={() => dispatch(setSaleItem(pd))}
+                        onClick={() => {
+                          dispatch(setSaleItem(pd));
+                          dispatch(setSelectReceivePd(pd?.id))
+                        }}
                           key={pd?.id}
                           className="w-[23.2%] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card "
                         >

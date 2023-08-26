@@ -83,6 +83,10 @@ export const saleSlice = createSlice({
 
     setReceiveData : (state , {payload}) => {
         state.receiveData = payload
+    },
+
+    deleteAllSaleItem : (state) => {
+      state.saleItem = []
     }
 
   },
@@ -95,7 +99,8 @@ export const {
   setQty,
   setSaleItem,
   deleteQuantity,
-  setReceiveData
+  setReceiveData,
+  deleteAllSaleItem,
 } = saleSlice.actions;
 
 export default saleSlice.reducer;
