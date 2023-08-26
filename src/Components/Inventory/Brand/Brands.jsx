@@ -118,7 +118,7 @@ const Brands = () => {
               <h1 className=" text-white font-medium text-2xl tracking-wide">
                     Brand Overview
               </h1>
-              <div className=" flex justify-between items-center">           
+              <div className=" flex justify-between items-center max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-3 ">           
                   <form className="relative">
                     <input onChange={(e)=> dispatch(setSearchBrand(e.target.value))}
                       type="text"

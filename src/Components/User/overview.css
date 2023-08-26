@@ -13,7 +13,7 @@
 
 @media (max-width: 800px) {
     .table-responsive {
-      display: block;
+      /* display: block; */
       width: 100%;
       overflow-x: auto;
     }
