@@ -72,7 +72,7 @@ const Sale = () => {
             ) : (
               <div className="ml-2">
                 <div className=" flex flex-wrap gap-5">
-                  {products.filter((pd) => {
+                  {products?.filter((pd) => {
                       if (searchSaleProduct === "") {
                         return pd;
                       } else if (pd?.name.toLowerCase().includes(searchSaleProduct.toLowerCase())) {

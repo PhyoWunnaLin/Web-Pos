@@ -49,7 +49,7 @@ const SaleCalc = () => {
 
   return (
     <div className='w-full border-l border-[#3f4245] bg-[#161618]'>
-      <div className='flex flex-col h-screen pt-14'>
+      <div className='flex flex-col h-screen pt-16'>
         <h1 className=' text-[25px] font-semibold px-8 pb-4 tracking-wide text-white'>Receive</h1>
         <div className=' h-auto overflow-y-scroll scrollbar'>
           {saleItem?.map(data => {
