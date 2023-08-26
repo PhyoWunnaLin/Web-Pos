@@ -2,10 +2,11 @@ import React from 'react'
 import { BsPlus } from 'react-icons/bs'
 import { MdOutlineCancelPresentation } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteQuantity, setQty, setReceiveData, setSelectReceivePd } from '../../Redux/Services/saleSlice'
+import { deleteAllSaleItem, deleteQuantity, setQty, setReceiveData, setSaleItem, setSelectReceivePd } from '../../Redux/Services/saleSlice'
 import { useCheckoutMutation } from '../../Redux/API/saleApi'
 import Cookies from 'js-cookie'
 import { Route, useNavigate } from 'react-router-dom'
+import { Loader } from '@mantine/core'
 
 const SaleCalc = () => {
   const dispatch = useDispatch()
@@ -15,7 +16,7 @@ const SaleCalc = () => {
   const total = useSelector((state) => state.saleSlice.total);
   const tax = useSelector((state) => state.saleSlice.tax);
   const token = Cookies.get("token");
-  const [checkout] = useCheckoutMutation();
+  const [checkout , {isLoading}] = useCheckoutMutation();
   const nav = useNavigate();
   console.log(saleItem);
 
@@ -36,6 +37,7 @@ const SaleCalc = () => {
       if(data?.data) {
         dispatch(setReceiveData(data?.data));
         nav("/sale/receive");
+        dispatch(deleteAllSaleItem());
       }
     } catch (error) {
       console.log(error)
@@ -129,7 +131,7 @@ const SaleCalc = () => {
                 <div onClick={() => dispatch(deleteQuantity(selectReceivePd))}
                  className='w-[25%] hover:bg-[#ffffff15] cursor-pointer text-white py-3 font-medium text-center tracking-wider flex justify-center items-center'> <MdOutlineCancelPresentation size={21}/> </div>
             </div>
-            <button onClick={handlePayment} className='border-t hover:bg-[#ffffff15] border-[#3f4245] py-3 text-[#8ab4f8] font-medium tracking-wider'>Payment</button>
+            <button disabled={isLoading && true} onClick={handlePayment} className='border-t hover:bg-[#ffffff15] border-[#3f4245] py-3 text-[#8ab4f8] font-medium tracking-wider flex justify-center items-center gap-2'>Payment {isLoading && <Loader size="xs" className={"-mb-[2px]"}/>} </button>
         </div>
       </div>
     </div>
