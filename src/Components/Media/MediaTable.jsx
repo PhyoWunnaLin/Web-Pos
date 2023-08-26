@@ -7,6 +7,7 @@ import Cookies from 'js-cookie'
 import Loader from '../Loader/Loader'
 import NoContact from '../NoContact/NoContact'
 import Swal from 'sweetalert2'
+import { Toaster, toast } from 'react-hot-toast'
 
 const MediaTable = () => {
     const token = Cookies.get("token")
@@ -49,8 +50,18 @@ const MediaTable = () => {
         })
       }
 
+    const handleCopyImageUrl = (url) => {
+        navigator.clipboard.writeText(url);
+        toast.success("Copied Image Link!", {
+          duration: 2000,
+          position: "bottom-center",
+          style:{backgroundColor:"#161618",color:"white"},
+        });
+    };
+
   return (
       <>
+      <Toaster/>
       {medias?.length == 0 ? (
         <div className=" mt-[-80px]">
         <NoContact image={"https://img.freepik.com/free-icon/picture_318-830480.jpg?size=626&ext=jpg&uid=R50931742&ga=GA1.2.1281172008.1669966802&semt=ais"} size={"w-[20%]"} title1={"No Photo !"} title2={"Please Upload Photo"} />
@@ -61,8 +72,8 @@ const MediaTable = () => {
             <div className='-mt-20 mb-8'>
                 <Loader/>
             </div> : 
-    
-            <table className="w-full text-white table-responsive2">
+            <div className='h-[300px] overflow-y-scroll scrollbar'>
+              <table className="w-full text-white table-responsive2">
                 <thead className=" tracking-wider text-sm border border-[#7E7F80]">
                     <tr className='select-none'>
                         <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
@@ -86,14 +97,16 @@ const MediaTable = () => {
                                 <td className="p-4 text-end">{media?.size}</td>
                                 <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                                    <span onClick={() => handleDeletePhoto(media?.id)} className=' text-white cursor-pointer hover:text-red-500 duration-300'><BiTrash size={16}/></span> 
-                                   <span className=' text-white cursor-pointer hover:text-[#8AB4F8]'><BsFiles/></span> 
+                                   <span onClick={() => handleCopyImageUrl(media?.url)} className=' text-white cursor-pointer hover:text-[#8AB4F8]'><BsFiles/></span> 
                                 </td>
                             </tr>
                         )
                     })}
                     
                 </tbody>
-            </table>}
+            </table>
+            </div>
+            }
         </div>
       )}
       </>

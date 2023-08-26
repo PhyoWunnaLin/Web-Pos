@@ -1,12 +1,16 @@
 import Cookies from "js-cookie";
 import React from "react";
-import { useDeletePhotoMutation, useGetPhotoQuery } from "../../Redux/API/mediaApi";
+import {
+  useDeletePhotoMutation,
+  useGetPhotoQuery,
+} from "../../Redux/API/mediaApi";
 import ImageLoader from "../Loader/ImageLoader";
 import NoContact from "../NoContact/NoContact";
 import { BiTrash } from "react-icons/bi";
 import { BsFiles } from "react-icons/bs";
-import "./media.css"
+import "./media.css";
 import Swal from "sweetalert2";
+import { Toaster, toast } from "react-hot-toast";
 
 const MediaImage = () => {
   const token = Cookies.get("token");
@@ -16,24 +20,24 @@ const MediaImage = () => {
 
   const handleDeletePhoto = (id) => {
     Swal.fire({
-      title: 'Do you want to delete this photo?',
-      icon: 'warning',
+      title: "Do you want to delete this photo?",
+      icon: "warning",
       iconColor: "#E64848",
       background: "#161618",
       showCancelButton: true,
       // showCloseButton: true,
-      confirmButtonColor: '#E64848',
-      cancelButtonColor: '#24262b',
-      confirmButtonText: 'Delete'
-    }).then(async(result) => {
+      confirmButtonColor: "#E64848",
+      cancelButtonColor: "#24262b",
+      confirmButtonText: "Delete",
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        const data = await deletePhoto({token,id})
+        const data = await deletePhoto({ token, id });
         console.log(data);
-        if(data?.data?.message){
+        if (data?.data?.message) {
           Swal.fire({
-            customClass : {
-              title: 'swal2-title',
-              popup: 'custom-swal-popup'
+            customClass: {
+              title: "swal2-title",
+              popup: "custom-swal-popup",
             },
             title: "Successfully delete a photo",
             icon: "success",
@@ -41,15 +45,24 @@ const MediaImage = () => {
             // showCloseButton: true,
             width: 400,
             background: "#161618",
-          })
+          });
         }
-        
       }
-    })
-  }
+    });
+  };
+
+  const handleCopyImageUrl = (url) => {
+    navigator.clipboard.writeText(url);
+    toast.success("Copied Image Link!", {
+      duration: 2000,
+      position: "bottom-center",
+      style:{backgroundColor:"#161618",color:"white"},
+    });
+  };
 
   return (
     <>
+    <Toaster/>
       {images?.length == 0 ? (
         <div className=" mt-[-80px]">
           <NoContact
@@ -79,11 +92,17 @@ const MediaImage = () => {
                       src={image?.url}
                       className=" w-full h-full rounded-md object-cover"
                     />
-                    <div onClick={() => handleDeletePhoto(image?.id)} className="img-icon flex gap-2 absolute bottom-2 right-2">
-                      <div className="h-8 w-10 flex justify-center items-center bg-[#ffffffd2] rounded-md">
+                    <div className="img-icon flex gap-2 absolute bottom-2 right-2">
+                      <div
+                        onClick={() => handleDeletePhoto(image?.id)}
+                        className="h-8 w-10 flex justify-center items-center bg-[#ffffffd2] rounded-md"
+                      >
                         <BiTrash size={18} />
                       </div>
-                      <div className="h-8 w-10 flex justify-center items-center bg-[#ffffffd2] rounded-md">
+                      <div
+                        onClick={() => handleCopyImageUrl(image?.url)}
+                        className="h-8 w-10 flex justify-center items-center bg-[#ffffffd2] rounded-md"
+                      >
                         <BsFiles size={18} />
                       </div>
                     </div>
