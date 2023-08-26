@@ -8,7 +8,8 @@ const initialState = {
   saleItem: [],
   total: 0,
   tax:0,
-  receiveData: null
+  receiveData: null,
+  firstDelete:null,
 };
 
 const totalAmount = (saleItem) => {
@@ -40,11 +41,19 @@ export const saleSlice = createSlice({
 
     setSelectReceivePd: (state, { payload }) => {
       state.selectReceivePd = payload;
+      state.firstDelete = true;
     },
 
     setQty: (state, { payload }) => {
       state.saleItem.map((item) => {
-        if (item.id === payload.id) {
+        if ( state.firstDelete && item.id === payload.id) {
+          return (
+            (item.quantity = payload.q),
+            (state.firstDelete = false),
+            (state.total = totalAmount(state.saleItem)),
+            (state.tax = totalTax(state.saleItem))
+          )
+        } else if (item.id === payload.id) {
           return (
             (item.quantity += payload.q),
             (state.total = totalAmount(state.saleItem)),
