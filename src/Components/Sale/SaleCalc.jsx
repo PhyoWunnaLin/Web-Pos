@@ -17,6 +17,7 @@ const SaleCalc = () => {
   const token = Cookies.get("token");
   const [checkout] = useCheckoutMutation();
   const nav = useNavigate();
+  console.log(saleItem);
 
   const newData = { items : saleItem.map(item => {
     return(
@@ -73,7 +74,7 @@ const SaleCalc = () => {
                 )
               })}
         </div>
-        {saleItem.length && <div className=' flex justify-end text-[#e8eaed] mt-auto py-2'>
+        {saleItem.length != 0 && <div className=' flex justify-end text-[#e8eaed] mt-auto py-2'>
             <div className=' mx-8'>
               <p className='text-xl tracking-wide'>
                 <span>total-</span>
