@@ -54,7 +54,7 @@ const ChangePasswordForm = () => {
 
   return (
     <div>
-        <form onSubmit={changePasswordHandler} className="p-10 flex flex-col gap-6 w-full">
+        <form onSubmit={changePasswordHandler} className="p-10 max-[620px]:pl-7 flex flex-col gap-6 w-full">
             <div className="flex justify-between gap-5">
                     <label className="text-[#FFFFFF] font-medium tracking-wider">
                         Current Password

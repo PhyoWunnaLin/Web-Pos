@@ -60,7 +60,7 @@ const AdminProfileEdit = () => {
             {/* pp top start  */}
             <div className=' bg-[#161618] border-b border-[#878787]'>
                 {/* profile img  */}
-                <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
+                <div className='pb-10 max-[550px]:pb-6 pt-7 mt-[73px] flex items-center relative'>
                     <div className=' absolute top-[-70px] left-[33px]'>
                     {user?.user_photo? (
                       <div>
@@ -94,8 +94,8 @@ const AdminProfileEdit = () => {
 
                     </div>
 
-                    <div className= " flex justify-between w-full">
-                        <div className=' ml-[213px]'>
+                    <div className= " flex justify-between w-full max-[550px]:pl-8 max-[550px]:gap-3">
+                        <div className=' ml-[213px] max-[550px]:ml-0 max-[550px]:mt-[100px]'>
                             <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>{user?.name}</h1>
                             <div className=' flex items-center gap-2 '>
                                 <span className=' text-[#c5c1c1]'>{user?.role} /</span> 
@@ -106,7 +106,7 @@ const AdminProfileEdit = () => {
                             </div>
                         </div>
 
-                        <div className=' flex items-center gap-3 mr-8'>
+                        <div className=' flex items-center gap-3 mr-8 max-[550px]:mt-[90px]'>
                             <p className=' icon2 hover-up text-[#fff]'><HiOutlineMailOpen/></p>
                             <p className=' icon2 hover-up text-[#fff]'><BsTelephoneOutbound/></p>
                         </div>
@@ -116,7 +116,7 @@ const AdminProfileEdit = () => {
                 </div>
 
                 {/* profile navLink  */}
-                <div className=' flex items-center gap-20 ml-10 pb-5'>
+                <div className=' flex items-center max-[620px]:gap-10 max-[620px]:gap-5 max-[620px]:ml-7 gap-20 ml-10 pb-5'>
                     <div onClick={() => dispatch(setAdminEditPp("Personal"))} className={` ${adminEditPp == "Personal" || adminEditPp == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
                         <span className=' font-semibold'>Personal</span>

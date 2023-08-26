@@ -81,12 +81,12 @@ const MediaImage = () => {
               <ImageLoader />
             </div>
           ) : (
-            <div className="flex gap-5 flex-wrap">
+            <div className="grid grid-cols-5 max-xl:grid-cols-4 max-lg:flex max-lg:flex-wrap max-lg:justify-center max-lg:gap-10 max-[980px]:gap-5 max-sm:gap-3 max-xl:gap-4 gap-5">
               {images?.map((image) => {
                 return (
                   <div
                     key={image?.id}
-                    className="img-div w-[200px] h-[200px] rounded-md relative hover:opacity-80 duration-300 cursor-pointer"
+                    className="img-div w-[200px] h-[200px] max-md:w-[180px] max-md:h-[180px] max-sm:w-[120px] max-sm:h-[120px] rounded-md relative hover:opacity-80 duration-300 cursor-pointer"
                   >
                     <img
                       src={image?.url}
@@ -95,15 +95,15 @@ const MediaImage = () => {
                     <div className="img-icon flex gap-2 absolute bottom-2 right-2">
                       <div
                         onClick={() => handleDeletePhoto(image?.id)}
-                        className="h-8 w-10 flex justify-center items-center bg-[#ffffffd2] rounded-md"
+                        className="h-8 w-10  flex justify-center items-center bg-[#ffffffd2] rounded-md"
                       >
-                        <BiTrash size={18} />
+                        <BiTrash className=" max-sm:text-[14px] text-[18px]" />
                       </div>
                       <div
                         onClick={() => handleCopyImageUrl(image?.url)}
                         className="h-8 w-10 flex justify-center items-center bg-[#ffffffd2] rounded-md"
                       >
-                        <BsFiles size={18} />
+                        <BsFiles className=" max-sm:text-[14px] text-[18px]" />
                       </div>
                     </div>
                   </div>

@@ -24,7 +24,7 @@ const BanUser = () => {
     const userList = users?.users;
     const banList = userList?.filter(user => user.banned == 1)
     const searchBanUser = useSelector(state => state.userSlice.searchBanUser)
-    // console.log(searchBanUser);
+    // console.log(banList);
 
     const unBanHandler = async(id)=>{
         Swal.fire({

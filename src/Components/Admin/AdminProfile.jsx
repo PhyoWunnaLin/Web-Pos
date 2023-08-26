@@ -61,8 +61,8 @@ const AdminProfile = () => {
                     )}
                     </div>
 
-                    <div className= " flex justify-between w-full">
-                        <div className=' ml-[213px]'>
+                    <div className= " flex justify-between w-full max-[550px]:pl-8 max-[550px]:gap-3">
+                        <div className=' ml-[213px] max-[550px]:ml-0 max-[550px]:mt-[70px]'>
                             <h1 className=' text-xl text-[#fff] font-bold tracking-wider mb-1'>{admin?.name}</h1>
                             <div className=' flex items-center gap-2 '>
                                 <span className=' text-[#c5c1c1]'>{admin?.role} /</span> 
@@ -73,7 +73,7 @@ const AdminProfile = () => {
                             </div>
                         </div>
 
-                        <div className=' flex items-center gap-3 mr-8'>
+                        <div className=' flex items-center gap-3 mr-8 max-[550px]:mt-[60px]'>
                             <p className=' icon2 hover-up text-[#fff]'><HiOutlineMailOpen/></p>
                             <p className=' icon2 hover-up text-[#fff]'><BsTelephoneOutbound/></p>
                         </div>
@@ -83,7 +83,7 @@ const AdminProfile = () => {
                 </div>
 
                 {/* profile navLink  */}
-                <div className=' flex items-center gap-20 ml-10 pb-5'>
+                <div className=' flex items-center gap-20 max-[430px]:gap-10 max-[430px]:ml-8 ml-10 pb-5'>
                     <div onClick={() => dispatch(setAdminPp("Personal"))} className={` ${adminPp == "Personal" || adminPp == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
                         <span className=' font-semibold'>Personal</span>
@@ -101,18 +101,18 @@ const AdminProfile = () => {
             {/* pp bottom start  */}
             <div className=' bg-[#191919]'>
               {/* Personal  */}
-              <div className={` ${adminPp == "Personal" || adminPp == null ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-3`}>
-                    <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+              <div className={` ${adminPp == "Personal" || adminPp == null ? "block" : "hidden"} pl-10 max-[430px]:pl-8 pt-6 pb-9 flex flex-col gap-3`}>
+                    <div className=' flex items-center gap-14 max-[430px]:gap-0 text-[17px] tracking-wider'>
                       <p className=' text-[#878787] w-[150px] font-semibold'>Address</p>
                       <p className=' text-[#fff]'>{admin?.address ? admin?.address : "Yangon" }</p>
                     </div>
 
-                    <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+                    <div className=' flex items-center gap-14 max-[430px]:gap-0 text-[17px] tracking-wider'>
                       <p className=' text-[#878787] w-[150px] font-semibold'>Gender</p>
                       <p className=' text-[#fff]'>{admin?.gender}</p>
                     </div>
                   
-                    <div className=' flex items-center gap-14 text-[17px] tracking-wide'>
+                    <div className=' flex items-center gap-14 max-[430px]:gap-0 text-[17px] tracking-wide'>
                       <p className=' text-[#878787] w-[150px] font-semibold'>Date Of Birth</p>
                       <p className=' text-[#fff]'>{admin?.date_of_birth? admin?.date_of_birth: "19/12/2002" }</p>
                     </div>
@@ -120,17 +120,17 @@ const AdminProfile = () => {
 
               {/* Login Information  */}
               <div className={` ${adminPp == "Login Information" ? "block" : "hidden"} pl-10 pt-6 pb-9 flex flex-col gap-5`}>
-                      <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+                      <div className=' flex items-center gap-14 max-[430px]:gap-0 text-[17px] tracking-wider'>
                           <p className=' text-[#878787] w-[150px] font-semibold'>Phone</p>
                           <p className=' text-[#fff]'>{admin?.phone? admin?.phone: "099999999" }</p>
                       </div>
 
-                      <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+                      <div className=' flex items-center gap-14 max-[430px]:gap-0 text-[17px] tracking-wider'>
                           <p className=' text-[#878787] w-[150px] font-semibold'>Position</p>
                           <p className=' text-[#fff]'>{admin?.role}</p>
                       </div>
 
-                      <div className=' flex items-center gap-14 text-[17px] tracking-wider'>
+                      <div className=' flex items-center gap-14 max-[430px]:gap-0 text-[17px] tracking-wider'>
                           <p className=' text-[#878787] w-[150px] font-semibold'>Mail</p>
                           <p className=' text-[#fff]'>{admin?.email}</p>
                       </div>

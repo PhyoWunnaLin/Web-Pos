@@ -47,7 +47,7 @@ const Stocks = () => {
 
           <NoContact image={noPd} size={"w-[55%]"} title1={"No Stock !"} title2={"Please ADD Stock"} /> : 
 
-          <div className=' flex flex-col gap-8'>
+          <div className=' flex flex-col gap-8 '>
             {/* banner2  */}
             <div className='flex flex-col gap-3'>
               <h1 className=" text-white font-medium text-2xl tracking-wide">
@@ -89,7 +89,7 @@ const Stocks = () => {
             <Loader/>
           </div>) 
           : (
-            <table className=" text-white table-responsive w-full">
+            <table className=" text-white table-responsive w-full overflow-x-auto">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
                 <th className="p-4 text-start">NO</th>

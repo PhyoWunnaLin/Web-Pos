@@ -57,7 +57,7 @@ const Products = () => {
               <h1 className=" text-white font-medium text-2xl tracking-wide">
                     Product Overview
               </h1>
-              <div className=" flex justify-between items-center">           
+              <div className=" flex max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-1 justify-between items-center">           
                   <form className="relative">
                     <input onChange={(e)=> dispatch(setSearchProduct(e.target.value))}
                       type="text"
@@ -68,20 +68,22 @@ const Products = () => {
                       <BiSearch size={20} />
                     </div>
                   </form>
-                <div className="flex gap-5 items-center justify-end mt-1">
-                    <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
-                      Sort : 
-                      <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
-                        <option className="bg-[#161618] hover:bg-[#202124]" value="">Last</option>
-                        <option className="bg-[#161618] hover:bg-[#202124]" value="">first</option>
-                      </select>
-                    </div>
-                    <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
-                      Filter : 
-                      <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
-                        <option className="bg-[#161618] hover:bg-[#202124]" value="">All Files</option>
-                        <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
-                      </select>
+                <div className="flex gap-5 items-center max-[680px]:w-full max-[680px]:justify-between justify-end mt-1">
+                    <div className="flex gap-5 items-center justify-end mt-1">
+                      <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
+                        Sort : 
+                        <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Last</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">first</option>
+                        </select>
+                      </div>
+                      <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
+                        Filter : 
+                        <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">All Files</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
+                        </select>
+                      </div>
                     </div>
                     <div className="flex">
                       <button
