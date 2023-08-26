@@ -6,13 +6,19 @@ import { CiShop } from 'react-icons/ci'
 import { HiOutlineMailOpen } from 'react-icons/hi'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserCreatePp } from '../../../Redux/Services/profileSlice'
-import { useGetBrandsQuery } from '../../../Redux/API/inventoryApi'
+import { useCreateProductMutation, useGetBrandsQuery } from '../../../Redux/API/inventoryApi'
 import {PiUserFocus} from 'react-icons/pi'
 import Cookies from 'js-cookie'
 import { setInsert } from '../../../Redux/Services/mediaSlice'
+import { ImArrowRight2 } from 'react-icons/im'
+import { TiTick } from 'react-icons/ti'
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router'
 
-const AddProductStep4 = () => {
+const AddProductStep4 = ({currentStep , setCurrentStep , steps , setComplete , complete}) => {
   const token = Cookies.get("token");
+  const nav = useNavigate();
+  const [createProduct] = useCreateProductMutation()
   const dispatch = useDispatch();
   const form1 = useSelector(state => state.productSlice.pdForm1)
   const form2 = useSelector(state => state.productSlice.pdForm2)
@@ -24,8 +30,45 @@ const AddProductStep4 = () => {
   const name = brandName && brandName[0]?.name;
   const userCreatePp = useSelector(state => state.profileSlice.userCreatePp);
 
+  const showAlert = () => {
+    Swal.fire({
+      customClass : {
+        title: 'swal2-title'
+      },
+      title: "Successfully created an product",
+      icon: "success",
+      confirmButtonText: "SEE ALL PRODUCTS",
+      showCloseButton: true,
+      width: 400,
+      background: "#161618",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        nav("/inventory/products")
+      }
+    })
+  };
+
+  const createProductHandler = async()=>{
+    try{
+      const pdData = {name: form1?.name, brand_id: form1?.brand_id, actual_price: form2?.realPrice, sale_price: form2?.price, unit: form1?.unit, more_information: form1?.more_information, photo: form3 }
+      const data = await createProduct({token,pdData})
+      console.log(data)
+      if(data?.data){
+        showAlert()
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  const run = () => {
+    createProductHandler();
+  }
+
   return (
-    <div className="">
+    <div className='flex gap-10'>
+      {/* preview  */}
+      <div className="w-[65%]">
       {/* Profile  */}
           <div>
             {/* pp top start  */}
@@ -110,6 +153,46 @@ const AddProductStep4 = () => {
             {/* pp bottom end  */}
           </div>
       {/* profile end  */}
+      </div>
+      {/* form step  */}
+      <div className="flex flex-col mt-16">
+                {steps.map((step, i) => {
+                  return (
+                    <div key={i} className="flex flex-col">
+                      <div
+                        className={`step-item ${
+                          currentStep == i + 1 && "active"
+                        } ${(i + 1 < currentStep || complete) && "complete"}`}
+                      >
+                        <div className="step">
+                          {i + 1 < currentStep || complete ? (
+                            <TiTick className=" text-black" size={22} />
+                          ) : (
+                            i + 1
+                          )}
+                        </div>
+                        <p className="text-[#FFFFFF] font-medium tracking-wider">
+                          {step}
+                        </p>
+                      </div>
+                      {i < 2 && <div className="line"></div>}
+                    </div>
+                  );
+                })}
+                <div className="mt-8">
+                    <button
+                      onClick={run}
+                      className="btn flex items-center gap-2"
+                    >
+                      {currentStep > 3 ? "Create" : "Next"}
+                      {currentStep <= 3 && (
+                        <span>
+                          <ImArrowRight2 />
+                        </span>
+                      )}
+                    </button>
+                </div>
+      </div> 
     </div>
   )
 }

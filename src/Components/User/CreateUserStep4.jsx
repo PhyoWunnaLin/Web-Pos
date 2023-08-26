@@ -7,9 +7,18 @@ import { BiSolidEditAlt } from "react-icons/bi";
 import {PiUserFocus} from 'react-icons/pi'
 import { useDispatch, useSelector } from "react-redux";
 import { setUserCreatePp } from "../../Redux/Services/profileSlice";
+import { TiTick } from "react-icons/ti";
+import { ImArrowRight2 } from "react-icons/im";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
+import Cookies from "js-cookie";
+import { useCreateUserMutation } from "../../Redux/API/userApi";
 
-const CreateUserStep4 = () => {
+const CreateUserStep4 = ({currentStep , setCurrentStep , steps , setComplete , complete}) => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
+  const token = Cookies.get("token")
+  const [createUser] = useCreateUserMutation()
   const userForm1 = useSelector((state) => state.userSlice.userForm1);
   const userForm2 = useSelector((state) => state.userSlice.userForm2);
   const userForm3 = useSelector(state => state.userSlice.userForm3)
@@ -17,8 +26,45 @@ const CreateUserStep4 = () => {
 
   const userCreatePp = useSelector((state) => state.profileSlice.userCreatePp);
   // const userCreatePp2 = localStorage.getItem("userCreatePp");
+
+  const showAlert = () => {
+    Swal.fire({
+      customClass: {
+        title: "swal2-title",
+      },
+      title: "Successfully created an account",
+      icon: "success",
+      confirmButtonText: "OK",
+      width: 400,
+      background: "#161618",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        nav("/user/overview");
+      }
+    });
+  };
+
+  const createUserHandler = async()=>{
+    try{
+      const userData = {name: userForm1?.name, phone: userForm1?.phone, date_of_birth: userForm1?.DOB, gender: userForm1?.gender, address: userForm1?.address, email: userForm2?.email, password: userForm2?.password, password_confirmation: userForm2?.confirm_Password, role: userForm2?.position, user_photo: userForm3 }
+      const data = await createUser({token,userData})
+      // console.log(data)
+      if(data?.data){
+        showAlert()
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  const run = () => {
+    createUserHandler();
+  }
+
   return (
-    <div className="">
+    <div className="flex gap-10">
+      {/* preview  */}
+      <div className="w-[65%]">
       {/* Profile  */}
       <div>
         {/* pp top start  */}
@@ -164,6 +210,46 @@ const CreateUserStep4 = () => {
         {/* pp bottom end  */}
       </div>
       {/* profile end  */}
+      </div>
+      {/* form step  */}
+      <div className="flex flex-col mt-16">
+                {steps.map((step, i) => {
+                  return (
+                    <div key={i} className="flex flex-col">
+                      <div
+                        className={`step-item ${
+                          currentStep == i + 1 && "active"
+                        } ${(i + 1 < currentStep || complete) && "complete"}`}
+                      >
+                        <div className="step">
+                          {i + 1 < currentStep || complete ? (
+                            <TiTick className=" text-black" size={22} />
+                          ) : (
+                            i + 1
+                          )}
+                        </div>
+                        <p className="text-[#FFFFFF] font-medium tracking-wider">
+                          {step}
+                        </p>
+                      </div>
+                      {i < 2 && <div className="line"></div>}
+                    </div>
+                  );
+                })}
+                <div className="mt-8">
+                    <button
+                      onClick={run}
+                      className="btn flex items-center gap-2"
+                    >
+                      {currentStep > 3 ? "Create" : "Next"}
+                      {currentStep <= 3 && (
+                        <span>
+                          <ImArrowRight2 />
+                        </span>
+                      )}
+                    </button>
+                </div>
+      </div> 
     </div>
   );
 };
