@@ -4,6 +4,7 @@ const initialState = {
   searchRecentVoucher: "",
   searchSaleProduct: "",
   selectReceivePd: 1,
+  products: [],
   qty: "1",
   saleItem: [],
   total: 0,
@@ -31,6 +32,10 @@ export const saleSlice = createSlice({
   name: "saleSlice",
   initialState,
   reducers: {
+    setProducts: (state, {payload}) =>{
+      state.products = payload
+    },
+
     setSearchRecentVoucher: (state, { payload }) => {
       state.searchRecentVoucher = payload;
     },
@@ -102,6 +107,7 @@ export const saleSlice = createSlice({
 });
 
 export const {
+  setProducts,
   setSearchRecentVoucher,
   setSearchSaleProduct,
   setSelectReceivePd,
