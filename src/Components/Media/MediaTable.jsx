@@ -72,7 +72,7 @@ const MediaTable = () => {
             <div className='-mt-20 mb-8'>
                 <Loader/>
             </div> : 
-            <div className='h-[300px] overflow-y-scroll table-responsive scrollbar'>
+            <div className='h-[300px] overflow-y-scroll scrollbar'>
               <table className="w-full text-white table-responsive2">
                 <thead className=" tracking-wider text-sm border border-[#7E7F80]">
                     <tr className='select-none'>

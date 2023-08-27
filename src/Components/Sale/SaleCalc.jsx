@@ -7,6 +7,7 @@ import { useCheckoutMutation } from '../../Redux/API/saleApi'
 import Cookies from 'js-cookie'
 import { Route, useNavigate } from 'react-router-dom'
 import { Loader } from '@mantine/core'
+import Swal from 'sweetalert2'
 
 const SaleCalc = () => {
   const dispatch = useDispatch()
@@ -29,15 +30,28 @@ const SaleCalc = () => {
     )
   })}
 
-  console.log(newData)
+  const errorHandler = (error) => {
+    Swal.fire({
+      title: error,
+      icon: 'warning',
+      iconColor: "#E64848",
+      background: "#161618",
+      // showCloseButton: true,
+      confirmButtonColor: '#E64848',
+      confirmButtonText: 'OK'
+    })
+  }
 
   const handlePayment = async () => {
     try {
-      const {data} = await checkout({token,newData});
+      const data = await checkout({token,newData});
+      console.log(data?.error?.data?.error)
       if(data?.data) {
         dispatch(setReceiveData(data?.data));
         nav("/sale/receive");
         dispatch(deleteAllSaleItem());
+      }else if (data?.error){
+        errorHandler(data?.error?.data?.error)
       }
     } catch (error) {
       console.log(error)

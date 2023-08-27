@@ -133,14 +133,14 @@ const Overview = () => {
             <Loader/>
           </div>) 
           : (
-            <table className=" text-white w-full table-responsive">
+            <table className=" text-white w-full table-responsive2">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
-                <th className="p-4 text-start">NO</th>
-                <th className="p-4 text-start">NAME</th>
-                <th className="p-4 text-start">POSITION</th>
-                <th className="p-4 text-start">EMAIL</th>
-                <th className="p-4 ">...</th>
+                <th className="p-4 max-[1000px]:pr-5 text-start">NO</th>
+                <th className="p-4 max-[1000px]:pr-36 text-start">NAME</th>
+                <th className="p-4 max-[1000px]:pr-24 text-start">POSITION</th>
+                <th className="p-4 max-[1000px]:pr-44 text-start">EMAIL</th>
+                <th className="p-4 max-[1000px]:px-28">...</th>
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">

@@ -89,14 +89,14 @@ const Stocks = () => {
             <Loader/>
           </div>) 
           : (
-            <table className=" text-white table-responsive w-full ">
+            <table className=" text-white table-responsive2 w-full ">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
-                <th className="p-4 text-start">NO</th>
-                <th className="p-4 text-start">PRODUCT NAME</th>
-                <th className="p-4 text-start">USER NAME</th>
-                <th className="p-4 text-end">ADDED QUANTITY</th>
-                <th className="p-4 text-start">CREATED AT</th>
+                <th className="p-4 max-[1000px]:pr-5 text-start">NO</th>
+                <th className="p-4 max-[1000px]:pr-40 text-start">PRODUCT NAME</th>
+                <th className="p-4 max-[1000px]:pr-20 text-start">USER NAME</th>
+                <th className="p-4 max-[1000px]:pl-10 text-end">ADDED QUANTITY</th>
+                <th className="p-4 max-[1000px]:pr-20 text-start">CREATED AT</th>
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
