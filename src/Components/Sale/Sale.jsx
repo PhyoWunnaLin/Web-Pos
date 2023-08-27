@@ -41,9 +41,9 @@ const Sale = () => {
       {/* cashier  */}
       <div className="flex mt-[53px]">
         {/* product  */}
-        <div className="w-[70%] flex flex-col gap-5">
+        <div className="w-[70%] max-[840px]:w-[60%] max-[665px]:w-[55%] flex flex-col gap-5">
           {/* banner  */}
-          <div className=" flex justify-between items-center border-b border-[#3f4245] py-5 px-5">
+          <div className=" flex max-[800px]:flex-col max-[800px]:gap-3 justify-between items-center border-b border-[#3f4245] py-5 px-5">
             <div className="w-[50%] flex gap-4">
               <p className="text-[hsl(0,3%,76%)] tracking-wide">
                 Sale <span className="text-[#8ab4f8]">/</span> Cashier{" "}
@@ -70,8 +70,8 @@ const Sale = () => {
                 <ImageLoader />
               </div>
             ) : (
-              <div className="ml-2">
-                <div className=" flex flex-wrap gap-5">
+              <div className="mx-5">
+                <div className="grid grid-cols-4 max-[1110px]:grid-cols-3 max-[840px]:grid-cols-2 max-[665px]:grid-cols-1 gap-5">
                   {products?.filter((pd) => {
                       if (searchSaleProduct === "") {
                         return pd;
@@ -86,7 +86,7 @@ const Sale = () => {
                           dispatch(setSelectReceivePd(pd?.id))
                         }}
                           key={pd?.id}
-                          className="w-[23.2%] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card "
+                          className=" h-[250px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card "
                         >
                           <img
                             src={
@@ -114,7 +114,7 @@ const Sale = () => {
           </div>
         </div>
         {/* calculator */}
-        <div className="w-[30%] fixed top-0 right-0">
+        <div className="w-[30%] max-[840px]:w-[40%] max-[665px]:w-[45%] fixed top-0 right-0">
           <SaleCalc />
         </div>
       </div>

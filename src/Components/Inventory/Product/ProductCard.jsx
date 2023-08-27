@@ -27,7 +27,7 @@ const ProductCard = () => {
           </div>) 
           : (
           <div className=' pl-2'>
-             <div className=' flex flex-wrap gap-5'>
+             <div className=' grid grid-cols-4 max-[900px]:grid-cols-3 max-[650px]:grid-cols-2 max-[400px]:grid-cols-1 gap-5'>
                 {products?.filter(pd => {
                 if(searchProduct === ""){
                   return pd
@@ -37,7 +37,7 @@ const ProductCard = () => {
               }).map(pd => {
                   return(
                     <Link to={`/inventory/product/productDetail/${pd?.id}`}  key={pd?.id}>
-                      <div className='w-[200px] h-[220px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card'>
+                      <div className=' h-[250px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card'>
                         <img src={pd?.photo ? pd?.photo : "https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' w-full h-[65%] rounded-md object-cover' />
                         <div className=' flex flex-col gap-1 items-end px-5 py-2 '>
                           <p className='text-[#e8eaed] text-lg tracking-wider'>{pd?.name}</p>

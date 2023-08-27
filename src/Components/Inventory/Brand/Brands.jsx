@@ -154,15 +154,15 @@ const Brands = () => {
             <Loader/>
           </div>) 
           : (
-            <table className=" text-white table-responsive w-full">
+            <table className=" text-white table-responsive2 w-full">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
-                <th className="p-4 text-start">NO</th>
-                <th className="p-4 text-start">BRAND NAME</th>
-                <th className="p-4 text-start">COMPANY NAME</th>
-                <th className="p-4 text-start">AGENT</th>
-                <th className="p-4 text-end ">PHONE</th>
-                <th className="p-4 text-end">DESCRIPTION</th>
+                <th className="p-4 max-[1000px]:pr-5 text-start">NO</th>
+                <th className="p-4 max-[1000px]:pr-12 text-start">BRAND NAME</th>
+                <th className="p-4 max-[1000px]:pr-12 text-start">COMPANY NAME</th>
+                <th className="p-4 max-[1000px]:pr-12 text-start">AGENT</th>
+                <th className="p-4 max-[1000px]:pl-12 text-end ">PHONE</th>
+                <th className="p-4 max-[1000px]:pr-12 text-start">DESCRIPTION</th>
                 <th className="p-4 ">...</th>
               </tr>
             </thead>
@@ -184,7 +184,7 @@ const Brands = () => {
                     <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-start">{brand?.company}</td>
                     <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-start">{brand?.agent}</td>
                     <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-end">{brand?.phone}</td>
-                    <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-end">{brand?.description}</td>
+                    <td onClick={() => route(brand?.id)} className=" cursor-pointer p-4 text-start">{brand?.description}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                       <p onClick={() => handleDeleteBrand(brand?.id)} className="hover-scale icon1 text-[#e94343]">

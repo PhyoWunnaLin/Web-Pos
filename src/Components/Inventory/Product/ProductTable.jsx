@@ -88,15 +88,15 @@ const ProductTable = () => {
             <Loader/>
           </div>) 
           : (
-            <table className=" text-white table-responsive w-full">
+            <table className=" text-white table-responsive2 w-full">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
-                <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
-                <th className="p-4 max-[800px]:pr-24 text-start">NAME</th>
-                <th className="p-4 max-[800px]:pr-16 text-start">BRAND</th>
-                <th className="p-4 max-[800px]:pr-40 text-start">UNIT</th>
-                <th className="p-4 max-[800px]:pr-40 text-end ">SALE PRICE</th>
-                <th className="p-4 max-[800px]:pr-40 text-end">TOTAL STOCK</th>
+                <th className="p-4 max-[1000px]:pr-5 text-start">NO</th>
+                <th className="p-4 max-[1000px]:pr-24 text-start">NAME</th>
+                <th className="p-4 max-[1000px]:pr-16 text-start">BRAND</th>
+                <th className="p-4 max-[1000px]:pr-10 text-start">UNIT</th>
+                <th className="p-4 max-[1000px]:pl-10 text-end ">SALE PRICE</th>
+                <th className="p-4 max-[1000px]:pl-10 text-end">TOTAL STOCK</th>
                 <th className="p-4 ">...</th>
               </tr>
             </thead>
