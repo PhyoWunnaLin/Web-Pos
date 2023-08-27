@@ -1,25 +1,32 @@
 import Cookies from "js-cookie";
-import React from "react";
+import React, { useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsFillMoonStarsFill, BsPersonCircle } from "react-icons/bs";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
 import SaleCalc from "./SaleCalc";
 import { useDispatch, useSelector } from "react-redux";
-import { setSaleItem, setSearchSaleProduct, setSelectReceivePd } from "../../Redux/Services/saleSlice";
+import { setProducts, setSaleItem, setSearchSaleProduct, setSelectReceivePd } from "../../Redux/Services/saleSlice";
 import ImageLoader from "../Loader/ImageLoader";
 import { Link } from "react-router-dom";
+import "./receive.css"
 
 const Sale = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
-  const products = data?.data;
+  // const products = data?.data;
+  const products = useSelector(state => state.saleSlice.products)
+  // console.log(products);
   const searchSaleProduct = useSelector(
     (state) => state.saleSlice.searchSaleProduct
   );
   const saleItem = useSelector((state) => state.saleSlice.saleItem);
   console.log(saleItem)
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(setProducts(data?.data))
+  },[data])
 
   return (
     <div className="relative">
@@ -86,7 +93,7 @@ const Sale = () => {
                           dispatch(setSelectReceivePd(pd?.id))
                         }}
                           key={pd?.id}
-                          className=" h-[250px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card "
+                          className=" h-[250px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card relative"
                         >
                           <img
                             src={
@@ -97,6 +104,9 @@ const Sale = () => {
                             alt=""
                             className=" w-full h-[65%] rounded-md object-cover"
                           />
+                          <div className={` ${pd?.total_stock != 0 ? "bg-green-600" : "bg-red-600"} px-3 py-1 flex flex-col justify-center items-center absolute top-0 text-[#e8eaed] stock`}>
+                            {pd?.total_stock}
+                          </div>
                           <div className=" flex flex-col gap-1 items-end px-5 py-2 ">
                             <p className="text-[#e8eaed] text-end text-lg tracking-wider">
                               {pd?.name}
