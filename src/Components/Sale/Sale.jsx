@@ -104,9 +104,9 @@ const Sale = () => {
                             alt=""
                             className=" w-full h-[65%] rounded-md object-cover"
                           />
-                          <div className={` ${pd?.total_stock != 0 ? "bg-green-600" : "bg-red-600"} px-3 py-1 flex flex-col justify-center items-center absolute top-0 text-[#e8eaed] stock`}>
+                          {/* <div className={` ${pd?.total_stock != 0 ? "bg-green-600" : "bg-red-600"} px-3 py-1 flex flex-col justify-center items-center absolute top-0 text-[#e8eaed] stock`}>
                             {pd?.total_stock}
-                          </div>
+                          </div> */}
                           <div className=" flex flex-col gap-1 items-end px-5 py-2 ">
                             <p className="text-[#e8eaed] text-end text-lg tracking-wider">
                               {pd?.name}
