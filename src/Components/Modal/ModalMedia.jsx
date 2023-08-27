@@ -115,12 +115,12 @@ const ModalMedia = (props) => {
                             </div>
                         </div>
                     ) : (
-                        <div className=' ml-6'>
+                        <div className=''>
                         <div className=' bg-[#202124] pt-10 pb-12 flex flex-col gap-5'>
-                        <div className=' flex flex-wrap item-center gap-5 mx-auto'>
+                        <div className=' grid grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-4 max-[930px]:grid-cols-3 max-lg:gap-2 gap-5 mx-auto'>
                         {/* upload      */}
                         <div
-                        className=" border border-[#3f4245] bg-[#161618] rounded-md flex flex-col justify-center items-center gap-3 w-[161px] h-[161px]">
+                        className=" border border-[#3f4245] bg-[#161618] rounded-md flex flex-col justify-center items-center gap-3 w-[161px] h-[161px] max-lg:w-[120px]  max-lg:h-[120px] max-[700px]:w-[90px] max-[700px]:h-[90px]">
                     <div
                     onClick={() => {
                         document.querySelector(".input-field").click();
@@ -142,11 +142,11 @@ const ModalMedia = (props) => {
                         onClick={() => {
                             document.querySelector(".input-field").click();
                         }}
-                        className=" text-[#8AB4F8] text-[15px] underline font-medium tracking-wider cursor-pointer"
+                        className=" max-lg:text-[13px] max-[700px]:text-[10px] text-[#8AB4F8] text-[15px] underline font-medium tracking-wider cursor-pointer"
                         >
                         Upload
                         </p>
-                        <p className="text-white text-[15px] font-medium tracking-wider ">
+                        <p className=" max-lg:text-[13px] max-[700px]:text-[10px] text-white text-[15px] font-medium tracking-wider ">
                         {" "}
                         Image
                         </p>
@@ -162,7 +162,7 @@ const ModalMedia = (props) => {
                                 ${selectActive == img?.id && " hover:border-opacity-100" }
                                 ${onclickActive == img?.id && onclickActive != null?"modal-active border-opacity-100" : ""}
                                 rounded border-2 border-blue-600 border-opacity-0`}>
-                                    <img src={img?.url} alt="" className=' cursor-pointer rounded w-[161px] h-[161px] object-cover ' />
+                                    <img src={img?.url} alt="" className=' cursor-pointer rounded w-[161px] h-[161px] object-cover max-lg:w-[120px]  max-lg:h-[120px] max-[700px]:w-[90px] max-[700px]:h-[90px]' />
                                 </div>
                             )
                         })}
