@@ -5,10 +5,11 @@ import { MdOutlineNotificationsActive } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import './receive.css'
 import { useSelector } from 'react-redux'
+import {BiPrinter} from "react-icons/bi"
 
 const Receive = () => {
   const receiveData = useSelector((state) => state.saleSlice.receiveData);
-  console.log(receiveData)
+  // console.log(receiveData)
 
   const printHandler = () => {
     const printContent = document.getElementById('print-content');
@@ -94,14 +95,28 @@ const Receive = () => {
 
         </div>
 
-         {/* button  */}
-         <div className=' flex justify-center mt-8 print:hidden'>
-              <button onClick={printHandler} className=' btn text-black w-[60%] tracking-wide'>
-                Print
-              </button>
-            </div>
         </div>
       </div>
+
+      {/* button  */}
+      <div className=' flex justify-center mt-[-10px] gap-4 print:hidden'>
+        <Link to={'/sale/recent'}>
+        <button className=' btn5 text-white'>
+          Recent
+        </button>
+        </Link>
+
+        <Link to={'/sale/cashier'}>
+        <button className=' btn5 text-white'>
+          Next Sale
+        </button>
+        </Link>
+
+        <button onClick={printHandler} className=' btn5 text-[#8bb4f6] text-lg tracking-wide'>
+          <BiPrinter/>
+        </button>
+      </div>
+
     </div>
   )
 }
