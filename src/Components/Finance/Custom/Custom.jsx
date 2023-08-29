@@ -14,9 +14,9 @@ const Custom = () => {
         <div className=" w-full flex justify-center">
           <div className="w-[95%] my-6 flex flex-col gap-8">
             <Banner2
-              title={"Daily"}
+              title={"Custom"}
               path1={"Finance"}
-              path2={"Daily"}
+              path2={"Custom"}
               btn2={"Go To Shop"}
               button2={true}
               route={"/sale/cashier"}

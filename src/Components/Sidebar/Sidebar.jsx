@@ -16,7 +16,7 @@ import { useLogoutMutation } from "../../Redux/API/authApi";
 import Cookies from 'js-cookie';
 import { removeToken } from "../../Redux/Services/authSlice";
 import { Loader,Burger } from '@mantine/core';
-import { setOpenAcc1, setOpenAcc2, setOpenAcc3, setOpenAcc4 } from "../../Redux/Services/sidebarSlice";
+import { setOpenAcc1, setOpenAcc2, setOpenAcc3, setOpenAcc4, setOpenAcc5 } from "../../Redux/Services/sidebarSlice";
 import { useDisclosure } from '@mantine/hooks';
 
 const Sidebar = () => {
@@ -34,6 +34,9 @@ const Sidebar = () => {
     const openAcc44 = useSelector(state => state.sidebarSlice.openAcc4)
     const openAcc4 = JSON.parse(localStorage.getItem("openAcc4"))
 
+    const openAcc55 = useSelector(state => state.sidebarSlice.openAcc5)
+    const openAcc5 = JSON.parse(localStorage.getItem("openAcc5"))
+
     const dispatch = useDispatch();
     const location = useLocation();
     const sidebarActive = location.pathname;
@@ -44,6 +47,7 @@ const Sidebar = () => {
     const handleOpenAcc2 = () => dispatch(setOpenAcc2(!openAcc22))
     const handleOpenAcc3 = () => dispatch(setOpenAcc3(!openAcc33))
     const handleOpenAcc4 = () => dispatch(setOpenAcc4(!openAcc44))
+    const handleOpenAcc5 = () => dispatch(setOpenAcc5(!openAcc55))
 
     const logoutHandler = async(e)=>{
         const {data} = await logout(token);
@@ -152,6 +156,47 @@ const Sidebar = () => {
                     <div className={` ${sidebarActive == "/inventory/brand" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
                         <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
                         <span className=" tracking-wider text-sm font-medium px-3 navLink">Manage Brand</span>
+                    </div>
+                    </Link>
+                </AccordionBody>
+                </Accordion>
+                <div className=" border-b border-[#3f4245]" />
+
+                {/* Finance  */}
+                <Accordion open={openAcc5} >
+                <div onClick={handleOpenAcc5} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                    <div className=" flex items-center gap-2">
+                    <span className=" text-[23px]"><PiNotepadBold/></span>
+                    <span className=" tracking-wider font-medium">Finance</span>
+                    </div>
+                    <div className=" text-xl"><MdKeyboardArrowDown/></div>
+                </div>
+                <AccordionBody className="py-0">
+                    <Link to={"/finance/daily"}>
+                    <div className={` ${sidebarActive == "/finance/daily" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Daily</span>
+                    </div>
+                    </Link>
+
+                    <Link to={"/finance/monthly"}>
+                    <div className={` ${sidebarActive == "/finance/monthly" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Monthly</span>
+                    </div>
+                    </Link>
+
+                    <Link to={"/finance/yearly"}>
+                    <div className={` ${sidebarActive == "/finance/yearly" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Yearly</span>
+                    </div>
+                    </Link>
+                    
+                    <Link to={"/finance/custom"}>
+                    <div className={` ${sidebarActive == "/finance/custom" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Custom</span>
                     </div>
                     </Link>
                 </AccordionBody>
