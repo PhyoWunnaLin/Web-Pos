@@ -11,6 +11,7 @@ const initialState = {
   tax:0,
   receiveData: null,
   firstDelete:null,
+  saleClose : false
 };
 
 const totalAmount = (saleItem) => {
@@ -101,6 +102,10 @@ export const saleSlice = createSlice({
 
     deleteAllSaleItem : (state) => {
       state.saleItem = []
+    },
+
+    setSaleClose : (state, {payload}) =>{
+      state.saleClose = payload
     }
 
   },
@@ -116,6 +121,7 @@ export const {
   deleteQuantity,
   setReceiveData,
   deleteAllSaleItem,
+  setSaleClose
 } = saleSlice.actions;
 
 export default saleSlice.reducer;
