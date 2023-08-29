@@ -27,7 +27,8 @@ const Path = () => {
     <>
       <ScrollTop/>
       <Routes>
-        <Route path="/" element={<Routegaurd><Dashboard/></Routegaurd>} />
+        {/* <Route path="/" element={<Routegaurd><Dashboard/></Routegaurd>} /> */}
+        <Route path="/" element={<Dashboard/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/user/overview" element={<Overview/>} />
         <Route path="/user/create" element={<CreateUser/>} />
