@@ -5,6 +5,7 @@ const initialState = {
   openAcc2: false,
   openAcc3: false,
   openAcc4: false,
+  openAcc5: false,
 
 
 };
@@ -33,11 +34,16 @@ export const sidebarSlice = createSlice({
         localStorage.setItem("openAcc4", state.openAcc4);
     },
 
+    setOpenAcc5: (state, { payload }) => {
+      (state.openAcc5 = payload),
+        localStorage.setItem("openAcc5", state.openAcc5);
+    },
+
 
   },
 });
 
-export const { setOpenAcc1, setOpenAcc2, setOpenAcc3, setOpenAcc4 } =
+export const { setOpenAcc1, setOpenAcc2, setOpenAcc3, setOpenAcc4 ,setOpenAcc5 } =
   sidebarSlice.actions;
 
 export default sidebarSlice.reducer;
