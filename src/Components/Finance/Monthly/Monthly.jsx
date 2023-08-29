@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import MainLayout from "../../../Layouts/MainLayout";
-import Banner2 from "../../Banner/Banner2";
-import "react-date-picker/dist/DatePicker.css";
-import "react-calendar/dist/Calendar.css";
 import { PiExportDuotone } from "react-icons/pi";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import "./daily.css";
+import { MdCalendarMonth, MdOutlineKeyboardArrowDown } from "react-icons/md";
+import Banner2 from "../../Banner/Banner2";
 import { BiSearch } from "react-icons/bi";
-import DailyTable from "./DailyTable";
-const Daily = () => {
-  const [value, onChange] = useState();
+import MonthlyTable from "./MonthlyTable";
+
+const Monthly = () => {
   return (
     <>
       <MainLayout>
         <div className=" w-full flex justify-center">
           <div className="w-[95%] my-6 flex flex-col gap-8">
             <Banner2
-              title={"Daily"}
+              title={"Monthly"}
               path1={"Finance"}
-              path2={"Daily"}
+              path2={"Monthly"}
               btn2={"Go To Shop"}
               button2={true}
               route={"/sale/cashier"}
@@ -27,7 +24,7 @@ const Daily = () => {
             <div className="flex justify-between items-center">
               <div>
                 <h1 className=" text-white font-medium text-2xl tracking-wide">
-                  Today Sales Overview
+                  This Month Sales Overview
                 </h1>
               </div>
               <div className="flex gap-3 items-center">
@@ -41,16 +38,32 @@ const Daily = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <input
-                    type="date"
-                    id="start"
-                    name="trip-start"
-                    onChange={(e) => onchange(e.target.value)}
-                    value={value}
-                    min="2018-01-01"
-                    max="2023-12-31"
-                    className="w-40 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent rounded-l outline-none py-1 px-2 text-sm border-r-0"
-                  />
+                  <div className="flex items-center border border-[#7E7F80] px-2 border-r-0 rounded-l">
+                    <div className="flex items-center gap-1 border-r border-[#7E7F80] pr-2">
+                        <MdCalendarMonth className="text-[#8bb4f6]"/>
+                        <select className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none">
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Jun</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Feb</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Mar</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">April</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">May</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">June</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">July</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Aug</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Sep</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Oct</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Nov</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Dec</option>
+                        </select>
+                    </div>
+                    <div className="pl-2">
+                        <select className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none pr-2">
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">2023</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">2022</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="">2021</option>
+                        </select>
+                    </div>
+                  </div>
                   <div className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer">
                     <BiSearch size={18}/>
                   </div>
@@ -59,10 +72,15 @@ const Daily = () => {
             </div>
             {/* table  */}
             <div>
-                <DailyTable/>
+                <MonthlyTable/>
             </div>
-            {/* total daily  */}
+            {/* total monthly  */}
             <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
+                <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
+                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Days</h1>
+                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>12</p>
+              </div>
+
               <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
                 <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Vouchers</h1>
                 <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>15</p>
@@ -90,4 +108,4 @@ const Daily = () => {
   );
 };
 
-export default Daily;
+export default Monthly;

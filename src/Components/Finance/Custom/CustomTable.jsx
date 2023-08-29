@@ -1,8 +1,8 @@
 import React from 'react'
 import { HiArrowNarrowRight } from 'react-icons/hi';
 
-const DailyTable = () => {
-    const Daily = [
+const CustomTable = () => {
+    const Custom = [
         {id:1,voucher:"09523",time:"11:30 AM",item:"20",cash:"10,000",tax:"200",total:"10,200"},
         {id:2,voucher:"09523",time:"11:30 AM",item:"20",cash:"10,000",tax:"200",total:"10,200"},
         {id:4,voucher:"09523",time:"11:30 AM",item:"20",cash:"10,000",tax:"200",total:"10,200"},
@@ -23,7 +23,7 @@ const DailyTable = () => {
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
-              {Daily?.map((pd) => {
+              {Custom?.map((pd) => {
                 return (
                   <tr
                     key={pd?.id}
@@ -48,4 +48,4 @@ const DailyTable = () => {
   )
 }
 
-export default DailyTable
+export default CustomTable
