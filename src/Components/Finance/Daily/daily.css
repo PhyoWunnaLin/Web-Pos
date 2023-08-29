@@ -1,0 +1,6 @@
+::-webkit-calendar-picker-indicator{
+    cursor: pointer;
+    color: #8bb4f6;
+    background-color: #E8EAED;
+    border-radius: 2px;
+}
