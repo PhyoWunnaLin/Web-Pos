@@ -21,6 +21,10 @@ import EditProduct from "../Components/Inventory/EditProduct/EditProduct";
 import Sale from "../Components/Sale/Sale";
 import Recent from "../Components/Sale/Recent";
 import Receive from "../Components/Sale/Receive";
+import Daily from "../Components/Finance/Daily/Daily";
+import Monthly from "../Components/Finance/Monthly/Monthly";
+import Yearly from "../Components/Finance/Yearly/Yearly";
+import Custom from "../Components/Finance/Custom/Custom";
 
 const Path = () => {
   return (
@@ -46,6 +50,10 @@ const Path = () => {
         <Route path="/sale/cashier" element={<Sale/>} />
         <Route path="/sale/receive" element={<Receive/>} />
         <Route path="/sale/recent" element={<Recent/>} />
+        <Route path="/finance/daily" element={<Daily/>} />
+        <Route path="/finance/monthly" element={<Monthly/>} />
+        <Route path="/finance/yearly" element={<Yearly/>} />
+        <Route path="/finance/custom" element={<Custom/>} />
       </Routes>
     </>
   );
