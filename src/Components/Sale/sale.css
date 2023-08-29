@@ -1,0 +1,7 @@
+.mantine-Pagination-control{
+    color: #fff;
+}
+
+.mantine-Pagination-control:hover{
+    background-color: #228be6 !important;
+}

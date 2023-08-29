@@ -10,6 +10,7 @@ import { setProducts, setSaleItem, setSearchSaleProduct, setSelectReceivePd } fr
 import ImageLoader from "../Loader/ImageLoader";
 import { Link } from "react-router-dom";
 import "./receive.css"
+import "./sale.css"
 
 const Sale = () => {
   const token = Cookies.get("token");
@@ -23,6 +24,8 @@ const Sale = () => {
   const saleItem = useSelector((state) => state.saleSlice.saleItem);
   console.log(saleItem)
   const dispatch = useDispatch();
+
+  const saleClose = useSelector(state => state.saleSlice.saleClose)
 
   // useEffect(()=>{
   //   dispatch(setProducts(data?.data))
@@ -45,7 +48,13 @@ const Sale = () => {
           </p>
         </div>
       </div>
-      {/* cashier  */}
+      {saleClose ? (
+        <div className=" flex justify-center items-center h-screen text-white">
+          <p>Close</p>
+        </div>
+      ) : (
+        <div>
+          {/* cashier  */}
       <div className="flex mt-[53px]">
         {/* product  */}
         <div className="w-[70%] max-[840px]:w-[60%] max-[665px]:w-[55%] flex flex-col gap-5">
@@ -129,6 +138,8 @@ const Sale = () => {
           <SaleCalc />
         </div>
       </div>
+        </div>
+      )}
     </div>
   );
 };

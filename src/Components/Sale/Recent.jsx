@@ -2,20 +2,46 @@ import React from 'react'
 import MainLayout from '../../Layouts/MainLayout'
 import Banner2 from '../Banner/Banner2'
 import NoContact from '../NoContact/NoContact'
-import { BiSearch } from 'react-icons/bi'
+import { BiSearch, BiCalculator } from 'react-icons/bi'
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
-import { setSearchRecentVoucher } from '../../Redux/Services/saleSlice'
+import { setSaleClose, setSearchRecentVoucher } from '../../Redux/Services/saleSlice'
 import { useRecentVoucherQuery } from '../../Redux/API/saleApi'
 import Loader from '../Loader/Loader'
+import { Pagination } from '@mantine/core';
+import {PiExportBold} from "react-icons/pi"
+import Swal from "sweetalert2";
 
 const Recent = () => {
     const token = Cookies.get("token")
     const {data , isLoading} = useRecentVoucherQuery(token)
-    const recent = data?.data 
+    // const recent = data?.data 
     const searchRecentVoucher = useSelector(state => state.saleSlice.searchRecentVoucher)
-    console.log(recent);
     const dispatch = useDispatch()
+    const saleClose = useSelector(state => state.saleSlice.saleClose)
+    // console.log(saleClose);
+
+    const recent = [
+      {id: 1, voucher_number: "aabbcc", total: 30000, tax: 300, net_total: 33000, created_at: 12/7/2023, created_time: 3}
+    ]
+
+    const saleCloseHandler = () => {
+      Swal.fire({
+        title: 'Are you sure to sale close?',
+        icon: 'question',
+        iconColor: "#fff",
+        background: "#161618",
+        showCancelButton: true,
+        showCloseButton: true,
+        confirmButtonColor: '#fff',
+        cancelButtonColor: '#24262b',
+        confirmButtonText: ' CALCULATE'
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          dispatch(setSaleClose(!saleClose))
+        }
+      })
+    }
 
   return (
     <MainLayout>
@@ -41,7 +67,7 @@ const Recent = () => {
             {/* banner2  */}
           <div className="flex flex-col gap-3">
             <h1 className=" text-white font-medium text-2xl tracking-wide">
-                  Sale Overview
+                Today Sales Overview
             </h1>
             <div className=" flex justify-between items-center max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-3">
               <form className="relative">
@@ -54,20 +80,22 @@ const Recent = () => {
                     <BiSearch size={20} />
                   </div>
               </form>
-              <div className="flex gap-5 items-center justify-end mt-1">
-                  <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
-                    Sort : 
-                    <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
-                      <option className="bg-[#161618] hover:bg-[#202124]" value="">Last</option>
-                      <option className="bg-[#161618] hover:bg-[#202124]" value="">first</option>
-                    </select>
+              <div className="flex gap-3 items-center justify-end mt-1 select-none">
+                  <div className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
+                    <div className=' flex justify-center items-center gap-1 py-2 px-2'>
+                    <PiExportBold className=' text-[#8bb4f6] text-lg'/>
+                    <p className=' tracking-wider'>Export</p>
+                    </div>
+                    {/* <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                      <option className="bg-[#161618] hover:bg-[#202124]" value="">pdf</option>
+                      <option className="bg-[#161618] hover:bg-[#202124]" value="">pdf</option>
+                    </select> */}
                   </div>
-                  <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
-                    Filter : 
-                    <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
-                      <option className="bg-[#161618] hover:bg-[#202124]" value="">All Files</option>
-                      <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
-                    </select>
+                  <div onClick={saleCloseHandler} className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
+                    <div className=' flex justify-center items-center gap-1 py-2 px-2'>
+                    <BiCalculator className=' text-[#8bb4f6] text-lg'/>
+                    <p className=' tracking-wider'>{saleClose ? "Sale Open" : "Sale Close"}</p>
+                    </div>
                   </div>
               </div>
             </div>
@@ -118,6 +146,37 @@ const Recent = () => {
             </tbody>
           </table>
           )}
+
+          <div className={` ${isLoading ? "hidden" : "flex"} gap-5 items-end w-full`}>
+            {/* TOTAL DAILY MONEY  */}
+            <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
+              <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
+                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Vouchers</h1>
+                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>15</p>
+              </div>
+
+              <div className=' border-r border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
+                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Cash</h1>
+                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>1400000</p>
+              </div>
+              
+              <div className=' border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
+                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Tax</h1>
+                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>10000</p>
+              </div>
+
+              <div className=' border border-[#7E7F80] py-2 px-5 text-end w-auto '>
+                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total</h1>
+                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>1500000</p>
+              </div>
+            </div>
+
+            {/* Pagination */}
+            <div className=' ml-auto mb-1'>
+              <Pagination total={3} />
+            </div>
+          </div>
+
           </div>}
             </div>
         </div>
