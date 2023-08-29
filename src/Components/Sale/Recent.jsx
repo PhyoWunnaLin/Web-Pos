@@ -27,7 +27,7 @@ const Recent = () => {
 
     const saleCloseHandler = () => {
       Swal.fire({
-        title: 'Are you sure to sale close?',
+        title: `Are you sure to sale ${saleClose ? "Open" : "Close"} ?`,
         icon: 'question',
         iconColor: "#fff",
         background: "#161618",
@@ -35,7 +35,7 @@ const Recent = () => {
         showCloseButton: true,
         confirmButtonColor: '#fff',
         cancelButtonColor: '#24262b',
-        confirmButtonText: ' CALCULATE'
+        confirmButtonText: `${saleClose ? "Open" : "CACULATE"}`,
       }).then(async(result) => {
         if (result.isConfirmed) {
           dispatch(setSaleClose(!saleClose))
