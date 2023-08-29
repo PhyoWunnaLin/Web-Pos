@@ -14,8 +14,8 @@ import "./receive.css"
 const Sale = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetProductsQuery(token);
-  // const products = data?.data;
-  const products = useSelector(state => state.saleSlice.products)
+  const products = data?.data;
+  // const products = useSelector(state => state.saleSlice.products)
   // console.log(products);
   const searchSaleProduct = useSelector(
     (state) => state.saleSlice.searchSaleProduct
@@ -24,9 +24,9 @@ const Sale = () => {
   console.log(saleItem)
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(setProducts(data?.data))
-  },[data])
+  // useEffect(()=>{
+  //   dispatch(setProducts(data?.data))
+  // },[data])
 
   return (
     <div className="relative">
@@ -79,6 +79,7 @@ const Sale = () => {
             ) : (
               <div className="mx-5">
                 <div className="grid grid-cols-4 max-[1110px]:grid-cols-3 max-[840px]:grid-cols-2 max-[665px]:grid-cols-1 gap-5">
+                {/* <div className="flex flex-wrap gap-5"> */}
                   {products?.filter((pd) => {
                       if (searchSaleProduct === "") {
                         return pd;

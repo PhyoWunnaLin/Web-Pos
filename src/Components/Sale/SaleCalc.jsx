@@ -45,9 +45,9 @@ const SaleCalc = () => {
   const handlePayment = async () => {
     try {
       const data = await checkout({token,newData});
-      console.log(data?.error?.data?.error)
+      console.log(data?.data)
       if(data?.data) {
-        dispatch(setReceiveData(data?.data));
+        dispatch(setReceiveData(data?.data?.data));
         nav("/sale/receive");
         dispatch(deleteAllSaleItem());
       }else if (data?.error){

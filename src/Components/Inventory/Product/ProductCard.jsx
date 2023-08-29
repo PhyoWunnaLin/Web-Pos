@@ -27,7 +27,8 @@ const ProductCard = () => {
           </div>) 
           : (
           <div className=' pl-2'>
-             <div className=' grid grid-cols-4 max-[900px]:grid-cols-3 max-[650px]:grid-cols-2 max-[400px]:grid-cols-1 gap-5'>
+             <div className=' grid grid-cols-5 max-[900px]:grid-cols-3 max-[650px]:grid-cols-2 max-[400px]:grid-cols-1 gap-5'>
+             {/* <div className=' flex flex-wrap'> */}
                 {products?.filter(pd => {
                 if(searchProduct === ""){
                   return pd
