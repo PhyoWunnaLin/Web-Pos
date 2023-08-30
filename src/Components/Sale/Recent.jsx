@@ -15,15 +15,15 @@ import Swal from "sweetalert2";
 const Recent = () => {
     const token = Cookies.get("token")
     const {data , isLoading} = useRecentVoucherQuery(token)
-    // const recent = data?.data 
+    const recent = data?.data 
     const searchRecentVoucher = useSelector(state => state.saleSlice.searchRecentVoucher)
     const dispatch = useDispatch()
     const saleClose = useSelector(state => state.saleSlice.saleClose)
     // console.log(saleClose);
 
-    const recent = [
-      {id: 1, voucher_number: "aabbcc", total: 30000, tax: 300, net_total: 33000, created_at: 12/7/2023, created_time: 3}
-    ]
+    // const recent = [
+    //   {id: 1, voucher_number: "aabbcc", total: 30000, tax: 300, net_total: 33000, created_at: 12/7/2023, created_time: 3}
+    // ]
 
     const saleCloseHandler = () => {
       Swal.fire({
