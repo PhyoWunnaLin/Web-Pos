@@ -9,6 +9,7 @@ import "./login.css"
 
 const Login = () => {
   const [invalid,setInvalid] = useState("")
+  const [serverError,setServerError] = useState(false)
   const [ login, {isLoading}] = useLoginMutation();
   const [email,setEmail] = useState("admin@gmail.com");
   const [password,setPassword] = useState("asdffdsa");
@@ -22,10 +23,14 @@ const Login = () => {
       const user = {email,password};
       const {data} = await login(user);
       // console.log(data);
-      setInvalid(data?.message)
+      
       dispatch(addToken(data?.token))
       if(data?.token){
         nav("/")
+      }else if (data?.message){
+        setInvalid(data?.message)
+      }else{
+        setServerError(!serverError)
       }
     }catch(error){
       console.log(error);
@@ -68,6 +73,7 @@ const Login = () => {
               {/* <PasswordInput label="Password" size='md'/> */}
             </div>
             {invalid != "" && <p className="text-sm text-[#e94343] tracking-widest -mt-2">* {invalid}</p>}
+            {serverError && <p className="text-sm text-[#e94343] tracking-widest -mt-2">* Server Error</p>}
 
             {isLoading ? (
               <button disabled className="btn mx-10 mt-6 flex justify-center item-center gap-3">
