@@ -6,6 +6,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 import { BiSearch } from 'react-icons/bi'
 import CustomTable from './CustomTable'
 import "../Daily/daily.css";
+import { FaRegCalendarCheck } from 'react-icons/fa'
 
 const Custom = () => {
     const [value, onChange] = useState();
@@ -39,26 +40,36 @@ const Custom = () => {
                   </p>
                 </div>
                 <div className="flex">
-                  <input
-                    type="date"
-                    id="start"
-                    name="trip-start"
-                    onChange={(e) => onchange(e.target.value)}
-                    value={value}
-                    min="2018-01-01"
-                    max="2023-12-31"
-                    className="w-40 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent rounded-l outline-none py-1 px-2 text-sm border-r-0"
-                  />
-                  <input
-                    type="date"
-                    id="start"
-                    name="trip-start"
-                    onChange={(e) => onchange(e.target.value)}
-                    value={value}
-                    min="2018-01-01"
-                    max="2023-12-31"
-                    className="w-40 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent outline-none py-1 px-2 text-sm border-r-0"
-                  />
+                  <div className='relative'>
+                    <div className="text-[#8bb4f6] absolute top-[8px] left-[12px]">
+                      <FaRegCalendarCheck/>
+                    </div>
+                    <input
+                      type="date"
+                      id="start"
+                      name="trip-start"
+                      onChange={(e) => onchange(e.target.value)}
+                      value={value}
+                      min="2018-01-01"
+                      max="2023-12-31"
+                      className="w-36 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent rounded-l outline-none py-1 pl-9 text-sm border-r-0"
+                    />
+                  </div>
+                  <div className=' relative'>
+                    <div className="text-[#8bb4f6] absolute top-[8px] left-[12px]">
+                      <FaRegCalendarCheck/>
+                    </div>
+                    <input
+                      type="date"
+                      id="start"
+                      name="trip-start"
+                      onChange={(e) => onchange(e.target.value)}
+                      value={value}
+                      min="2018-01-01"
+                      max="2023-12-31"
+                      className="w-36 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent outline-none py-1 pl-9 text-sm border-r-0"
+                    />
+                  </div>
                   <div className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer">
                     <BiSearch size={18}/>
                   </div>
