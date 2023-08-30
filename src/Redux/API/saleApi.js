@@ -6,8 +6,8 @@ export const saleApi = createApi({
   tagTypes: ["sale"],
   endpoints: (builder) => ({
     recentVoucher: builder.query({
-      query: (token) => ({
-        url: "/voucher",
+      query: ({token , page}) => ({
+        url: `/voucher?page=${page}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["sale"],

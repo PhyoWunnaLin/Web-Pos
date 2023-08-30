@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 
 const Routegaurd = ({children}) => {
   const token = Cookies.get("token")
-  if(token){
+  if(token && token != "undefined"){
     return children
   }else{
     return <Navigate to={'/login'}/>

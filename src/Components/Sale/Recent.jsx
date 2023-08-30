@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MainLayout from '../../Layouts/MainLayout'
 import Banner2 from '../Banner/Banner2'
 import NoContact from '../NoContact/NoContact'
@@ -14,11 +14,20 @@ import Swal from "sweetalert2";
 
 const Recent = () => {
     const token = Cookies.get("token")
-    const {data , isLoading} = useRecentVoucherQuery(token)
+    const p = localStorage.getItem("page");
+    const [page,setPage] = useState(p ? p : 1);
+    const {data , isLoading} = useRecentVoucherQuery({token,page})
+    // console.log(data)
+    const totalPage = data?.meta?.last_page
     const recent = data?.data 
     const searchRecentVoucher = useSelector(state => state.saleSlice.searchRecentVoucher)
     const dispatch = useDispatch()
     const saleClose = useSelector(state => state.saleSlice.saleClose)
+
+    useEffect(() => {
+      localStorage.setItem("page",page)
+    },[page])
+    
     // console.log(saleClose);
 
     // const recent = [
@@ -173,7 +182,7 @@ const Recent = () => {
 
             {/* Pagination */}
             <div className=' ml-auto mb-1'>
-              <Pagination total={3} />
+              <Pagination total={totalPage} value={Number(page)} onChange={setPage}/>
             </div>
           </div>
 
