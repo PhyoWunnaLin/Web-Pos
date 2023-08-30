@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import MainLayout from "../../../Layouts/MainLayout";
 import Banner2 from "../../Banner/Banner2";
 import "react-date-picker/dist/DatePicker.css";
@@ -11,6 +11,7 @@ import DailyTable from "./DailyTable";
 import { FaRegCalendarCheck } from "react-icons/fa";
 const Daily = () => {
   const [value, onChange] = useState();
+  const calendar = useRef(); 
   return (
     <>
       <MainLayout>
@@ -46,6 +47,8 @@ const Daily = () => {
                     <FaRegCalendarCheck/>
                   </div>
                   <input
+                    ref={calendar}
+                    onClick={() => calendar.current.click()}
                     type="date"
                     id="start"
                     name="trip-start"
@@ -53,7 +56,7 @@ const Daily = () => {
                     value={value}
                     min="2018-01-01"
                     max="2023-12-31"
-                    className="w-36 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent rounded-l outline-none py-1 pl-9 text-sm border-r-0"
+                    className=" w-36 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent rounded-l outline-none py-1 pl-9 text-sm border-r-0"
                   />
                   <div className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer">
                     <BiSearch size={18}/>

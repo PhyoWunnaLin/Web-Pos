@@ -92,6 +92,7 @@ const Sale = () => {
                 ) : (
                   <div className="mx-5">
                     <div className="grid grid-cols-4 max-[1110px]:grid-cols-3 max-[840px]:grid-cols-2 max-[665px]:grid-cols-1 gap-5">
+                      
                     {/* <div className="flex flex-wrap gap-5"> */}
                       {products?.filter((pd) => {
                           if (searchSaleProduct === "") {
@@ -107,7 +108,7 @@ const Sale = () => {
                               dispatch(setSelectReceivePd(pd?.id))
                             }}
                               key={pd?.id}
-                              className=" h-[250px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border card relative"
+                              className=" h-[250px] shadow-md select-none cursor-pointer bg-[#242528] rounded-md border-[#383b3d] border-2 card relative"
                             >
                               <img
                                 src={

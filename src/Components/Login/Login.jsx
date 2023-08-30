@@ -30,7 +30,7 @@ const Login = () => {
       }else if (data?.message){
         setInvalid(data?.message)
       }else{
-        setServerError(!serverError)
+        setServerError(true)
       }
     }catch(error){
       console.log(error);
