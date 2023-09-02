@@ -16,6 +16,7 @@ import closedImg from  "../../assets/closed.png"
 
 const Sale = () => {
   const token = Cookies.get("token");
+  const saleClose = Cookies.get("sale");
   const { data, isLoading } = useGetProductsQuery(token);
   const products = data?.data;
   // const products = useSelector(state => state.saleSlice.products)
@@ -27,7 +28,7 @@ const Sale = () => {
   console.log(saleItem)
   const dispatch = useDispatch();
 
-  const saleClose = useSelector(state => state.saleSlice.saleClose)
+  // const saleClose1 = useSelector(state => state.saleSlice.saleClose)
 
   // useEffect(()=>{
   //   dispatch(setProducts(data?.data))
@@ -50,7 +51,7 @@ const Sale = () => {
           </p>
         </div>
       </div>
-      {saleClose ? (
+      {saleClose === "true" ? (
         <div className=" flex justify-center items-center h-screen text-white">
           
           <NoContact image={closedImg} size={"w-[25%]"}  />

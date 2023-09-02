@@ -1,12 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainLayout from "../../../Layouts/MainLayout";
 import { PiExportDuotone } from "react-icons/pi";
 import { MdCalendarMonth, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import Banner2 from "../../Banner/Banner2";
 import { BiSearch } from "react-icons/bi";
 import MonthlyTable from "./MonthlyTable";
+import Cookies from "js-cookie";
+import { useMonthlyMutation } from "../../../Redux/API/saleApi";
+import Loader from "../../Loader/Loader";
 
 const Monthly = () => {
+  const date = new Date();
+  const [month , setMonth] = useState("1");
+  const [year , setYear] = useState(date.getFullYear());
+  const token = Cookies.get("token");
+  const [currentMonth , setCurrentMonth] = useState();
+  const monthlyTable = currentMonth?.data?.data?.data
+  const monthlyTotal = currentMonth?.data?.monthly_total_sale
+  const nowMonth = date.getMonth() + 1;
+  // console.log(date)
+  const [monthly , {isLoading}] = useMonthlyMutation();
+  useEffect(() => {
+    handleMonthly()
+  },[])
+
+  const handleMonthly = async () => {
+    const m = {month : nowMonth,year} 
+    const data = await monthly({token,searchMonthly : m});
+    setCurrentMonth(data)
+  }
+
+  const handleSearch = async () => {
+    try {
+      const m = {month,year} 
+      const data = await monthly({token,searchMonthly : m});
+      console.log(data?.data?.data)
+      if (data?.data) {
+        setCurrentMonth(data)
+    }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // console.log(monthlyTotal)
+
+  console.log(year)
+  const months = [
+    {id : 1 , name : "Jan"},
+    {id : 2 , name : "Feb"},
+    {id : 3 , name : "Mar"},
+    {id : 4 , name : "Apr"},
+    {id : 5 , name : "May"},
+    {id : 6 , name : "Jun"},
+    {id : 7 , name : "Jul"},
+    {id : 8 , name : "Aug"},
+    {id : 9 , name : "Sep"},
+    {id : 10 , name : "Oct"},
+    {id : 11 , name : "Nov"},
+    {id : 12 , name : "Dec"},
+  ]
   return (
     <>
       <MainLayout>
@@ -41,66 +94,32 @@ const Monthly = () => {
                   <div className="flex items-center border border-[#7E7F80] px-2 border-r-0 rounded-l">
                     <div className="flex items-center gap-1 border-r border-[#7E7F80] pr-2">
                         <MdCalendarMonth className="text-[#8bb4f6]"/>
-                        <select className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none">
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Jun</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Feb</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Mar</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">April</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">May</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">June</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">July</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Aug</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Sep</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Oct</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Nov</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Dec</option>
+                        <select onChange={(e) => setMonth(e.target.value)} className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none cursor-pointer">
+                          {months.map(m => {
+                            return (
+                              <option key={m.id} selected={nowMonth === m.id && true} className="bg-[#161618] hover:bg-[#202124]" value={m.id}>{m.name}</option>
+                            )
+                          })}
                         </select>
                     </div>
                     <div className="pl-2">
-                        <select className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none pr-2">
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">2023</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">2022</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">2021</option>
+                        <select onChange={(e) => setYear(e.target.value)} className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none pr-2 cursor-pointerx">
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="2023">2023</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="2022">2022</option>
                         </select>
                     </div>
                   </div>
-                  <div className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer">
+                  <div onClick={handleSearch} className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer">
                     <BiSearch size={18}/>
                   </div>
                 </div>
               </div>
             </div>
             {/* table  */}
+            {isLoading ? <div><Loader/></div> : 
             <div>
-                <MonthlyTable/>
-            </div>
-            {/* total monthly  */}
-            <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
-                <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Days</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>12</p>
-              </div>
-
-              <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Vouchers</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>15</p>
-              </div>
-
-              <div className=' border-r border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Cash</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>1,400,000</p>
-              </div>
-              
-              <div className=' border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Tax</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>10,000</p>
-              </div>
-
-              <div className=' border border-[#7E7F80] py-2 px-5 text-end w-auto '>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>1,500,000</p>
-              </div>
-            </div>
+                <MonthlyTable monthlyTable={monthlyTable} monthlyTotal={monthlyTotal}/>
+            </div>}
           </div>
         </div>
       </MainLayout>

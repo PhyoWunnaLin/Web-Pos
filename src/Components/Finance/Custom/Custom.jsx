@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MainLayout from '../../../Layouts/MainLayout'
 import Banner2 from '../../Banner/Banner2'
 import { PiExportDuotone } from 'react-icons/pi'
@@ -7,9 +7,42 @@ import { BiSearch } from 'react-icons/bi'
 import CustomTable from './CustomTable'
 import "../Daily/daily.css";
 import { FaRegCalendarCheck } from 'react-icons/fa'
+import { useCustomMutation, useRecentVoucherQuery } from '../../../Redux/API/saleApi'
+import Cookies from 'js-cookie'
+import Loader from '../../Loader/Loader'
 
 const Custom = () => {
-    const [value, onChange] = useState();
+    const date = new Date();
+    const nowYear = date.getFullYear();
+    const nowMonth = (date.getMonth() + 1).toString();
+    const realMonth = nowMonth.length === 1 ? "0" + nowMonth : nowMonth;
+    const nowDay = date.getDate().toString();
+    const realDay = nowDay.length === 1 ? "0" + nowDay : nowDay;
+    const today = nowYear + "-" + realMonth + "-" + realDay
+    const [from, setFrom] = useState();
+    const [to, setTo] = useState();
+    const [currentShow, setCurrentShow] = useState();
+    const currentShowTable = currentShow?.data?.data?.data
+    const currentShowTotal = currentShow?.data?.daily_total_sale
+    const token = Cookies.get("token");
+    const [custom,{isLoading}] = useCustomMutation();
+    const {data , isFetching} = useRecentVoucherQuery({token})
+    const currentRecentTable = data?.data?.data
+    const currentRecentTotal = data?.daily_total_sale
+
+    console.log(currentShowTotal)
+
+    const handleCustom = async (e) => {
+      try {
+        e.preventDefault()
+        const searchCustom = {from , to}
+        const data = await custom({token , searchCustom})
+        setCurrentShow(data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
   return (
     <MainLayout>
         <div className=" w-full flex justify-center">
@@ -23,7 +56,7 @@ const Custom = () => {
               route={"/sale/cashier"}
             />
             {/* search  */}
-            <div className="flex justify-between items-center">
+            <form onSubmit={handleCustom} className="flex justify-between items-center">
               <div>
                 <h1 className=" text-white font-medium text-2xl tracking-wide">
                   Today Sales Overview
@@ -45,13 +78,14 @@ const Custom = () => {
                       <FaRegCalendarCheck/>
                     </div>
                     <input
+                      required
                       type="date"
                       id="start"
                       name="trip-start"
-                      onChange={(e) => onchange(e.target.value)}
-                      value={value}
-                      min="2018-01-01"
-                      max="2023-12-31"
+                      onChange={(e) => setFrom(e.target.value)}
+                      value={from}
+                      min="2023-01-01"
+                      max={today}
                       className="w-36 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent rounded-l outline-none py-1 pl-9 text-sm border-r-0"
                     />
                   </div>
@@ -60,48 +94,28 @@ const Custom = () => {
                       <FaRegCalendarCheck/>
                     </div>
                     <input
+                      required
                       type="date"
                       id="start"
                       name="trip-start"
-                      onChange={(e) => onchange(e.target.value)}
-                      value={value}
-                      min="2018-01-01"
-                      max="2023-12-31"
+                      onChange={(e) => setTo(e.target.value)}
+                      value={to}
+                      min="2023-01-01"
+                      max={today}
                       className="w-36 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent outline-none py-1 pl-9 text-sm border-r-0"
                     />
                   </div>
-                  <div className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer">
+                  <button className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer">
                     <BiSearch size={18}/>
-                  </div>
+                  </button>
                 </div>
               </div>
-            </div>
+            </form>
             {/* table  */}
+            {isLoading || isFetching ? <div><Loader/></div> : 
             <div>
-                <CustomTable/>
-            </div>
-            {/* total daily  */}
-            <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
-              <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Vouchers</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>15</p>
-              </div>
-
-              <div className=' border-r border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Cash</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>1,400,000</p>
-              </div>
-              
-              <div className=' border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Tax</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>10,000</p>
-              </div>
-
-              <div className=' border border-[#7E7F80] py-2 px-5 text-end w-auto '>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>1,500,000</p>
-              </div>
-            </div>
+                <CustomTable currentShowTable={currentShowTable} currentShowTotal={currentShowTotal} currentRecentTable={currentRecentTable} currentRecentTotal={currentRecentTotal}/> 
+            </div>}
           </div>
         </div>
       </MainLayout>

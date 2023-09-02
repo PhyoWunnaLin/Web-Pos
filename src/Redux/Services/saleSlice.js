@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 const initialState = {
   searchRecentVoucher: "",
@@ -11,7 +12,7 @@ const initialState = {
   tax:0,
   receiveData: null,
   firstDelete:null,
-  saleClose : false
+  saleClose : Cookies.get("sale") === "true" || Cookies.get("sale") === "false" ? Cookies.get("sale") : "false" ,
 };
 
 const totalAmount = (saleItem) => {
@@ -106,6 +107,7 @@ export const saleSlice = createSlice({
 
     setSaleClose : (state, {payload}) =>{
       state.saleClose = payload
+      Cookies.set("sale",JSON.stringify(payload));
     }
 
   },

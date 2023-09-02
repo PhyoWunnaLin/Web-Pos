@@ -6,7 +6,7 @@ import { BiSearch, BiCalculator } from 'react-icons/bi'
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 import { setSaleClose, setSearchRecentVoucher } from '../../Redux/Services/saleSlice'
-import { useRecentVoucherQuery } from '../../Redux/API/saleApi'
+import { useRecentVoucherQuery, useSaleCloseMutation, useSaleOpenMutation } from '../../Redux/API/saleApi'
 import Loader from '../Loader/Loader'
 import { Pagination } from '@mantine/core';
 import {PiExportBold} from "react-icons/pi"
@@ -14,15 +14,21 @@ import Swal from "sweetalert2";
 
 const Recent = () => {
     const token = Cookies.get("token")
+    const close = Cookies.get("sale")
     const p = localStorage.getItem("page");
     const [page,setPage] = useState(p ? p : 1);
     const {data , isLoading} = useRecentVoucherQuery({token,page})
-    // console.log(data)
-    const totalPage = data?.meta?.last_page
-    const recent = data?.data 
+    console.log(data)
+    const dailyTotal = data?.daily_total_sale
+    const recent = data?.data?.data
+    const totalPage =data?.data?.last_page
+    // console.log(totalPage)
     const searchRecentVoucher = useSelector(state => state.saleSlice.searchRecentVoucher)
     const dispatch = useDispatch()
-    const saleClose = useSelector(state => state.saleSlice.saleClose)
+    // const close1 = useSelector(state => state.saleSlice.saleClose)
+    // console.log(close)
+    const [saleClose] = useSaleCloseMutation();
+    const [saleOpen] = useSaleOpenMutation();
 
     useEffect(() => {
       localStorage.setItem("page",page)
@@ -36,7 +42,7 @@ const Recent = () => {
 
     const saleCloseHandler = () => {
       Swal.fire({
-        title: `Are you sure to sale ${saleClose ? "Open" : "Close"} ?`,
+        title: `Are you sure to sale ${close === "true" ? "Open" : "Close"} ?`,
         icon: 'question',
         iconColor: "#fff",
         background: "#161618",
@@ -44,10 +50,19 @@ const Recent = () => {
         showCloseButton: true,
         confirmButtonColor: '#fff',
         cancelButtonColor: '#24262b',
-        confirmButtonText: `${saleClose ? "Open" : "CACULATE"}`,
+        confirmButtonText: `${close === "true" ? "Open" : "Close"}`,
       }).then(async(result) => {
         if (result.isConfirmed) {
-          dispatch(setSaleClose(!saleClose))
+          if(close === "true"){
+            const data = await saleOpen(token)
+            // console.log(data?.data?.data)
+            dispatch(setSaleClose(data?.data?.data?.sale_close ? data?.data?.data?.sale_close : false))
+          }else{
+            const data = await saleClose(token)
+            // console.log(data?.data?.data)
+            dispatch(setSaleClose(data?.data?.data?.sale_close ? data?.data?.data?.sale_close : true))
+          }
+          
         }
       })
     }
@@ -103,7 +118,7 @@ const Recent = () => {
                   <div onClick={saleCloseHandler} className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
                     <div className=' flex justify-center items-center gap-1 py-2 px-2'>
                     <BiCalculator className=' text-[#8bb4f6] text-lg'/>
-                    <p className=' tracking-wider'>{saleClose ? "Sale Open" : "Sale Close"}</p>
+                    <p className=' tracking-wider'>{close === "true" ? "Sale Open" : "Sale Close"}</p>
                     </div>
                   </div>
               </div>
@@ -120,11 +135,12 @@ const Recent = () => {
               <tr>
                 <th className="p-4 text-start">NO</th>
                 <th className="p-4 text-start">VOUCHER</th>
-                <th className="p-4 text-start">CASH</th>
-                <th className="p-4 text-start">TAX</th>
-                <th className="p-4 text-start">TOTAL</th>
-                <th className="p-4 text-start">DATE</th>
-                <th className="p-4 text-start">TIME</th>
+                <th className="p-4 text-end">ITEM COUNT</th>
+                <th className="p-4 text-end">CASH</th>
+                <th className="p-4 text-end">TAX</th>
+                <th className="p-4 text-end">TOTAL</th>
+                <th className="p-4 text-end">DATE</th>
+                <th className="p-4 text-end">TIME</th>
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
@@ -142,11 +158,12 @@ const Recent = () => {
                   >
                     <td className=" p-4 text-start">{rVoucher?.id}</td>
                     <td className=" p-4 text-start">{rVoucher?.voucher_number}</td>
-                    <td className=" p-4 text-start">{rVoucher?.total}</td>
-                    <td className=" p-4 text-start">{rVoucher?.tax}</td>
-                    <td className=" p-4 text-start">{rVoucher?.net_total}</td>
-                    <td className=" p-4 text-start">{rVoucher?.created_at}</td>
-                    <td className=" p-4 text-start">{rVoucher?.created_time}</td>
+                    <td className=" p-4 text-end">{rVoucher?.item_count}</td>
+                    <td className=" p-4 text-end">{rVoucher?.total}</td>
+                    <td className=" p-4 text-end">{rVoucher?.tax}</td>
+                    <td className=" p-4 text-end">{rVoucher?.net_total}</td>
+                    <td className=" p-4 text-end">{rVoucher?.created_at}</td>
+                    <td className=" p-4 text-end">{rVoucher?.created_time}</td>
                     
                     
                   </tr>
@@ -161,22 +178,22 @@ const Recent = () => {
             <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
               <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
                 <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Vouchers</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>15</p>
+                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>{dailyTotal?.total_voucher}</p>
               </div>
 
               <div className=' border-r border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
                 <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Cash</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>1400000</p>
+                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>{dailyTotal?.total_cash}</p>
               </div>
               
               <div className=' border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
                 <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Tax</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>10000</p>
+                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>{dailyTotal?.total_tax}</p>
               </div>
 
               <div className=' border border-[#7E7F80] py-2 px-5 text-end w-auto '>
                 <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>1500000</p>
+                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>{dailyTotal?.total}</p>
               </div>
             </div>
 
