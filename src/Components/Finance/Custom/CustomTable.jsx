@@ -3,13 +3,7 @@ import { HiArrowNarrowRight } from 'react-icons/hi';
 
 const CustomTable = ({currentShowTable,currentShowTotal,currentRecentTable,currentRecentTotal}) => {
   const customTable = currentShowTable ? currentShowTable : currentRecentTable
-  const customTotal = currentShowTotal ? currentShowTotal : currentRecentTotal
-    // const Custom = [
-    //     {id:1,voucher:"09523",time:"11:30 AM",item:"20",cash:"10,000",tax:"200",total:"10,200"},
-    //     {id:2,voucher:"09523",time:"11:30 AM",item:"20",cash:"10,000",tax:"200",total:"10,200"},
-    //     {id:4,voucher:"09523",time:"11:30 AM",item:"20",cash:"10,000",tax:"200",total:"10,200"},
-    //     {id:5,voucher:"09523",time:"11:30 AM",item:"20",cash:"10,000",tax:"200",total:"10,200"},
-    // ]
+    
   return (
     <div className='flex flex-col gap-8'>
       {/* table  */}
@@ -49,28 +43,7 @@ const CustomTable = ({currentShowTable,currentShowTotal,currentRecentTable,curre
               })}
             </tbody>
       </table>
-      {/* total daily  */}
-      <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
-              <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Vouchers</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>{customTotal?.total_voucher}</p>
-              </div>
-
-              <div className=' border-r border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Cash</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>{customTotal?.total_cash}</p>
-              </div>
-              
-              <div className=' border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Tax</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>{customTotal?.total_tax}</p>
-              </div>
-
-              <div className=' border border-[#7E7F80] py-2 px-5 text-end w-auto '>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>{customTotal?.total}</p>
-              </div>
-      </div>
+      
     </div>
   )
 }

@@ -26,8 +26,8 @@ export const saleApi = createApi({
     }),
 
     monthly: builder.mutation({
-      query: ({ token, searchMonthly }) => ({
-        url: "/monthly-sale",
+      query: ({ token, searchMonthly, page }) => ({
+        url: `/monthly-sale?page=${page}`,
         method: "POST",
         body: searchMonthly,
         headers: { authorization: `Bearer ${token}` },
@@ -36,8 +36,8 @@ export const saleApi = createApi({
     }),
 
     yearly: builder.mutation({
-      query: ({ token, searchYearly }) => ({
-        url: "/yearly-sale",
+      query: ({ token, searchYearly, page }) => ({
+        url: `/yearly-sale?page=${page}`,
         method: "POST",
         body: searchYearly,
         headers: { authorization: `Bearer ${token}` },
@@ -46,8 +46,8 @@ export const saleApi = createApi({
     }),
 
     custom: builder.mutation({
-      query: ({ token, searchCustom }) => ({
-        url: "/custom-search-by-day",
+      query: ({ token, searchCustom, page }) => ({
+        url: `/custom-search-by-day?page=${page}`,
         method: "POST",
         body: searchCustom,
         headers: { authorization: `Bearer ${token}` },

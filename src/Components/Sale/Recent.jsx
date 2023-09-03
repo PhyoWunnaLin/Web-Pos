@@ -18,7 +18,7 @@ const Recent = () => {
     const p = localStorage.getItem("page");
     const [page,setPage] = useState(p ? p : 1);
     const {data , isLoading} = useRecentVoucherQuery({token,page})
-    console.log(data)
+    // console.log(data)
     const dailyTotal = data?.daily_total_sale
     const recent = data?.data?.data
     const totalPage =data?.data?.last_page
