@@ -74,8 +74,8 @@ export const {
   useRecentVoucherQuery,
   useCheckoutMutation,
   useMonthlyQuery,
-  useYearlyMutation,
-  useCustomMutation,
+  useYearlyQuery,
+  useCustomQuery,
   useSaleCloseMutation,
   useSaleOpenMutation,
 } = saleApi;
