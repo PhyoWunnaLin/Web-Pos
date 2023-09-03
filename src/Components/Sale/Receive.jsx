@@ -88,7 +88,7 @@ const Receive = () => {
                 <span>total-</span>
                 <span className=' font-semibold'>{receiveData?.net_total}</span>
               </p>
-              <p className=' text-end tracking-wide tax-color'>Tax-{receiveData?.tax}</p>
+              <p className=' text-end tracking-wide tax-color'>Tax-{receiveData?.tax?.toFixed(3)}</p>
               </div>
             </div>
           </div>
