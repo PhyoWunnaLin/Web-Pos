@@ -12,44 +12,33 @@ import { Pagination } from "@mantine/core";
 
 const Monthly = () => {
   const token = Cookies.get("token");
+  const p = localStorage.getItem("MonthlyPage");
+  const [page, setPage] = useState(p ? p : 1);
   const d = new Date();
   const nowMonth = d.getMonth() + 1;
   const [month, setMonth] = useState(nowMonth);
   const [year, setYear] = useState(d.getFullYear());
-  const date = {month,year}
-  const {data , isLoading}= useMonthlyQuery({token,date});
+  const [searchMonth, setSearchMonth] = useState(nowMonth);
+  const [searchYear, setSearchYear] = useState(d.getFullYear());
+  const {data , isLoading ,isFetching}= useMonthlyQuery({token,page,month,year});
   const [currentMonth, setCurrentMonth] = useState();
   const monthlyTable = currentMonth?.data?.data;
   const monthlyTotal = currentMonth?.monthly_total_sale;
-  // console.log(date);
-  // const p = localStorage.getItem("MonthlyPage");
-  // const [page, setPage] = useState(p ? p : 1);
-  // const totalPage = currentMonth?.data?.data?.last_page;
-  // console.log(page);
-  // console.log(data)
+  const totalPage = currentMonth?.data?.last_page
+  console.log(totalPage );
 
-  // useEffect(() => {
-  //   localStorage.setItem("MonthlyPage", page);
-  // }, [page]);
+  useEffect(() => {
+    localStorage.setItem("MonthlyPage", page);
+  }, [page]);
 
   useEffect(() => {
     setCurrentMonth(data)
   }, [data]);
 
-  // const handleMonthly = async () => {
-  //   const m = { month: nowMonth, year };
-  //   const data = await montdatahly({ token, searchMonthly: m, page });
-  //   setCurrentMonth(data);
-  // };
-
-  // const handleSearch = async () => {
-  //   try {
-  //     useMonthlyQuery({token,date})
-  //     setCurrentMonth(data)
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleSearch = () => {
+    setMonth(searchMonth)
+    setYear(searchYear)
+  };
 
   const months = [
     { id: 1, name: "Jan" },
@@ -102,7 +91,7 @@ const Monthly = () => {
                     <div className="flex items-center gap-1 border-r border-[#7E7F80] pr-2">
                       <MdCalendarMonth className="text-[#8bb4f6]" />
                       <select
-                        onChange={(e) => setMonth(e.target.value)}
+                        onChange={(e) => setSearchMonth(e.target.value)}
                         className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none cursor-pointer"
                       >
                         {months?.map((m) => {
@@ -121,7 +110,7 @@ const Monthly = () => {
                     </div>
                     <div className="pl-2">
                       <select
-                        onChange={(e) => setYear(e.target.value)}
+                        onChange={(e) => setSearchYear(e.target.value)}
                         className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none pr-2 cursor-pointerx"
                       >
                         <option
@@ -140,7 +129,7 @@ const Monthly = () => {
                     </div>
                   </div>
                   <div
-                    // onClick={handleSearch}
+                    onClick={handleSearch}
                     className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer"
                   >
                     <BiSearch size={18} />
@@ -149,7 +138,7 @@ const Monthly = () => {
               </div>
             </div>
             {/* table  */}
-            {isLoading ? (
+            {isFetching ? (
               <div>
                 <Loader />
               </div>
@@ -205,13 +194,13 @@ const Monthly = () => {
                   </div>
 
                   {/* Pagination */}
-                  {/* <div className=" ml-auto mb-1">
+                  <div className=" ml-auto mb-1">
                     <Pagination
                       total={totalPage}
                       value={Number(page)}
                       onChange={setPage}
                     />
-                  </div> */}
+                  </div>
                 </div>
               </div>
             )}

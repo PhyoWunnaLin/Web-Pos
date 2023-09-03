@@ -6,8 +6,8 @@ export const saleApi = createApi({
   tagTypes: ["sale"],
   endpoints: (builder) => ({
     recentVoucher: builder.query({
-      query: ({ token, page }) => ({
-        url: `/voucher?page=${page}`,
+      query: ({ token, page, date }) => ({
+        url: `/voucher?page=${page}&date=${date}`,
         method: "Get",
         headers: { authorization: `Bearer ${token}` },
       }),
@@ -25,32 +25,30 @@ export const saleApi = createApi({
     }),
 
     monthly: builder.query({
-      query: ({ token, page, date }) => ({
-        url: `/monthly-sale?page=${page}&date=${date}`,
+      query: ({ token, page, month, year }) => ({
+        url: `/monthly-sale?page=${page}&month=${month}&year=${year}`,
         method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
-      providesTags: ["sale"]
+      providesTags: ["sale"],
     }),
 
-    yearly: builder.mutation({
-      query: ({ token, searchYearly, page }) => ({
-        url: `/yearly-sale?page=${page}`,
-        method: "POST",
-        body: searchYearly,
+    yearly: builder.query({
+      query: ({ token, year, page }) => ({
+        url: `/yearly-sale?page=${page}&year=${year}`,
+        method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
-      invalidatesTags: ["sale"],
+      providesTags: ["sale"],
     }),
 
-    custom: builder.mutation({
-      query: ({ token, searchCustom, page }) => ({
-        url: `/custom-search-by-day?page=${page}`,
-        method: "POST",
-        body: searchCustom,
+    custom: builder.query({
+      query: ({ token, from, to, page }) => ({
+        url: `/custom-search-by-day?page=${page}&from=${from}&to=${to}`,
+        method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
-      invalidatesTags: ["sale"],
+      providesTags: ["sale"],
     }),
 
     saleClose: builder.mutation({
@@ -70,7 +68,6 @@ export const saleApi = createApi({
       }),
       invalidatesTags: ["sale"],
     }),
-
   }),
 });
 export const {
@@ -80,5 +77,5 @@ export const {
   useYearlyMutation,
   useCustomMutation,
   useSaleCloseMutation,
-  useSaleOpenMutation
+  useSaleOpenMutation,
 } = saleApi;
