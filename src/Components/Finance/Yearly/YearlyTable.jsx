@@ -46,33 +46,7 @@ const YearlyTable = ({yearlyTable,yearlyTotal}) => {
               })}
             </tbody>
       </table>
-      {/* total yearly  */}
-      <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
-                {/* <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Days</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>12</p>
-              </div> */}
-
-              <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Vouchers</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>{yearlyTotal?.total_voucher}</p>
-              </div>
-
-              <div className=' border-r border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Cash</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>{yearlyTotal?.total_cash}</p>
-              </div>
-              
-              <div className=' border-t border-b border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Tax</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>{yearlyTotal?.total_tax}</p>
-              </div>
-
-              <div className=' border border-[#7E7F80] py-2 px-5 text-end w-auto '>
-                <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total</h1>
-                <p className=' text-white text-xl whitespace-nowrap tracking-wider font-semibold'>{yearlyTotal?.total}</p>
-              </div>
-      </div>
+      
     </div>
   )
 }
