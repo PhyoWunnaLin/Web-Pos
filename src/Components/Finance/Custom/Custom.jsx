@@ -7,15 +7,19 @@ import { BiSearch } from "react-icons/bi";
 import CustomTable from "./CustomTable";
 import "../Daily/daily.css";
 import { FaRegCalendarCheck } from "react-icons/fa";
-import {
-  useCustomMutation,
-  useRecentVoucherQuery,
-} from "../../../Redux/API/saleApi";
+// import {
+//   useCustomMutation,
+//   useRecentVoucherQuery,
+// } from "../../../Redux/API/saleApi";
 import Cookies from "js-cookie";
 import Loader from "../../Loader/Loader";
 import { Pagination } from "@mantine/core";
+import { useCustomQuery, useRecentVoucherQuery } from "../../../Redux/API/saleApi";
+import { data } from "autoprefixer";
 
 const Custom = () => {
+  const p = localStorage.getItem("CustomPage");
+  const [page, setPage] = useState(p ? p : 1);
   const date = new Date();
   const nowYear = date.getFullYear();
   const nowMonth = (date.getMonth() + 1).toString();
@@ -25,37 +29,33 @@ const Custom = () => {
   const today = nowYear + "-" + realMonth + "-" + realDay;
   const [from, setFrom] = useState();
   const [to, setTo] = useState();
-  const [currentShow, setCurrentShow] = useState();
-  const currentShowTable = currentShow?.data?.data?.data;
-  const currentShowTotal = currentShow?.data?.daily_total_sale;
   const token = Cookies.get("token");
-  const [custom, { isLoading }] = useCustomMutation();
-  const { data, isFetching } = useRecentVoucherQuery({ token });
+  const {data:custom} = useCustomQuery({token,from,to,page});
+  const { data:recent , isLoading , isFetching } = useRecentVoucherQuery({ token ,page, date:today });
+  const [currentShow, setCurrentShow] = useState();
+  const currentRecentTable = currentShow?.data?.data
+  const currentRecentTotal = currentShow?.daily_total_sale;
 
-  const currentRecentTable = data?.data?.data;
-  const currentRecentTotal = data?.daily_total_sale;
-
-  // const p = localStorage.getItem("CustomPage");
-  const [page, setPage] = useState(1);
-  const totalPage = currentShow ? currentShow?.data?.data?.last_page : 1;
-  const customTotal = currentShowTotal ? currentShowTotal : currentRecentTotal
-  const customTable = currentShowTable ? currentShowTable : currentRecentTable
-  // console.log(totalPage);
+  useEffect(() => {
+    setCurrentShow(recent)
+  },[recent])
 
 
-  // console.log(currentShowTotal);
+  const totalPage = currentShow?.data?.last_page
+  const customTotal = currentRecentTotal
 
-  // useEffect(() => {
-  //   localStorage.setItem("CustomPage", page);
-  // }, [page]);
+  console.log(totalPage)
+  console.log(currentShow)
+
+  useEffect(() => {
+    localStorage.setItem("CustomPage", page);
+  }, [page]);
 
 
   const handleCustom = async (e) => {
     try {
       e.preventDefault();
-      const searchCustom = { from, to };
-      const data = await custom({ token, searchCustom });
-      setCurrentShow(data);
+      setCurrentShow(custom);
     } catch (error) {
       console.log(error);
     }
@@ -142,8 +142,6 @@ const Custom = () => {
           ) : (
             <div>
               <CustomTable
-                currentShowTable={currentShowTable}
-                currentShowTotal={currentShowTotal}
                 currentRecentTable={currentRecentTable}
                 currentRecentTotal={currentRecentTotal}
               />

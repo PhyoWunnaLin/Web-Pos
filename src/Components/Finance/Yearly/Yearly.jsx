@@ -12,6 +12,8 @@ import { Pagination } from "@mantine/core";
 
 const Yearly = () => {
   const token = Cookies.get("token");
+  const p = localStorage.getItem("YearlyPage")
+  const [page,setPage] = useState(p ? p : 1)
   const date = new Date();
   const [year , setYear] = useState(date.getFullYear());
   const [searchYear , setSearchYear] = useState(date.getFullYear());
@@ -21,8 +23,7 @@ const Yearly = () => {
   const {data, isLoading, isFetching} = useYearlyQuery({token,year,page});
 
   // pagination 
-  const p = localStorage.getItem("YearlyPage")
-  const [page,setPage] = useState(p ? p : 1)
+
   const totalPage = currentYear?.data?.last_page
   // console.log(totalPage);
 

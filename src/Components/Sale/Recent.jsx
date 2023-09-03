@@ -16,8 +16,15 @@ const Recent = () => {
     const token = Cookies.get("token")
     const close = Cookies.get("sale")
     const p = localStorage.getItem("page");
+    const date = new Date();
+    const nowYear = date.getFullYear();
+    const nowMonth = (date.getMonth() + 1).toString();
+    const realMonth = nowMonth.length === 1 ? "0" + nowMonth : nowMonth;
+    const nowDay = date.getDate().toString();
+    const realDay = nowDay.length === 1 ? "0" + nowDay : nowDay;
+    const today = nowYear + "-" + realMonth + "-" + realDay;
     const [page,setPage] = useState(p ? p : 1);
-    const {data , isLoading} = useRecentVoucherQuery({token,page})
+    const {data , isLoading} = useRecentVoucherQuery({token,page,date:today})
     // console.log(data)
     const dailyTotal = data?.daily_total_sale
     const recent = data?.data?.data
@@ -55,11 +62,11 @@ const Recent = () => {
         if (result.isConfirmed) {
           if(close === "true"){
             const data = await saleOpen(token)
-            // console.log(data?.data?.data)
+            console.log(data?.data?.data)
             dispatch(setSaleClose(data?.data?.data?.sale_close ? data?.data?.data?.sale_close : false))
           }else{
             const data = await saleClose(token)
-            // console.log(data?.data?.data)
+            console.log(data?.data?.data)
             dispatch(setSaleClose(data?.data?.data?.sale_close ? data?.data?.data?.sale_close : true))
           }
           

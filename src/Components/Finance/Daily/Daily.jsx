@@ -15,6 +15,8 @@ import Loader from "../../Loader/Loader";
 import { Pagination } from "@mantine/core";
 const Daily = () => {
   const token = Cookies.get("token");
+  const p = localStorage.getItem("dailyPage")
+  const [page,setPage] = useState(p ? p : 1)
   const d = new Date();
   const nowYear = d.getFullYear();
   const nowMonth = (d.getMonth() + 1).toString();
@@ -30,8 +32,7 @@ const Daily = () => {
   const dailyTotal = currentShow?.daily_total_sale;
 
   // pagination 
-  const p = localStorage.getItem("dailyPage")
-  const [page,setPage] = useState(p ? p : 1)
+
   const totalPage = currentShow?.data?.last_page
 
   // console.log(totalPage);
@@ -156,7 +157,7 @@ const Daily = () => {
 
                   {/* Pagination */}
                   <div className=" ml-auto mb-1">
-                    <Pagination total={1} value={Number(page)} onChange={setPage}/>
+                    <Pagination total={totalPage} value={Number(page)} onChange={setPage}/>
                   </div>
                 </div>
               </div>
