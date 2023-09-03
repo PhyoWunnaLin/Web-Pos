@@ -6,10 +6,9 @@ export const saleApi = createApi({
   tagTypes: ["sale"],
   endpoints: (builder) => ({
     recentVoucher: builder.query({
-      query: ({ token, page, searchDaily }) => ({
+      query: ({ token, page }) => ({
         url: `/voucher?page=${page}`,
         method: "Get",
-        body: searchDaily,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["sale"],
@@ -25,14 +24,13 @@ export const saleApi = createApi({
       invalidatesTags: ["sale"],
     }),
 
-    monthly: builder.mutation({
-      query: ({ token, searchMonthly, page }) => ({
-        url: `/monthly-sale?page=${page}`,
-        method: "POST",
-        body: searchMonthly,
+    monthly: builder.query({
+      query: ({ token, page, date }) => ({
+        url: `/monthly-sale?page=${page}&date=${date}`,
+        method: "GET",
         headers: { authorization: `Bearer ${token}` },
       }),
-      invalidatesTags: ["sale"],
+      providesTags: ["sale"]
     }),
 
     yearly: builder.mutation({
@@ -78,7 +76,7 @@ export const saleApi = createApi({
 export const {
   useRecentVoucherQuery,
   useCheckoutMutation,
-  useMonthlyMutation,
+  useMonthlyQuery,
   useYearlyMutation,
   useCustomMutation,
   useSaleCloseMutation,
