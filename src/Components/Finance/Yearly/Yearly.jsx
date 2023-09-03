@@ -6,48 +6,37 @@ import { MdCalendarMonth, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { BiSearch } from "react-icons/bi";
 import YearlyTable from "./YearlyTable";
 import Cookies from "js-cookie";
-import { useYearlyMutation } from "../../../Redux/API/saleApi";
+import { useYearlyQuery } from "../../../Redux/API/saleApi";
 import Loader from "../../Loader/Loader";
 import { Pagination } from "@mantine/core";
 
 const Yearly = () => {
+  const token = Cookies.get("token");
   const date = new Date();
   const [year , setYear] = useState(date.getFullYear());
-  const token = Cookies.get("token");
+  const [searchYear , setSearchYear] = useState(date.getFullYear());
   const [currentYear , setCurrentYear] = useState();
-  const yearlyTable = currentYear?.data?.data
-  const yearlyTotal = currentYear?.data?.yearly_sale
-  // console.log(currentYear)
+  const yearlyTable = currentYear?.data
+  const yearlyTotal = currentYear?.yearly_sale
+  const {data, isLoading, isFetching} = useYearlyQuery({token,year,page});
+
+  // pagination 
   const p = localStorage.getItem("YearlyPage")
   const [page,setPage] = useState(p ? p : 1)
-  // const totalPage = currentYear?.data?.data?.last_page
-  // console.log(page);
+  const totalPage = currentYear?.data?.last_page
+  // console.log(totalPage);
 
-  const [yearly , {isLoading}] = useYearlyMutation();
 
   useEffect(() => {
     localStorage.setItem("YearlyPage",page)
   },[page])
 
   useEffect(() => {
-    handleMonthly()
-  },[])
-
-  const handleMonthly = async () => {
-    const data = await yearly({token,searchYearly : year, page});
     setCurrentYear(data)
-  }
+  },[data])
 
   const handleSearch = async () => {
-    try {
-      const data = await yearly({token,searchYearly : year, page});
-      console.log(data?.data)
-      if (data?.data) {
-        setCurrentYear(data)
-    }
-    } catch (error) {
-      console.log(error)
-    }
+   setYear(searchYear)
   }
 
   return (
@@ -84,20 +73,22 @@ const Yearly = () => {
                   <div className="flex items-center border border-[#7E7F80] px-2 border-r-0 rounded-l">
                     <div className="flex items-center gap-2">
                         <MdCalendarMonth className="text-[#8bb4f6]"/>
-                        <select onChange={(e) => setYear(e.target.value)} className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none pr-2">
+                        <select onChange={(e) => setSearchYear(e.target.value)} className=" bg-transparent text-[#E8EAED] py-1 text-sm font-medium tracking-wider outline-none pr-2">
                           <option className="bg-[#161618] hover:bg-[#202124]" value="2023">2023</option>
                           <option className="bg-[#161618] hover:bg-[#202124]" value="2022">2022</option>
                         </select>
                     </div>
                   </div>
-                  <div onClick={handleSearch} className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer">
+                  <div 
+                  onClick={handleSearch}
+                   className="bg-[#8bb4f6] py-1 px-3 rounded-r flex items-center tracking-wider text-black font-medium text-sm cursor-pointer">
                     <BiSearch size={18}/>
                   </div>
                 </div>
               </div>
             </div>
             {/* table  */}
-            {isLoading ? <div><Loader/></div> : 
+            {isFetching ? <div><Loader/></div> : 
             <div>
                 <YearlyTable yearlyTable={yearlyTable} yearlyTotal={yearlyTotal}/>
 
@@ -106,11 +97,6 @@ const Yearly = () => {
                 >
                   {/* TOTAL Yearly  */}
                   <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
-                          {/* <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
-                          <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Days</h1>
-                          <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>12</p>
-                        </div> */}
-
                         <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>
                           <h1 className=' text-[#8bb4f6] font-semibold whitespace-nowrap tracking-wide'>Total Vouchers</h1>
                           <p className=' text-white text-xl whitespace-nowrap tracking-wide font-semibold'>{yearlyTotal?.total_voucher}</p>

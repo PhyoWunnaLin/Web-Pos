@@ -22,7 +22,7 @@ const Recent = () => {
     const dailyTotal = data?.daily_total_sale
     const recent = data?.data?.data
     const totalPage =data?.data?.last_page
-    // console.log(totalPage)
+    console.log(recent)
     const searchRecentVoucher = useSelector(state => state.saleSlice.searchRecentVoucher)
     const dispatch = useDispatch()
     // const close1 = useSelector(state => state.saleSlice.saleClose)
