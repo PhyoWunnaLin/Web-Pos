@@ -8,7 +8,7 @@ import CustomTable from "./CustomTable";
 import "../Daily/daily.css";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import {
-  useCustomQuery,
+  useCustomMutation,
   useRecentVoucherQuery,
 } from "../../../Redux/API/saleApi";
 import Cookies from "js-cookie";
@@ -29,7 +29,7 @@ const Custom = () => {
   const currentShowTable = currentShow?.data?.data?.data;
   const currentShowTotal = currentShow?.data?.daily_total_sale;
   const token = Cookies.get("token");
-  const [custom, { isLoading }] = useCustomQuery();
+  const [custom, { isLoading }] = useCustomMutation();
   const { data, isFetching } = useRecentVoucherQuery({ token });
 
   const currentRecentTable = data?.data?.data;
