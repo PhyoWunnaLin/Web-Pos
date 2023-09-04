@@ -12,7 +12,7 @@ const initialState = {
   tax:0,
   receiveData: null,
   firstDelete:null,
-  saleClose : Cookies.get("sale") === "true" || Cookies.get("sale") === "false" ? Cookies.get("sale") : "false" ,
+  saleClose : Cookies.get("sale") === "true" || Cookies.get("sale") === "false" ? Cookies.get("sale") : "true" ,
 };
 
 const totalAmount = (saleItem) => {

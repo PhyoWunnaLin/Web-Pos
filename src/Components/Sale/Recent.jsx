@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 
 const Recent = () => {
     const token = Cookies.get("token")
-    const close = Cookies.get("sale")
+    const close1 = Cookies.get("sale")
     const p = localStorage.getItem("page");
     const date = new Date();
     const nowYear = date.getFullYear();
@@ -32,7 +32,7 @@ const Recent = () => {
     console.log(recent)
     const searchRecentVoucher = useSelector(state => state.saleSlice.searchRecentVoucher)
     const dispatch = useDispatch()
-    // const close1 = useSelector(state => state.saleSlice.saleClose)
+    const close = useSelector(state => state.saleSlice.saleClose)
     // console.log(close)
     const [saleClose] = useSaleCloseMutation();
     const [saleOpen] = useSaleOpenMutation();
@@ -49,7 +49,7 @@ const Recent = () => {
 
     const saleCloseHandler = () => {
       Swal.fire({
-        title: `Are you sure to sale ${close === "true" ? "Open" : "Close"} ?`,
+        title: `Are you sure to sale ${(close === "true" || close1 === "true") ? "Open" : "Close"} ?`,
         icon: 'question',
         iconColor: "#fff",
         background: "#161618",
@@ -60,7 +60,7 @@ const Recent = () => {
         confirmButtonText: `${close === "true" ? "Open" : "Close"}`,
       }).then(async(result) => {
         if (result.isConfirmed) {
-          if(close === "true"){
+          if(close === "true" || close1 === "true"){
             const data = await saleOpen(token)
             console.log(data?.data?.data)
             dispatch(setSaleClose(data?.data?.data?.sale_close ? data?.data?.data?.sale_close : false))
@@ -87,6 +87,42 @@ const Recent = () => {
                     button2={true}
                     route={"/sale/cashier"}
                 />
+                {/* banner2  */}
+                <div className="flex flex-col gap-3">
+                  <h1 className=" text-white font-medium text-2xl tracking-wide">
+                      Today Sales Overview
+                  </h1>
+                  <div className=" flex justify-between items-center max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-3">
+                    <form className="relative">
+                        <input onChange={(e)=> dispatch(setSearchRecentVoucher(e.target.value))}
+                          type="text"
+                          placeholder="Search"
+                          className="search-input"
+                        />
+                        <div className="text-white absolute top-[10px] left-[11px]">
+                          <BiSearch size={20} />
+                        </div>
+                    </form>
+                    <div className="flex gap-3 items-center justify-end mt-1 select-none">
+                        <div className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
+                          <div className=' flex justify-center items-center gap-1 py-2 px-2'>
+                          <PiExportBold className=' text-[#8bb4f6] text-lg'/>
+                          <p className=' tracking-wider'>Export</p>
+                          </div>
+                          {/* <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                            <option className="bg-[#161618] hover:bg-[#202124]" value="">pdf</option>
+                            <option className="bg-[#161618] hover:bg-[#202124]" value="">pdf</option>
+                          </select> */}
+                        </div>
+                        <div onClick={saleCloseHandler} className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
+                          <div className=' flex justify-center items-center gap-1 py-2 px-2'>
+                          <BiCalculator className=' text-[#8bb4f6] text-lg'/>
+                          <p className=' tracking-wider'>{(close === "true" || close1 === "true") ? "Sale Open" : "Sale Close"}</p>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
                 {recent?.length == 0 ? 
           
           // no user 
@@ -95,42 +131,7 @@ const Recent = () => {
            : 
           
           <div className="flex flex-col gap-8">
-            {/* banner2  */}
-          <div className="flex flex-col gap-3">
-            <h1 className=" text-white font-medium text-2xl tracking-wide">
-                Today Sales Overview
-            </h1>
-            <div className=" flex justify-between items-center max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-3">
-              <form className="relative">
-                  <input onChange={(e)=> dispatch(setSearchRecentVoucher(e.target.value))}
-                    type="text"
-                    placeholder="Search"
-                    className="search-input"
-                  />
-                  <div className="text-white absolute top-[10px] left-[11px]">
-                    <BiSearch size={20} />
-                  </div>
-              </form>
-              <div className="flex gap-3 items-center justify-end mt-1 select-none">
-                  <div className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
-                    <div className=' flex justify-center items-center gap-1 py-2 px-2'>
-                    <PiExportBold className=' text-[#8bb4f6] text-lg'/>
-                    <p className=' tracking-wider'>Export</p>
-                    </div>
-                    {/* <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
-                      <option className="bg-[#161618] hover:bg-[#202124]" value="">pdf</option>
-                      <option className="bg-[#161618] hover:bg-[#202124]" value="">pdf</option>
-                    </select> */}
-                  </div>
-                  <div onClick={saleCloseHandler} className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
-                    <div className=' flex justify-center items-center gap-1 py-2 px-2'>
-                    <BiCalculator className=' text-[#8bb4f6] text-lg'/>
-                    <p className=' tracking-wider'>{close === "true" ? "Sale Open" : "Sale Close"}</p>
-                    </div>
-                  </div>
-              </div>
-            </div>
-          </div>
+
           {/* table  */}
           {isLoading ? (
           <div className=" ">

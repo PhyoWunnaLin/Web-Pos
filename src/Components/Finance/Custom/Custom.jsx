@@ -44,8 +44,8 @@ const Custom = () => {
   const totalPage = currentShow?.data?.last_page
   const customTotal = currentRecentTotal
 
-  console.log(totalPage)
-  console.log(currentShow)
+  // console.log(totalPage)
+  console.log(page)
 
   useEffect(() => {
     localStorage.setItem("CustomPage", page);
