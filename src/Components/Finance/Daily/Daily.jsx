@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 import { useRecentVoucherQuery } from "../../../Redux/API/saleApi";
 import Loader from "../../Loader/Loader";
 import { Pagination } from "@mantine/core";
+
 const Daily = () => {
   const token = Cookies.get("token");
   const p = localStorage.getItem("dailyPage")
@@ -92,7 +93,7 @@ const Daily = () => {
                     id="start"
                     name="trip-start"
                     onChange={(e) => setSearchDate(e.target.value)}
-                    value={date}
+                    value={searchDate}
                     min="2023-01-01"
                     max={today}
                     className=" w-36 appearance-none border border-[#7E7F80] text-[#E8EAED] font-medium tracking-wider bg-transparent rounded-l outline-none py-1 pl-9 text-sm border-r-0"

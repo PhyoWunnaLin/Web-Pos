@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGetProductsQuery } from '../../../Redux/API/inventoryApi';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import "./products.css"
 import { useSelector } from 'react-redux';
 import ImageLoader from '../../Loader/ImageLoader';
+import { Pagination } from '@mantine/core';
 
 const ProductCard = () => {
   const token = Cookies.get("token");
-  const { data, isLoading } = useGetProductsQuery(token);
+  const p = localStorage.getItem("pdCardPage")
+  const [page,setPage] = useState(p ? p : 1)
+  const { data, isLoading, isFetching } = useGetProductsQuery({token, page});
+  const totalPage = data?.meta?.last_page
   const products = data?.data
   const searchProduct = useSelector(state => state.productSlice.searchProduct)
-  
   // console.log(data);
+
+  useEffect(() => {
+    localStorage.setItem("pdCardPage",page)
+  },[page])
 
   const nav = useNavigate();
   const route = () => {
@@ -21,12 +28,13 @@ const ProductCard = () => {
   
   return (
     <div>
-      {isLoading ? (
+      {isFetching ? (
           <div className=" ">
             <ImageLoader/>
           </div>) 
           : (
-          <div className=' pl-2'>
+          <div>
+            <div className=' pl-2'>
              <div className=' grid grid-cols-5 max-[900px]:grid-cols-3 max-[650px]:grid-cols-2 max-[400px]:grid-cols-1 gap-5'>
              {/* <div className=' flex flex-wrap'> */}
                 {products?.filter(pd => {
@@ -50,6 +58,17 @@ const ProductCard = () => {
                 })}
             </div>
           </div>
+
+          {/* Pagination */}
+          <div className=" flex justify-end mt-5 ">
+          <Pagination
+            total={totalPage}
+            value={Number(page)}
+            onChange={setPage}
+          />
+        </div>
+          </div>
+
           )}
     </div>
   )

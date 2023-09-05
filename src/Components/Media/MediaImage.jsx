@@ -14,7 +14,7 @@ import { Toaster, toast } from "react-hot-toast";
 
 const MediaImage = () => {
   const token = Cookies.get("token");
-  const { data, isLoading } = useGetPhotoQuery(token);
+  const { data, isLoading, isFetching } = useGetPhotoQuery(token);
   const [deletePhoto] = useDeletePhotoMutation();
   const images = data?.data;
 
@@ -76,7 +76,7 @@ const MediaImage = () => {
         </div>
       ) : (
         <div>
-          {isLoading ? (
+          {isFetching ? (
             <div className="-mt-20 h-[100px]">
               <ImageLoader />
             </div>
