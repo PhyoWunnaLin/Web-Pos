@@ -36,11 +36,15 @@ const Daily = () => {
 
   const totalPage = currentShow?.data?.last_page
 
-  // console.log(totalPage);
+  console.log(data);
 
   useEffect(() => {
     localStorage.setItem("dailyPage",page)
   },[page])
+
+  useEffect(() => {
+    setPage(1)
+  },[])
 
   useEffect(() => {
     setCurrentShow(data);
@@ -49,6 +53,7 @@ const Daily = () => {
   const handleSearch = (e) => {
     e.preventDefault()
     setDate(searchDate)
+    setPage(1)
   }
 
   return (

@@ -1,8 +1,9 @@
 import React from 'react'
 import { HiArrowNarrowRight } from 'react-icons/hi';
 
-const CustomTable = ({currentRecentTable}) => {
-  const customTable = currentRecentTable
+const CustomTable = ({currentRecentTable,searchShowTable}) => {
+  const customTable = searchShowTable ? searchShowTable : currentRecentTable
+  // console.log(customTable)
     
   return (
     <div className='flex flex-col gap-8'>

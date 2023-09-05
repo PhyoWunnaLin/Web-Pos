@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
 import { BsFillMoonStarsFill, BsPersonCircle } from "react-icons/bs";
 import { MdOutlineNotificationsActive } from "react-icons/md";
-import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
 import SaleCalc from "./SaleCalc";
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts, setSaleItem, setSearchSaleProduct, setSelectReceivePd } from "../../Redux/Services/saleSlice";
@@ -13,11 +12,13 @@ import "./receive.css"
 import "./sale.css"
 import NoContact from "../NoContact/NoContact";
 import closedImg from  "../../assets/closed.png"
+import { useGetSaleProductsQuery } from "../../Redux/API/saleApi";
 
 const Sale = () => {
   const token = Cookies.get("token");
   const saleClose1 = Cookies.get("sale");
-  const { data, isLoading } = useGetProductsQuery(token);
+  const { data, isLoading } = useGetSaleProductsQuery(token);
+  console.log(data)
   const products = data?.data;
   // const products = useSelector(state => state.saleSlice.products)
   // console.log(products);

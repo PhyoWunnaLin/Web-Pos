@@ -33,11 +33,16 @@ const Yearly = () => {
   },[page])
 
   useEffect(() => {
+    setPage(1)
+  },[])
+
+  useEffect(() => {
     setCurrentYear(data)
   },[data])
 
   const handleSearch = async () => {
    setYear(searchYear)
+   setPage(1)
   }
 
   return (

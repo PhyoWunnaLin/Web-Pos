@@ -60,7 +60,7 @@ const ProductCard = () => {
           </div>
 
           {/* Pagination */}
-          <div className=" flex justify-end mt-5 ">
+          <div className=" flex justify-end mt-8 ">
           <Pagination
             total={totalPage}
             value={Number(page)}

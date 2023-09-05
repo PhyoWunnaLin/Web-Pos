@@ -5,6 +5,14 @@ export const saleApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: `https://g.mmsdev.site/api/v1` }),
   tagTypes: ["sale"],
   endpoints: (builder) => ({
+    getSaleProducts: builder.query({
+      query: (token) => ({
+        url: `/product`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["sale"],
+    }),
+
     recentVoucher: builder.query({
       query: ({ token, page, date }) => ({
         url: `/voucher?page=${page}&date=${date}`,
@@ -78,4 +86,5 @@ export const {
   useCustomQuery,
   useSaleCloseMutation,
   useSaleOpenMutation,
+  useGetSaleProductsQuery
 } = saleApi;

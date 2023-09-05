@@ -32,12 +32,17 @@ const Monthly = () => {
   }, [page]);
 
   useEffect(() => {
+    setPage(1)
+  },[])
+
+  useEffect(() => {
     setCurrentMonth(data)
   }, [data]);
 
   const handleSearch = () => {
     setMonth(searchMonth)
     setYear(searchYear)
+    setPage(1)
   };
 
   const months = [

@@ -35,14 +35,22 @@ const Custom = () => {
   const [currentShow, setCurrentShow] = useState();
   const currentRecentTable = currentShow?.data?.data
   const currentRecentTotal = currentShow?.daily_total_sale;
+  const [searchShow, setSearchShow] = useState();
+  const searchShowTable = searchShow?.data?.data
+  const searchShowTotal = searchShow?.daily_total_sale;
 
   useEffect(() => {
     setCurrentShow(recent)
   },[recent])
 
+  useEffect(() => {
+    setPage(1)
+  },[])
 
-  const totalPage = currentShow?.data?.last_page
-  const customTotal = currentRecentTotal
+  console.log(recent)
+
+  const totalPage = searchShow ? searchShow?.data?.last_page : currentShow?.data?.last_page
+  const customTotal = searchShowTotal ? searchShowTotal : currentRecentTotal
 
   // console.log(totalPage)
   console.log(page)
@@ -55,7 +63,8 @@ const Custom = () => {
   const handleCustom = async (e) => {
     try {
       e.preventDefault();
-      setCurrentShow(custom);
+      setSearchShow(custom);
+      setPage(1)
     } catch (error) {
       console.log(error);
     }
@@ -143,7 +152,7 @@ const Custom = () => {
             <div>
               <CustomTable
                 currentRecentTable={currentRecentTable}
-                currentRecentTotal={currentRecentTotal}
+                searchShowTable={searchShowTable}
               />
 
               {/* total monthly  */}
