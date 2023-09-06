@@ -1,18 +1,19 @@
 import Cookies from "js-cookie";
 import React, { useEffect } from "react";
-import { BiSearch } from "react-icons/bi";
+import { BiCalculator, BiSearch } from "react-icons/bi";
 import { BsFillMoonStarsFill, BsPersonCircle } from "react-icons/bs";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import SaleCalc from "./SaleCalc";
 import { useDispatch, useSelector } from "react-redux";
-import { setProducts, setSaleItem, setSearchSaleProduct, setSelectReceivePd } from "../../Redux/Services/saleSlice";
+import { setProducts, setSaleClose, setSaleItem, setSearchSaleProduct, setSelectReceivePd } from "../../Redux/Services/saleSlice";
 import ImageLoader from "../Loader/ImageLoader";
 import { Link } from "react-router-dom";
 import "./receive.css"
 import "./sale.css"
 import NoContact from "../NoContact/NoContact";
 import closedImg from  "../../assets/closed.png"
-import { useGetSaleProductsQuery } from "../../Redux/API/saleApi";
+import { useGetSaleProductsQuery, useSaleOpenMutation } from "../../Redux/API/saleApi";
+import Swal from "sweetalert2";
 
 const Sale = () => {
   const token = Cookies.get("token");
@@ -20,6 +21,7 @@ const Sale = () => {
   const { data, isLoading } = useGetSaleProductsQuery(token);
   console.log(data)
   const products = data?.data;
+  const [saleOpen] = useSaleOpenMutation();
   // const products = useSelector(state => state.saleSlice.products)
   // console.log(products);
   const searchSaleProduct = useSelector(
@@ -34,6 +36,26 @@ const Sale = () => {
   // useEffect(()=>{
   //   dispatch(setProducts(data?.data))
   // },[data])
+
+  const saleOpenHandler = () => {
+    Swal.fire({
+      title: `Are you sure to sale open ?`,
+      icon: 'question',
+      iconColor: "#fff",
+      background: "#161618",
+      showCancelButton: true,
+      showCloseButton: true,
+      confirmButtonColor: '#fff',
+      cancelButtonColor: '#24262b',
+      confirmButtonText: "Open",
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+          const data = await saleOpen(token)
+          console.log(data?.data?.data)
+          dispatch(setSaleClose(data?.data?.data?.sale_close ? data?.data?.data?.sale_close : false))      
+      }
+    })
+  }
 
   return (
     <div className="relative">
@@ -53,9 +75,15 @@ const Sale = () => {
         </div>
       </div>
       {(saleClose === "true" || saleClose1 === "true") ? (
-        <div className=" flex justify-center items-center h-screen text-white">
+        <div className=" flex flex-col justify-center items-center h-screen text-white">
           
           <NoContact image={closedImg} size={"w-[25%]"}  />
+          <div onClick={saleOpenHandler} className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
+            <div className=' flex justify-center items-center gap-2 py-2 px-2'>
+              <BiCalculator className=' text-[#8bb4f6] text-lg'/>
+              <p className=' tracking-wider'>Sale Open</p>
+            </div>
+          </div>
           
         </div>
       ) : (
