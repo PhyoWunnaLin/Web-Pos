@@ -76,12 +76,12 @@ const Login = () => {
             {serverError && <p className="text-sm text-[#e94343] tracking-widest -mt-2">* Server Error</p>}
 
             {isLoading ? (
-              <button disabled className="btn mt-6 flex justify-center item-center gap-3">
+              <button disabled className="btn mt-4 flex justify-center item-center gap-3">
                 <span>Login</span> 
                 <span><Loader color="dark" size="sm" className=" pt-1"/></span>
               </button>
             ) : (
-              <button className="btn mt-6 cursor-pointer flex justify-center item-center gap-3">
+              <button className="btn mt-4 cursor-pointer flex justify-center item-center gap-3">
               <span>Login</span> 
             </button>
             )}

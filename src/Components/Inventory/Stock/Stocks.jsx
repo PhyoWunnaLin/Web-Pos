@@ -125,7 +125,7 @@ const Stocks = () => {
                     </div>
                   ) : (
                     <div>
-                      <table className=" text-white table-responsive2 w-full ">
+                      <table className=" text-white max-[970px]:whitespace-nowrap max-[970px]:block max-[970px]:overflow-x-auto w-full ">
                         <thead className=" tracking-wider text-sm border border-[#7E7F80]">
                           <tr>
                             <th className="p-4 max-[1000px]:pr-5 text-start">

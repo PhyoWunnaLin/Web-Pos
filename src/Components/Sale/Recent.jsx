@@ -138,7 +138,7 @@ const Recent = () => {
             <Loader/>
           </div>) 
           : (
-            <table className=" text-white table-responsive w-full">
+            <table className=" text-white max-[760px]:whitespace-nowrap max-[760px]:block max-[760px]:overflow-x-auto w-full">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
                 <th className="p-4 text-start">NO</th>
@@ -181,7 +181,7 @@ const Recent = () => {
           </table>
           )}
 
-          <div className={` ${isLoading ? "hidden" : "flex"} gap-5 items-end w-full`}>
+          <div className={` ${isLoading ? "hidden" : "flex"} ${totalPage >= 5 ? "max-xl:flex-col-reverse max-xl:items-start" : "max-[810px]:flex-col-reverse max-[810px]:items-start"} gap-5 items-end w-full`}>
             {/* TOTAL DAILY MONEY  */}
             <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
               <div className=' border border-[#7E7F80] px-5 py-2 text-end w-auto'>

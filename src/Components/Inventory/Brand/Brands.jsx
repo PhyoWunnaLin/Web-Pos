@@ -206,7 +206,7 @@ const Brands = () => {
                   </div>
                 ) : (
                   <div>
-                    <table className=" text-white table-responsive2 w-full">
+                    <table className=" text-white max-[865px]:whitespace-nowrap max-[865px]:block max-[865px]:overflow-x-auto w-full">
                       <thead className=" tracking-wider text-sm border border-[#7E7F80]">
                         <tr>
                           <th className="p-4 max-[1000px]:pr-5 text-start">
