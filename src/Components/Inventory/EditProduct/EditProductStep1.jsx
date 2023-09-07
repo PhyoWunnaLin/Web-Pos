@@ -6,7 +6,7 @@ import { setEditPdForm1 } from '../../../Redux/Services/productSlice'
 
 const EditProductStep1 = ({currentStep , detail}) => {
     const token = Cookies.get("token")
-    const {data} = useGetBrandsQuery(token)
+    const {data} = useGetBrandsQuery({token})
     const brands = data?.data
     const [name,setName] = useState(detail?.name)
     const [brand_id,setBrand] = useState(detail?.brand_name)

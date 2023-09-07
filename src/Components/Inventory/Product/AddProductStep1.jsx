@@ -8,9 +8,9 @@ import { ImArrowRight2 } from "react-icons/im";
 
 const AddProductStep1 = ({currentStep , setCurrentStep , steps , setComplete , complete}) => {
   const token = Cookies.get("token")
-  const {data} = useGetBrandsQuery(token)
+  const {data} = useGetBrandsQuery({token})
   const brands = data?.data
-
+  console.log(brands)
   const [name,setName] = useState("")
   const [brand_id,setBrand] = useState()
   const [stock,setStock] = useState()

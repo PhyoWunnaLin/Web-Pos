@@ -11,7 +11,7 @@ const EditProductStep4 = ({ detail }) => {
   const form1 = useSelector((state) => state.productSlice.editPdForm1);
   const form2 = useSelector((state) => state.productSlice.editPdForm2);
   const form3 = useSelector((state) => state.productSlice.editPdForm3);
-  const { data } = useGetBrandsQuery(token);
+  const { data } = useGetBrandsQuery({token});
   const brandId = form1?.brand_id;
   const products = data?.data;
   const brandName =
@@ -111,12 +111,12 @@ const EditProductStep4 = ({ detail }) => {
               <span className=" text-[#878787] w-[150px]">Unit</span>
               <span className=" text-[#fff]">: {form1?.unit}</span>
             </p>
-            <p className=" flex items-center gap-14 text-[17px] tracking-wide font-medium">
+            {form1?.more_information && <p className=" flex items-center gap-14 text-[17px] tracking-wide font-medium">
               <span className=" text-[#878787] w-[150px]">
                 More Information
               </span>
               <span className=" text-[#fff]">: {form1?.more_information}</span>
-            </p>
+            </p>}
           </div>
         </div>
         {/* pp bottom end  */}

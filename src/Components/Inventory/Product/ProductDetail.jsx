@@ -100,10 +100,10 @@ const ProductDetail = () => {
                           <span className=' text-[#878787] w-[150px]'>Unit</span>
                           <span className=' text-[#fff]'>: {product?.unit}</span>
                         </p>
-                        <p className=' flex items-center gap-14 text-[17px] tracking-wide font-medium'>
+                        {product?.more_information && <p className=' flex items-center gap-14 text-[17px] tracking-wide font-medium'>
                           <span className=' text-[#878787] w-[150px]'>More Information</span>
                           <span className=' text-[#fff]'>: {product?.more_information}</span>
-                        </p>
+                        </p>}
                   </div>
                 </div>
                 {/* pp bottom end  */}
