@@ -30,9 +30,9 @@ const ProductDetail = () => {
             route={"/inventory/products"}/>
           {isLoading ? <div><Loader/></div> : 
 
-          <div className='flex gap-5'>
+          <div className='flex gap-5 max-xl:flex-col max-xl:gap-0'>
             {/* product detail   */}
-            <div className=' w-[50%]'>
+            <div className=' w-[50%] max-xl:w-[100%]'>
                 {/* pp top start  */}
                 <div className=' bg-[#161618] border-b border-[#878787]'>
                     {/* profile img  */}
@@ -109,7 +109,7 @@ const ProductDetail = () => {
                 {/* pp bottom end  */}
             </div>
             {/* product detail table  */}
-            <div className='w-[50%] flex flex-col gap-8 mt-[74px]'>
+            <div className='w-[50%] max-xl:w-[100%] max-xl:mt-9 flex flex-col gap-8 mt-[74px]'>
               <div>
                 <ProductDetailTable1/>
               </div>
