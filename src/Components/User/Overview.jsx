@@ -133,7 +133,7 @@ const Overview = () => {
             <Loader/>
           </div>) 
           : (
-            <table className=" text-white w-full table-responsive2">
+            <table className=" text-white w-full max-[975px]:whitespace-nowrap max-[975px]:block max-[975px]:overflow-x-auto">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
                 <th className="p-4 max-[1000px]:pr-5 text-start">NO</th>

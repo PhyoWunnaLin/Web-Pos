@@ -8,14 +8,14 @@ const CustomTable = ({currentRecentTable,searchShowTable}) => {
   return (
     <div className='flex flex-col gap-8'>
       {/* table  */}
-      <table className=" text-white table-responsive2 w-full">
+      <table className=" text-white max-[810px]:whitespace-nowrap max-[810px]:block max-[810px]:overflow-x-auto w-full">
             <thead className=" tracking-wider text-sm border border-[#7E7F80]">
               <tr>
                 <th className="p-4 max-[1000px]:pr-5 text-start">NO</th>
                 <th className="p-4 max-[1000px]:pr-5 text-start">VOUCHER</th>
                 <th className="p-4 max-[1000px]:pr-24 text-start">TIME</th>
-                <th className="p-4 max-[1000px]:pr-16 text-end">ITEM COUNT</th>
-                <th className="p-4 max-[1000px]:pr-10 text-end">CASH</th>
+                <th className="p-4 text-end">ITEM COUNT</th>
+                <th className="p-4 text-end">CASH</th>
                 <th className="p-4 max-[1000px]:pl-10 text-end ">TAX</th>
                 <th className="p-4 max-[1000px]:pl-10 text-end">TOTAL</th>
                 <th className="p-4 ">...</th>

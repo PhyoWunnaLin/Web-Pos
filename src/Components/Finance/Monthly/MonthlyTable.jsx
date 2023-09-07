@@ -7,13 +7,13 @@ const MonthlyTable = ({ monthlyTable }) => {
   return (
     <div className="flex flex-col gap-8">
       {/* table  */}
-      <table className=" text-white table-responsive2 w-full">
+      <table className=" text-white max-[760px]:whitespace-nowrap max-[760px]:block max-[760px]:overflow-x-auto w-full">
         <thead className=" tracking-wider text-sm border border-[#7E7F80]">
           <tr>
             <th className="p-4 max-[1000px]:pr-5 text-start">NO</th>
             <th className="p-4 max-[1000px]:pr-5 text-start">CREATE AT</th>
             <th className="p-4 max-[1000px]:pr-24 text-start">VOUCHERS</th>
-            <th className="p-4 max-[1000px]:pr-10 text-end">CASH</th>
+            <th className="p-4 text-end">CASH</th>
             <th className="p-4 max-[1000px]:pl-10 text-end ">TAX</th>
             <th className="p-4 max-[1000px]:pl-10 text-end">TOTAL</th>
             <th className="p-4 ">...</th>

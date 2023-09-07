@@ -85,7 +85,7 @@ const Custom = () => {
           {/* search  */}
           <form
             onSubmit={handleCustom}
-            className="flex justify-between items-center"
+            className="flex max-[780px]:flex-col max-[780px]:gap-4 max-[780px]:items-start justify-between items-center"
           >
             <div>
               <h1 className=" text-white font-medium text-2xl tracking-wide">
@@ -157,7 +157,7 @@ const Custom = () => {
 
               {/* total monthly  */}
 
-              <div className={`flex gap-5 items-end w-full`}>
+              <div className={`flex ${totalPage >= 5 ? "max-xl:flex-col-reverse max-xl:items-start" : "max-[810px]:flex-col-reverse max-[810px]:items-start"}  mt-7 gap-5 items-end w-full`}>
                 {/* total monthly  */}
                 <div className={` flex mt-5  border-[#7E7F80] w-[60%]`}>
                   <div className=" border border-[#7E7F80] px-5 py-2 text-end w-auto">

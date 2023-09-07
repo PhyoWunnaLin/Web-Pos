@@ -116,16 +116,16 @@ const AdminProfileEdit = () => {
                 </div>
 
                 {/* profile navLink  */}
-                <div className=' flex items-center max-[620px]:gap-10 max-[620px]:gap-5 max-[620px]:ml-7 gap-20 ml-10 pb-5'>
+                <div className=' flex items-center max-[620px]:gap-16 max-[620px]:ml-7 gap-20 ml-10 pb-5'>
                     <div onClick={() => dispatch(setAdminEditPp("Personal"))} className={` ${adminEditPp == "Personal" || adminEditPp == null ? "active" : null} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
                         <span className=' font-semibold'>Personal</span>
                     </div>
 
-                    <div onClick={() => dispatch(setAdminEditPp("Login Information"))} className={` ${adminEditPp == "Login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
+                    {/* <div onClick={() => dispatch(setAdminEditPp("Login Information"))} className={` ${adminEditPp == "Login Information" && "active"} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
                         <span className=' font-semibold'>Login Information</span>
-                    </div>
+                    </div> */}
 
                     <div onClick={() => dispatch(setAdminEditPp("Password"))} className={` ${adminEditPp == "Password" && "active"} navLink cursor-pointer flex items-center gap-2`}>
                         <span className=" text-[19px]"><CiShop/></span>
@@ -144,9 +144,9 @@ const AdminProfileEdit = () => {
               </div>
 
               {/* Login Information  */}
-              <div className={`${adminEditPp == "Login Information" ? "block" : "hidden"}`}>
+              {/* <div className={`${adminEditPp == "Login Information" ? "block" : "hidden"}`}>
                 <LoginInfoEditForm/>
-              </div>
+              </div> */}
 
               {/* password  */}
               <div className={`${adminEditPp == "Password" ? "block" : "hidden"}`}>

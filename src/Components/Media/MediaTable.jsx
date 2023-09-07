@@ -73,7 +73,7 @@ const MediaTable = () => {
                 <Loader/>
             </div> : 
             <div className='h-[300px] overflow-y-scroll scrollbar'>
-              <table className="w-full text-white table-responsive2">
+              <table className="w-full text-white max-[830px]:whitespace-nowrap max-[830px]:block max-[830px]:overflow-x-auto">
                 <thead className=" tracking-wider text-sm border border-[#7E7F80]">
                     <tr className='select-none'>
                         <th className="p-4 max-[800px]:pr-5 text-start">NO</th>
@@ -90,7 +90,7 @@ const MediaTable = () => {
                         return(
                             <tr key={media?.id} className=" hover:bg-[#161618] select-none duration-300  border border-[#7E7F80]">
                                 <td className="p-4 text-start">{media?.id}</td>
-                                <td className="p-4 text-start">{media?.name}</td>
+                                <td className="p-4 text-start">{media?.name.length > 20 ? media?.name.substring(0,20) + "..." : media?.name}</td>
                                 <td className="p-4 text-start">{media?.user_name}</td>
                                 <td className="p-4 text-end">{media?.updated_at}</td>
                                 <td className="p-4 text-end">{media?.created_at}</td>
