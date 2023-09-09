@@ -152,7 +152,7 @@ const SaleReport = () => {
                   </div>
 
                   <div className=" flex justify-end">
-                    <button className="bg-transparent border border-[#fff] py-1 px-3 rounded-md mt-3 text-sm tracking-wide">
+                    <button className="bg-transparent border border-[#7E7F80] py-1 px-4 rounded-md mt-3 text-sm tracking-wide text-white">
                       RECENT SALES
                     </button>
                   </div>
@@ -160,7 +160,7 @@ const SaleReport = () => {
               </div>
             </div>
 
-            <div className=" w-[65%] rounded-md border border-[#3F4245]">
+            <div className=" w-[65%] rounded-md">
               <BarChart/>
             </div>
           </div>
