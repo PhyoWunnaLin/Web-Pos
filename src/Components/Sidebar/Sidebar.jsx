@@ -93,10 +93,12 @@ const Sidebar = () => {
             <div className={`text-[#e8eaed] bg-[#161618] border-r-2 border-[#3f4245] scrollbar overflow-y-auto fixed w-[210px] mt-[53px] h-screen pb-24 z-50 ${opened ? "left-0" : "max-lg:left-[-300px]"} transition-all ease-in duration-300`}>
 
                 {/* Overview  */}
-                <p className={` flex items-center gap-2 px-5 py-3 cursor-pointer sidebarLink`}>
+                <Link to={'/'}>
+                <p className={`${sidebarActive == "/" && "sidebarActive"} flex items-center gap-2 px-5 py-3 cursor-pointer sidebarLink`}>
                     <span className=" text-[23px]"><AiOutlineHome/></span>
                     <span className=" font-bold tracking-wider">Overview</span>
                 </p>
+                </Link>
                 <div className=" border-b border-[#3f4245]" />
 
                 {/* Sale  */}
