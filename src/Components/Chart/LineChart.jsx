@@ -23,6 +23,33 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  
+  scales: {
+    y: {
+      grid: {
+        color: "#3F4245" ,
+      },
+      ticks: {
+        color: "hsl(0,3%,76%)",
+
+      },
+    },
+
+    x: {
+      grid: {
+        color: "#3F4245",
+      },
+      ticks: {
+        color: "hsl(0,3%,76%)",
+
+      },
+    },
+  },
   // plugins: {
   //   legend: {
   //     position: 'top',
