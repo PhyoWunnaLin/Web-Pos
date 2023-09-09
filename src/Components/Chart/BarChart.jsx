@@ -70,7 +70,7 @@ export const data = {
 
 const BarChart = () => {
   return (
-    <div className=" border border-[#3F4245] p-5 flex items-end gap-10">
+    <div className=" border border-[#3F4245] p-5 flex items-end gap-5">
       {/* left  */}
       <div className="w-[50%] flex flex-col gap-5">
         <div className="flex flex-col gap-1">
