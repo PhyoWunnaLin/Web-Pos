@@ -80,7 +80,7 @@ const Dashboard = () => {
           </div>
 
           {/* line chart  */}
-          <div className="border flex gap-8 px-5 py-5 border-[#3F4245] rounded-md">
+          <div className="border flex items-center gap-8 px-5 py-5 border-[#3F4245] rounded-md">
 
             {/* left side  */}
             <div className="w-[70%] flex flex-col gap-8">
