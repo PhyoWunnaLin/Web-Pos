@@ -20,7 +20,7 @@ const Dashboard = () => {
           <Banner title={"Overview"} path1={"Products"} />
 
           {/* quick action  */}
-          <div className="flex gap-5 h-[150px]">
+          <div className="flex gap-5 ">
 
             {/* left  */}
             <div className="w-[50%] flex gap-5">
@@ -49,7 +49,7 @@ const Dashboard = () => {
             </div>
 
             {/* right  */}
-            <div className="w-[50%] px-5 flex flex-col gap-2 justify-center border border-[#3F4245] rounded-md">
+            <div className="w-[50%] py-3 px-5 flex flex-col gap-2 justify-center border border-[#3F4245] rounded-md">
               <h1 className=" text-white text-xl font-medium tracking-wide">Quick Action</h1>
               <div className="flex gap-2 h-20">
                 <Link to={'/inventory/addProduct'} className="w-[40%] flex gap-2 px-2 border border-[#3F4245] rounded-md items-center cursor-pointer">
