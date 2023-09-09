@@ -92,7 +92,7 @@ const StockReport = () => {
             </div>
 
             {/* left bottom progress  */}
-            <div className="px-5 py-6 rounded-md border border-[#7E7F80] ">
+            <div className="px-5 py-6 rounded-md border border-[#3F4245] ">
               <div className="">
                 <div className="gap-5 flex items-center justify-between">
                   {/* progress  */}
@@ -188,9 +188,9 @@ const StockReport = () => {
             </div>
            </div>
 
-            <div className=" w-[50%] border border-[#7E7F80]">
+            <div className=" w-[50%] rounded-md border border-[#3F4245]">
               <DonutChart />
-            </div>
+            </div>  
           </div>
 
           {products?.length == 0 ? (

@@ -64,7 +64,7 @@ const SaleReport = () => {
           />
 
           <div className=" flex gap-6 justify-between">
-            <div className=" w-[35%] px-5 pt-3 pb-6 rounded-md border border-[#7E7F80] ">
+            <div className=" w-[35%] px-5 pt-3 pb-6 rounded-md border border-[#3F4245] ">
               <div className="">
                 <div className=" text-white mt-2">
                   <div className="flex flex-col gap-1 pb-3 border-b border-[#383b3d]">
@@ -160,7 +160,7 @@ const SaleReport = () => {
               </div>
             </div>
 
-            <div className=" w-[65%] border border-[#7E7F80]">
+            <div className=" w-[65%] rounded-md border border-[#3F4245]">
               <BarChart/>
             </div>
           </div>
