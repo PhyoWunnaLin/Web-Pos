@@ -10,6 +10,7 @@ import Loader from "../Loader/Loader";
 import DonutChart from "../Chart/DonutChart";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { useRecentVoucherQuery } from "../../Redux/API/saleApi";
+import BarChart from "../Chart/BarChart";
 
 const SaleReport = () => {
   const token = Cookies.get("token");
@@ -160,7 +161,7 @@ const SaleReport = () => {
             </div>
 
             <div className=" w-[65%] border border-[#7E7F80]">
-              <DonutChart />
+              <BarChart/>
             </div>
           </div>
 

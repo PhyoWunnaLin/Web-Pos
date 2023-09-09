@@ -2,7 +2,7 @@ import React from "react";
 import MainLayout from "../../Layouts/MainLayout";
 import Banner2 from "../Banner/Banner2";
 import NoContact from "../NoContact/NoContact";
-import { BiSearch, BiSolidCircle } from "react-icons/bi";
+import { BiSearch, BiSolidCircle, BiSolidUserBadge } from "react-icons/bi";
 import noPd from "../../assets/noPd3.png";
 import { Pagination } from "@mantine/core";
 import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import Loader from "../Loader/Loader";
 import DonutChart from "../Chart/DonutChart";
 import { MdKeyboardArrowUp } from "react-icons/md";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 
 const StockReport = () => {
   const token = Cookies.get("token");
@@ -63,7 +64,35 @@ const StockReport = () => {
           />
 
           <div className=" flex gap-5 justify-between">
-            <div className=" w-[50%] px-5 py-6 rounded-md border border-[#7E7F80] ">
+           <div className=" w-[50%]">
+             {/* left top total  */}
+           <div className=" flex gap-5 mb-5">
+              <div className="w-[50%] flex justify-between px-5 py-5 items-center border border-[#3F4245] rounded-md">
+                <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
+                  <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
+                    <HiOutlineShoppingCart className=" text-[#8bb4f6]" size={25}/>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">28,500 k</p>
+                  <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">Total Products</p>
+                </div>
+              </div>
+              <div className="w-[50%] flex justify-between px-5 items-center border border-[#3F4245] rounded-md">
+                <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
+                  <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
+                    <BiSolidUserBadge className=" text-[#8bb4f6]" size={25}/>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">28 k</p>
+                  <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">Total Brands</p>
+                </div>
+              </div>
+            </div>
+
+            {/* left bottom progress  */}
+            <div className="px-5 py-6 rounded-md border border-[#7E7F80] ">
               <div className="">
                 <div className="gap-5 flex items-center justify-between">
                   {/* progress  */}
@@ -157,6 +186,7 @@ const StockReport = () => {
                 </div>
               </div>
             </div>
+           </div>
 
             <div className=" w-[50%] border border-[#7E7F80]">
               <DonutChart />
