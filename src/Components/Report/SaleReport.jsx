@@ -80,7 +80,7 @@ const SaleReport = () => {
                       </div>
 
                       <div>
-                        <p className="text-2xl text-white font-semibold tracking-wider">239007</p>
+                        <p className="text-2xl text-white font-semibold tracking-wider mb-1">239007</p>
                         <p className=" text-[hsl(0,3%,76%)] text-sm tracking-wider">
                           Kyats
                         </p>
