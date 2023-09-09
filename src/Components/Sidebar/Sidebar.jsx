@@ -3,11 +3,12 @@ import {MdOutlineNotificationsActive} from "react-icons/md";
 import {BsFillMoonStarsFill,BsPersonCircle, BsPersonSquare} from "react-icons/bs";
 import {AiOutlineHome} from "react-icons/ai"
 import {CiShop} from "react-icons/ci";
+import {AiOutlineDatabase} from "react-icons/ai";
 import {TbPointFilled} from "react-icons/tb"
 import {MdKeyboardArrowDown} from "react-icons/md"
 import {RxExit} from "react-icons/rx"
 import { Accordion, AccordionHeader, AccordionBody, } from "@material-tailwind/react";
-import {PiNotepadBold, PiUserCirclePlusDuotone, PiUserSquareFill} from "react-icons/pi"
+import {PiNotepadBold, PiUserCirclePlusDuotone, PiUserSquareFill, PiChartDonutThin} from "react-icons/pi"
 import {HiOutlinePhotograph} from "react-icons/hi"
 import "./sidebar.css"
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -16,7 +17,7 @@ import { useLogoutMutation } from "../../Redux/API/authApi";
 import Cookies from 'js-cookie';
 import { removeToken } from "../../Redux/Services/authSlice";
 import { Loader,Burger } from '@mantine/core';
-import { setOpenAcc1, setOpenAcc2, setOpenAcc3, setOpenAcc4, setOpenAcc5 } from "../../Redux/Services/sidebarSlice";
+import { setOpenAcc1, setOpenAcc2, setOpenAcc3, setOpenAcc4, setOpenAcc5, setOpenAcc6 } from "../../Redux/Services/sidebarSlice";
 import { useDisclosure } from '@mantine/hooks';
 
 const Sidebar = () => {
@@ -37,6 +38,9 @@ const Sidebar = () => {
     const openAcc55 = useSelector(state => state.sidebarSlice.openAcc5)
     const openAcc5 = JSON.parse(localStorage.getItem("openAcc5"))
 
+    const openAcc66 = useSelector(state => state.sidebarSlice.openAcc6)
+    const openAcc6 = JSON.parse(localStorage.getItem("openAcc6"))
+
     const dispatch = useDispatch();
     const location = useLocation();
     const sidebarActive = location.pathname;
@@ -48,6 +52,7 @@ const Sidebar = () => {
     const handleOpenAcc3 = () => dispatch(setOpenAcc3(!openAcc33))
     const handleOpenAcc4 = () => dispatch(setOpenAcc4(!openAcc44))
     const handleOpenAcc5 = () => dispatch(setOpenAcc5(!openAcc55))
+    const handleOpenAcc6 = () => dispatch(setOpenAcc6(!openAcc66))
 
     const logoutHandler = async(e)=>{
         const {data} = await logout(token);
@@ -162,11 +167,39 @@ const Sidebar = () => {
                 </Accordion>
                 <div className=" border-b border-[#3f4245]" />
 
+                {/* Report */}
+                <Accordion open={openAcc6} >
+                <div onClick={handleOpenAcc6} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
+                    <div className=" flex items-center gap-2">
+                    <span className=" text-[23px]"><PiChartDonutThin/></span>
+                    <span className=" tracking-wider font-medium">Report</span>
+                    </div>
+                    <div className=" text-xl"><MdKeyboardArrowDown/></div>
+                </div>
+                <AccordionBody className="py-0">
+                    <Link to={'/report/stockReport'}>
+                    <div className={` ${sidebarActive == "/report/stockReport" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Stock</span>
+                    </div>
+                    </Link>
+
+                    <Link to={'/report/saleReport'}>
+                    <div className={` ${sidebarActive == "/report/saleReport" && "sidebarActive"} cursor-pointer sidebarLink px-5 py-[0.55rem] flex items-center nav`}>
+                        <span className="pl-3 text-[8px] navLink"><TbPointFilled/></span>
+                        <span className=" tracking-wider text-sm font-medium px-3 navLink">Sale</span>
+                    </div>
+                    </Link>
+
+                </AccordionBody>
+                </Accordion>
+                <div className=" border-b border-[#3f4245]" />
+
                 {/* Finance  */}
                 <Accordion open={openAcc5} >
                 <div onClick={handleOpenAcc5} className=" cursor-pointer sidebarLink px-5 py-3 flex items-center justify-between text-[#e8eaed] gap-2">
                     <div className=" flex items-center gap-2">
-                    <span className=" text-[23px]"><PiNotepadBold/></span>
+                    <span className=" text-[23px]"><AiOutlineDatabase/></span>
                     <span className=" tracking-wider font-medium">Finance</span>
                     </div>
                     <div className=" text-xl"><MdKeyboardArrowDown/></div>
