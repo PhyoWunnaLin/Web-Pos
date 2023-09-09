@@ -80,17 +80,17 @@ const Dashboard = () => {
           </div>
 
           {/* line chart  */}
-          <div className="border flex gap-8 px-5 py-5 border-[#3F4245] rounded-md">
+          <div className="border flex items-center gap-8 px-5 py-5 border-[#3F4245] rounded-md">
 
             {/* left side  */}
             <div className="w-[70%] flex flex-col gap-8">
-              <div className="flex justify-between items-center">
+              <div className="flex items-center">
                 <span className=" text-[#E8EAED] font-medium text-xl tracking-wide">Monthly Sales</span>
-                <div className="flex border border-[#7E7F80] rounded">
+                {/* <div className="flex border border-[#7E7F80] rounded">
                   <span className="py-[3px] px-2 text-sm border-r border-[#7E7F80] font-medium tracking-wider text-[#E8EAED]">Year</span>
                   <span className="py-[3px] px-2 text-sm border-r border-[#7E7F80] font-medium tracking-wider text-[#8AB4F8]">Month</span>
                   <span className="py-[3px] px-2 text-sm font-medium tracking-wider text-[#E8EAED]">Week</span>
-                </div>
+                </div> */}
               </div>
               <LineChart/>
             </div>  
