@@ -8,9 +8,9 @@ import { Pagination } from "@mantine/core";
 import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
 import Cookies from "js-cookie";
 import Loader from "../Loader/Loader";
-import DonutChart from "../Chart/DonutChart";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import DonutChartBestSeller from "../Chart/DonutChartBestSeller";
 
 const StockReport = () => {
   const token = Cookies.get("token");
@@ -63,8 +63,8 @@ const StockReport = () => {
             route2={"/sale/cashier"}
           />
 
-          <div className=" flex gap-5 justify-between">
-           <div className=" w-[50%]">
+          <div className=" flex max-xl:flex-col gap-5 justify-between">
+           <div className=" w-[50%] max-xl:w-full">
              {/* left top total  */}
            <div className=" flex gap-5 mb-5">
               <div className="w-[50%] flex justify-between px-5 py-5 items-center border border-[#3F4245] rounded-md">
@@ -74,7 +74,7 @@ const StockReport = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">28,500 k</p>
+                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">300 </p>
                   <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">Total Products</p>
                 </div>
               </div>
@@ -85,7 +85,7 @@ const StockReport = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">28 k</p>
+                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">28</p>
                   <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">Total Brands</p>
                 </div>
               </div>
@@ -188,8 +188,8 @@ const StockReport = () => {
             </div>
            </div>
 
-            <div className=" w-[50%] rounded-md border border-[#3F4245]">
-              <DonutChart />
+            <div className=" w-[50%] max-xl:w-full rounded-md border border-[#3F4245] p-5 max-xl:px-10 max-xl:py-7 max-xl:p-5">
+              <DonutChartBestSeller />
             </div>  
           </div>
 

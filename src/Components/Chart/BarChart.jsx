@@ -87,14 +87,14 @@ const BarChart = () => {
           </p>
         </div>
 
-        <div className="flex items-end gap-5">
+        <div className="flex items-start gap-5 max-md:flex-col max-md:gap-8 max-md:items-center">
           {/* bar chart  */}
-          <div className="w-[50%] flex flex-col gap-5">
+          <div className="w-[50%] max-md:w-full max-md:justify-center max-md:flex-row flex flex-col gap-5">
             <Bar options={options} data={data} />
           </div>
 
           {/* right  */}
-          <div className="w-[50%] flex flex-col gap-5">
+          <div className="w-[50%] max-md:w-full flex flex-col gap-5">
             <div className="flex justify-between">
               <div className="flex gap-3 items-center">
                 <div className="w-10 h-10 flex text-[#E8EAED] justify-center items-center rounded-md border border-[#3F4245]">
