@@ -29,8 +29,11 @@ const DonutChartBrandsSell = () => {
   };
   return (
     <div>
-      <div className=" flex justify-center">
+      <div className="w-[70%] flex justify-center mx-auto relative">
         <Doughnut data={data} options={options} />
+        <p className=" text-[hsl(0,10%,94%)] tracking-wider text-lg absolute top-[40%]">100%</p>
+
+        <p className=" text-[hsl(0,3%,76%)] tracking-wider absolute text-sm top-1/2">Weekly Sale</p>
       </div>
 
       <div className=" text-[hsl(0,3%,76%)] text-sm tracking-wider flex items-center mt-5 gap-4 max-xl:gap-16 justify-center">
