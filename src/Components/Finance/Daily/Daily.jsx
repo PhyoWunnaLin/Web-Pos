@@ -13,6 +13,8 @@ import Cookies from "js-cookie";
 import { useRecentVoucherQuery } from "../../../Redux/API/saleApi";
 import Loader from "../../Loader/Loader";
 import { Pagination } from "@mantine/core";
+import NoContact from "../../NoContact/NoContact";
+import noVoucher from "../../../assets/noVoucher.png";
 
 const Daily = () => {
   const token = Cookies.get("token");
@@ -31,12 +33,11 @@ const Daily = () => {
   const [currentShow, setCurrentShow] = useState();
   const dailyTable = currentShow?.data?.data;
   const dailyTotal = currentShow?.daily_total_sale;
+  const todayTableLength = dailyTable?.length
 
   // pagination 
 
   const totalPage = currentShow?.data?.last_page
-
-  console.log(data);
 
   useEffect(() => {
     localStorage.setItem("dailyPage",page)
@@ -117,7 +118,8 @@ const Daily = () => {
                 <Loader />
               </div>
             ) : (
-              <div>
+              <>
+              {todayTableLength ? <div>
                 <DailyTable dailyTable={dailyTable} dailyTotal={dailyTotal} />
 
                 {/* total yearly  */}
@@ -166,7 +168,8 @@ const Daily = () => {
                     <Pagination total={totalPage} value={Number(page)} onChange={setPage}/>
                   </div>
                 </div>
-              </div>
+              </div> : <div><NoContact image={noVoucher} title1={"No Voucher !"} size={"w-[60%]"}/></div>}
+              </>
             )}
           </div>
         </div>
