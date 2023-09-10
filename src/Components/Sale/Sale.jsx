@@ -19,7 +19,6 @@ const Sale = () => {
   const token = Cookies.get("token");
   const saleClose1 = Cookies.get("sale");
   const { data, isLoading } = useGetSaleProductsQuery(token);
-  console.log(data)
   const products = data?.data;
   const [saleOpen] = useSaleOpenMutation();
   // const products = useSelector(state => state.saleSlice.products)

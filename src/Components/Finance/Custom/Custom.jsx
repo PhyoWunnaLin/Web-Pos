@@ -7,15 +7,12 @@ import { BiSearch } from "react-icons/bi";
 import CustomTable from "./CustomTable";
 import "../Daily/daily.css";
 import { FaRegCalendarCheck } from "react-icons/fa";
-// import {
-//   useCustomMutation,
-//   useRecentVoucherQuery,
-// } from "../../../Redux/API/saleApi";
 import Cookies from "js-cookie";
 import Loader from "../../Loader/Loader";
 import { Pagination } from "@mantine/core";
 import { useCustomQuery, useRecentVoucherQuery } from "../../../Redux/API/saleApi";
-import { data } from "autoprefixer";
+import noVoucher from "../../../assets/noVoucher.png"
+import NoContact from "../../NoContact/NoContact";
 
 const Custom = () => {
   const p = localStorage.getItem("CustomPage");
@@ -35,6 +32,7 @@ const Custom = () => {
   const [currentShow, setCurrentShow] = useState();
   const currentRecentTable = currentShow?.data?.data
   const currentRecentTotal = currentShow?.daily_total_sale;
+  const currentRecentTableLength = currentRecentTable?.length
   const [searchShow, setSearchShow] = useState();
   const searchShowTable = searchShow?.data?.data
   const searchShowTotal = searchShow?.daily_total_sale;
@@ -47,13 +45,8 @@ const Custom = () => {
     setPage(1)
   },[])
 
-  console.log(recent)
-
   const totalPage = searchShow ? searchShow?.data?.last_page : currentShow?.data?.last_page
   const customTotal = searchShowTotal ? searchShowTotal : currentRecentTotal
-
-  // console.log(totalPage)
-  console.log(page)
 
   useEffect(() => {
     localStorage.setItem("CustomPage", page);
@@ -149,7 +142,8 @@ const Custom = () => {
               <Loader />
             </div>
           ) : (
-            <div>
+            <>
+            {(currentRecentTableLength || searchShowTable) ? <div>
               <CustomTable
                 currentRecentTable={currentRecentTable}
                 searchShowTable={searchShowTable}
@@ -206,7 +200,8 @@ const Custom = () => {
                   />
                 </div>
               </div>
-            </div>
+            </div> : <div><NoContact image={noVoucher} title1={"No Voucher !"} size={"w-[60%]"}/></div>}
+            </>
           )}
         </div>
       </div>
