@@ -11,6 +11,7 @@ import Loader from '../Loader/Loader'
 import { Pagination } from '@mantine/core';
 import {PiExportBold} from "react-icons/pi"
 import Swal from "sweetalert2";
+import noVoucher from "../../assets/noVoucher.png"
 
 const Recent = () => {
     const token = Cookies.get("token")
@@ -29,7 +30,7 @@ const Recent = () => {
     const dailyTotal = data?.daily_total_sale
     const recent = data?.data?.data
     const totalPage =data?.data?.last_page
-    console.log(recent)
+    // console.log(recent)
     const searchRecentVoucher = useSelector(state => state.saleSlice.searchRecentVoucher)
     const dispatch = useDispatch()
     const close = useSelector(state => state.saleSlice.saleClose)
@@ -126,7 +127,7 @@ const Recent = () => {
                 {recent?.length == 0 ? 
           
           // no user 
-          <NoContact image={"https://static.thenounproject.com/png/3518204-200.png"} size={"w-[60%]"} title1={"No Recent Voucher !"} />
+          <NoContact image={noVoucher} size={"w-[60%]"} title1={"No Recent Voucher !"} />
 
            : 
           
