@@ -107,13 +107,16 @@ const StockReport = () => {
                     <div className=" w-[100%]">
                       <div className=" flex items-center h-3 rounded-full">
                         <div
-                          className={`w-[${inStockProgress}%] flex flex-col bg-[#87dd45] h-3 rounded-l-full`}
+                          className={` flex flex-col bg-[#87dd45] h-3 rounded-l-full`}
+                          style={{width:`${inStockProgress}%`}}
                         ></div>
                         <div
-                          className={`w-[${lowStockProgress}%] flex flex-col bg-[#f3b34d] h-3 z-20`}
+                          className={` flex flex-col bg-[#f3b34d] h-3 z-20`}
+                          style={{width:`${lowStockProgress}%`}}
                         ></div>
                         <div
-                          className={`w-[${outOfStockProgress}%] flex flex-col bg-[#f19dd3] h-3 rounded-r-full z-10`}
+                          className={` flex flex-col bg-[#f19dd3] h-3 rounded-r-full z-10`}
+                          style={{width:`${outOfStockProgress}%`}}
                         ></div>
                       </div>
                     </div>
