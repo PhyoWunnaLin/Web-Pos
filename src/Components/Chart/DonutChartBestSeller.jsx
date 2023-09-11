@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { BiSolidCircle } from "react-icons/bi";
 import { MdKeyboardArrowUp } from "react-icons/md";
+import { Link } from "react-router-dom";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DonutChartBestSeller = ({ chart }) => {
@@ -168,11 +169,11 @@ const DonutChartBestSeller = ({ chart }) => {
             </div>
           </div>
 
-          <div className=" flex justify-end">
-            <div className="bg-transparent border border-[#7E7F80] py-1 px-4 rounded-md mt-3 text-sm tracking-wide text-white select-none">
+          <Link to={'/sale/recent'} className=" flex justify-end">
+            <button className="bg-transparent border border-[#7E7F80] py-2 px-4 rounded-md mt-3 text-sm tracking-wide text-white select-none hover:bg-[#24262b]">
               RECENT SALES
-            </div>
-          </div>
+            </button>
+          </Link>
         </div>
       </div>
     </>

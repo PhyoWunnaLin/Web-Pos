@@ -68,7 +68,9 @@ export const data = {
 const BarChart = ({date,barChart,sales}) => {
 
   const chart = barChart?.map(item => parseInt(item.total / 1000))
-  console.log(sales)
+  const highestPercentage = (((sales?.max_price?.total / 1000) - (sales?.avg_price /1000)) / 100).toFixed(1) + "%"
+  const lowestPercentage = (((sales?.min_price?.total / 1000) - (sales?.avg_price /1000)) / 100).toFixed(1) + "%"
+  console.log(highestPercentage)
 
   const yearLabel = [
     "Jan",
@@ -179,7 +181,7 @@ const BarChart = ({date,barChart,sales}) => {
       {/* left  */}
       <div className="flex flex-col gap-1 mb-8">
           <p className=" text-xl tracking-wider text-white">
-            Weekly Sales
+            {date == "" ? "Weekly Sales" : (date == "month" ? "Monthly Sales" : "Yearly Sales")}
           </p>
           <p className=" text-[#AFAFAF] font-medium tracking-wider text-sm">
             Total {(sales?.total / 1000).toFixed(0)} k Sales
@@ -205,7 +207,7 @@ const BarChart = ({date,barChart,sales}) => {
                     <span className="text-[#55C800]">
                       <IoIosArrowUp />
                     </span>
-                    <span className="text-[#55C800]">25.8%</span>
+                    <span className="text-[#55C800]">{highestPercentage == "0.0%" ? "0%" : highestPercentage}</span>
                   </p>
                   <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs">
                     {sales?.max_price?.date}
@@ -251,7 +253,7 @@ const BarChart = ({date,barChart,sales}) => {
                     <span className="text-[#FF4C51]">
                       <IoIosArrowDown />
                     </span>
-                    <span className="text-[#FF4C51]">-3%</span>
+                    <span className="text-[#FF4C51]">{lowestPercentage == "0.0%" ? "0%" : lowestPercentage}</span>
                   </p>
                   <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs">
                   {sales?.min_price?.date}
@@ -266,7 +268,7 @@ const BarChart = ({date,barChart,sales}) => {
               </div>
             </div>
             <div className=" ml-auto">
-              <button className="text-white bg-transparent px-4 py-1 border border-[#7E7F80] rounded tracking-wider  hover:bg-[#24262b] text-sm">SEE MORE</button>
+              <button className="text-white bg-transparent px-4 py-2 border border-[#7E7F80] rounded tracking-wider  hover:bg-[#24262b] text-sm">SEE MORE</button>
             </div>
           </div>
         </div>

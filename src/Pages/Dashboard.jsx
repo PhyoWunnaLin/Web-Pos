@@ -16,7 +16,7 @@ import Loader from "../Components/Loader/Loader";
 
 const Dashboard = () => {
   
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState("year");
   const token = Cookies.get("token");
   const { data , isLoading } = useGetOverviewQuery({ token, date });
   const chart = data?.total_sales?.map((item) => parseInt(item?.total / 1000))
