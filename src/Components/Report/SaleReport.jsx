@@ -18,37 +18,11 @@ const SaleReport = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetSaleReportQuery( {token , date} );
   const productTable = data?.products
-  console.log(data)
+  const brandSales = data?.brand_sales
+  const todaySales = data?.today_sales
+  const barChart = data?.sales?.total_sales
+  const sales = data?.sales
 
-  const products = [
-    {
-      id: 1,
-      name: "aa",
-      brand_name: "yum yum",
-      unit: "kg",
-      sale_price: "1000",
-      total_stock: "30",
-      level: "in stock",
-    },
-    {
-      id: 2,
-      name: "cc",
-      brand_name: "apple",
-      unit: "kg",
-      sale_price: "5000",
-      total_stock: "0",
-      level: "out of stock",
-    },
-    {
-      id: 3,
-      name: "bb",
-      brand_name: "KFC",
-      unit: "kg",
-      sale_price: "3000",
-      total_stock: "2",
-      level: "low stock",
-    },
-  ];
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
@@ -90,7 +64,7 @@ const SaleReport = () => {
            </div>
           </div>
 
-          <div className=" flex max-xl:flex-col gap-6 justify-between">
+          {isLoading ? <div><Loader/></div> : <><div className=" flex max-xl:flex-col gap-6 justify-between">
             <div className=" w-[35%] max-xl:w-full px-5 pt-3 pb-6 rounded-md border border-[#3F4245] ">
               <div className="">
                 <div className=" text-white mt-2">
@@ -109,7 +83,7 @@ const SaleReport = () => {
 
                     <div>
                       <p className="text-2xl text-white font-semibold tracking-wider mb-1">
-                        239007
+                        {todaySales?.total}
                       </p>
                       <p className=" text-[hsl(0,3%,76%)] text-sm tracking-wider">
                         Kyats
@@ -190,11 +164,11 @@ const SaleReport = () => {
             </div>
 
             <div className=" w-[65%] max-xl:w-full rounded-md">
-              <BarChart />
+              <BarChart date={date} barChart={barChart} sales={sales}/>
             </div>
           </div>
 
-          {products?.length == 0 ? (
+          {productTable?.length == 0 ? (
             <NoContact
               image={noPd}
               size={"w-[55%]"}
@@ -282,14 +256,14 @@ const SaleReport = () => {
                       Brand Sales
                     </h1>
                     <div className="border border-[#383b3d] p-5">
-                    <DonutChartBrandsSell />
+                    <DonutChartBrandsSell brandSales={brandSales}/>
                     </div>
                     </div>
                   </div>
                 )}
               </div>
             </div>
-          )}
+          )}</>}
         </div>
       </div>
     </MainLayout>

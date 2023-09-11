@@ -50,15 +50,6 @@ export const options = {
       },
     },
   },
-  // plugins: {
-  //   legend: {
-  //     position: 'top',
-  //   },
-  //   title: {
-  //     display: true,
-  //     text: 'Chart.js Bar Chart',
-  //   },
-  // },
 };
 
 const labels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -74,7 +65,115 @@ export const data = {
   ],
 };
 
-const BarChart = () => {
+const BarChart = ({date,barChart,sales}) => {
+
+  const chart = barChart?.map(item => parseInt(item.total / 1000))
+  console.log(sales)
+
+  const yearLabel = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+
+  const monthLabel = [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22",
+    "D23",
+    "D24",
+    "D25",
+    "D26",
+    "D27",
+    "D28",
+    "D29",
+    "D30",
+    "D31",
+   ]
+
+   const weekLabel = [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Tur",
+    "Fri",
+    "Sat",
+    "Sun"
+   ]
+
+    const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  
+    scales: {
+      y: {
+        grid: {
+          color: "transparent" ,
+        },
+        display: false ,
+        ticks: {
+          color: "white",
+  
+        },
+      },
+  
+      x: {
+        grid: {
+          color: "transparent",
+        },
+        ticks: {
+          color: "white",
+  
+        },
+      },
+    },
+  };
+  
+  const labels = date == "" ? weekLabel : (date == "month" ? monthLabel : yearLabel);
+  
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: chart,
+        backgroundColor: '#8bb4f694',
+      },
+    ],
+  };
+
   return (
     <div className=" border border-[#3F4245] rounded-md px-5 py-5">
       {/* left  */}
@@ -83,7 +182,7 @@ const BarChart = () => {
             Weekly Sales
           </p>
           <p className=" text-[#AFAFAF] font-medium tracking-wider text-sm">
-            Total 85.4k Sales
+            Total {(sales?.total / 1000).toFixed(0)} k Sales
           </p>
         </div>
 
@@ -109,12 +208,12 @@ const BarChart = () => {
                     <span className="text-[#55C800]">25.8%</span>
                   </p>
                   <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs">
-                    12/8/2023
+                    {sales?.max_price?.date}
                   </p>
                 </div>
               </div>
               <div>
-                <p className=" text-[#E8EAED] tracking-wider text-end">125 k </p>
+                <p className=" text-[#E8EAED] tracking-wider text-end">{(sales?.max_price?.total / 1000).toFixed(0)} k </p>
                 <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs text-end">
                   Kyats
                 </p>
@@ -135,7 +234,7 @@ const BarChart = () => {
                 </div>
               </div>
               <div>
-                <p className=" text-[#E8EAED] tracking-wider text-end">100 k </p>
+                <p className=" text-[#E8EAED] tracking-wider text-end">{(sales?.avg_price / 1000).toFixed(0)} k </p>
                 <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs text-end">
                   Kyats
                 </p>
@@ -155,12 +254,12 @@ const BarChart = () => {
                     <span className="text-[#FF4C51]">-3%</span>
                   </p>
                   <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs">
-                    12/8/2023
+                  {sales?.min_price?.date}
                   </p>
                 </div>
               </div>
               <div>
-                <p className=" text-[#E8EAED] tracking-wider text-end">97 k </p>
+                <p className=" text-[#E8EAED] tracking-wider text-end">{(sales?.min_price?.total / 1000).toFixed(0)} k </p>
                 <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs text-end">
                   Kyats
                 </p>

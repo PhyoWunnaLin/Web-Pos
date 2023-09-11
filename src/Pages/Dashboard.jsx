@@ -12,14 +12,15 @@ import LineChart from "../Components/Chart/LineChart";
 import DashboardTable from "../Components/Dashboard/DashboardTable";
 import { useGetOverviewQuery } from "../Redux/API/dashboardApi";
 import Cookies from "js-cookie";
-import { Loader } from "@mantine/core";
+import Loader from "../Components/Loader/Loader";
 
 const Dashboard = () => {
+  
   const [date, setDate] = useState("");
   const token = Cookies.get("token");
   const { data , isLoading } = useGetOverviewQuery({ token, date });
   const chart = data?.total_sales?.map((item) => parseInt(item?.total / 1000))
-  console.log(chart);
+
   return (
     <MainLayout>
       <div className=" w-full flex justify-center">
@@ -27,10 +28,10 @@ const Dashboard = () => {
           {/* header  */}
           <Banner title={"Overview"} path1={"Products"} />
 
-          {/* quick action  */}
+          {isLoading ? <div><Loader/></div> : <>{/* quick action  */}
           <div className="flex gap-5 max-xl:flex-col max-xl:gap-8">
             {/* left  */}
-            {isLoading ? <div className="w-[50%] max-xl:w-[100%] flex items-center justify-center"><Loader/></div> : <div className="w-[50%] max-xl:w-[100%] flex gap-5 max-sm:flex-col max-sm:gap-8">
+            <div className="w-[50%] max-xl:w-[100%] flex gap-5 max-sm:flex-col max-sm:gap-8">
               <div className="w-[50%] max-xl:py-5 max-sm:w-[100%]  flex justify-between px-5 items-center border border-[#3F4245] rounded-md">
                 <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
                   <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
@@ -64,7 +65,7 @@ const Dashboard = () => {
                   </p>
                 </div>
               </div>
-            </div>}
+            </div>
 
             {/* right  */}
             <div className="w-[50%] max-xl:w-[100%] py-3 px-5 flex flex-col gap-3 justify-center border border-[#3F4245] rounded-md max-sm:pb-28">
@@ -114,7 +115,7 @@ const Dashboard = () => {
           </div>
 
           {/* line chart  */}
-          {isLoading ? <div className="flex justify-center items-center"><Loader/></div> : <div className="border flex max-[850px]:flex-col items-end gap-8 px-5 py-5 border-[#3F4245] rounded-md">
+          <div className="border flex max-[850px]:flex-col items-end gap-8 px-5 py-5 border-[#3F4245] rounded-md">
             {/* left side  */}
             <div className="w-[70%] max-[850px]:w-[100%] flex flex-col gap-8">
               <div className="flex items-center justify-between">
@@ -206,10 +207,9 @@ const Dashboard = () => {
               </button>
               </Link>
             </div>
-          </div>}
-
+          </div>
           {/* table  */}
-          <DashboardTable />
+          <DashboardTable /></>}
         </div>
       </div>
     </MainLayout>
