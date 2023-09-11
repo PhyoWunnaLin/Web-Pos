@@ -5,16 +5,17 @@ import NoContact from "../NoContact/NoContact";
 import { BiSearch, BiSolidCircle, BiSolidUserBadge } from "react-icons/bi";
 import noPd from "../../assets/noPd3.png";
 import { Pagination } from "@mantine/core";
-import { useGetProductsQuery } from "../../Redux/API/inventoryApi";
 import Cookies from "js-cookie";
 import Loader from "../Loader/Loader";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import DonutChartBestSeller from "../Chart/DonutChartBestSeller";
+import { useGetStockReportQuery } from "../../Redux/API/reportApi";
 
 const StockReport = () => {
   const token = Cookies.get("token");
-  const { data, isLoading, isFetching } = useGetProductsQuery({ token });
+  const { data, isLoading, isFetching } = useGetStockReportQuery(token);
+  console.log(data);
 
   const products = [
     {

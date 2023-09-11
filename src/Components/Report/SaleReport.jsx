@@ -51,7 +51,7 @@ const SaleReport = () => {
         <div className="w-[95%] my-6 flex flex-col gap-8">
           {/* banner  */}
           <Banner2
-            title={"Stock"}
+            title={"Sale"}
             path1={"Report"}
             path2={"Sale"}
             icon={true}
