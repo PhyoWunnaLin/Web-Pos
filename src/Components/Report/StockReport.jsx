@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainLayout from "../../Layouts/MainLayout";
 import Banner2 from "../Banner/Banner2";
 import NoContact from "../NoContact/NoContact";
@@ -10,42 +10,60 @@ import Loader from "../Loader/Loader";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import DonutChartBestSeller from "../Chart/DonutChartBestSeller";
-import { useGetStockReportQuery } from "../../Redux/API/reportApi";
+import { useGetStockBrandReportQuery, useGetStockReportQuery } from "../../Redux/API/reportApi";
 
 const StockReport = () => {
   const token = Cookies.get("token");
-  const { data, isLoading, isFetching } = useGetStockReportQuery(token);
-  console.log(data);
+  const p = localStorage.getItem("dailyPage")
+  const [page,setPage] = useState(p ? p : 1)
+  const [stockLevel,setStockLevel] = useState("")
+  const [search,setSearch] = useState("")
+  const { data, isLoading, isFetching } = useGetStockReportQuery({token,page,stockLevel});
+  const { data:stockBrandReport } = useGetStockBrandReportQuery(token);
 
-  const products = [
-    {
-      id: 1,
-      name: "aa",
-      brand_name: "yum yum",
-      unit: "kg",
-      sale_price: "1000",
-      total_stock: "30",
-      level: "in stock",
-    },
-    {
-      id: 2,
-      name: "cc",
-      brand_name: "apple",
-      unit: "kg",
-      sale_price: "5000",
-      total_stock: "0",
-      level: "out of stock",
-    },
-    {
-      id: 3,
-      name: "bb",
-      brand_name: "KFC",
-      unit: "kg",
-      sale_price: "3000",
-      total_stock: "2",
-      level: "low stock",
-    },
-  ];
+  const inStockProgress = parseInt(stockBrandReport?.stocks?.in_stock)
+  const lowStockProgress = parseInt(stockBrandReport?.stocks?.low_stock)
+  const outOfStockProgress = parseInt(stockBrandReport?.stocks?.out_of_stock)
+  // console.log(inStockProgress);
+
+  const brandChart = stockBrandReport?.brands
+
+  const products = data?.data
+
+  const totalPage = data?.meta?.last_page
+
+  useEffect(() => {
+    localStorage.setItem("dailyPage",page)
+  },[page])
+
+  //   {
+  //     id: 1,
+  //     name: "aa",
+  //     brand_name: "yum yum",
+  //     unit: "kg",
+  //     sale_price: "1000",
+  //     total_stock: "30",
+  //     level: "in stock",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "cc",
+  //     brand_name: "apple",
+  //     unit: "kg",
+  //     sale_price: "5000",
+  //     total_stock: "0",
+  //     level: "out of stock",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "bb",
+  //     brand_name: "KFC",
+  //     unit: "kg",
+  //     sale_price: "3000",
+  //     total_stock: "2",
+  //     level: "low stock",
+  //   },
+  // ];
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
@@ -75,7 +93,8 @@ const StockReport = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">300 </p>
+                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">
+                    {stockBrandReport?.total_products} </p>
                   <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">Total Products</p>
                 </div>
               </div>
@@ -86,7 +105,8 @@ const StockReport = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">28</p>
+                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">
+                    {stockBrandReport?.total_brands}</p>
                   <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">Total Brands</p>
                 </div>
               </div>
@@ -100,20 +120,23 @@ const StockReport = () => {
                   <div className=" w-[75%]">
                     <div className=" flex items-center h-3 rounded-full">
                       <div
-                        className={` w-[70%] flex flex-col bg-[#87dd45] h-3 rounded-l-full`}
+                        className={` flex flex-col bg-[#87dd45] h-3 rounded-l-full`}
+                        style={{width: inStockProgress}}
                       ></div>
                       <div
-                        className={` w-[25%] flex flex-col bg-[#f3b34d] h-3 z-20`}
+                        className={`flex flex-col bg-[#f3b34d] h-3 z-20`}
+                        style={{width: lowStockProgress}}
                       ></div>
                       <div
-                        className={` w-[15%] flex flex-col bg-[#f19dd3] h-3 rounded-r-full z-10`}
+                        className={`flex flex-col bg-[#f19dd3] h-3 rounded-r-full z-10`}
+                        style={{width: outOfStockProgress}}
                       ></div>
                     </div>
                   </div>
 
                   <div className="w-[20%] text-end">
                     <p className=" text-2xl text-white font-semibold tracking-wide">
-                      2000
+                    {stockBrandReport?.total_products}
                     </p>
                     <p className=" text-[hsl(0,3%,76%)] tracking-wider">
                       Products
@@ -135,8 +158,8 @@ const StockReport = () => {
                     <div className=" flex items-center gap-7">
                       <p>100</p>
                       <div className=" flex items-end ">
-                        <p>70%</p>
-                        <p className="text-[#87dd45] text-2xl">
+                        <p className="text-end">{inStockProgress}%</p>
+                        <p className="text-[#87dd45] text-2xl text-end">
                           <MdKeyboardArrowUp />
                         </p>
                       </div>
@@ -153,11 +176,11 @@ const StockReport = () => {
                       </span>
                     </div>
 
-                    <div className=" flex items-center gap-7">
+                    <div className=" flex items-center gap-7 text-end">
                       <p>100</p>
                       <div className=" flex items-end ">
-                        <p>25%</p>
-                        <p className="text-[#87dd45] text-2xl">
+                        <p className="text-end">{lowStockProgress}%</p>
+                        <p className="text-[#87dd45] text-2xl text-end">
                           <MdKeyboardArrowUp />
                         </p>
                       </div>
@@ -177,8 +200,8 @@ const StockReport = () => {
                     <div className=" flex items-center gap-7">
                       <p>100</p>
                       <div className=" flex items-end ">
-                        <p>15%</p>
-                        <p className="text-[#87dd45] text-2xl">
+                        <p className="text-end">{outOfStockProgress}%</p>
+                        <p className="text-[#87dd45] text-2xl text-end">
                           <MdKeyboardArrowUp />
                         </p>
                       </div>
@@ -189,8 +212,9 @@ const StockReport = () => {
             </div>
            </div>
 
+           {/* chart  */}
             <div className=" w-[50%] max-xl:w-full rounded-md border border-[#3F4245] p-5 max-xl:px-10 max-xl:py-7 max-xl:p-5">
-              <DonutChartBestSeller />
+              <DonutChartBestSeller chart={brandChart} />
             </div>  
           </div>
 
@@ -210,7 +234,7 @@ const StockReport = () => {
                 <div className=" flex max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-1 justify-between items-center">
                   <form className="relative">
                     <input
-                      // onChange={(e)=> dispatch(setSearchProduct(e.target.value))}
+                      onChange={(e)=> setSearch(e.target.value)}
                       type="text"
                       placeholder="Search"
                       className="search-input"
@@ -223,22 +247,30 @@ const StockReport = () => {
                     <div className="flex gap-5 items-center justify-end mt-1">
                       <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                         Sort :
-                        <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                        <select
+                        onChange={(e) => setStockLevel(e.target.value)}
+                         className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
                           <option
                             className="bg-[#161618] hover:bg-[#202124]"
                             value=""
+                          >
+                            All Stocks
+                          </option>
+                          <option
+                            className="bg-[#161618] hover:bg-[#202124]"
+                            value="in-stock"
                           >
                             In Stock
                           </option>
                           <option
                             className="bg-[#161618] hover:bg-[#202124]"
-                            value=""
+                            value="out-of-stock"
                           >
                             Out Of Stock
                           </option>
                           <option
                             className="bg-[#161618] hover:bg-[#202124]"
-                            value=""
+                            value="low-stock"
                           >
                             Low Stock
                           </option>
@@ -268,7 +300,7 @@ const StockReport = () => {
 
               {/* table  */}
               <div>
-                {isLoading ? (
+                {isFetching ? (
                   <div className=" ">
                     <Loader />
                   </div>
@@ -301,18 +333,17 @@ const StockReport = () => {
                         </tr>
                       </thead>
                       <tbody className=" tracking-wide text-sm">
-                        {products
-                          // ?.filter((pd) => {
-                          //   if (searchProduct === "") {
-                          //     return pd;
-                          //   } else if (
-                          //     pd?.name
-                          //       .toLowerCase()
-                          //       .includes(searchProduct.toLowerCase())
-                          //   ) {
-                          //     return pd;
-                          //   }
-                          // })
+                        {products?.filter((pd) => {
+                            if (search === "") {
+                              return pd;
+                            } else if (
+                              pd?.name
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                            ) {
+                              return pd;
+                            }
+                          })
                           .map((pd) => {
                             return (
                               <tr
@@ -356,19 +387,19 @@ const StockReport = () => {
                                   {pd?.total_stock}
                                 </td>
 
-                                <td className="p-4 flex gap-3 justify-end items-center overflow-hidden">
+                                <td className="p-4 flex gap-3 justify-end items-center overflow-hidden select-none">
                                   <div
                                     className={`
                                    ${
-                                     pd?.level == "in stock" &&
+                                     pd?.stock_level == "In Stock" &&
                                      "bg-[#3e4c38] border-[#80ff22]"
                                    }
                                    ${
-                                     pd?.level == "out of stock" &&
+                                     pd?.stock_level == "Out of Stock" &&
                                      "bg-[#4b3f46] border-[#feb2e2]"
                                    }
                                    ${
-                                     pd?.level == "low stock" &&
+                                     pd?.stock_level == "Low Stock" &&
                                      "bg-[#4c4741] border-[#ddb169]"
                                    }
                                    py-1 px-3 border rounded-full`}
@@ -376,20 +407,20 @@ const StockReport = () => {
                                     <span
                                       className={` 
                                     ${
-                                      pd?.level == "in stock" &&
+                                      pd?.stock_level == "In Stock" &&
                                       "text-[#80ff22]"
                                     }
                                     ${
-                                      pd?.level == "out of stock" &&
+                                      pd?.stock_level == "Out of Stock" &&
                                       "text-[#feb2e2]"
                                     }
                                     ${
-                                      pd?.level == "low stock" &&
+                                      pd?.stock_level == "Low Stock" &&
                                       "text-[#ddb169]"
                                     }
                                     font-semibold whitespace-nowrap`}
                                     >
-                                      {pd?.level}
+                                      {pd?.stock_level}
                                     </span>
                                   </div>
                                 </td>
@@ -402,9 +433,9 @@ const StockReport = () => {
                     {/* Pagination */}
                     <div className=" flex justify-end mt-8 ">
                       <Pagination
-                        total={2}
-                        // value={Number(page)}
-                        // onChange={setPage}
+                        total={totalPage}
+                        value={Number(page)}
+                        onChange={setPage}
                       />
                     </div>
                   </div>

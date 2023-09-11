@@ -6,8 +6,8 @@ export const reportApi = createApi({
     tagTypes: ["report"],
     endpoints: (builder) => ({
         getStockReport: builder.query({
-            query: (token) => ({
-                url: "/report/stock",
+            query: ({token,page,stockLevel}) => ({
+                url: `/report/stock?page=${page}&${stockLevel}`,
                 headers: {authorization : `Bearer ${token}`},
             }),
             providesTags: ["report"],
