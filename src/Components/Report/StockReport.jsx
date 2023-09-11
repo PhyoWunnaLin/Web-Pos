@@ -17,8 +17,7 @@ import {
 
 const StockReport = () => {
   const token = Cookies.get("token");
-  const p = localStorage.getItem("dailyPage");
-  const [page, setPage] = useState(p ? p : 1);
+  const [page, setPage] = useState(1);
   const [stockLevel, setStockLevel] = useState("");
   const [search, setSearch] = useState("");
   const { data, isLoading, isFetching } = useGetStockReportQuery({
@@ -39,8 +38,8 @@ const StockReport = () => {
   const totalPage = data?.meta?.last_page;
 
   useEffect(() => {
-    localStorage.setItem("dailyPage", page);
-  }, [page]);
+    setPage(1)
+  },[stockLevel])
 
   return (
     <MainLayout>
