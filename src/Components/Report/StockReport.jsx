@@ -10,60 +10,38 @@ import Loader from "../Loader/Loader";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import DonutChartBestSeller from "../Chart/DonutChartBestSeller";
-import { useGetStockBrandReportQuery, useGetStockReportQuery } from "../../Redux/API/reportApi";
+import {
+  useGetStockBrandReportQuery,
+  useGetStockReportQuery,
+} from "../../Redux/API/reportApi";
 
 const StockReport = () => {
   const token = Cookies.get("token");
-  const p = localStorage.getItem("dailyPage")
-  const [page,setPage] = useState(p ? p : 1)
-  const [stockLevel,setStockLevel] = useState("")
-  const [search,setSearch] = useState("")
-  const { data, isLoading, isFetching } = useGetStockReportQuery({token,page,stockLevel});
-  const { data:stockBrandReport } = useGetStockBrandReportQuery(token);
+  const p = localStorage.getItem("dailyPage");
+  const [page, setPage] = useState(p ? p : 1);
+  const [stockLevel, setStockLevel] = useState("");
+  const [search, setSearch] = useState("");
+  const { data, isLoading, isFetching } = useGetStockReportQuery({
+    token,
+    page,
+    stockLevel,
+  });
+  const { data: stockBrandReport } = useGetStockBrandReportQuery(token);
 
-  const inStockProgress = parseInt(stockBrandReport?.stocks?.in_stock)
-  const lowStockProgress = parseInt(stockBrandReport?.stocks?.low_stock)
-  const outOfStockProgress = parseInt(stockBrandReport?.stocks?.out_of_stock)
-  // console.log(inStockProgress);
+  const inStockProgress = parseInt(stockBrandReport?.stocks?.in_stock);
+  const lowStockProgress = parseInt(stockBrandReport?.stocks?.low_stock);
+  const outOfStockProgress = parseInt(stockBrandReport?.stocks?.out_of_stock);
 
-  const brandChart = stockBrandReport?.brands
+  const brandChart = stockBrandReport?.brands;
 
-  const products = data?.data
+  const products = data?.data;
 
-  const totalPage = data?.meta?.last_page
+  const totalPage = data?.meta?.last_page;
 
   useEffect(() => {
-    localStorage.setItem("dailyPage",page)
-  },[page])
+    localStorage.setItem("dailyPage", page);
+  }, [page]);
 
-  //   {
-  //     id: 1,
-  //     name: "aa",
-  //     brand_name: "yum yum",
-  //     unit: "kg",
-  //     sale_price: "1000",
-  //     total_stock: "30",
-  //     level: "in stock",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "cc",
-  //     brand_name: "apple",
-  //     unit: "kg",
-  //     sale_price: "5000",
-  //     total_stock: "0",
-  //     level: "out of stock",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "bb",
-  //     brand_name: "KFC",
-  //     unit: "kg",
-  //     sale_price: "3000",
-  //     total_stock: "2",
-  //     level: "low stock",
-  //   },
-  // ];
   return (
     <MainLayout>
       <div className="bg-[#202124] w-full flex justify-center">
@@ -82,140 +60,146 @@ const StockReport = () => {
             route2={"/sale/cashier"}
           />
 
-          <div className=" flex max-xl:flex-col gap-5 justify-between">
-           <div className=" w-[50%] max-xl:w-full">
-             {/* left top total  */}
-           <div className=" flex gap-5 mb-5">
-              <div className="w-[50%] flex justify-between px-5 py-5 items-center border border-[#3F4245] rounded-md">
-                <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
-                  <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
-                    <HiOutlineShoppingCart className=" text-[#8bb4f6]" size={25}/>
+          {isLoading ? <div><Loader/></div> : <><div className=" flex max-xl:flex-col gap-5 justify-between">
+            <div className=" w-[50%] max-xl:w-full">
+              {/* left top total  */}
+              <div className=" flex gap-5 mb-5">
+                <div className="w-[50%] flex justify-between px-5 py-5 items-center border border-[#3F4245] rounded-md">
+                  <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
+                    <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
+                      <HiOutlineShoppingCart
+                        className=" text-[#8bb4f6]"
+                        size={25}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">
+                      {stockBrandReport?.total_products}{" "}
+                    </p>
+                    <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">
+                      Total Products
+                    </p>
                   </div>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">
-                    {stockBrandReport?.total_products} </p>
-                  <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">Total Products</p>
+                <div className="w-[50%] flex justify-between px-5 items-center border border-[#3F4245] rounded-md">
+                  <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
+                    <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
+                      <BiSolidUserBadge className=" text-[#8bb4f6]" size={25} />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">
+                      {stockBrandReport?.total_brands}
+                    </p>
+                    <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">
+                      Total Brands
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div className="w-[50%] flex justify-between px-5 items-center border border-[#3F4245] rounded-md">
-                <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
-                  <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
-                    <BiSolidUserBadge className=" text-[#8bb4f6]" size={25}/>
+
+              {/* left bottom progress  */}
+              <div className="px-5 py-[38px] rounded-md border border-[#3F4245] ">
+                <div className="">
+                  <div className="gap-5 flex items-center justify-between">
+                    {/* progress  */}
+                    <div className=" w-[100%]">
+                      <div className=" flex items-center h-3 rounded-full">
+                        <div
+                          className={`w-[${inStockProgress}%] flex flex-col bg-[#87dd45] h-3 rounded-l-full`}
+                        ></div>
+                        <div
+                          className={`w-[${lowStockProgress}%] flex flex-col bg-[#f3b34d] h-3 z-20`}
+                        ></div>
+                        <div
+                          className={`w-[${outOfStockProgress}%] flex flex-col bg-[#f19dd3] h-3 rounded-r-full z-10`}
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div className="w-[20%] text-end">
+                      <p className=" text-2xl text-white font-semibold tracking-wide">
+                        {stockBrandReport?.total_products}
+                      </p>
+                      <p className=" text-[hsl(0,3%,76%)] tracking-wider">
+                        Products
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">
-                    {stockBrandReport?.total_brands}</p>
-                  <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">Total Brands</p>
+
+                  <div className=" text-white mt-2">
+                    <div className="flex justify-between items-center py-[10px] border-b border-[#383b3d]">
+                      <div className=" flex gap-3 items-center w-[78%]">
+                        <span className=" text-[#87dd45]">
+                          <BiSolidCircle />
+                        </span>
+                        <span className=" tracking-wider font-semibold text-[15px]">
+                          Instock
+                        </span>
+                      </div>
+
+                      <div className=" flex justify-between items-center w-[22%]">
+                        <p>100</p>
+                        <div className=" flex items-end ">
+                          <p className="text-end">{inStockProgress}%</p>
+                          <p className="text-[#87dd45] text-2xl text-end">
+                            <MdKeyboardArrowUp />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center py-[10px] border-b border-[#383b3d]">
+                      <div className=" flex gap-3 items-center w-[78%]">
+                        <span className=" text-[#f3b34d]">
+                          <BiSolidCircle />
+                        </span>
+                        <span className=" tracking-wider font-semibold text-[15px]">
+                          Low stock
+                        </span>
+                      </div>
+
+                      <div className=" justify-between flex items-center w-[22%]">
+                        <p>100</p>
+                        <div className=" flex items-end ">
+                          <p className="text-end">{lowStockProgress}%</p>
+                          <p className="text-[#87dd45] text-2xl text-end">
+                            <MdKeyboardArrowUp />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center py-[10px]">
+                      <div className=" flex gap-3 items-center w-[78%]">
+                        <span className=" text-[#f19dd3]">
+                          <BiSolidCircle />
+                        </span>
+                        <span className=" tracking-wider font-semibold text-[15px]">
+                          Out of stock
+                        </span>
+                      </div>
+
+                      <div className=" justify-between flex items-center w-[22%]">
+                        <p>100</p>
+                        <div className=" flex items-end ">
+                          <p className="text-end">{outOfStockProgress}%</p>
+                          <p className="text-[#87dd45] text-2xl text-end">
+                            <MdKeyboardArrowUp />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* left bottom progress  */}
-            <div className="px-5 py-6 rounded-md border border-[#3F4245] ">
-              <div className="">
-                <div className="gap-5 flex items-center justify-between">
-                  {/* progress  */}
-                  <div className=" w-[75%]">
-                    <div className=" flex items-center h-3 rounded-full">
-                      <div
-                        className={` flex flex-col bg-[#87dd45] h-3 rounded-l-full`}
-                        style={{width: inStockProgress}}
-                      ></div>
-                      <div
-                        className={`flex flex-col bg-[#f3b34d] h-3 z-20`}
-                        style={{width: lowStockProgress}}
-                      ></div>
-                      <div
-                        className={`flex flex-col bg-[#f19dd3] h-3 rounded-r-full z-10`}
-                        style={{width: outOfStockProgress}}
-                      ></div>
-                    </div>
-                  </div>
-
-                  <div className="w-[20%] text-end">
-                    <p className=" text-2xl text-white font-semibold tracking-wide">
-                    {stockBrandReport?.total_products}
-                    </p>
-                    <p className=" text-[hsl(0,3%,76%)] tracking-wider">
-                      Products
-                    </p>
-                  </div>
-                </div>
-
-                <div className=" text-white mt-2">
-                  <div className="flex justify-between items-center py-2 border-b border-[#383b3d]">
-                    <div className=" flex gap-3 items-center">
-                      <span className=" text-[#87dd45]">
-                        <BiSolidCircle />
-                      </span>
-                      <span className=" tracking-wider font-semibold text-[15px]">
-                        Instock
-                      </span>
-                    </div>
-
-                    <div className=" flex items-center gap-7">
-                      <p>100</p>
-                      <div className=" flex items-end ">
-                        <p className="text-end">{inStockProgress}%</p>
-                        <p className="text-[#87dd45] text-2xl text-end">
-                          <MdKeyboardArrowUp />
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-between items-center py-2 border-b border-[#383b3d]">
-                    <div className=" flex gap-3 items-center">
-                      <span className=" text-[#f3b34d]">
-                        <BiSolidCircle />
-                      </span>
-                      <span className=" tracking-wider font-semibold text-[15px]">
-                        Low stock
-                      </span>
-                    </div>
-
-                    <div className=" flex items-center gap-7 text-end">
-                      <p>100</p>
-                      <div className=" flex items-end ">
-                        <p className="text-end">{lowStockProgress}%</p>
-                        <p className="text-[#87dd45] text-2xl text-end">
-                          <MdKeyboardArrowUp />
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-between items-center py-2">
-                    <div className=" flex gap-3 items-center">
-                      <span className=" text-[#f19dd3]">
-                        <BiSolidCircle />
-                      </span>
-                      <span className=" tracking-wider font-semibold text-[15px]">
-                        Out of stock
-                      </span>
-                    </div>
-
-                    <div className=" flex items-center gap-7">
-                      <p>100</p>
-                      <div className=" flex items-end ">
-                        <p className="text-end">{outOfStockProgress}%</p>
-                        <p className="text-[#87dd45] text-2xl text-end">
-                          <MdKeyboardArrowUp />
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-           </div>
-
-           {/* chart  */}
+            {/* chart  */}
             <div className=" w-[50%] max-xl:w-full rounded-md border border-[#3F4245] p-5 max-xl:px-10 max-xl:py-7 max-xl:p-5">
               <DonutChartBestSeller chart={brandChart} />
-            </div>  
+            </div>
           </div>
 
           {products?.length == 0 ? (
@@ -234,7 +218,7 @@ const StockReport = () => {
                 <div className=" flex max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-1 justify-between items-center">
                   <form className="relative">
                     <input
-                      onChange={(e)=> setSearch(e.target.value)}
+                      onChange={(e) => setSearch(e.target.value)}
                       type="text"
                       placeholder="Search"
                       className="search-input"
@@ -248,8 +232,9 @@ const StockReport = () => {
                       <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                         Sort :
                         <select
-                        onChange={(e) => setStockLevel(e.target.value)}
-                         className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                          onChange={(e) => setStockLevel(e.target.value)}
+                          className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none"
+                        >
                           <option
                             className="bg-[#161618] hover:bg-[#202124]"
                             value=""
@@ -333,7 +318,8 @@ const StockReport = () => {
                         </tr>
                       </thead>
                       <tbody className=" tracking-wide text-sm">
-                        {products?.filter((pd) => {
+                        {products
+                          ?.filter((pd) => {
                             if (search === "") {
                               return pd;
                             } else if (
@@ -442,7 +428,7 @@ const StockReport = () => {
                 )}
               </div>
             </div>
-          )}
+          )}</>}
         </div>
       </div>
     </MainLayout>

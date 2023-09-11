@@ -51,15 +51,6 @@ const LineChart = ({ date , chart }) => {
         },
       },
     },
-    // plugins: {
-    //   legend: {
-    //     position: 'top',
-    //   },
-    //   title: {
-    //     display: true,
-    //     text: 'Chart.js Line Chart',
-    //   },
-    // },
   };
   const yearLabel = [
     "Jan",
