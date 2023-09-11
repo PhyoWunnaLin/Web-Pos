@@ -84,8 +84,13 @@ const Dashboard = () => {
 
             {/* left side  */}
             <div className="w-[70%] max-[850px]:w-[100%] flex flex-col gap-8">
-              <div className="flex items-center">
-                <span className=" text-[#E8EAED] font-medium text-xl tracking-wide">Monthly Sales</span>
+              <div className="flex items-center justify-between">
+                <span className=" text-[#E8EAED] font-medium text-xl tracking-wide">Weekly Sales</span>
+                <div className="flex border border-[#3F4245] items-center rounded -mb-2">
+                  <p className="text-[#E8EAED] text-sm px-3 py-[6px] tracking-wider cursor-pointer hover:bg-[#24262b] duration-300 border-r border-[#3F4245]">Year</p>
+                  <p className="text-[#E8EAED] text-sm px-3 py-[6px] tracking-wider cursor-pointer hover:bg-[#24262b] duration-300 border-r border-[#3F4245]">Month</p>
+                  <p className="text-[#E8EAED] text-sm px-3 py-[6px] tracking-wider cursor-pointer hover:bg-[#24262b] duration-300">Week</p>
+                </div>
               </div>
               <LineChart/>
             </div>  
