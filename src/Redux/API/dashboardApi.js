@@ -6,8 +6,8 @@ export const dashboardApi = createApi({
     tagTypes: ["dashboard"],
     endpoints: (builder) => ({
         getOverview: builder.query({
-            query: (token) => ({
-                url: "/overview",
+            query: ({token,date}) => ({
+                url: `report/overview?${date}`,
                 headers: {authorization : `Bearer ${token}`},
             }),
             providesTags: ["dashboard"],
