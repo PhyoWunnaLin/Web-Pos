@@ -63,8 +63,8 @@ const StockReport = () => {
           {isLoading ? <div><Loader/></div> : <><div className=" flex max-xl:flex-col gap-5 justify-between">
             <div className=" w-[50%] max-xl:w-full">
               {/* left top total  */}
-              <div className=" flex gap-5 mb-5">
-                <div className="w-[50%] flex justify-between px-5 py-5 items-center border border-[#3F4245] rounded-md">
+              <div className=" flex gap-5 mb-5 max-sm:flex-col">
+                <div className="w-[50%] max-sm:w-[100%] flex justify-between px-5 py-5 items-center border border-[#3F4245] rounded-md">
                   <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
                     <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
                       <HiOutlineShoppingCart
@@ -82,7 +82,7 @@ const StockReport = () => {
                     </p>
                   </div>
                 </div>
-                <div className="w-[50%] flex justify-between px-5 items-center border border-[#3F4245] rounded-md">
+                <div className="w-[50%] max-sm:w-[100%] flex justify-between px-5 py-5 items-center border border-[#3F4245] rounded-md">
                   <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
                     <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
                       <BiSolidUserBadge className=" text-[#8bb4f6]" size={25} />
