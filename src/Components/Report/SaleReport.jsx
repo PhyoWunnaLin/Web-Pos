@@ -11,10 +11,14 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 import { useRecentVoucherQuery } from "../../Redux/API/saleApi";
 import BarChart from "../Chart/BarChart";
 import DonutChartBrandsSell from "../Chart/DonutChartBrandsSell";
+import { useGetSaleReportQuery } from "../../Redux/API/reportApi";
 
 const SaleReport = () => {
+  const [date, setDate] = useState("");
   const token = Cookies.get("token");
-  const { data, isLoading } = useRecentVoucherQuery({ token });
+  const { data, isLoading } = useGetSaleReportQuery( {token , date} );
+  const productTable = data?.products
+  console.log(data)
 
   const products = [
     {
@@ -50,18 +54,41 @@ const SaleReport = () => {
       <div className="bg-[#202124] w-full flex justify-center">
         <div className="w-[95%] my-6 flex flex-col gap-8">
           {/* banner  */}
-          <Banner2
-            title={"Sale"}
-            path1={"Report"}
-            path2={"Sale"}
-            icon={true}
-            btn1={"Go To Shop"}
-            btn2={"Add Product"}
-            button1={true}
-            button2={true}
-            route={"/inventory/addProduct"}
-            route2={"/sale/cashier"}
-          />
+          <div className="flex justify-between items-center">
+            <Banner2
+              title={"Sale"}
+              path1={"Report"}
+              path2={"Sale"}
+            />
+           <div>
+            <div className="flex border border-[#3F4245] items-center rounded-md">
+                  <p
+                    onClick={() => setDate("year")}
+                    className={`${
+                      date === "year" ? "text-[#8AB4F8]" : "text-[#E8EAED]"
+                    } font-medium px-5 py-3 tracking-wider cursor-pointer hover:bg-[#24262b] duration-300 border-r border-[#3F4245]`}
+                  >
+                    Year
+                  </p>
+                  <p
+                    onClick={() => setDate("month")}
+                    className={`${
+                      date === "month" ? "text-[#8AB4F8]" : "text-[#E8EAED]"
+                    } font-medium px-5 py-3 tracking-wider cursor-pointer hover:bg-[#24262b] duration-300 border-r border-[#3F4245]`}
+                  >
+                    Month
+                  </p>
+                  <p
+                    onClick={() => setDate("")}
+                    className={`${
+                      date === "" ? "text-[#8AB4F8]" : "text-[#E8EAED]"
+                    } font-medium px-5 py-3 tracking-wider cursor-pointer hover:bg-[#24262b] duration-300`}
+                  >
+                    Week
+                  </p>
+            </div>
+           </div>
+          </div>
 
           <div className=" flex max-xl:flex-col gap-6 justify-between">
             <div className=" w-[35%] max-xl:w-full px-5 pt-3 pb-6 rounded-md border border-[#3F4245] ">
@@ -207,7 +234,7 @@ const SaleReport = () => {
                           </tr>
                         </thead>
                         <tbody className=" tracking-wide text-sm">
-                          {products?.map((pd) => {
+                          {productTable?.map((pd) => {
                             return (
                               <tr
                                 key={pd?.id}

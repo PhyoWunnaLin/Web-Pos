@@ -12,11 +12,12 @@ import LineChart from "../Components/Chart/LineChart";
 import DashboardTable from "../Components/Dashboard/DashboardTable";
 import { useGetOverviewQuery } from "../Redux/API/dashboardApi";
 import Cookies from "js-cookie";
+import { Loader } from "@mantine/core";
 
 const Dashboard = () => {
   const [date, setDate] = useState("");
   const token = Cookies.get("token");
-  const { data } = useGetOverviewQuery({ token, date });
+  const { data , isLoading } = useGetOverviewQuery({ token, date });
   const chart = data?.total_sales?.map((item) => parseInt(item?.total / 1000))
   console.log(chart);
   return (
@@ -29,7 +30,7 @@ const Dashboard = () => {
           {/* quick action  */}
           <div className="flex gap-5 max-xl:flex-col max-xl:gap-8">
             {/* left  */}
-            <div className="w-[50%] max-xl:w-[100%] flex gap-5 max-sm:flex-col max-sm:gap-8">
+            {isLoading ? <div className="w-[50%] max-xl:w-[100%] flex items-center justify-center"><Loader/></div> : <div className="w-[50%] max-xl:w-[100%] flex gap-5 max-sm:flex-col max-sm:gap-8">
               <div className="w-[50%] max-xl:py-5 max-sm:w-[100%]  flex justify-between px-5 items-center border border-[#3F4245] rounded-md">
                 <div className="bg-[#323336] rounded-full h-20 w-20 flex justify-center items-center">
                   <div className="border border-[#8bb4f6] flex justify-center items-center bg-[#434446] rounded-full h-14 w-14">
@@ -41,7 +42,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                   <p className=" text-[#E8EAED] text-2xl font-bold tracking-wide text-end">
-                    {data?.totalStock} k
+                    {data?.totalStock}
                   </p>
                   <p className=" text-[#DFDFDF] font-medium tracking-wider text-end text-sm">
                     Total Stocks
@@ -63,7 +64,7 @@ const Dashboard = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div>}
 
             {/* right  */}
             <div className="w-[50%] max-xl:w-[100%] py-3 px-5 flex flex-col gap-3 justify-center border border-[#3F4245] rounded-md max-sm:pb-28">
@@ -113,7 +114,7 @@ const Dashboard = () => {
           </div>
 
           {/* line chart  */}
-          <div className="border flex max-[850px]:flex-col items-end gap-8 px-5 py-5 border-[#3F4245] rounded-md">
+          {isLoading ? <div className="flex justify-center items-center"><Loader/></div> : <div className="border flex max-[850px]:flex-col items-end gap-8 px-5 py-5 border-[#3F4245] rounded-md">
             {/* left side  */}
             <div className="w-[70%] max-[850px]:w-[100%] flex flex-col gap-8">
               <div className="flex items-center justify-between">
@@ -154,7 +155,7 @@ const Dashboard = () => {
             <div className="w-[30%] max-[850px]:w-[100%] flex flex-col gap-5">
               <div>
                 <p className=" text-[#E8EAED] tracking-wide text-[22px]">
-                  {data?.total}k
+                  {data?.total}
                 </p>
                 <p className=" text-[#7E7F80] tracking-wider font-medium text-sm">
                   Kyats
@@ -205,7 +206,7 @@ const Dashboard = () => {
               </button>
               </Link>
             </div>
-          </div>
+          </div>}
 
           {/* table  */}
           <DashboardTable />
