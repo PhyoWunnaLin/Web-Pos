@@ -12,6 +12,8 @@ import productSlice from './Services/productSlice'
 import sidebarSlice from './Services/sidebarSlice'
 import userSlice from './Services/userSlice'
 import saleSlice from './Services/saleSlice'
+import { reportApi } from './API/reportApi'
+import { dashboardApi } from './API/dashboardApi'
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +23,8 @@ export const store = configureStore({
     [mediaApi.reducerPath]: mediaApi.reducer,
     [inventoryApi.reducerPath]: inventoryApi.reducer,
     [saleApi.reducerPath]: saleApi.reducer,
+    [reportApi.reducerPath]: reportApi.reducer,
+    [dashboardApi.reducerPath]: dashboardApi.reducer,
     profileSlice : profileSlice,
     mediaSlice : mediaSlice,
     authSlice : authSlice,
@@ -30,5 +34,5 @@ export const store = configureStore({
     saleSlice : saleSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware, adminApi.middleware, mediaApi.middleware, inventoryApi.middleware, saleApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware, adminApi.middleware, mediaApi.middleware, inventoryApi.middleware, saleApi.middleware, reportApi.middleware, dashboardApi.middleware),
 })
