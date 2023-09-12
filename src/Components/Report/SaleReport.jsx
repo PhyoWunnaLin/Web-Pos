@@ -12,7 +12,7 @@ import { useRecentVoucherQuery } from "../../Redux/API/saleApi";
 import BarChart from "../Chart/BarChart";
 import DonutChartBrandsSell from "../Chart/DonutChartBrandsSell";
 import { useGetSaleReportQuery } from "../../Redux/API/reportApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SaleReport = () => {
   const [date, setDate] = useState("year");
@@ -23,6 +23,11 @@ const SaleReport = () => {
   const todaySales = data?.today_sales;
   const barChart = data?.sales?.total_sales;
   const sales = data?.sales;
+  const nav = useNavigate()
+
+  const route = (id) => {
+    nav(`/inventory/product/productDetail/${id}`)
+  }
 
   return (
     <MainLayout>
@@ -159,11 +164,13 @@ const SaleReport = () => {
                         </div>
                       </div>
 
-                      <Link to={"/sale/recent"} className=" flex justify-end">
+                      <div className=" flex justify-end">
+                        <Link to={"/sale/recent"}>
                         <button className="bg-transparent border border-[#7E7F80] py-2 px-4 rounded-md mt-3 text-sm tracking-wide text-white select-none hover:bg-[#24262b]">
                           RECENT SALES
                         </button>
-                      </Link>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

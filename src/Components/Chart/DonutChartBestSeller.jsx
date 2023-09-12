@@ -169,11 +169,13 @@ const DonutChartBestSeller = ({ chart }) => {
             </div>
           </div>
 
-          <Link to={'/sale/recent'} className=" flex justify-end">
+          <div className=" flex justify-end">
+            <Link to={'/sale/recent'}>
             <button className="bg-transparent border border-[#7E7F80] py-2 px-4 rounded-md mt-3 text-sm tracking-wide text-white select-none hover:bg-[#24262b]">
               RECENT SALES
             </button>
-          </Link>
+            </Link>
+          </div>
         </div>
       </div>
     </>

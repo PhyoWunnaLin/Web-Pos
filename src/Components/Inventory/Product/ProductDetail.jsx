@@ -22,9 +22,9 @@ const ProductDetail = () => {
         <div className='w-[95%] my-6 flex flex-col gap-8'>
           {/* banner  */}
           <Banner2 
-            title={"Add Product"}
+            title={"Product Detail"}
             path1={"Inventory"}
-            path2={"Add Product"}
+            path2={"Product Detail"}
             btn2={"Product List"}
             button2={true}
             route={"/inventory/products"}/>
@@ -41,9 +41,9 @@ const ProductDetail = () => {
                             <div className=' relative rounded-full w-[150px] h-[150px]'>
                                 <img src={product?.photo ? product?.photo :"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
 
-                                <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
+                                {/* <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
                                 <BiSolidEditAlt size={18}/>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 

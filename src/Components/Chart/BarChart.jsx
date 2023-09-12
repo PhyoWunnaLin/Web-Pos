@@ -10,6 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { Link } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -267,9 +268,9 @@ const BarChart = ({date,barChart,sales}) => {
                 </p>
               </div>
             </div>
-            <div className=" ml-auto">
+            <Link to={date == "" ? "/finance/daily" : (date == "month" ? "/finance/monthly" : "/finance/yearly")} className=" ml-auto">
               <button className="text-white bg-transparent px-4 py-2 border border-[#7E7F80] rounded tracking-wider  hover:bg-[#24262b] text-sm">SEE MORE</button>
-            </div>
+            </Link>
           </div>
         </div>
     </div>

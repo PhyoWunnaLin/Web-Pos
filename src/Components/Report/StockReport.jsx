@@ -339,38 +339,32 @@ const StockReport = () => {
                                 className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                               >
                                 <td
-                                  onClick={() => route(pd?.id)}
-                                  className=" cursor-pointer p-4 text-start"
+                                  className=" p-4 text-start"
                                 >
                                   {pd?.id}
                                 </td>
                                 <td
-                                  onClick={() => route(pd?.id)}
-                                  className=" cursor-pointer p-4 text-start"
+                                  className=" p-4 text-start"
                                 >
                                   {pd?.name}
                                 </td>
                                 <td
-                                  onClick={() => route(pd?.id)}
-                                  className=" cursor-pointer p-4 text-start"
+                                  className=" p-4 text-start"
                                 >
                                   {pd?.brand_name}
                                 </td>
                                 <td
-                                  onClick={() => route(pd?.id)}
-                                  className=" cursor-pointer p-4 text-start"
+                                  className=" p-4 text-start"
                                 >
                                   {pd?.unit}
                                 </td>
                                 <td
-                                  onClick={() => route(pd?.id)}
-                                  className=" cursor-pointer p-4 text-end"
+                                  className=" p-4 text-end"
                                 >
                                   {pd?.sale_price}
                                 </td>
                                 <td
-                                  onClick={() => route(pd?.id)}
-                                  className=" cursor-pointer p-4 text-end"
+                                  className=" p-4 text-end"
                                 >
                                   {pd?.total_stock}
                                 </td>
