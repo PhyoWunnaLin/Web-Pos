@@ -68,7 +68,7 @@ const Dashboard = () => {
             </div>
 
             {/* right  */}
-            <div className="w-[50%] max-xl:w-[100%] py-3 px-5 flex flex-col gap-3 justify-center border border-[#3F4245] rounded-md max-sm:pb-28">
+            <div className="w-[50%] max-xl:w-[100%] py-5 px-5 flex flex-col gap-3 justify-center border border-[#3F4245] rounded-md max-sm:pb-28">
               <h1 className=" text-white text-xl font-medium tracking-wide">
                 Quick Action
               </h1>
