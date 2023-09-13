@@ -109,7 +109,7 @@ const Overview = () => {
                     <BiSearch size={20} />
                   </div>
               </form>
-              <div className="flex gap-5 items-center justify-end mt-1">
+              {/* <div className="flex gap-5 items-center justify-end mt-1">
                   <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                     Sort : 
                     <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
@@ -124,7 +124,7 @@ const Overview = () => {
                       <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
                     </select>
                   </div>
-              </div>
+              </div> */}
             </div>
           </div>
           {/* table  */}
@@ -153,26 +153,29 @@ const Overview = () => {
               }).map((user) => {
                 return (
                   <tr
+                    onClick={() => route(user.id)}
                     key={user?.id}
-                    className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
+                    className=" hover:bg-[#161618] cursor-pointer duration-300  border border-[#7E7F80]"
                   >
-                    <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.id}</td>
-                    <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.name}</td>
-                    <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.role}</td>
-                    <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.email}</td>
+                    <td className=" p-4 text-start">{user?.id}</td>
+                    <td className=" p-4 text-start">{user?.name}</td>
+                    <td className=" p-4 text-start">{user?.role}</td>
+                    <td className=" p-4 text-start">{user?.email}</td>
                     
                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
-                      <Link to={'/user/overview'}>
-                      <p onClick={()=>banHandler(user?.id)} className="hover-scale icon1 text-[#e94343]">
+                      <p onClick={(e)=>{
+                        e.stopPropagation();
+                        banHandler(user?.id);
+                      }} className="hover-scale icon1 text-[#e94343]">
                         <HiBan />
                       </p>
-                      </Link>
 
-                      <Link to={'/user/edit'}>
-                      <p className=" icon1 hover-scale">
+                      <p onClick={(e) => {
+                        e.stopPropagation();
+                        nav('/user/edit')
+                      }} className=" icon1 hover-scale">
                         <BiEditAlt />
                       </p>
-                      </Link>
                       
                       <span className=" icon1 hover-scale">
                         <HiArrowNarrowRight />

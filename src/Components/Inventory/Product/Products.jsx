@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BiSearch } from "react-icons/bi";
 import MainLayout from "../../../Layouts/MainLayout";
 import Banner2 from '../../Banner/Banner2';
@@ -16,6 +16,8 @@ import { setPdEditSelectImg } from '../../../Redux/Services/mediaSlice';
 
 const Products = () => {
   const token = Cookies.get("token");
+  const [sort, setSort] = useState("id");
+  const [sort2, setSort2] = useState("name");
   const { data, isLoading } = useGetProductsQuery(token);
   // console.log(data?.data?.length);
   const length = data?.data?.length
@@ -72,16 +74,10 @@ const Products = () => {
                     <div className="flex gap-5 items-center justify-end mt-1">
                       <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                         Sort : 
-                        <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Last</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">first</option>
-                        </select>
-                      </div>
-                      <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
-                        Filter : 
-                        <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">All Files</option>
-                          <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
+                        <select onChange={(e) => setSort(e.target.value)} className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="id">First</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="desc">Last</option>
+                          <option className="bg-[#161618] hover:bg-[#202124]" value="name">Name</option>
                         </select>
                       </div>
                     </div>
@@ -108,7 +104,7 @@ const Products = () => {
             </div>
             {/* table  */}
             <div>
-              {active == "2" ? <ProductCard/> : <ProductTable/>}
+              {active == "2" ? <ProductCard/> : <ProductTable sort={sort} sort2={sort2}/>}
             </div>
           </div>}
 

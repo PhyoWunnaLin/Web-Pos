@@ -17,11 +17,12 @@ import { Pagination } from "@mantine/core";
 
 const Stocks = () => {
   const [open, setOpen] = useState(false);
+  const [sort, setSort] = useState("id");
   const token = Cookies.get("token");
   const p = localStorage.getItem("stockPage");
   const [page, setPage] = useState(p ? p : 1);
-  const { data, isLoading, isFetching } = useGetStocksQuery({ token, page });
-  const totalPage = data?.meta?.last_page
+  const { data, isLoading, isFetching } = useGetStocksQuery({ token, page , sort });
+  const totalPage = data?.meta?.last_page;
   const stocks = data?.data;
   const dispatch = useDispatch();
   const searchStock = useSelector((state) => state.productSlice.searchStock);
@@ -82,22 +83,22 @@ const Stocks = () => {
                     <div className="flex gap-5 items-center justify-end mt-1">
                       <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                         Sort :
-                        <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
+                        <select onChange={(e) => setSort(e.target.value)} className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
                           <option
                             className="bg-[#161618] hover:bg-[#202124]"
-                            value=""
+                            value="id"
+                          >
+                            First
+                          </option>
+                          <option
+                            className="bg-[#161618] hover:bg-[#202124]"
+                            value="desc"
                           >
                             Last
                           </option>
-                          <option
-                            className="bg-[#161618] hover:bg-[#202124]"
-                            value=""
-                          >
-                            first
-                          </option>
                         </select>
                       </div>
-                      <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
+                      {/* <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                         Filter :
                         <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
                           <option
@@ -113,7 +114,7 @@ const Stocks = () => {
                             Half Files
                           </option>
                         </select>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -164,34 +165,19 @@ const Stocks = () => {
                                   key={stock?.id}
                                   className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                                 >
-                                  <td
-                                    onClick={() => route(stock?.id)}
-                                    className=" cursor-pointer p-4 text-start"
-                                  >
+                                  <td className=" p-4 text-start">
                                     {stock?.id}
                                   </td>
-                                  <td
-                                    onClick={() => route(stock?.id)}
-                                    className=" cursor-pointer p-4 text-start"
-                                  >
+                                  <td className=" p-4 text-start">
                                     {stock?.product_name}
                                   </td>
-                                  <td
-                                    onClick={() => route(stock?.id)}
-                                    className=" cursor-pointer p-4 text-start"
-                                  >
+                                  <td className=" p-4 text-start">
                                     {stock?.user_name}
                                   </td>
-                                  <td
-                                    onClick={() => route(stock?.id)}
-                                    className=" cursor-pointer p-4 text-end"
-                                  >
+                                  <td className=" p-4 text-end">
                                     {stock?.quantity}
                                   </td>
-                                  <td
-                                    onClick={() => route(stock?.id)}
-                                    className=" cursor-pointer p-4 text-start"
-                                  >
+                                  <td className=" p-4 text-start">
                                     {stock?.created_at}
                                   </td>
                                 </tr>

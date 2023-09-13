@@ -106,7 +106,7 @@ const BanUser = () => {
                   <BiSearch size={20} />
                 </div>
             </div>
-            <div className="flex gap-5 items-center justify-end mt-1">
+            {/* <div className="flex gap-5 items-center justify-end mt-1">
                 <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                   Sort : 
                   <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
@@ -121,7 +121,7 @@ const BanUser = () => {
                     <option className="bg-[#161618] hover:bg-[#202124]" value="">Half Files</option>
                   </select>
                 </div>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* table  */}
@@ -153,10 +153,10 @@ const BanUser = () => {
                   key={user?.id}
                   className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                 >
-                  <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.id}</td>
-                  <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.name}</td>
-                  <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.role}</td>
-                  <td onClick={() => route(user.id)} className=" cursor-pointer p-4 text-start">{user?.email}</td>
+                  <td className=" p-4 text-start">{user?.id}</td>
+                  <td className=" p-4 text-start">{user?.name}</td>
+                  <td className=" p-4 text-start">{user?.role}</td>
+                  <td className=" p-4 text-start">{user?.email}</td>
                   
                   <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">
                     <button onClick={()=>unBanHandler(user?.id)} className=' bg-transparent border border-[#fff] py-2 px-7 rounded-md font-medium hover:bg-[#24262b] duration-300;'>

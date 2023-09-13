@@ -13,12 +13,12 @@ const AddProductStep1 = ({currentStep , setCurrentStep , steps , setComplete , c
   console.log(brands)
   const [name,setName] = useState("")
   const [brand_id,setBrand] = useState()
-  const [stock,setStock] = useState()
+  // const [stock,setStock] = useState()
   const [unit,setUnit] = useState("")
   const [more_information,setMoreInfo] = useState("")
   const dispatch = useDispatch()
   // const pd = useSelector(state => state.productSlice.pdForm1)
-  const pdData = {name,brand_id,unit,more_information,stock}
+  const pdData = {name,brand_id,unit,more_information}
   // console.log(pd);
   // console.log(currentStep)
 
@@ -68,12 +68,12 @@ const AddProductStep1 = ({currentStep , setCurrentStep , steps , setComplete , c
         </div>
 
         {/* stock  */}
-        <div className="flex justify-between gap-5">
+        {/* <div className="flex justify-between gap-5">
           <label className="text-[#FFFFFF] font-medium tracking-wider">
             Stock
           </label>
           <input onChange={(e)=> setStock(e.target.value)} required type="number" className="input w-[70%]" />
-        </div>
+        </div> */}
 
         {/* unit  */}
         <div className="flex justify-between gap-5">

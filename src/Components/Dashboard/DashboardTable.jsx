@@ -76,12 +76,12 @@ const DashboardTable = () => {
           Today Sales Overview
         </h1>
         <div className="flex gap-3 items-center justify-end mt-1 select-none">
-          <div className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
+          {/* <div className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]">
             <div className=" flex justify-center items-center gap-1 py-2 px-2">
               <PiExportBold className=" text-[#8bb4f6] text-lg" />
               <p className=" tracking-wider">Export</p>
             </div>
-          </div>
+          </div> */}
           <div
               onClick={saleCloseHandler}
             className="text-white bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded  outline-none flex gap-1 font-medium text-sm tracking-wide cursor-pointer hover:bg-[#24262b]"

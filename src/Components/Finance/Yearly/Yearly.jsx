@@ -66,7 +66,7 @@ const Yearly = () => {
                 </h1>
               </div>
               <div className="flex gap-3 items-center">
-                <div className="border border-[#7E7F80] py-1 px-2 flex items-center gap-2 rounded cursor-pointer">
+                {/* <div className="border border-[#7E7F80] py-1 px-2 flex items-center gap-2 rounded cursor-pointer">
                   <p className="text-[#8bb4f6]">
                     <PiExportDuotone />
                   </p>
@@ -74,7 +74,7 @@ const Yearly = () => {
                   <p className="text-[#E8EAED]">
                     <MdOutlineKeyboardArrowDown />
                   </p>
-                </div>
+                </div> */}
                 <div className="flex">
                   <div className="flex items-center border border-[#7E7F80] px-2 border-r-0 rounded-l">
                     <div className="flex items-center gap-2">

@@ -138,7 +138,7 @@ const AddProductStep4 = ({currentStep , setCurrentStep , steps , setComplete , c
                   
                     <p className=' flex items-center gap-14 text-[17px] tracking-wide font-medium'>
                       <span className=' text-[#878787] w-[150px]'>Stock</span>
-                      <span className=' text-[#fff]'>: {form1?.stock}</span>
+                      <span className=' text-[#fff]'>: 0</span>
                     </p>
                     <p className=' flex items-center gap-14 text-[17px] tracking-wide font-medium'>
                       <span className=' text-[#878787] w-[150px]'>Unit</span>
