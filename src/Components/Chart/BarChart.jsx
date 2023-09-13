@@ -166,11 +166,11 @@ const BarChart = ({date,barChart,sales}) => {
   
   const labels = date == "" ? weekLabel : (date == "month" ? monthLabel : yearLabel);
 
-  const weekFakeData = [40,40,40,40,40,40,40]
+  const weekFakeData = [10,10,10,10,10,10,10]
 
-  const monthFakeData = [40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40]
+  const monthFakeData = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
 
-  const yearFakeData = [800,800,800,800,800,800,800,800,800,800,800,800]
+  const yearFakeData = [500,500,500,500,500,500,500,500,500,500,500,500]
 
   const fakeDataColor = ["#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620"]
 

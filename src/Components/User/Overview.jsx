@@ -170,12 +170,12 @@ const Overview = () => {
                         <HiBan />
                       </p>
 
-                      <p onClick={(e) => {
+                      {/* <p onClick={(e) => {
                         e.stopPropagation();
                         nav('/user/edit')
                       }} className=" icon1 hover-scale">
                         <BiEditAlt />
-                      </p>
+                      </p> */}
                       
                       <span className=" icon1 hover-scale">
                         <HiArrowNarrowRight />
