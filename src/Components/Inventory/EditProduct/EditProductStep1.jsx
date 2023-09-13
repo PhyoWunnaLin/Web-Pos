@@ -8,8 +8,11 @@ const EditProductStep1 = ({currentStep , detail}) => {
     const token = Cookies.get("token")
     const {data} = useGetBrandsQuery({token})
     const brands = data?.data
+    const brandFilter = brands?.filter(item => item?.name == detail?.brand_name)
+    const brandId = brandFilter?.map(item => item?.id)
+    const id = brandId && brandId[0]
     const [name,setName] = useState(detail?.name)
-    const [brand_id,setBrand] = useState(detail?.brand_name)
+    const [brand_id,setBrand] = useState()
     const [stock,setStock] = useState(detail?.total_stock)
     const [unit,setUnit] = useState(detail?.unit)
     const [more_information,setMoreInfo] = useState(detail?.more_information)
@@ -19,6 +22,13 @@ const EditProductStep1 = ({currentStep , detail}) => {
     useEffect(()=>{
       dispatch(setEditPdForm1(pdData))
     },[currentStep])
+
+    useEffect(()=>{
+      setBrand( (currentStep >= 2 && brand_id) ? brand_id : id )
+    },[currentStep])
+
+    console.log(brand_id)
+    console.log()
 
   return (
     <form className="border border-[#7E7F80] bg-[#161618] p-10 flex flex-col gap-6 w-full rounded-md">
