@@ -22,8 +22,8 @@ export const reportApi = createApi({
         }),
 
         getSaleReport: builder.query({
-            query: ({token , date}) => ({
-                url: `/report/sale?${date}`,
+            query: ({token , date , sort}) => ({
+                url: `/report/sale?${date}&${sort}`,
                 headers: {authorization : `Bearer ${token}`},
             }),
             providesTags: ["report"],

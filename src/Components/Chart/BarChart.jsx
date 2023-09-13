@@ -166,11 +166,11 @@ const BarChart = ({date,barChart,sales}) => {
   
   const labels = date == "" ? weekLabel : (date == "month" ? monthLabel : yearLabel);
 
-  const weekFakeData = [40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40]
+  const weekFakeData = [40,40,40,40,40,40,40]
 
   const monthFakeData = [40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40]
 
-  const yearFakeData = [800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800]
+  const yearFakeData = [800,800,800,800,800,800,800,800,800,800,800,800]
 
   const fakeDataColor = ["#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620"]
 
@@ -181,7 +181,7 @@ const BarChart = ({date,barChart,sales}) => {
     };
   }).map(bar => bar.color )
 
-  console.log(chartColor)
+  console.log(barChart)
   
   const data = {
     labels,
@@ -202,7 +202,7 @@ const BarChart = ({date,barChart,sales}) => {
             {date == "" ? "Weekly Sales" : (date == "month" ? "Monthly Sales" : "Yearly Sales")}
           </p>
           <p className=" text-[#AFAFAF] font-medium tracking-wider text-sm">
-            Total {(sales?.total / 1000).toFixed(0)} k Sales
+            Total {(sales?.total / 1000).toFixed(0)}k Sales
           </p>
         </div>
 
@@ -233,7 +233,7 @@ const BarChart = ({date,barChart,sales}) => {
                 </div>
               </div>
               <div>
-                <p className=" text-[#E8EAED] tracking-wider text-end">{(sales?.max_price?.total / 1000).toFixed(0)} k </p>
+                <p className=" text-[#E8EAED] tracking-wider text-end">{(sales?.max_price?.total / 1000).toFixed(0)}k </p>
                 <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs text-end">
                   Kyats
                 </p>
@@ -254,7 +254,7 @@ const BarChart = ({date,barChart,sales}) => {
                 </div>
               </div>
               <div>
-                <p className=" text-[#E8EAED] tracking-wider text-end">{(sales?.avg_price / 1000).toFixed(0)} k </p>
+                <p className=" text-[#E8EAED] tracking-wider text-end">{(sales?.avg_price / 1000).toFixed(0)}k </p>
                 <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs text-end">
                   Kyats
                 </p>
@@ -279,7 +279,7 @@ const BarChart = ({date,barChart,sales}) => {
                 </div>
               </div>
               <div>
-                <p className=" text-[#E8EAED] tracking-wider text-end">{(sales?.min_price?.total / 1000).toFixed(0)} k </p>
+                <p className=" text-[#E8EAED] tracking-wider text-end">{(sales?.min_price?.total / 1000).toFixed(0)}k </p>
                 <p className=" text-[#AFAFAF] tracking-wider font-medium text-xs text-end">
                   Kyats
                 </p>

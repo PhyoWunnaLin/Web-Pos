@@ -6,8 +6,8 @@ export const inventoryApi = createApi({
   tagTypes: ["inventory"],
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({token, page}) => ({
-        url: `/product?page=${page}`,
+      query: ({token, page, sort}) => ({
+        url: `/product?page=${page}&${sort}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["inventory"],
@@ -51,8 +51,8 @@ export const inventoryApi = createApi({
     }),
 
     getStocks: builder.query({
-      query: ({token, page}) => ({
-        url: `/stock?page=${page}`,
+      query: ({token, page , sort}) => ({
+        url: `/stock?page=${page}&${sort}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["inventory"],
@@ -69,8 +69,8 @@ export const inventoryApi = createApi({
     }),
 
     getBrands: builder.query({
-      query: ({token, page}) => ({
-        url: `/brand?page=${page}`,
+      query: ({token, page , id , name}) => ({
+        url: `/brand?page=${page}&${id}$${name}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["inventory"],

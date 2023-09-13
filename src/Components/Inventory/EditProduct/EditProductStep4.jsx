@@ -20,7 +20,7 @@ const EditProductStep4 = ({ detail }) => {
   const userCreatePp = useSelector((state) => state.profileSlice.userCreatePp);
   // console.log(form1?.brand_id);
   const brandId2 = parseInt(form1?.brand_id)
-  // console.log(brandId2);
+  console.log(form1);
 
   return (
     <div className="">

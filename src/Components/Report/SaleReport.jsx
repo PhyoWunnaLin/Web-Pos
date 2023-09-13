@@ -16,22 +16,29 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SaleReport = () => {
   const [date, setDate] = useState("year");
+  const [sort, setSort] = useState("");
   const token = Cookies.get("token");
-  const { data, isLoading } = useGetSaleReportQuery({ token, date });
+  const { data, isLoading } = useGetSaleReportQuery({ token, date ,sort });
   const productTable = data?.products;
   const brandSales = data?.brand_sales;
   const todaySales = data?.today_sales;
   const barChart = data?.sales?.total_sales;
   const sales = data?.sales;
-  const nav = useNavigate()
-  const todaySale = data?.today_sales
-  const todaySaleMaxPercent = ((todaySale?.today_max_sale?.total / 1000) - (todaySale?.today_avg_sale / 1000)).toFixed(0)
-  const todaySaleMinPercent = ((todaySale?.today_min_sale?.total / 1000) - (todaySale?.today_avg_sale / 1000)).toFixed(0)
+  const nav = useNavigate();
+  const todaySale = data?.today_sales;
+  const todaySaleMaxPercent = (
+    todaySale?.today_max_sale?.total / 1000 -
+    todaySale?.today_avg_sale / 1000
+  ).toFixed(0);
+  const todaySaleMinPercent = (
+    todaySale?.today_min_sale?.total / 1000 -
+    todaySale?.today_avg_sale / 1000
+  ).toFixed(0);
   console.log(todaySale);
 
   const route = (id) => {
-    nav(`/inventory/product/productDetail/${id}`)
-  }
+    nav(`/inventory/product/productDetail/${id}`);
+  };
 
   return (
     <MainLayout>
@@ -116,7 +123,12 @@ const SaleReport = () => {
                         </div>
 
                         <div className=" flex items-center justify-between gap-6">
-                          <p className=" text-end">{(todaySale?.today_max_sale?.total / 1000).toFixed(0) } k</p>
+                          <p className=" text-end">
+                            {(todaySale?.today_max_sale?.total / 1000).toFixed(
+                              0
+                            )}
+                            k
+                          </p>
                           <div className=" flex items-end w-[65px] text-end gap-1">
                             <p>{todaySaleMaxPercent}%</p>
                             <p className="text-[#87dd45] text-2xl">
@@ -132,12 +144,14 @@ const SaleReport = () => {
                             <PiNotepadBold />
                           </span>
                           <span className=" tracking-wider font-semibold text-[15px]">
-                          Today Average Sale
+                            Average
                           </span>
                         </div>
 
                         <div className=" flex items-center justify-between gap-6">
-                          <p className=" text-end ">{todaySale?.today_avg_sale }</p>
+                          <p className=" text-end ">
+                            {(todaySale?.today_avg_sale / 1000).toFixed(0)}k
+                          </p>
                           <div className=" flex items-end w-[65px] text-end gap-1">
                             kyats
                           </div>
@@ -150,12 +164,17 @@ const SaleReport = () => {
                             <PiNotepadBold />
                           </span>
                           <span className=" tracking-wider font-semibold text-[15px]">
-                          {todaySale?.today_min_sale?.voucher_number}
+                            {todaySale?.today_min_sale?.voucher_number}
                           </span>
                         </div>
 
                         <div className=" flex items-center justify-between gap-6">
-                          <p className=" text-end ">{(todaySale?.today_min_sale?.total / 1000).toFixed(0) } k</p>
+                          <p className=" text-end ">
+                            {(todaySale?.today_min_sale?.total / 1000).toFixed(
+                              0
+                            )}
+                            k
+                          </p>
                           <div className=" flex items-end w-[65px] text-end">
                             <p>{todaySaleMinPercent}%</p>
                             <p className="text-[#FF4C51] text-2xl">
@@ -167,9 +186,9 @@ const SaleReport = () => {
 
                       <div className=" flex justify-end">
                         <Link to={"/sale/recent"}>
-                        <button className="bg-transparent border border-[#7E7F80] py-2 px-4 rounded-md mt-3 text-sm tracking-wide text-white select-none hover:bg-[#24262b]">
-                          RECENT SALES
-                        </button>
+                          <button className="bg-transparent border border-[#7E7F80] py-2 px-4 rounded-md mt-3 text-sm tracking-wide text-white select-none hover:bg-[#24262b]">
+                            RECENT SALES
+                          </button>
                         </Link>
                       </div>
                     </div>
@@ -198,9 +217,31 @@ const SaleReport = () => {
                     ) : (
                       <div className=" flex gap-6 max-xl:flex-col">
                         <div className=" w-[65%] max-xl:w-full">
-                          <h1 className="  text-white font-medium text-2xl mb-5 tracking-wide">
-                            Product Sales
-                          </h1>
+                          <div className="flex justify-between items-center">
+                            <h1 className="  text-white font-medium text-2xl mb-5 tracking-wide">
+                              Product Sales
+                            </h1>
+                            <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
+                              Sort :
+                              <select
+                                onChange={(e) => setSort(e.target.value)}
+                                className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none"
+                              >
+                                <option
+                                  className="bg-[#161618] hover:bg-[#202124]"
+                                  value=""
+                                >
+                                  max price
+                                </option>
+                                <option
+                                  className="bg-[#161618] hover:bg-[#202124]"
+                                  value="price"
+                                >
+                                  min price
+                                </option>
+                              </select>
+                            </div>
+                          </div>
 
                           <table className=" text-white max-[600px]:whitespace-nowrap max-[600px]:block max-[600px]:overflow-x-auto w-full">
                             <thead className=" tracking-wider text-sm border border-[#383b3d]">
@@ -224,31 +265,20 @@ const SaleReport = () => {
                               {productTable?.map((pd) => {
                                 return (
                                   <tr
+                                    onClick={() => route(pd?.id)}
                                     key={pd?.id}
                                     className=" hover:bg-[#161618] duration-300  border border-[#383b3d]"
                                   >
-                                    <td
-                                      onClick={() => route(pd?.id)}
-                                      className=" cursor-pointer p-4 text-start"
-                                    >
+                                    <td className=" cursor-pointer p-4 text-start">
                                       {pd?.id}
                                     </td>
-                                    <td
-                                      onClick={() => route(pd?.id)}
-                                      className=" cursor-pointer p-4 text-start"
-                                    >
+                                    <td className=" cursor-pointer p-4 text-start">
                                       {pd?.name}
                                     </td>
-                                    <td
-                                      onClick={() => route(pd?.id)}
-                                      className=" cursor-pointer p-4 text-start"
-                                    >
+                                    <td className=" cursor-pointer p-4 text-start">
                                       {pd?.brand_name}
                                     </td>
-                                    <td
-                                      onClick={() => route(pd?.id)}
-                                      className=" cursor-pointer p-4 text-end"
-                                    >
+                                    <td className=" cursor-pointer p-4 text-end">
                                       {pd?.sale_price}
                                     </td>
                                     <td className="p-4 justify-center flex gap-3 items-center overflow-hidden">

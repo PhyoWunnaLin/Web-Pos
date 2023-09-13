@@ -30,12 +30,13 @@ import { Pagination } from "@mantine/core";
 
 const Brands = () => {
   const [id, setId] = useState(null);
+  // const [sort, setSort] = useState("id");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [editSidebarOpen, setEditSidebarOpen] = useState(false);
   const token = Cookies.get("token");
   const p = localStorage.getItem("brandPage");
   const [page, setPage] = useState(p ? p : 1);
-  const { data, isLoading } = useGetBrandsQuery({ token, page });
+  const { data, isLoading } = useGetBrandsQuery({ token, page});
   const totalPage = data?.meta?.last_page;
   const [deleteBrand] = useDeleteBrandMutation();
   const brands = useSelector((state) => state.productSlice.brands);
@@ -160,7 +161,7 @@ const Brands = () => {
                       <BiSearch size={20} />
                     </div>
                   </form>
-                  <div className="flex gap-5 items-center justify-end mt-1">
+                  {/* <div className="flex gap-5 items-center justify-end mt-1">
                     <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                       Sort :
                       <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded text-white tracking-wider outline-none">
@@ -195,7 +196,7 @@ const Brands = () => {
                         </option>
                       </select>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               {/* table  */}
@@ -249,40 +250,22 @@ const Brands = () => {
                                 key={brand?.id}
                                 className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                               >
-                                <td
-                                  onClick={() => route(brand?.id)}
-                                  className=" cursor-pointer p-4 text-start"
-                                >
+                                <td className=" p-4 text-start">
                                   {brand?.id}
                                 </td>
-                                <td
-                                  onClick={() => route(brand?.id)}
-                                  className=" cursor-pointer p-4 text-start"
-                                >
+                                <td className=" p-4 text-start">
                                   {brand?.name}
                                 </td>
-                                <td
-                                  onClick={() => route(brand?.id)}
-                                  className=" cursor-pointer p-4 text-start"
-                                >
+                                <td className=" p-4 text-start">
                                   {brand?.company}
                                 </td>
-                                <td
-                                  onClick={() => route(brand?.id)}
-                                  className=" cursor-pointer p-4 text-start"
-                                >
+                                <td className=" p-4 text-start">
                                   {brand?.agent}
                                 </td>
-                                <td
-                                  onClick={() => route(brand?.id)}
-                                  className=" cursor-pointer p-4 text-end"
-                                >
+                                <td className=" p-4 text-end">
                                   {brand?.phone}
                                 </td>
-                                <td
-                                  onClick={() => route(brand?.id)}
-                                  className=" cursor-pointer p-4 text-start"
-                                >
+                                <td className=" p-4 text-start">
                                   {brand?.description}
                                 </td>
 

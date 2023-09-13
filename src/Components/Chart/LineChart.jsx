@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -21,8 +22,7 @@ ChartJS.register(
   Legend
 );
 
-const LineChart = ({ date , chart }) => {
-  console.log(date)
+const LineChart = ({ date , chart , chartData }) => {
 
   const options = {
     responsive: true,
@@ -35,7 +35,7 @@ const LineChart = ({ date , chart }) => {
     scales: {
       y: {
         grid: {
-          color: "#3F4245",
+          color: chart?.length == 1 ? "transparent" :"#3F4245",
         },
         ticks: {
           color: "hsl(0,3%,76%)",
@@ -44,7 +44,7 @@ const LineChart = ({ date , chart }) => {
 
       x: {
         grid: {
-          color: "#3F4245",
+          color: chart?.length == 1 ? "transparent" :"#3F4245",
         },
         ticks: {
           color: "hsl(0,3%,76%)",
@@ -111,21 +111,42 @@ const LineChart = ({ date , chart }) => {
     "Sun"
    ]
 
+   const fakeDataColor = ["#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620"]
+   
+  const chartColor = chartData?.map(item => {
+    return {
+      ...item,           // Copy existing properties from the original item
+      color: '#8bb4f694' // Add the 'color' property
+    };
+  }).map(bar => bar.color )
+
+  console.log(chartColor)
+
   const labels = date == "" ? weekLabel : (date == "month" ? monthLabel : yearLabel) 
+
+  const weekFakeData = [40,40,40,40,40,40,40]
+
+  const monthFakeData = [40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40]
+
+  const yearFakeData = [800,800,800,800,800,800,800,800,800,800,800,800]
 
   const data = {
     labels,
     datasets: [
       {
         label: "Dataset 1",
-        data: chart,
+        data: chart?.length == 1 ? [...chart,...(date == "" ? weekFakeData : (date == "month" ? monthFakeData : yearFakeData))] : chart,
         borderColor: "#8AB4F8",
-        backgroundColor: "#8bb4f694",
+        backgroundColor: chart?.length == 1 ? [...chartColor,...fakeDataColor] : '#8bb4f694',
       },
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return (
+    <>
+    {chart?.length == 1 ? <Bar options={options} data={data} /> : <Line options={options} data={data} />}
+    </>
+  );
 };
 
 export default LineChart;

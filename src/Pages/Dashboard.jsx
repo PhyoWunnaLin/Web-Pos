@@ -20,6 +20,7 @@ const Dashboard = () => {
   const token = Cookies.get("token");
   const { data , isLoading } = useGetOverviewQuery({ token, date });
   const chart = data?.total_sales?.map((item) => parseInt(item?.total / 1000))
+  const chartData = data?.total_sales
 
   return (
     <MainLayout>
@@ -149,7 +150,7 @@ const Dashboard = () => {
                   </p>
                 </div>
               </div>
-              <LineChart date={date} chart={chart}/>
+              <LineChart date={date} chart={chart} chartData={chartData}/>
             </div>
 
             {/* right side  */}

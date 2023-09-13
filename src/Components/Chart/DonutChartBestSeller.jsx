@@ -64,7 +64,7 @@ const DonutChartBestSeller = ({ chart }) => {
         </div>
 
         <div className=" w-[50%] max-xl:w-[65%] max-md:w-full text-white mt-2 ">
-          {chart[0]?.total_brand_sale !=0 && (
+          {(chart && chart[0]?.total_brand_sale !=0) && (
             <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#a0d5f2]`}>
@@ -87,7 +87,7 @@ const DonutChartBestSeller = ({ chart }) => {
           </div>
           )}
 
-          {chart[1]?.total_brand_sale != 0 && (
+          {(chart && chart[1]?.total_brand_sale != 0) && (
             <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#8ab4f8]`}>
@@ -110,7 +110,7 @@ const DonutChartBestSeller = ({ chart }) => {
           </div>
           )}
 
-          {chart[2]?.total_brand_sale != 0 && (
+          {(chart && chart[2]?.total_brand_sale != 0) && (
             <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#6a88b8]`}>
@@ -133,7 +133,7 @@ const DonutChartBestSeller = ({ chart }) => {
           </div>
           )}
 
-          {chart[3]?.total_brand_sale != 0 && (
+          {(chart && chart[3]?.total_brand_sale != 0) && (
             <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#404d64]`}>
@@ -156,7 +156,7 @@ const DonutChartBestSeller = ({ chart }) => {
           </div>
           )}
 
-          {chart[4]?.total_brand_sale != 0 && (
+          {(chart && chart[4]?.total_brand_sale != 0) && (
             <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#e8eaed]`}>

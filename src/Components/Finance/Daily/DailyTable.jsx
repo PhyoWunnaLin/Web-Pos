@@ -1,7 +1,7 @@
 import React from 'react'
 import { HiArrowNarrowRight } from 'react-icons/hi';
 
-const DailyTable = ({dailyTable,dailyTotal}) => {
+const DailyTable = ({dailyTable}) => {
   return (
     <div className='flex flex-col gap-8'>
       {/* table  */}
@@ -15,7 +15,7 @@ const DailyTable = ({dailyTable,dailyTotal}) => {
                 <th className="p-4 text-end">CASH</th>
                 <th className="p-4 max-[1000px]:pl-10 text-end ">TAX</th>
                 <th className="p-4 max-[1000px]:pl-10 text-end">TOTAL</th>
-                <th className="p-4 ">...</th>
+                {/* <th className="p-4 ">...</th> */}
               </tr>
             </thead>
             <tbody className=" tracking-wide text-sm">
@@ -25,17 +25,16 @@ const DailyTable = ({dailyTable,dailyTotal}) => {
                     key={pd?.id}
                     className=" hover:bg-[#161618] duration-300  border border-[#7E7F80]"
                   >
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.id}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.voucher_number}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-start">{pd?.created_time}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.item_count}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.total}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.tax}</td>
-                    <td onClick={() => route(pd?.id)} className=" cursor-pointer p-4 text-end">{pd?.net_total}</td>
-                    
-                    <td className="p-4 justify-center flex gap-3 items-center overflow-hidden text-white">
+                    <td className=" p-4 text-start">{pd?.id}</td>
+                    <td className=" p-4 text-start">{pd?.voucher_number}</td>
+                    <td className=" p-4 text-start">{pd?.created_time}</td>
+                    <td className=" p-4 text-end">{pd?.item_count}</td>
+                    <td className=" p-4 text-end">{pd?.total}</td>
+                    <td className=" p-4 text-end">{pd?.tax}</td>
+                    <td className=" p-4 text-end">{pd?.net_total}</td>
+                    {/* <td className="p-4 justify-center flex gap-3 items-center overflow-hidden text-white">
                       <p className='icon1'><span><HiArrowNarrowRight/></span></p>
-                    </td>
+                    </td> */}
                   </tr>
                 );
               })}
