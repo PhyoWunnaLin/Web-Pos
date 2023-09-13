@@ -165,14 +165,31 @@ const BarChart = ({date,barChart,sales}) => {
   };
   
   const labels = date == "" ? weekLabel : (date == "month" ? monthLabel : yearLabel);
+
+  const weekFakeData = [40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40]
+
+  const monthFakeData = [40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40]
+
+  const yearFakeData = [800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800,800]
+
+  const fakeDataColor = ["#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620","#8bb4f620"]
+
+  const chartColor = barChart?.map(item => {
+    return {
+      ...item,           // Copy existing properties from the original item
+      color: '#8bb4f694' // Add the 'color' property
+    };
+  }).map(bar => bar.color )
+
+  console.log(chartColor)
   
   const data = {
     labels,
     datasets: [
       {
         label: 'Dataset 1',
-        data: chart,
-        backgroundColor: '#8bb4f694',
+        data: [...chart,...(date == "" ? weekFakeData : (date == "month" ? monthFakeData : yearFakeData))],
+        backgroundColor: [...chartColor,...fakeDataColor],
       },
     ],
   };
