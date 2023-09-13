@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NoContact from "../NoContact/NoContact";
-import { MdKeyboardArrowUp } from "react-icons/md";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { PiNotepadBold } from "react-icons/pi";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import Cookies from "js-cookie";
@@ -24,6 +24,10 @@ const SaleReport = () => {
   const barChart = data?.sales?.total_sales;
   const sales = data?.sales;
   const nav = useNavigate()
+  const todaySale = data?.today_sales
+  const todaySaleMaxPercent = ((todaySale?.today_max_sale?.total / 1000) - (todaySale?.today_avg_sale / 1000)).toFixed(0)
+  const todaySaleMinPercent = ((todaySale?.today_min_sale?.total / 1000) - (todaySale?.today_avg_sale / 1000)).toFixed(0)
+  console.log(todaySale);
 
   const route = (id) => {
     nav(`/inventory/product/productDetail/${id}`)
@@ -107,14 +111,14 @@ const SaleReport = () => {
                             <PiNotepadBold />
                           </span>
                           <span className=" tracking-wider font-semibold text-[15px]">
-                            09988
+                            {todaySale?.today_max_sale?.voucher_number}
                           </span>
                         </div>
 
-                        <div className=" flex items-center gap-6">
-                          <p>100</p>
-                          <div className=" flex items-end gap-2 ">
-                            <p>85%</p>
+                        <div className=" flex items-center justify-between gap-6">
+                          <p className=" text-end">{(todaySale?.today_max_sale?.total / 1000).toFixed(0) } k</p>
+                          <div className=" flex items-end w-[65px] text-end gap-1">
+                            <p>{todaySaleMaxPercent}%</p>
                             <p className="text-[#87dd45] text-2xl">
                               <MdKeyboardArrowUp />
                             </p>
@@ -128,17 +132,14 @@ const SaleReport = () => {
                             <PiNotepadBold />
                           </span>
                           <span className=" tracking-wider font-semibold text-[15px]">
-                            09989
+                          Today Average Sale
                           </span>
                         </div>
 
-                        <div className=" flex items-center gap-6">
-                          <p>60</p>
-                          <div className=" flex items-end gap-2 ">
-                            <p>25%</p>
-                            <p className="text-[#87dd45] text-2xl">
-                              <MdKeyboardArrowUp />
-                            </p>
+                        <div className=" flex items-center justify-between gap-6">
+                          <p className=" text-end ">{todaySale?.today_avg_sale }</p>
+                          <div className=" flex items-end w-[65px] text-end gap-1">
+                            kyats
                           </div>
                         </div>
                       </div>
@@ -149,16 +150,16 @@ const SaleReport = () => {
                             <PiNotepadBold />
                           </span>
                           <span className=" tracking-wider font-semibold text-[15px]">
-                            09990
+                          {todaySale?.today_min_sale?.voucher_number}
                           </span>
                         </div>
 
-                        <div className=" flex items-center gap-6">
-                          <p>30</p>
-                          <div className=" flex items-end gap-2 ">
-                            <p>10%</p>
-                            <p className="text-[#87dd45] text-2xl">
-                              <MdKeyboardArrowUp />
+                        <div className=" flex items-center justify-between gap-6">
+                          <p className=" text-end ">{(todaySale?.today_min_sale?.total / 1000).toFixed(0) } k</p>
+                          <div className=" flex items-end w-[65px] text-end">
+                            <p>{todaySaleMinPercent}%</p>
+                            <p className="text-[#FF4C51] text-2xl">
+                              <MdKeyboardArrowDown />
                             </p>
                           </div>
                         </div>
