@@ -64,7 +64,8 @@ const DonutChartBestSeller = ({ chart }) => {
         </div>
 
         <div className=" w-[50%] max-xl:w-[65%] max-md:w-full text-white mt-2 ">
-          <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
+          {chart[0]?.total_brand_sale !=0 && (
+            <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#a0d5f2]`}>
                 <BiSolidCircle />
@@ -84,8 +85,10 @@ const DonutChartBestSeller = ({ chart }) => {
               </div>
             </div>
           </div>
+          )}
 
-          <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
+          {chart[1]?.total_brand_sale != 0 && (
+            <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#8ab4f8]`}>
                 <BiSolidCircle />
@@ -105,8 +108,10 @@ const DonutChartBestSeller = ({ chart }) => {
               </div>
             </div>
           </div>
+          )}
 
-          <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
+          {chart[2]?.total_brand_sale != 0 && (
+            <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#6a88b8]`}>
                 <BiSolidCircle />
@@ -126,8 +131,10 @@ const DonutChartBestSeller = ({ chart }) => {
               </div>
             </div>
           </div>
+          )}
 
-          <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
+          {chart[3]?.total_brand_sale != 0 && (
+            <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#404d64]`}>
                 <BiSolidCircle />
@@ -147,8 +154,10 @@ const DonutChartBestSeller = ({ chart }) => {
               </div>
             </div>
           </div>
+          )}
 
-          <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
+          {chart[4]?.total_brand_sale != 0 && (
+            <div className="flex justify-between items-center py-[10px] max-xl:py-4 border-b border-[#383b3d]">
             <div className=" flex w-[60%] gap-3 items-center">
               <span className={`text-[#e8eaed]`}>
                 <BiSolidCircle />
@@ -168,6 +177,7 @@ const DonutChartBestSeller = ({ chart }) => {
               </div>
             </div>
           </div>
+          )}
 
           <div className=" flex justify-end">
             <Link to={'/sale/recent'}>
