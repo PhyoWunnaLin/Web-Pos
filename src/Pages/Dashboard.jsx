@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainLayout from "../Layouts/MainLayout";
 import Banner from "../Components/Banner/Banner";
 import { HiOutlineShoppingCart } from "react-icons/hi";
@@ -18,9 +18,13 @@ const Dashboard = () => {
   
   const [date, setDate] = useState("year");
   const token = Cookies.get("token");
-  const { data , isLoading } = useGetOverviewQuery({ token, date });
+  const { data , isLoading, refetch } = useGetOverviewQuery({ token, date });
   const chart = data?.total_sales?.map((item) => parseInt(item?.total / 1000))
   const chartData = data?.total_sales
+
+  useEffect(() => {
+    refetch()
+  },[])
 
   return (
     <MainLayout>

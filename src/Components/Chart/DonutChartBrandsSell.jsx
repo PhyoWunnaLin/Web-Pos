@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const DonutChartBrandsSell = ({brandSales}) => {
   const brandLabels = brandSales?.map((data) => data?.brand_name);
   const brandData = brandSales?.map((data) => parseInt(data?.total_sale / 1000));
-  console.log(brandData)
+  console.log(brandSales)
   const data = {
     labels: brandLabels,
     datasets: [
