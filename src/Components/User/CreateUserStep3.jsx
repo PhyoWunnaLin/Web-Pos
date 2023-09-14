@@ -15,7 +15,7 @@ const CreateUserStep3 = ({currentStep , setCurrentStep , steps , setComplete , c
   const insert = useSelector(state => state.mediaSlice.insert)
   const userForm3 = useSelector(state => state.userSlice.userForm3)
   const userSelectImg = useSelector(state => state.mediaSlice.userSelectImg)
-
+  // console.log(userForm3)
 
   useEffect(()=>{
     dispatch(setInsert(false))

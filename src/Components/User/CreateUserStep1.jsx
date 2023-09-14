@@ -103,6 +103,7 @@ const CreateUserStep1 = ({ currentStep , setCurrentStep , steps , setComplete , 
             Address
           </label>
           <textarea
+            required
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Your Address..."
             cols="30"

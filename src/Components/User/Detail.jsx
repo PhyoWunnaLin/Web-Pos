@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import { useParams } from "react-router-dom";
 import { useGetUserProfileQuery } from "../../Redux/API/userApi";
 import Loader from "../Loader/Loader";
+import person from "../../assets/person.jpg"
 
 const Detail = () => {
   const {id} = useParams();
@@ -22,8 +23,7 @@ const Detail = () => {
   const dispatch = useDispatch();
 
   const userPp = useSelector(state => state.profileSlice.userPp);
-  // const userPp2 = localStorage.getItem("userPp");
-
+  
   return (
     <MainLayout>
       <div className=" w-full flex justify-center">
@@ -47,11 +47,11 @@ const Detail = () => {
                     <div className='pb-10 pt-7 mt-[73px] flex items-center relative'>
                         <div className=' absolute top-[-70px] left-[33px]'>
                             <div className=' relative rounded-full w-[150px] h-[150px]'>
-                                <img src={admin?.photo ? admin?.photo :"https://i.pinimg.com/236x/01/21/8b/01218b1a1560ca260596cd19c14fb1d9.jpg"} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
+                                <img src={admin?.user_photo ? admin?.user_photo : person} alt="" className=' rounded-full w-[150px] h-[150px] object-cover'/>
 
-                                <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
+                                {/* <div className=' hover:bg-[#c1c5cc] hover:scale-[1.1] cursor-pointer duration-200 h-7 w-7 rounded-full flex items-center bg-white justify-center absolute right-3 bottom-0'>
                                 <BiSolidEditAlt size={18}/>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 

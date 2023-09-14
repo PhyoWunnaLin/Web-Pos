@@ -26,7 +26,6 @@ const Overview = () => {
   const userList = users?.users;
   const unBanList = userList?.filter(user => user?.banned == 0);
   const searchUnBanUser = useSelector(state => state.userSlice.searchUnBanUser)
-  // console.log(searchUnBanUser);
 
   const nav = useNavigate();
 
