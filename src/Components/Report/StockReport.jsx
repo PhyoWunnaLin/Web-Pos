@@ -20,13 +20,13 @@ const StockReport = () => {
   const [page, setPage] = useState(1);
   const [stockLevel, setStockLevel] = useState("");
   const [search, setSearch] = useState("");
-  const { data, isLoading, isFetching } = useGetStockReportQuery({
+  const { data, isLoading, isFetching, refetch:stockRefetch } = useGetStockReportQuery({
     token,
     page,
     stockLevel,
   });
-  const { data: stockBrandReport } = useGetStockBrandReportQuery(token);
-  console.log(data);
+  const { data: stockBrandReport, refetch:brandChartRefetch } = useGetStockBrandReportQuery(token);
+  // console.log(data);
 
   const inStockProgress = parseInt(stockBrandReport?.stocks?.in_stock);
   const lowStockProgress = parseInt(stockBrandReport?.stocks?.low_stock);
@@ -40,6 +40,11 @@ const StockReport = () => {
   useEffect(() => {
     setPage(1);
   }, [stockLevel]);
+
+  useEffect(() => {
+    stockRefetch()
+    brandChartRefetch()
+  },[])
 
   return (
     <MainLayout>

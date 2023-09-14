@@ -69,7 +69,7 @@ const Receive = () => {
                   <div className=' px-8 pb-2 flex flex-col'>
                     <p className=' tracking-wide text-lg'>{data?.product_name}</p>
                     <p className=' flex gap-2 tracking-wide text-[hsl(0,1%,67%)] '>
-                      <span className='title'>{data?.quantity}</span>
+                      <span className='title'>{data?.quantity} x </span>
                       <span className=' text-end title'>{data?.sale_price}</span>
                     </p>
                   </div>

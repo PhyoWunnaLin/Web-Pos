@@ -18,7 +18,7 @@ const SaleReport = () => {
   const [date, setDate] = useState("year");
   const [sort, setSort] = useState("");
   const token = Cookies.get("token");
-  const { data, isLoading } = useGetSaleReportQuery({ token, date ,sort });
+  const { data, isLoading, refetch } = useGetSaleReportQuery({ token, date ,sort });
   const productTable = data?.products;
   const brandSales = data?.brand_sales;
   const todaySales = data?.today_sales;
@@ -39,6 +39,10 @@ const SaleReport = () => {
   const route = (id) => {
     nav(`/inventory/product/productDetail/${id}`);
   };
+
+  useEffect(() => {
+    refetch()
+  },[])
 
   return (
     <MainLayout>
