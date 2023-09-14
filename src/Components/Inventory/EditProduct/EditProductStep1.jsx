@@ -60,12 +60,12 @@ const EditProductStep1 = ({currentStep , detail}) => {
       </div>
 
       {/* stock  */}
-      <div className="flex justify-between gap-5">
+      {/* <div className="flex justify-between gap-5">
         <label className="text-[#FFFFFF] font-medium tracking-wider">
           Stock
         </label>
         <input value={stock} onChange={(e)=> setStock(e.target.value)} required type="number" className="input w-[70%]" />
-      </div>
+      </div> */}
 
       {/* unit  */}
       <div className="flex justify-between gap-5">
