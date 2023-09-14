@@ -18,7 +18,7 @@ const Dashboard = () => {
   
   const [date, setDate] = useState("year");
   const token = Cookies.get("token");
-  const { data , isLoading, refetch } = useGetOverviewQuery({ token, date });
+  const { data , isLoading, refetch, isFetching } = useGetOverviewQuery({ token, date });
   const chart = data?.total_sales?.map((item) => parseInt(item?.total / 1000))
   const chartData = data?.total_sales
 
@@ -33,7 +33,7 @@ const Dashboard = () => {
           {/* header  */}
           <Banner title={"Overview"} path1={"Products"} />
 
-          {isLoading ? <div><Loader/></div> : <>{/* quick action  */}
+          {isFetching ? <div><Loader/></div> : <>{/* quick action  */}
           <div className="flex gap-5 max-xl:flex-col max-xl:gap-8">
             {/* left  */}
             <div className="w-[50%] max-xl:w-[100%] flex gap-5 max-sm:flex-col max-sm:gap-8">

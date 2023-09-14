@@ -64,7 +64,7 @@ const StockReport = () => {
             route2={"/sale/cashier"}
           />
 
-          {isLoading ? (
+          {isFetching ? (
             <div>
               <Loader />
             </div>
