@@ -13,12 +13,17 @@ import BarChart from "../Chart/BarChart";
 import DonutChartBrandsSell from "../Chart/DonutChartBrandsSell";
 import { useGetSaleReportQuery } from "../../Redux/API/reportApi";
 import { Link, useNavigate } from "react-router-dom";
+import image from "../../assets/noVoucher.png"
 
 const SaleReport = () => {
   const [date, setDate] = useState("year");
   const [sort, setSort] = useState("");
   const token = Cookies.get("token");
-  const { data, isLoading, refetch, isFetching } = useGetSaleReportQuery({ token, date ,sort });
+  const { data, isLoading, refetch, isFetching } = useGetSaleReportQuery({
+    token,
+    date,
+    sort,
+  });
   const productTable = data?.products;
   const brandSales = data?.brand_sales;
   const todaySales = data?.today_sales;
@@ -41,8 +46,8 @@ const SaleReport = () => {
   };
 
   useEffect(() => {
-    refetch()
-  },[])
+    refetch();
+  }, [data]);
 
   return (
     <MainLayout>
@@ -88,115 +93,128 @@ const SaleReport = () => {
           ) : (
             <>
               <div className=" flex max-xl:flex-col gap-6 justify-between">
-                <div className=" w-[35%] max-xl:w-full px-5 pt-3 pb-6 rounded-md border border-[#3F4245] ">
-                  <div className="">
-                    <div className=" text-white mt-2">
-                      <div className="flex flex-col gap-1 pb-3 max-xl:pb-4 border-b border-[#383b3d]">
-                        <div className="flex justify-between items-center ">
-                          <div className=" flex gap-3 items-center">
-                            <p className=" text-xl tracking-wider">
-                              Today Sale
-                            </p>
-                          </div>
-
-                          <div className=" flex items-center gap-6">
-                            <p className="text-white text-2xl">
-                              <BiDotsVerticalRounded />
-                            </p>
-                          </div>
-                        </div>
-
-                        <div>
-                          <p className="text-2xl text-white font-semibold tracking-wider mb-1">
-                            {todaySales?.total}
-                          </p>
-                          <p className=" text-[hsl(0,3%,76%)] text-sm tracking-wider">
-                            Kyats
-                          </p>
-                        </div>
+                <div className={` w-[35%] ${todaySale?.message && "flex justify-center items-center"} max-xl:w-full px-5 pt-3 pb-6 rounded-md border border-[#3F4245] `}>
+                  {todaySale?.message ? (
+                    <div className=" flex-col flex gap-5">
+                      <div className={`w-[40%] mx-auto`}>
+                        <img src={image} className="w-full" />
                       </div>
-
-                      <div className="flex justify-between items-center py-3 max-xl:py-4 border-b border-[#383b3d]">
-                        <div className=" flex gap-3 items-center">
-                          <span className=" text-[#8ab4f8]">
-                            <PiNotepadBold />
-                          </span>
-                          <span className=" tracking-wider font-semibold text-[15px]">
-                            {todaySale?.today_max_sale?.voucher_number}
-                          </span>
-                        </div>
-
-                        <div className=" flex items-center justify-between gap-6">
-                          <p className=" text-end">
-                            {(todaySale?.today_max_sale?.total / 1000).toFixed(
-                              0
-                            )}
-                            k
-                          </p>
-                          <div className=" flex items-end w-[65px] text-end gap-1">
-                            <p>{todaySaleMaxPercent}%</p>
-                            <p className="text-[#87dd45] text-2xl">
-                              <MdKeyboardArrowUp />
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex justify-between items-center py-3 max-xl:py-4 border-b border-[#383b3d]">
-                        <div className=" flex gap-3 items-center">
-                          <span className=" text-[#8ab4f8]">
-                            <PiNotepadBold />
-                          </span>
-                          <span className=" tracking-wider font-semibold text-[15px]">
-                            Average
-                          </span>
-                        </div>
-
-                        <div className=" flex items-center justify-between gap-6">
-                          <p className=" text-end ">
-                            {(todaySale?.today_avg_sale / 1000).toFixed(0)}k
-                          </p>
-                          <div className=" flex items-end w-[65px] text-end gap-1">
-                            kyats
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex justify-between items-center py-3 max-xl:py-4">
-                        <div className=" flex gap-3 items-center">
-                          <span className=" text-[#8ab4f8]">
-                            <PiNotepadBold />
-                          </span>
-                          <span className=" tracking-wider font-semibold text-[15px]">
-                            {todaySale?.today_min_sale?.voucher_number}
-                          </span>
-                        </div>
-
-                        <div className=" flex items-center justify-between gap-6">
-                          <p className=" text-end ">
-                            {(todaySale?.today_min_sale?.total / 1000).toFixed(
-                              0
-                            )}
-                            k
-                          </p>
-                          <div className=" flex items-end w-[65px] text-end">
-                            <p>{todaySaleMinPercent}%</p>
-                            <p className="text-[#FF4C51] text-2xl">
-                              <MdKeyboardArrowDown />
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className=" flex justify-end">
-                        <Link to={"/sale/recent"}>
-                          <button className="bg-transparent border border-[#7E7F80] py-2 px-4 rounded-md mt-3 text-sm tracking-wide text-white select-none hover:bg-[#24262b]">
-                            RECENT SALES
-                          </button>
-                        </Link>
+                      <div className="flex flex-col mx-auto">
+                        <h1 className=" text-lg text-white tracking-widest font-semibold text-center">
+                          {todaySale?.message}
+                        </h1>
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="">
+                      <div className=" text-white mt-2">
+                        <div className="flex flex-col gap-1 pb-3 max-xl:pb-4 border-b border-[#383b3d]">
+                          <div className="flex justify-between items-center ">
+                            <div className=" flex gap-3 items-center">
+                              <p className=" text-xl tracking-wider">
+                                Today Sale
+                              </p>
+                            </div>
+
+                            <div className=" flex items-center gap-6">
+                              <p className="text-white text-2xl">
+                                <BiDotsVerticalRounded />
+                              </p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p className="text-2xl text-white font-semibold tracking-wider mb-1">
+                              {todaySales?.total}
+                            </p>
+                            <p className=" text-[hsl(0,3%,76%)] text-sm tracking-wider">
+                              Kyats
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-between items-center py-3 max-xl:py-4 border-b border-[#383b3d]">
+                          <div className=" flex gap-3 items-center">
+                            <span className=" text-[#8ab4f8]">
+                              <PiNotepadBold />
+                            </span>
+                            <span className=" tracking-wider font-semibold text-[15px]">
+                              {todaySale?.today_max_sale?.voucher_number}
+                            </span>
+                          </div>
+
+                          <div className=" flex items-center justify-between gap-6">
+                            <p className=" text-end">
+                              {(
+                                todaySale?.today_max_sale?.total / 1000
+                              ).toFixed(0)}
+                              k
+                            </p>
+                            <div className=" flex items-end w-[65px] text-end gap-1">
+                              <p>{todaySaleMaxPercent}%</p>
+                              <p className="text-[#87dd45] text-2xl">
+                                <MdKeyboardArrowUp />
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-between items-center py-3 max-xl:py-4 border-b border-[#383b3d]">
+                          <div className=" flex gap-3 items-center">
+                            <span className=" text-[#8ab4f8]">
+                              <PiNotepadBold />
+                            </span>
+                            <span className=" tracking-wider font-semibold text-[15px]">
+                              Average
+                            </span>
+                          </div>
+
+                          <div className=" flex items-center justify-between gap-6">
+                            <p className=" text-end ">
+                              {(todaySale?.today_avg_sale / 1000).toFixed(0)}k
+                            </p>
+                            <div className=" flex items-end w-[65px] text-end gap-1">
+                              kyats
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-between items-center py-3 max-xl:py-4">
+                          <div className=" flex gap-3 items-center">
+                            <span className=" text-[#8ab4f8]">
+                              <PiNotepadBold />
+                            </span>
+                            <span className=" tracking-wider font-semibold text-[15px]">
+                              {todaySale?.today_min_sale?.voucher_number}
+                            </span>
+                          </div>
+
+                          <div className=" flex items-center justify-between gap-6">
+                            <p className=" text-end ">
+                              {(
+                                todaySale?.today_min_sale?.total / 1000
+                              ).toFixed(0)}
+                              k
+                            </p>
+                            <div className=" flex items-end w-[65px] text-end">
+                              <p>{todaySaleMinPercent}%</p>
+                              <p className="text-[#FF4C51] text-2xl">
+                                <MdKeyboardArrowDown />
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className=" flex justify-end">
+                          <Link to={"/sale/recent"}>
+                            <button className="bg-transparent border border-[#7E7F80] py-2 px-4 rounded-md mt-3 text-sm tracking-wide text-white select-none hover:bg-[#24262b]">
+                              RECENT SALES
+                            </button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className=" w-[65%] max-xl:w-full rounded-md">
