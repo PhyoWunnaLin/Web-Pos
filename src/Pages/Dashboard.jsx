@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     refetch()
-  },[])
+  },[data])
 
   return (
     <MainLayout>

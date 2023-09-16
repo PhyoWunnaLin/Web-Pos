@@ -44,7 +44,7 @@ const StockReport = () => {
   useEffect(() => {
     stockRefetch()
     brandChartRefetch()
-  },[])
+  },[data,stockBrandReport])
 
   return (
     <MainLayout>

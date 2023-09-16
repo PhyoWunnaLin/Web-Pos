@@ -37,6 +37,7 @@ const Brands = () => {
   const p = localStorage.getItem("brandPage");
   const [page, setPage] = useState(p ? p : 1);
   const { data, isLoading } = useGetBrandsQuery({ token, page});
+  console.log(data)
   const totalPage = data?.meta?.last_page;
   const [deleteBrand] = useDeleteBrandMutation();
   const brands = useSelector((state) => state.productSlice.brands);

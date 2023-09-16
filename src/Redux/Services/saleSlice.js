@@ -60,6 +60,10 @@ export const saleSlice = createSlice({
             (state.total = totalAmount(state.saleItem)),
             (state.tax = totalTax(state.saleItem))
           )
+        }else if ( item.quantity == 0 ) {
+          return(
+            item.quantity = payload.q
+          )
         } else if (item.id === payload.id) {
           return (
             (item.quantity += payload.q),

@@ -20,7 +20,7 @@ const AddBrand = ({ sidebarOpen, setSidebarOpen, id }) => {
   const [createBrand] = useCreateBrandMutation();
   const [editBrand] = useEditBrandMutation();
   // const { data ,isLoading } = useGetSingleBrandQuery({ token, id });
-  const { data, isLoading } = useGetBrandsQuery(token);
+  // const { data, isLoading } = useGetBrandsQuery(token);
   // console.log(data);
   // console.log(id);
   const dispatch = useDispatch();

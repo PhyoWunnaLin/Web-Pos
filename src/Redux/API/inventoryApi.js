@@ -69,8 +69,8 @@ export const inventoryApi = createApi({
     }),
 
     getBrands: builder.query({
-      query: ({token, page , id , name}) => ({
-        url: `/brand?page=${page}&${id}$${name}`,
+      query: ({token, page }) => ({
+        url: `/brand?page=${page}`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["inventory"],

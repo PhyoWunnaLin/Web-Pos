@@ -6,8 +6,16 @@ export const saleApi = createApi({
   tagTypes: ["sale"],
   endpoints: (builder) => ({
     getSaleProducts: builder.query({
+      query: ({token,id}) => ({
+        url: `/sale-products${id && `?brand_id=${id}`}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags: ["sale"],
+    }),
+
+    getSaleBrands: builder.query({
       query: (token) => ({
-        url: `/product`,
+        url: `/sale-brands`,
         headers: { authorization: `Bearer ${token}` },
       }),
       providesTags: ["sale"],
@@ -86,5 +94,6 @@ export const {
   useCustomQuery,
   useSaleCloseMutation,
   useSaleOpenMutation,
-  useGetSaleProductsQuery
+  useGetSaleProductsQuery,
+  useGetSaleBrandsQuery
 } = saleApi;
