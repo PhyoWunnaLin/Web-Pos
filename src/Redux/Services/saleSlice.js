@@ -18,7 +18,7 @@ const initialState = {
 const totalAmount = (saleItem) => {
   return saleItem.reduce(
     (total, item) => total + item.sale_price * item.quantity,
-    0
+    0 
   );
 };
 
@@ -62,7 +62,9 @@ export const saleSlice = createSlice({
           )
         }else if ( item.quantity == 0 ) {
           return(
-            item.quantity = payload.q
+            (item.quantity = payload.q),
+            (state.total = totalAmount(state.saleItem)),
+            (state.tax = totalTax(state.saleItem))
           )
         } else if (item.id === payload.id) {
           return (
