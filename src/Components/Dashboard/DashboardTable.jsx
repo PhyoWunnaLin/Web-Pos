@@ -51,7 +51,7 @@ const DashboardTable = () => {
       showCloseButton: true,
       confirmButtonColor: '#fff',
       cancelButtonColor: '#24262b',
-      confirmButtonText: `${close === "true" ? "Open" : "Close"}`,
+      confirmButtonText: `${(close === "true" || close1 === "true") ? "Open" : "Close"}`,
     }).then(async(result) => {
       if (result.isConfirmed) {
         if(close === "true" || close1 === "true"){

@@ -33,7 +33,7 @@ const Dashboard = () => {
           {/* header  */}
           <Banner title={"Overview"} path1={"Products"} />
 
-          {isFetching ? <div><Loader/></div> : <>{/* quick action  */}
+          {isLoading ? <div><Loader/></div> : <>{/* quick action  */}
           <div className="flex gap-5 max-xl:flex-col max-xl:gap-8">
             {/* left  */}
             <div className="w-[50%] max-xl:w-[100%] flex gap-5 max-sm:flex-col max-sm:gap-8">

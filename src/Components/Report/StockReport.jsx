@@ -64,7 +64,7 @@ const StockReport = () => {
             route2={"/sale/cashier"}
           />
 
-          {isFetching ? (
+          {isLoading ? (
             <div>
               <Loader />
             </div>
@@ -293,7 +293,7 @@ const StockReport = () => {
                               </option>
                             </select>
                           </div>
-                          <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
+                          {/* <div className="text-[#7E7F80] flex gap-1 font-medium text-sm tracking-wide">
                             Filter :
                             <select className=" bg-transparent px-1 border -mt-[2px] border-[#7E7F80] rounded-md text-white tracking-wider outline-none">
                               <option
@@ -309,7 +309,7 @@ const StockReport = () => {
                                 Half Files
                               </option>
                             </select>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
@@ -317,7 +317,7 @@ const StockReport = () => {
 
                   {/* table  */}
                   <div>
-                    {isFetching ? (
+                    {isLoading ? (
                       <div className=" ">
                         <Loader />
                       </div>

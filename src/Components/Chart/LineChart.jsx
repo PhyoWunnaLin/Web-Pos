@@ -120,8 +120,6 @@ const LineChart = ({ date , chart , chartData }) => {
     };
   }).map(bar => bar.color )
 
-  console.log(chartColor)
-
   const labels = date == "" ? weekLabel : (date == "month" ? monthLabel : yearLabel) 
 
   const weekFakeData = [10,10,10,10,10,10,10]
@@ -135,16 +133,16 @@ const LineChart = ({ date , chart , chartData }) => {
     datasets: [
       {
         label: "Dataset 1",
-        data: chart?.length == 1 ? [...chart,...(date == "" ? weekFakeData : (date == "month" ? monthFakeData : yearFakeData))] : chart,
+        data: (chart?.length == 1 || chartData == []) ? [...chart,...(date == "" ? weekFakeData : (date == "month" ? monthFakeData : yearFakeData))] : chart,
         borderColor: "#8AB4F8",
-        backgroundColor: chart?.length == 1 ? [...chartColor,...fakeDataColor] : '#8bb4f694',
+        backgroundColor: (chart?.length == 1 || chartData == []) ? [...chartColor,...fakeDataColor] : '#8bb4f694',
       },
     ],
   };
 
   return (
     <>
-    {chart?.length == 1 ? <Bar options={options} data={data} /> : <Line options={options} data={data} />}
+    {(chart?.length == 1 || chartData == []) ? <Bar options={options} data={data} /> : <Line options={options} data={data} />}
     </>
   );
 };

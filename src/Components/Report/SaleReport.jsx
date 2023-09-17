@@ -86,7 +86,7 @@ const SaleReport = () => {
             </div>
           </div>
 
-          {isFetching ? (
+          {isLoading ? (
             <div>
               <Loader />
             </div>
