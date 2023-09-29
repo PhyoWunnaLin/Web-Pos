@@ -26,15 +26,15 @@ const StockReport = () => {
     stockLevel,
   });
   const { data: stockBrandReport, refetch:brandChartRefetch } = useGetStockBrandReportQuery(token);
-  // console.log(data);
-
+  
   const inStockProgress = parseInt(stockBrandReport?.stocks?.in_stock);
   const lowStockProgress = parseInt(stockBrandReport?.stocks?.low_stock);
   const outOfStockProgress = parseInt(stockBrandReport?.stocks?.out_of_stock);
   const brandChart = stockBrandReport?.brands;
 
   const products = data?.data;
-
+  console.log(products);
+  
   const totalPage = data?.meta?.last_page;
 
   useEffect(() => {
@@ -233,14 +233,7 @@ const StockReport = () => {
                   <DonutChartBestSeller chart={brandChart} />
                 </div>
               </div>
-
-              {products?.length == 0 ? (
-                <NoContact
-                  image={noPd}
-                  size={"w-[55%]"}
-                  title1={"No Stock Report !"}
-                />
-              ) : (
+              
                 <div className=" flex flex-col gap-8">
                   {/* banner2  */}
                   <div className="flex flex-col gap-4">
@@ -323,6 +316,16 @@ const StockReport = () => {
                       </div>
                     ) : (
                       <div>
+                        {products?.length == 0 ?(
+                        <div>
+                          <NoContact
+                          image={noPd}
+                          size={"w-[55%]"}
+                          title1={"No Stock Report !"}
+                        />
+                        </div>
+                      ) : (
+                        <div>
                         <table className=" text-white max-[840px]:whitespace-nowrap max-[840px]:block max-[840px]:overflow-x-auto w-full">
                           <thead className=" tracking-wider text-sm border border-[#7E7F80]">
                             <tr>
@@ -439,10 +442,12 @@ const StockReport = () => {
                           />
                         </div>
                       </div>
+                      )}
+                      </div>
                     )}
                   </div>
                 </div>
-              )}
+  
             </>
           )}
         </div>
